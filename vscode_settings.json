@@ -13,7 +13,7 @@
     "vue": "html"
   },
 
-  "vim.leader": "<space>",
+  "vim.leader": ",",
   "vim.ignorecase": true,
   "vim.insertModeKeyBindings": [{
     "before": ["<c-v>"],
@@ -79,7 +79,7 @@
         "args": []
     }]
   }],
-
+  "vim.useSystemClipboard": true,
   "editor.detectIndentation": false,
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
