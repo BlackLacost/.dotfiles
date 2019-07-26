@@ -56,11 +56,11 @@
   "when": "editorTextFocus && vim.active"
 },
 {
-  "key": "ctrl+]",
+  "key": "ctrl+a ]",
   "command": "editor.action.openLink"
 },
 {
-  "key": "ctrl+[",
+  "key": "ctrl+a [",
   "command": "extension.xi.goBack"
 },
 {
