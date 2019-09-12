@@ -86,7 +86,7 @@
   "[python]": {
     "editor.tabSize": 4
   },
-  "editor.lineNumbers": "off",
+  "editor.lineNumbers": "on",
   "editor.links": true,
   "editor.minimap.enabled": false,
   "editor.autoClosingBrackets": false,
@@ -95,8 +95,7 @@
   "editor.renderLineHighlight": "line",
   "editor.rulers": [78],
   "editor.glyphMargin": true,
-  "editor.wordWrap": "wordWrapColumn",
-  "editor.wordWrapColumn": 77,
+  "editor.wordWrap": "off",
   "editor.autoClosingQuotes": false,
   "editor.fontFamily": "Monoid, Monoid NF",
   "terminal.integrated.fontFamily": "Monoid, Monoid NF",
@@ -142,5 +141,6 @@
   "telemetry.enableTelemetry": false,
   "workbench.colorTheme": "grigoryvp memory theme",
   "debug.node.autoAttach": "on",
-  "terminal.integrated.shell.windows": "pwsh.exe"
+  "terminal.integrated.shell.windows": "pwsh.exe",
+  "workbench.iconTheme": "material-icon-theme"
 }
