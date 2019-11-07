@@ -3,20 +3,16 @@
     "workbench.colorTheme": "grigoryvp memory theme",
     "telemetry.enableTelemetry": false,
     "window.zoomLevel": 0,
-    "vim.autoSwitchInputMethod.obtainIMCmd": "/usr/bin/ibus engine",
-    "vim.autoSwitchInputMethod.switchIMCmd": "/usr/bin/ibus engine {im}",
-    "vim.autoSwitchInputMethod.defaultIM": "xkb:us::eng",
     "vim.easymotion": true,
     "vim.leader": ",",
-    "vim.autoSwitchInputMethod.enable": true,
     "editor.fontFamily": "Monoid, Monoid NF",
-    "terminal.integrated.fontFamily": "Monoid, Monoid NF",
     "editor.fontSize": 12,
-    "terminal.integrated.fontSize": 12,
     "editor.fontLigatures": true,
     "editor.lineNumbers": "relative",
-    "editor.rulers": [
-        80, 120
-    ],
-    "editor.minimap.enabled": false
+    "editor.rulers": [80, 120],
+    "editor.minimap.enabled": false,
+    "terminal.integrated.fontFamily": "Monoid, Monoid NF",
+    "terminal.integrated.fontSize": 12,
+    "terminal.integrated.shell.windows": "powershell.exe",
+    "terminal.integrated.shellArgs.windows": "-ExecutionPolicy ByPass -NoExit -Command & \"C:\\Users\\blacklacost\\Miniconda3\\shell\\condabin\\conda-hook.ps1\" ; conda activate \"C:\\Users\\blacklacost\\Miniconda3\" ; Set-PSReadLineOption -EditMode \"Emacs\""
 }
