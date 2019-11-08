@@ -4,10 +4,50 @@ try {
 catch {
 }
 
-function cdd() { Set-Location ~/Documents; }
-function cdc() { Set-Location ~/.dotfiles; }
+function cddc() { Set-Location ~/Documents; }
+function cddl() { Set-Location ~/Downloads; }
+function cddt() { Set-Location ~/Desktop; }
+function cdd() { Set-Location ~/.dotfiles; }
 function cdh() { Set-Location ~; }
 function cdp() { Set-Location D:/code; }
+
+function ggs() { git status; }
+function gga($file) {
+  if ($file) {
+    git add $file;
+  } else {
+    git add .;
+  }
+}
+function ggc($commit) {
+  if ($commit) {
+    git commit -m $commit;
+  } else {
+    git commit;
+  }
+}
+function ggac($commit) { git add .; ggc($commit); }
+function ggca($commit) {
+  if ($commit) {
+    git commit --amend -m $commit;
+  } else {
+    git commit --amend --no-edit;
+  }
+}
+function ggaca($commit) { git add .; ggca($commit); }
+function ggd($file) { git diff HEAD $file; }
+function ggl { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit; }
+function ggp { git push; }
+
+function touch($file) { "" | Out-File $file }
+
+# Reload the Shell
+function Reload-Powershell {
+    $newProcess = new-object System.Diagnostics.ProcessStartInfo "PowerShell";
+    $newProcess.Arguments = "-nologo";
+    [System.Diagnostics.Process]::Start($newProcess);
+    exit
+}
 
 # Windows-OSX-Linux consistency
 function rmf($dst) {

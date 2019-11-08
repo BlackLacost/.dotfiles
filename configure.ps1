@@ -33,9 +33,17 @@ class App {
         -Name "profile.ps1" `
         -Target $psProfileCfg
     }
+
+    if (-not (Test-Path -Path ".editorconfig")) {
+      $src = "$($this._cfgDir)/.editorconfig";
+      Copy-Item -Path $src -Destination . -Force | Out-Null;
+    }
   }
 
   _configureVscode() {
+    Push-Location;
+    Set-Location -Path $env:USERPROFILE
+
     $dstDir = "$($env:APPDATA)\Code\User";
 
     # Создавать директорию, только если ее ещё не было
@@ -50,6 +58,8 @@ class App {
     $srcPath = "$($this._cfgDir)\vscode_keybindings.json";
     $dstPath = "$dstDir\keybindings.json";
     New-Item -ItemType SymbolicLink -Path $dstPath -Target $srcPath -Force;
+
+    Pop-Location;
   }
 
   _installPowershellModule($moduleName) {
