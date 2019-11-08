@@ -13,6 +13,6 @@
     "editor.minimap.enabled": false,
     "terminal.integrated.fontFamily": "Monoid, Monoid NF",
     "terminal.integrated.fontSize": 12,
-    "terminal.integrated.shell.windows": "powershell.exe",
-    "terminal.integrated.shellArgs.windows": "-ExecutionPolicy ByPass -NoExit -Command & \"C:\\Users\\blacklacost\\Miniconda3\\shell\\condabin\\conda-hook.ps1\" ; conda activate \"C:\\Users\\blacklacost\\Miniconda3\" ; Set-PSReadLineOption -EditMode \"Emacs\""
+    "terminal.integrated.shell.windows": "pwsh.exe",
+    "window.openFoldersInNewWindow": "off"
 }
