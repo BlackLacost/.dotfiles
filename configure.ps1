@@ -1,12 +1,17 @@
+Import-Module -Name "$PSScriptRoot\modules\InstallScoopApp.psm1"
+
+
 class App {
 
   $_cfgDir = $null;
 
-  configure() {
+  Configure() {
     $this._cfgDir = "$($env:USERPROFILE)\.dotfiles";
 
-    $this._installPowershellModule("posh-git");
-    $this._configureVscode();
+    $this.InstallWindowsApps();
+    $this.InstallPowershellModule("posh-git");
+    $this.ConfigureVscode();
+    $this.HardLinkModules();
 
     # Auto-created by PowerShell 5.x until 6.x+ is a system default.
     # Create and set hidden attribute to exclude from 'ls'.
@@ -31,7 +36,8 @@ class App {
         -ItemType HardLink `
         -Path $psDir `
         -Name "profile.ps1" `
-        -Target $psProfileCfg
+        -Target $psProfileCfg `
+        -Force
     }
 
     if (-not (Test-Path -Path ".editorconfig")) {
@@ -40,29 +46,63 @@ class App {
     }
   }
 
-  _configureVscode() {
+  hidden HardLinkModules() {
+    $fullNameAndNameModules = Get-ChildItem .\modules\ | Select-Object FullName, Name, BaseName
+
+    $fullNameAndNameModules | ForEach-Object {
+      $profileDir = Split-Path -parent $profile;
+      $moduleDir = Join-Path $profileDir "Modules" $_.BaseName;
+      New-Item $moduleDir -ItemType Directory -Force;
+      New-Item -ItemType HardLink -Path (Join-Path $moduleDir $_.Name) -Target $_.FullName -Force;
+    }
+  }
+
+  hidden InstallWindowsApps() {
+    Install-ScoopApp "sudo";
+    Install-ScoopApp "anki";
+    Install-ScoopApp "foxit-reader";
+    Install-ScoopApp "googlechrome";
+    Install-ScoopApp "git";
+    Install-ScoopApp "miniconda3";
+    Install-ScoopApp "Monoid-NF";
+    Install-ScoopApp "rufus";
+    Install-ScoopApp "smplayer";
+    Install-ScoopApp "telegram";
+    Install-ScoopApp "vscode";
+    Install-ScoopApp "whatsapp";
+    Install-ScoopApp "qbittorrent";
+  }
+
+  hidden ConfigureVscode() {
     Push-Location;
     Set-Location -Path $env:USERPROFILE
 
     $dstDir = "$($env:APPDATA)\Code\User";
 
-    # Создавать директорию, только если ее ещё не было
     if (-not (Test-Path -Path $dstDir)) {
       New-Item -Path $dstDir -ItemType Directory | Out-Null;
     }
 
     $srcPath = "$($this._cfgDir)\vscode_settings.json";
-    $dstPath = "$dstDir\settings.json";
-    New-Item -ItemType SymbolicLink -Path $dstPath -Target $srcPath -Force;
+    New-Item `
+      -ItemType HardLink `
+      -Path $dstDir `
+      -Name "settings.json" `
+      -Target $srcPath `
+      -Force
 
     $srcPath = "$($this._cfgDir)\vscode_keybindings.json";
-    $dstPath = "$dstDir\keybindings.json";
-    New-Item -ItemType SymbolicLink -Path $dstPath -Target $srcPath -Force;
+    New-Item `
+      -ItemType HardLink `
+      -Path $dstDir `
+      -Name "keybindings.json" `
+      -Target $srcPath `
+      -Force
 
     Pop-Location;
   }
 
-  _installPowershellModule($moduleName) {
+  hidden InstallPowershellModule($moduleName) {
     if (Get-InstalledModule | Where-Object Name -eq $moduleName) { return; }
     Install-Module $moduleName -Scope CurrentUser;
     if (-not $?) { throw "Failed" }
@@ -71,4 +111,4 @@ class App {
 }
 
 $app = [App]::new();
-$app.configure();
+$app.Configure();

@@ -9,11 +9,12 @@
   "editor.lineNumbers": "off",
   "editor.minimap.enabled": false,
   "editor.rulers": [78],
-  "editor.tabSize": 2,
-  "[python]": {
-    "editor.tabSize": 4
+  "[powershell]": {
+    "editor.rulers": [120]
   },
+  "editor.tabSize": 4,
   "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
   "html.autoClosingTags": false,
   "powershell.integratedConsole.showOnStartup": false,
   "powershell.powerShellExePath": "C:\\Users\\blacklacost\\scoop\\apps\\pwsh\\current\\pwsh.exe",
@@ -31,7 +32,7 @@
   "vim.leader": "<space>",
   "window.openFoldersInNewWindow": "off",
   "window.menuBarVisibility": "toggle",
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 1,
   "workbench.activityBar.visible": false,
   "workbench.iconTheme": "vscode-icons",
   "workbench.colorTheme": "grigoryvp memory theme"
