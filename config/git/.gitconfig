@@ -1,0 +1,8 @@
+[user]
+email = blacklacost@gmail.com
+name = Ilya Lisin
+
+[format]
+pretty = oneline
+[credential]
+	helper = manager

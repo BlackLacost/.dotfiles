@@ -50,7 +50,7 @@ function Reload-Powershell {
 }
 
 # Windows-OSX-Linux consistency
-function rmf($dst) {
+function rmd($dst) {
   Remove-Item $dst -Recurse -Force
 }
 
@@ -69,5 +69,5 @@ Set-PSReadLineOption @PSReadLineOptions
 
 #region conda initialize
 # !! Contents within this block are managed by 'conda init' !!
-(& "conda" "shell.powershell" "hook") | Out-String | Invoke-Expression
+# (& "conda" "shell.powershell" "hook") | Out-String | Invoke-Expression
 #endregion

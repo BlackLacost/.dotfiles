@@ -10,7 +10,7 @@ fi
 if [ -h $keybindings_file ]; then
     rm $keybindings_file
 fi
-ln vscode_keybindings.json $keybindings_file
+ln config/vscode/keybindings.json $keybindings_file
 
 if [ -f $settings_file ]; then
     mv $settings_file $settings_file.backup
@@ -18,4 +18,4 @@ fi
 if [ -h $settings_file ]; then
     rm $settings_file
 fi
-ln vscode_settings.json $settings_file
+ln config/vscode/settings.json $settings_file
