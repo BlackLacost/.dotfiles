@@ -65,9 +65,10 @@ class App {
     Install-ScoopApp "fzf";
     Install-ScoopApp "googlechrome";
     Install-ScoopApp "git";
-    Install-ScoopApp "miniconda3";
+    # Install-ScoopApp "miniconda3";
     Install-ScoopApp "Monoid-NF";
     Install-ScoopApp "mpv";
+    Install-ScoopApp "nvm";
     Install-ScoopApp "rufus";
     Install-ScoopApp "telegram";
     Install-ScoopApp "vscode";

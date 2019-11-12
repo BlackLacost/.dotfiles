@@ -18,9 +18,11 @@
   "html.autoClosingTags": false,
   "powershell.integratedConsole.showOnStartup": false,
   "powershell.powerShellExePath": "C:\\Users\\blacklacost\\scoop\\apps\\pwsh\\current\\pwsh.exe",
+  "search.useIgnoreFiles": true,
   "terminal.integrated.shell.windows": "pwsh.exe",
   "terminal.integrated.fontFamily": "Monoid, Monoid NF",
   "terminal.integrated.fontSize": 12,
+  "terminal.integrated.rendererType": "dom",
   "telemetry.enableTelemetry": false,
   "vim.autoSwitchInputMethod.enable": true,
   "vim.autoSwitchInputMethod.defaultIM": "1033",
@@ -35,5 +37,9 @@
   "window.zoomLevel": 1,
   "workbench.activityBar.visible": false,
   "workbench.iconTheme": "vscode-icons",
-  "workbench.colorTheme": "grigoryvp memory theme"
+  "workbench.colorTheme": "grigoryvp memory theme",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "liveServer.settings.donotShowInfoMsg": true
 }

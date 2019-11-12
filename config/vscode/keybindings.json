@@ -23,7 +23,7 @@
     "when": "editorTextFocus && vim.active"
   },
   {
-    "key": "ctrl+n",
+    "key": "ctrl+a n",
     "command": "explorer.newFile"
   },
   {

@@ -13,6 +13,9 @@
             // Make changes here to the powershell.exe profile
             "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
             "name": "PowerShell",
+            "useAcrylic": true,
+            "acrylicOpacity": 0.75,
+            "background": "#000000",
             // "colorScheme" : "Solarized Dark",
             "commandline": "pwsh",
             "hidden": false,
@@ -47,6 +50,62 @@
     // To unbind a default keybinding, set the command to "unbound"
     "keybindings": [
         {
+            "command" : "moveFocusLeft",
+            "keys" :
+            [
+                "alt+h"
+            ]
+        },
+        {
+            "command" : "moveFocusRight",
+            "keys" :
+            [
+                "alt+l"
+            ]
+        },
+        {
+            "command" : "moveFocusUp",
+            "keys" :
+            [
+                "alt+k"
+            ]
+        },
+        {
+            "command" : "moveFocusDown",
+            "keys" :
+            [
+                "alt+j"
+            ]
+        },
+        {
+            "command" : "resizePaneLeft",
+            "keys" :
+            [
+                "alt+shift+h"
+            ]
+        },
+        {
+            "command" : "resizePaneRight",
+            "keys" :
+            [
+                "alt+shift+l"
+            ]
+        },
+        {
+            "command" : "resizePaneUp",
+            "keys" :
+            [
+                "alt+shift+k"
+            ]
+        },
+        {
+            "command" : "resizePaneDown",
+            "keys" :
+            [
+                "alt+shift+j"
+            ]
+        },
+        {
             "command" : "splitHorizontal",
             "keys" :
             [
@@ -58,6 +117,13 @@
             "keys" :
             [
                 "ctrl+|"
+            ]
+        },
+        {
+            "command" : "toggleFullscreen",
+            "keys" :
+            [
+                "alt+f"
             ]
         }
     ]
