@@ -3,46 +3,41 @@ Import-Module -Name New-InstallScoopApp
 class Dotfiles {
 
   $dotfilesDir = "$env:USERPROFILE\.dotfiles";
-  $_windowsDirConfigs = @{
-    "anki" = "$env:USERPROFILE\scoop\apps\anki\current\data"
+  $windowsConfigDir = @{
+    "anki" = "$env:USERPROFILE\scoop\apps\anki\current\data";
     "editorconfig" = "$env:USERPROFILE";
     "git" = "$env:USERPROFILE";
     "mpv" = "$env:USERPROFILE\scoop\apps\mpv\current\portable_config";
     "vscode" = "$env:APPDATA\Code\User";
     "windows_terminal" = "$env:APPDATA\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
   }
-  $_scoop = (New-InstallScoopApp);
-  hidden $myVscodeExts = @(
+  $scoop = (New-InstallScoopApp);
+  $vscodeExts = @(
     "vscodevim.vim",
     "EditorConfig.EditorConfig",
     "vscode-icons-team.vscode-icons",
     "grigoryvp.language-xi",
     "grigoryvp.memory-theme"
   );
-  hidden $gitRepositories = @{
-    "https://github.com/BlackLacost/.dotfiles.git" = $this.dotfilesDir;
-    "https://gitlab.com/blacklacost/xi.git" = "$env:USERPROFILE\.xi"
+  $gitRepositories = @{
+    ".dotfiles" = "https://github.com/BlackLacost/.dotfiles.git"
+    ".xi" = "https://gitlab.com/blacklacost/xi.git"
   }
-  hidden $testApps = @("git", "anki", "Monoid-NF", "vscode");
-  hidden $basicApps = @(
+
+  $testApps = @("git", "anki", "Monoid-NF", "vscode");
+  $basicApps = @(
     "git", "sudo", "anki", "googlechrome", "Monoid-NF", "mpv", "potplayer", "telegram", "vscode", "whatsapp", "qbittorrent"
   );
-  hidden $extraApps = @(
-    "colortool", "nvm", "rufus", "fzf", "foxit-reader"
+  $extraApps = @(
+    "colortool", "nvm", "rufus", "foxit-reader"
   );
-  hidden $fullApps = $this.basicApps + $this.extraApps;
+  $fullApps = $this.basicApps + $this.extraApps;
 
-  Configure() {
-    Write-Host $this.dotfilesDir;
-    $this.InstallWindowsApps();
-    ForEach ($uri in $this.gitRepositories.keys) {
-      $dstDir = $this.gitRepositories[$uri];
-      $this.GitClone($uri, $dstDir);
-    }
+
+  [void] Configure() {
+    $this.InstallWindowsApps($this.basicApps);
+    $this.GitClones();
     $this.InstallPowershellModule("posh-git");
-    # For fzf
-    $this.InstallPowershellModule("PSEverything");
-    $this.InstallPowershellModule("PSFzf");
     $this.LinkAppsConfigs();
     $this.ConfigureVscode();
     $this.LinkModules();
@@ -82,9 +77,9 @@ class Dotfiles {
     }
   }
 
-  hidden InstallWindowsApps() {
-    ForEach ($app in $this.fullApps) {
-      $this._scoop.InstallScoopApp($app);
+  hidden InstallWindowsApps($apps) {
+    ForEach ($app in $apps) {
+      $this.scoop.InstallScoopApp($app);
     }
   }
 
@@ -93,16 +88,24 @@ class Dotfiles {
     git clone $uri $dstDir;
   }
 
+  GitClones() {
+    ForEach ($app in $this.gitRepositories.keys) {
+      $uri = $this.gitRepositories[$app];
+      $dstDir = Join-Path $env:USERPROFILE $app;
+      $this.GitClone($uri, $dstDir);
+    }
+  }
+
   hidden LinkAppsConfigs() {
-    ForEach ($appName in $this._windowsDirConfigs.keys) {
+    ForEach ($appName in $this.windowsConfigDir.keys) {
       $srcDir = Join-Path $this.dotfilesDir "config" $appName;
-      $this.SymlinkAllInDir($srcDir, $this._windowsDirConfigs[$appName]);
+      $this.SymlinkAllInDir($srcDir, $this.windowsConfigDir[$appName]);
     }
   }
 
   hidden ConfigureVscode() {
     $extList = @(& code --list-extensions);
-    ForEach ($ext in $this.myVscodeExts) {
+    ForEach ($ext in $this.vscodeExts) {
       if (-not $extList.Contains($ext)) {
         & code --install-extension $ext;
         if ($LASTEXITCODE -ne 0) { throw "Failed" }

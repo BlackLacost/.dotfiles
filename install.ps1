@@ -1,13 +1,11 @@
-function LinkModules() {
-  $modulesDir = "$env:USERPROFILE\.dotfiles\modules\";
-  $fullNameAndNameModules = Get-ChildItem $modulesDir | Select-Object FullName, Name, BaseName;
-
-  $fullNameAndNameModules | ForEach-Object {
+LinkModules {
+  $srcModulesDir = "$env:USERPROFILE\.dotfiles\modules\";
+  Get-ChildItem $srcModulesDir | Select-Object FullName, Name, BaseName | ForEach-Object {
     # Сделать foreach по PSModulePath
-    $profileDir = Split-Path -parent $profile;
-    $moduleDir = Join-Path $profileDir "Modules" $_.BaseName;
-    New-Item $moduleDir -ItemType Directory -Force;
-    New-Item -ItemType SymbolicLink -Path (Join-Path $moduleDir $_.Name) -Target $_.FullName -Force;
+    $powershellDir = Split-Path -parent $profile;
+    $powershellModuleDir = Join-Path $powershellDir "Modules" $_.BaseName;
+    New-Item $powershellModuleDir -ItemType Directory -Force;
+    New-Item -ItemType SymbolicLink -Path (Join-Path $powershellModuleDir $_.Name) -Target $_.FullName -Force;
   }
 }
 

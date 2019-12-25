@@ -1,5 +1,5 @@
 class Scoop {
-  $_buckets = @{
+  hidden $buckets = @{
     "anki" = "extras";
     "autohotkey" = "extras";
     "whatsapp" = "extras";
@@ -7,11 +7,11 @@ class Scoop {
     "smplayer" = "jfut";
   }
 
-  $_bucketsUri = @{
+  hidden $bucketsUri = @{
     "smplayer" = "https://github.com/jfut/scoop-jfut";
   }
 
-  $_sudo = @("Monoid-NF");
+  hidden $sudo = @("Monoid-NF");
 
   [bool] hidden IsAppStatusInstalled($appName) {
     $res = & scoop info $appName;
@@ -43,23 +43,23 @@ class Scoop {
       scoop uninstall $appName;
     }
 
-    if ($this._buckets.ContainsKey($appName)) {
-      $BucketName = $this._buckets[$appName];
+    if ($this.buckets.ContainsKey($appName)) {
+      $BucketName = $this.buckets[$appName];
       $contained = $(scoop bucket list).Contains($BucketName);
       if (-not $contained) {
-        if ($this._bucketsUri.ContainsKey($appName)) {
-          scoop bucket add $BucketName $this._bucketsUri[$appName];
+        if ($this.bucketsUri.ContainsKey($appName)) {
+          scoop bucket add $BucketName $this.bucketsUri[$appName];
         } else {
           scoop bucket add $BucketName;
         }
       }
     }
 
-    if ($this._sudo -contains $appName) {
+    if ($this.sudo -contains $appName) {
       # Start-Process scoop.cmd -Wait -Verb RunAs -ArgumentList "install $appName";
       sudo scoop install $appName;
     } else {
-      scoop install $AppName;
+      scoop install $appName;
     }
 
     if ($LASTEXITCODE -ne 0) {
