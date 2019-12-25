@@ -1,4 +1,4 @@
-LinkModules {
+function LinkModules {
   $srcModulesDir = "$env:USERPROFILE\.dotfiles\modules\";
   Get-ChildItem $srcModulesDir | Select-Object FullName, Name, BaseName | ForEach-Object {
     # Сделать foreach по PSModulePath

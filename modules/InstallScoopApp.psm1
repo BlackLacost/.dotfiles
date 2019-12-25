@@ -1,8 +1,5 @@
 class Scoop {
   hidden $buckets = @{
-    "anki" = "extras";
-    "autohotkey" = "extras";
-    "whatsapp" = "extras";
     "Monoid-NF" = "nerd-fonts";
     "smplayer" = "jfut";
   }
@@ -13,13 +10,19 @@ class Scoop {
 
   hidden $sudo = @("Monoid-NF");
 
+  Scoop() {
+    if (-not $this.CheckBucketAdded("extras")) {
+      scoop bucket add extras;
+    }
+  }
+
   [bool] hidden IsAppStatusInstalled($appName) {
     $res = & scoop info $appName;
     if ($LASTEXITCODE -ne 0) { return $false; }
     return (-not ($res | Out-String).Contains("Installed: No"));
   }
 
-  [bool] hidden HasApp($appName) {
+  [bool] HasApp($appName) {
     if (-not ($this.IsAppStatusInstalled($appName))) { return $false; }
     $res = @(& scoop info $appName);
     $installMarkIdx = $res.IndexOf("Installed:");
@@ -34,6 +37,10 @@ class Scoop {
     return ($content.Length -gt 0);
   }
 
+  [bool] CheckBucketAdded($bucketName) {
+    return (scoop bucket list).Contains($bucketName);
+  }
+
   InstallScoopApp($appName) {
     if ($this.HasApp($appName)) { return; }
     if ($this.IsAppStatusInstalled($appName)) {
@@ -44,9 +51,8 @@ class Scoop {
     }
 
     if ($this.buckets.ContainsKey($appName)) {
-      $BucketName = $this.buckets[$appName];
-      $contained = $(scoop bucket list).Contains($BucketName);
-      if (-not $contained) {
+      $bucketName = $this.buckets[$appName];
+      if (-not $this.CheckBucketAdded($bucketName)) {
         if ($this.bucketsUri.ContainsKey($appName)) {
           scoop bucket add $BucketName $this.bucketsUri[$appName];
         } else {

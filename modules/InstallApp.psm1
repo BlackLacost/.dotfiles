@@ -3,68 +3,23 @@ Import-Module -Name New-InstallScoopApp
 
 class InstallApp {
   $scoop = (New-InstallScoopApp);
-
   $dotfilesDir = "$env:USERPROFILE\.dotfiles";
 
-  [hashtable] $apps = [ordered] @{
-    "posh-git" = @{
-      "name" = "posh-git";
-      "installType" = "powershellModule";
-    };
-    "anki" = @{
-      "name" = "anki";
-      "installType" = "scoop";
-      "configDir" = "$env:USERPROFILE\scoop\apps\anki\current\data";
-    };
-    "git" = @{
-      "name" = "git";
-      "installType" = "scoop";
-      "configDir" = "$env:USERPROFILE";
-    };
-    "vscode" = @{
-      "name" = "vscode";
-      "installType" = "scoop";
-      "configDir" = "$env:APPDATA\Code\User";
-      "vscodeExts" = @(
-        "vscodevim.vim",
-        "EditorConfig.EditorConfig",
-        "vscode-icons-team.vscode-icons",
-        "grigoryvp.language-xi",
-        "grigoryvp.memory-theme"
-      );
-    };
-    "mpv" = @{
-      "name" = "mpv";
-      "installType" = "scoop";
-      "configDir" = "$env:USERPROFILE\scoop\apps\mpv\current\portable_config";
-    };
-    "dotfiles" = @{
-      "name" = "dotfiles";
-      "installType" = "git";
-      "uri" = "https://github.com/BlackLacost/.dotfiles.git";
-      "dstDir" = "$env:USERPROFILE\.dotfiles";
-    };
-    "xi" = @{
-      "name" = "xi";
-      "installType" = "git";
-      "uri" = "https://gitlab.com/blacklacost/xi.git";
-      "dstDir" = "$env:USERPROFILE\.xi";
-    };
-    "editorconfig" = @{
-      "name" = "editorconfig";
-      "installType" = "config";
-      "configDir" = "$env:USERPROFILE";
-    };
-    "windows_terminal" = @{
-      "name" = "windows_terminal";
-      "installType" = "config";
-      "configDir" = "$env:APPDATA\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState";
-    };
-  }
   InstallAll() {
-    ForEach ($app in $this.apps.Values) {
-      $this.Install($app);
+    [hashtable] $appsConfig = $this.LoadAppsConfigFromJson();
+
+    if (-not $this.scoop.HasApp("sudo")) {
+      $this.scoop.InstallScoopApp("sudo");
     }
+
+    ForEach ($appConfig in $appsConfig.Values) {
+      $this.Install($appConfig);
+    }
+  }
+
+  [hashtable] LoadAppsConfigFromJson() {
+    $jsonFile = "$($this.dotfilesDir)\apps.json";
+    return Get-Content -Path $jsonFile | ConvertFrom-Json -AsHashtable;
   }
 
   Install([hashtable] $app) {
@@ -80,7 +35,8 @@ class InstallApp {
 
         if ($app.ContainsKey("configDir")) {
           $srcDir = Join-Path $this.dotfilesDir "config" $app["name"];
-          $this.SymlinkAllInDir($srcDir, $app["configDir"]);
+          $dstDir = $this.ExpandEnv($app["configDir"]);
+          $this.SymlinkAllInDir($srcDir, $dstDir);
         }
 
         if ($app.ContainsKey("vscodeExts")) {
@@ -95,17 +51,26 @@ class InstallApp {
       }
 
       "git" {
-        if (Test-Path -Path $app["dstDir"]) { return; }
-        git clone $app["uri"] $app["dstDir"];
+        $dstDir = $this.ExpandEnv($app["dstDir"]);
+        if (Test-Path -Path $dstDir) { return; }
+        git clone $app["uri"] $dstDir;
       }
 
       "config" {
         $srcDir = Join-Path $this.dotfilesDir "config" $app["name"];
-        $this.SymlinkAllInDir($srcDir, $app["configDir"]);
+        $dstDir = $this.ExpandEnv($app["configDir"]);
+        $this.SymlinkAllInDir($srcDir, $dstDir);
       }
 
       Default {Write-Host "Неподдерживаемый тип установки"}
     }
+  }
+
+  [string] ExpandEnv($dstDir) {
+    $dirArray = @($dstDir.Split('\'));
+    # Преобразует string env, например %USERPROFILE%
+    $dirArray[0] = [System.Environment]::ExpandEnvironmentVariables($dirArray[0])
+    return $dirArray -join "\"
   }
 
   hidden SymlinkAllInDir($srcDir, $dstDir) {

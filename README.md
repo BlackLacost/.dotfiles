@@ -11,6 +11,8 @@ Invoke-WebRequest -UseBasicParsing get.scoop.sh | Invoke-Expression
 scoop install pwsh git
 pwsh.exe
 (Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/BlackLacost/.dotfiles/master/install.ps1).Content | Invoke-Expression
+$d = New-Dotfiles
+$d.Configure()
 ```
 
 Linux

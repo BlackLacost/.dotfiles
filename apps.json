@@ -1,0 +1,79 @@
+{
+  "posh-git": {
+    "name": "posh-git",
+    "installType": "powershellModule"
+  },
+  "anki": {
+    "name": "anki",
+    "installType": "scoop",
+    "configDir": "%USERPROFILE%\\scoop\\apps\\anki\\current\\data"
+  },
+  "git": {
+    "name": "git",
+    "installType": "scoop",
+    "configDir": "%USERPROFILE%"
+  },
+  "chrome": {
+    "name": "googlechrome",
+    "installType": "scoop"
+  },
+  "monoid-nf": {
+    "name": "Monoid-NF",
+    "installType": "scoop"
+  },
+  "mpv": {
+    "name": "mpv",
+    "installType": "scoop",
+    "configDir": "%USERPROFILE%\\scoop\\apps\\mpv\\current\\portable_config"
+  },
+  "potplayer": {
+    "name": "potplayer",
+    "installType": "scoop"
+  },
+  "telegram": {
+    "name": "telegram",
+    "installType": "scoop"
+  },
+  "vscode": {
+    "name": "vscode",
+    "installType": "scoop",
+    "configDir": "%APPDATA%\\Code\\User",
+    "vscodeExts": [
+      "vscodevim.vim",
+      "EditorConfig.EditorConfig",
+      "vscode-icons-team.vscode-icons",
+      "grigoryvp.language-xi",
+      "grigoryvp.memory-theme"
+    ]
+  },
+  "whatsapp": {
+    "name": "whatsapp",
+    "installType": "scoop"
+  },
+  "qbittorrent": {
+    "name": "qbittorrent",
+    "installType": "scoop"
+  },
+  "dotfiles": {
+    "name": "dotfiles",
+    "installType": "git",
+    "uri": "https://github.com/BlackLacost/.dotfiles.git",
+    "dstDir": "%USERPROFILE%\\.dotfiles"
+  },
+  "xi": {
+    "name": "xi",
+    "installType": "git",
+    "uri": "https://gitlab.com/blacklacost/xi.git",
+    "dstDir": "%USERPROFILE%\\.xi"
+  },
+  "editorconfig": {
+    "name": "editorconfig",
+    "installType": "config",
+    "configDir": "%USERPROFILE%"
+  },
+  "windows_terminal": {
+    "name": "windows_terminal",
+    "installType": "config",
+    "configDir": "%APPDATA%\\Local\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\LocalState"
+  }
+}
