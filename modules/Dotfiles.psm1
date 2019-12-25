@@ -1,78 +1,8 @@
-class Scoop {
-  $_buckets = @{
-    "anki" = "extras";
-    "autohotkey" = "extras";
-    "whatsapp" = "extras";
-    "Monoid-NF" = "nerd-fonts";
-    "smplayer" = "jfut";
-  }
+Import-Module -Name New-InstallScoopApp
 
-  $_bucketsUri = @{
-    "smplayer" = "https://github.com/jfut/scoop-jfut";
-  }
+class Dotfiles {
 
-  $_sudo = @("Monoid-NF");
-
-  [bool] hidden IsAppStatusInstalled($appName) {
-    $res = & scoop info $appName;
-    if ($LASTEXITCODE -ne 0) { return $false; }
-    return (-not ($res | Out-String).Contains("Installed: No"));
-  }
-
-  [bool] hidden HasApp($appName) {
-    if (-not ($this.IsAppStatusInstalled($appName))) { return $false; }
-    $res = @(& scoop info $appName);
-    $installMarkIdx = $res.IndexOf("Installed:");
-    if ($installMarkIdx -eq -1) { return $false; }
-    $installDir = $res[$installMarkIdx + 1];
-    if (-not $installDir) { return $false; }
-    $installDir = $installDir.Trim();
-    # if install fails, scoop will treat app as installed, but install dir
-    # is not created.
-    if (-not (Test-Path -Path $installDir)) { return $false; }
-    $content = Get-ChildItem $installDir;
-    return ($content.Length -gt 0);
-  }
-
-  InstallScoopApp($appName) {
-    if ($this.HasApp($appName)) { return; }
-    if ($this.IsAppStatusInstalled($appName)) {
-      # if install fails, scoop will treat app as installed.
-      # $this._prompt("'$appName' corrupted, press any key to reinstall");
-      Write-Host ("Uninstall $appName");
-      scoop uninstall $appName;
-    }
-
-    if ($this._buckets.ContainsKey($appName)) {
-      $BucketName = $this._buckets[$appName];
-      $contained = $(scoop bucket list).Contains($BucketName);
-      if (-not $contained) {
-        if ($this._bucketsUri.ContainsKey($appName)) {
-          scoop bucket add $BucketName $this._bucketsUri[$appName];
-        } else {
-          scoop bucket add $BucketName;
-        }
-      }
-    }
-
-    if ($this._sudo -contains $appName) {
-      # Start-Process scoop.cmd -Wait -Verb RunAs -ArgumentList "install $appName";
-      sudo scoop install $appName;
-    } else {
-      scoop install $AppName;
-    }
-
-    if ($LASTEXITCODE -ne 0) {
-      Write-Host ("Failed during installation", $appName);
-      throw "Failed";
-    }
-  }
-}
-
-
-class App {
-
-  $_cfgDir = "$env:USERPROFILE\.dotfiles";
+  $dotfilesDir = "$env:USERPROFILE\.dotfiles";
   $_windowsDirConfigs = @{
     "anki" = "$env:USERPROFILE\scoop\apps\anki\current\data"
     "editorconfig" = "$env:USERPROFILE";
@@ -81,7 +11,7 @@ class App {
     "vscode" = "$env:APPDATA\Code\User";
     "windows_terminal" = "$env:APPDATA\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
   }
-  $_scoop = [Scoop]::new();
+  $_scoop = (New-InstallScoopApp);
   hidden $myVscodeExts = @(
     "vscodevim.vim",
     "EditorConfig.EditorConfig",
@@ -90,7 +20,7 @@ class App {
     "grigoryvp.memory-theme"
   );
   hidden $gitRepositories = @{
-    "https://github.com/BlackLacost/.dotfiles.git" = $this._cfgDir;
+    "https://github.com/BlackLacost/.dotfiles.git" = $this.dotfilesDir;
     "https://gitlab.com/blacklacost/xi.git" = "$env:USERPROFILE\.xi"
   }
   hidden $testApps = @("git", "anki", "Monoid-NF", "vscode");
@@ -103,6 +33,7 @@ class App {
   hidden $fullApps = $this.basicApps + $this.extraApps;
 
   Configure() {
+    Write-Host $this.dotfilesDir;
     $this.InstallWindowsApps();
     ForEach ($uri in $this.gitRepositories.keys) {
       $dstDir = $this.gitRepositories[$uri];
@@ -114,7 +45,7 @@ class App {
     $this.InstallPowershellModule("PSFzf");
     $this.LinkAppsConfigs();
     $this.ConfigureVscode();
-    $this.HardLinkModules();
+    $this.LinkModules();
     $this.SetPowerOptions();
 
     # Auto-created by PowerShell 5.x until 6.x+ is a system default.
@@ -134,22 +65,20 @@ class App {
     }
 
     # Symlink PowerShel config file into PowerShell config dir.
-    $psProfileCfg = "$($this._cfgDir)/profile.ps1";
+    $psProfileCfg = "$($this.dotfilesDir)/profile.ps1";
     if (-not (Test-Path -Path "$psDir/profile.ps1")) {
       New-Item -ItemType SymbolicLink ` -Path $psDir -Name "profile.ps1" -Target $psProfileCfg -Force
     }
   }
 
-  hidden HardLinkModules() {
-    $modulesDir = "$($this._cfgDir)\modules\"
-    $fullNameAndNameModules = Get-ChildItem $modulesDir | Select-Object FullName, Name, BaseName
-
-    $fullNameAndNameModules | ForEach-Object {
+  LinkModules() {
+    $srcModulesDir = "$($this.dotfilesDir)\modules\";
+    Get-ChildItem $srcModulesDir | Select-Object FullName, Name, BaseName | ForEach-Object {
       # Сделать foreach по PSModulePath
-      $profileDir = Split-Path -parent $profile;
-      $moduleDir = Join-Path $profileDir "Modules" $_.BaseName;
-      New-Item $moduleDir -ItemType Directory -Force;
-      New-Item -ItemType HardLink -Path (Join-Path $moduleDir $_.Name) -Target $_.FullName -Force;
+      $powershellDir = Split-Path -parent $profile;
+      $powershellModuleDir = Join-Path $powershellDir "Modules" $_.BaseName;
+      New-Item $powershellModuleDir -ItemType Directory -Force;
+      New-Item -ItemType SymbolicLink -Path (Join-Path $powershellModuleDir $_.Name) -Target $_.FullName -Force;
     }
   }
 
@@ -166,7 +95,7 @@ class App {
 
   hidden LinkAppsConfigs() {
     ForEach ($appName in $this._windowsDirConfigs.keys) {
-      $srcDir = Join-Path $this._cfgDir "config" $appName;
+      $srcDir = Join-Path $this.dotfilesDir "config" $appName;
       $this.SymlinkAllInDir($srcDir, $this._windowsDirConfigs[$appName]);
     }
   }
@@ -210,11 +139,8 @@ class App {
 
 }
 
-# $app = [App]::new();
-# $app.Configure();
-
-function New-App() {
-  return [App]::new();
+function New-Dotfiles() {
+  return [Dotfiles]::new();
 }
 
-Export-ModuleMember -Function New-App
+Export-ModuleMember -Function New-Dotfiles
