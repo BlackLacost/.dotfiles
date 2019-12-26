@@ -2,7 +2,16 @@
 email = blacklacost@gmail.com
 name = Ilya Lisin
 
+[core]
+editor = code
+autocrlf = input
+safecrlf = false
+
 [format]
 pretty = oneline
+
+[pull]
+rebase = true
+
 [credential]
 	helper = manager
