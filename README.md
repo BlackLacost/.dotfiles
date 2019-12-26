@@ -15,6 +15,8 @@ $d = New-Dotfiles
 $d.Configure()
 ```
 
+- swap caps and ctrl using sharpkeys
+
 Linux
 ```
 sh link.sh

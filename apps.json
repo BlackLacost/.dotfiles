@@ -30,8 +30,16 @@
     "name": "potplayer",
     "installType": "scoop"
   },
+  "sharpkeys": {
+    "name": "sharpkeys",
+    "installType": "scoop"
+  },
   "telegram": {
     "name": "telegram",
+    "installType": "scoop"
+  },
+  "vim": {
+    "name": "vim",
     "installType": "scoop"
   },
   "vscode": {
@@ -44,7 +52,11 @@
       "vscode-icons-team.vscode-icons",
       "grigoryvp.language-xi",
       "grigoryvp.memory-theme"
-    ]
+    ],
+    "imselect": {
+      "uri": "https://github.com/daipeihust/im-select/raw/master/im-select-win/out/x64/im-select.exe",
+      "outFile": "C:\\im-select.exe"
+    }
   },
   "whatsapp": {
     "name": "whatsapp",
@@ -74,6 +86,6 @@
   "windows_terminal": {
     "name": "windows_terminal",
     "installType": "config",
-    "configDir": "%APPDATA%\\Local\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\LocalState"
+    "configDir": "%USERPROFILE%\\AppData\\Local\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\LocalState"
   }
 }
