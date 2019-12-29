@@ -44,6 +44,5 @@
   },
   "liveServer.settings.donotShowInfoMsg": true,
   "puglint.enable": true,
-  "puglint.run": "onSave",
-  "workbench.colorTheme": "grigoryvp memory theme"
+  "puglint.run": "onSave"
 }
