@@ -1,0 +1,11 @@
+{
+    "enableHierarchicalTags": true,
+    "enableHierarchicalCompleter": true,
+    "hierarchicalCompleterArbitrarySubstrings": false,
+    "hierarchicalCompleterHighlightWorkaround": true,
+    "hierarchicalTagsSeparator": "::",
+    "hotkeyFindReplace": "Ctrl+Alt+Shift+T",
+    "hotkeyRefreshTags": "Ctrl+Shift+F5",
+    "hotkeyDeleteTag": "Shift+Delete",
+    "hotkeyRenameTag": "F2"
+}

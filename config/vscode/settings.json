@@ -38,12 +38,12 @@
   "window.menuBarVisibility": "toggle",
   "window.zoomLevel": 1,
   "workbench.activityBar.visible": false,
-  "workbench.iconTheme": "vscode-icons",
+  "workbench.iconTheme": "material-icon-theme",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "liveServer.settings.donotShowInfoMsg": true,
   "puglint.enable": true,
   "puglint.run": "onSave",
-  "workbench.colorTheme": "grigoryvp memory theme"
+  "workbench.colorTheme": "Atom One Dark"
 }
