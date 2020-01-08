@@ -35,8 +35,8 @@ class Dotfiles {
     }
 
     # Symlink PowerShel config file into PowerShell config dir.
-    $psProfileCfg = "$($this.dotfilesDir)/profile.ps1";
-    if (-not (Test-Path -Path "$psDir/profile.ps1")) {
+    $psProfileCfg = "$($this.dotfilesDir)\profile.ps1";
+    if (-not (Test-Path -Path "$psDir\profile.ps1")) {
       New-Item -ItemType SymbolicLink ` -Path $psDir -Name "profile.ps1" -Target $psProfileCfg -Force
     }
   }

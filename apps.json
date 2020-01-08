@@ -51,7 +51,10 @@
       "EditorConfig.EditorConfig",
       "vscode-icons-team.vscode-icons",
       "grigoryvp.language-xi",
-      "grigoryvp.memory-theme"
+      "grigoryvp.memory-theme",
+      "ritwickdey.LiveServer",
+      "techer.open-in-browser",
+      "CoenraadS.bracket-pair-colorizer-2"
     ],
     "imselect": {
       "uri": "https://github.com/daipeihust/im-select/raw/master/im-select-win/out/x64/im-select.exe",
