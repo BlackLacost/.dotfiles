@@ -1,1 +1,1 @@
-{"name": "Syntax Highlighting for Code", "mod": 1577695633, "config": {"hotkey": "Alt+s", "limitToLangs": ["Pug", "JavaScript"], "style": "default"}}
+{"name": "Syntax Highlighting for Code", "mod": 1577695633, "config": {"hotkey": "Alt+s", "limitToLangs": ["PUG", "JavaScript", "HTML", "Python"], "style": "default"}}
