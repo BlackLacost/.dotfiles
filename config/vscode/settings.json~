@@ -1,8 +1,8 @@
 {
   "auto-close-tag.enableAutoCloseTag": true,
   "editor.acceptSuggestionOnEnter": "off",
-  "editor.autoClosingBrackets": false,
-  "editor.autoClosingQuotes": false,
+  "editor.autoClosingBrackets": true,
+  "editor.autoClosingQuotes": true,
   "editor.fontFamily": "Monoid, Monoid NF",
   "editor.fontSize": 12,
   "editor.fontLigatures": true,
@@ -41,12 +41,18 @@
   "window.menuBarVisibility": "toggle",
   "window.zoomLevel": 1,
   "workbench.activityBar.visible": false,
-  "workbench.iconTheme": "material-icon-theme",
+  "workbench.iconTheme": "vscode-icons",
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "liveServer.settings.donotShowInfoMsg": true,
   "puglint.enable": true,
   "puglint.run": "onSave",
-  "workbench.colorTheme": "Atom One Dark"
+  "workbench.colorTheme": "grigoryvp memory theme",
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "task.problemMatchers.neverPrompt": {
+    "npm": true
+  }
 }
