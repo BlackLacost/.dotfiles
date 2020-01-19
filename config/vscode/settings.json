@@ -1,19 +1,25 @@
 {
   "auto-close-tag.enableAutoCloseTag": true,
   "editor.acceptSuggestionOnEnter": "off",
-  "editor.autoClosingBrackets": true,
-  "editor.autoClosingQuotes": true,
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.autoClosingBrackets": "beforeWhitespace",
+  "editor.autoClosingQuotes": "beforeWhitespace",
   "editor.fontFamily": "Monoid, Monoid NF",
   "editor.fontSize": 12,
   "editor.fontLigatures": true,
   "editor.links": true,
-  "editor.lineNumbers": "on",
+  "editor.lineNumbers": "relative",
   "editor.minimap.enabled": false,
   "editor.rulers": [78],
   "[powershell]": {
     "editor.rulers": [120]
   },
+  "[javascript]": {
+    "editor.rulers": [100]
+  },
   "editor.tabSize": 4,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
   "emmet.includeLanguages": {
     "vue": "jade"
   },
@@ -23,6 +29,10 @@
   "html.mirrorCursorOnMatchingTag": false,
   "powershell.integratedConsole.showOnStartup": false,
   "powershell.powerShellExePath": "C:\\Users\\black\\scoop\\apps\\pwsh\\current\\pwsh.exe",
+  "prettier.singleQuote": true,
+  "prettier.printWidth": 100,
+  "prettier.trailingComma": "all",
+  "prettier.bracketSpacing": true,
   "search.useIgnoreFiles": true,
   "terminal.integrated.fontFamily": "Monoid, Monoid NF",
   "terminal.integrated.fontSize": 12,
@@ -37,14 +47,11 @@
   "vim.easymotion": true,
   "vim.ignorecase": true,
   "vim.leader": "<space>",
-  "window.openFoldersInNewWindow": "off",
+  "window.openFoldersInNewWindow": "on",
   "window.menuBarVisibility": "toggle",
   "window.zoomLevel": 1,
   "workbench.activityBar.visible": false,
   "workbench.iconTheme": "vscode-icons",
-  "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
   "liveServer.settings.donotShowInfoMsg": true,
   "puglint.enable": true,
   "puglint.run": "onSave",
@@ -55,7 +62,6 @@
   "task.problemMatchers.neverPrompt": {
     "npm": true
   },
-  "cSpell.language": "en,en-US,ru",
   "cSpell.enabledLanguageIds": [
     "asciidoc",
     "c",
@@ -95,5 +101,19 @@
     "xi",
     "yaml",
     "yml"
-  ]
+  ],
+  "cSpell.userWords": [
+    "Vuelidate",
+    "Vuex",
+    "consola",
+    "nuxt",
+    "prepend",
+    "tbody",
+    "thead"
+  ],
+  "cSpell.language": "en,ru",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "wallaby.startAutomatically": false
 }

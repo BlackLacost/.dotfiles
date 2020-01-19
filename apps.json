@@ -86,6 +86,11 @@
     "installType": "config",
     "configDir": "%USERPROFILE%"
   },
+  "prettier": {
+    "name": "prettier",
+    "installType": "config",
+    "configDir": "%USERPROFILE%"
+  },
   "windows_terminal": {
     "name": "windows_terminal",
     "installType": "config",
