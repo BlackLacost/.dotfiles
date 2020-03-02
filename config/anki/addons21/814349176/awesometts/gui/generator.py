@@ -355,7 +355,7 @@ class BrowserGenerator(ServiceDialog):
 
             proc['counts']['fail'] += 1
 
-            message = exception.message if hasattr(exception, 'message') else str(exception)
+            message = str(exception)
             if isinstance(message, str):
                 message = self._RE_WHITESPACE.sub(' ', message).strip()
 
@@ -725,6 +725,9 @@ class EditorGenerator(ServiceDialog):
 
         super(EditorGenerator, self).show(*args, **kwargs)
 
+        QtCore.QTimer.singleShot(0, self._populate_input_field)
+
+    def _populate_input_field(self):
         text = self.findChild(QtWidgets.QTextEdit, 'text')
         text.setFocus()
 
@@ -738,15 +741,27 @@ class EditorGenerator(ServiceDialog):
             """Fetch from given system clipboard."""
             return from_unknown(app.clipboard().text(subtype)[0])
 
-        for origin in [
-                lambda: from_note(web.selectedText()),
-                lambda: from_note(web.page().mainFrame().evaluateJavaScript(
+        def js_callback(val):
+            self.callback_message = val
+
+        def exec_javascript():
+            self.callback_message = None
+
+            web.page().runJavaScript(
                     # for jQuery, this needs to be html() instead of text() as
                     # $('<div>hi<br>there</div>').text() yields "hithere"
                     # whereas if we have the original HTML, we can convert the
                     # line break tag into whitespace during input sanitization
-                    '$("#f%d").html()' % editor.currentField
-                )),
+                    '$("#f%d").html()' % editor.currentField, js_callback)
+
+            while self.callback_message is None:
+                app.instance().processEvents()
+
+            return self.callback_message
+
+        for origin in [
+                lambda: from_note(web.selectedText()),
+                lambda: from_note(exec_javascript()),
                 lambda: try_clipboard('html'),
                 lambda: try_clipboard('text'),
         ]:
@@ -781,7 +796,7 @@ class EditorGenerator(ServiceDialog):
             ),
             fail=lambda exception: (
                 self._alerts("Cannot record the input phrase with these "
-                             "settings.\n\n%s" % exception.message, self),
+                             "settings.\n\n%s" % exception, self),
                 text_input.setFocus(),
             ),
         )
