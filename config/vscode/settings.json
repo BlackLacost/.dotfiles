@@ -10,19 +10,29 @@
   "editor.links": true,
   "editor.lineNumbers": "relative",
   "editor.minimap.enabled": false,
-  "editor.rulers": [78],
+  "editor.rulers": [100],
+  "[markdown]": {
+    "editor.rulers": [78],
+    "editor.wordWrap": "wordWrapColumn"
+  },
   "[powershell]": {
     "editor.rulers": [120]
   },
-  "[javascript]": {
-    "editor.rulers": [100]
+  "[python]": {
+    "editor.rulers": [78]
   },
   "editor.tabSize": 4,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "emmet.includeLanguages": {
+    "vue-html": "jade",
     "vue": "jade"
   },
+  "emmet.syntaxProfiles": {
+    "vue-html": "jade",
+    "vue": "jade"
+  },
+  "emmet.triggerExpansionOnTab": true,
   "files.eol": "\n",
   "files.trimTrailingWhitespace": true,
   "html.autoClosingTags": false,
@@ -115,5 +125,10 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "wallaby.startAutomatically": false
+  "wallaby.startAutomatically": false,
+  "explorer.confirmDragAndDrop": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "explorer.confirmDelete": false,
+  "todo-tree.tree.showScanModeButton": false
 }
