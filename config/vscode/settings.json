@@ -20,7 +20,15 @@
   },
   "[python]": {
     "editor.rulers": [78],
-    "editor.defaultFormatter": null
+    "editor.defaultFormatter": null,
+    "editor.formatOnSaveTimeout": 3000
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": false,
+    "prettier": {
+      "trailingComma": "none"
+    }
   },
   "editor.tabSize": 4,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -44,7 +52,6 @@
   "powershell.powerShellExePath": "C:\\Users\\black\\scoop\\apps\\pwsh\\current\\pwsh.exe",
   "prettier.singleQuote": true,
   "prettier.printWidth": 100,
-  "prettier.trailingComma": "all",
   "prettier.bracketSpacing": true,
   "search.useIgnoreFiles": true,
   "terminal.integrated.fontFamily": "Monoid, Monoid NF",
