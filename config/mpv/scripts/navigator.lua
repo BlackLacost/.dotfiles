@@ -15,7 +15,7 @@ local windows_downloads = ON_WINDOWS and utils.join_path(os.getenv("USERPROFILE"
 local settings = {
   --navigation keybinds override arrowkeys and enter when activating navigation menu, false means keys are always actíve
   dynamic_binds = true,
-  navigator_mainkey = "p", --the key to bring up navigator's menu, can be bound on input.conf aswell
+  navigator_mainkey = "n", --the key to bring up navigator's menu, can be bound on input.conf aswell
 
   --dynamic binds, should not be bound in input.conf unless dynamic binds is false
   key_navfavorites = "f",
