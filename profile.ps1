@@ -11,6 +11,7 @@ function cdd() { Set-Location ~/.dotfiles; }
 function cdh() { Set-Location ~; }
 function cdp() { Set-Location D:/code; }
 function cdx() { Set-Location ~/.xi; }
+function jnote() { Set-Location ~/python; jupyter notebook; }
 
 function ggs() { git status; }
 function gga($file) {
