@@ -4,23 +4,27 @@ class Dotfiles {
 
   $dotfilesDir = "$env:USERPROFILE\.dotfiles";
   $install = (New-InstallApp);
-  $testApps = @("git", "anki", "Monoid-NF", "vscode");
-  $basicApps = @(
-    "git", "sudo", "anki", "googlechrome", "Monoid-NF", "mpv", "potplayer", "telegram", "vscode", "whatsapp", "qbittorrent"
-  );
-  $extraApps = @(
-    "colortool", "nvm", "rufus", "foxit-reader"
-  );
-  $fullApps = $this.basicApps + $this.extraApps;
+  # $testApps = @("git", "anki", "Monoid-NF", "vscode");
+  # $basicApps = @(
+  #   "git", "sudo", "anki", "googlechrome", "Monoid-NF", "mpv", "potplayer", "telegram", "vscode", "whatsapp", "qbittorrent"
+  # );
+  # $extraApps = @(
+  #   "colortool", "nvm", "rufus", "foxit-reader"
+  # );
+  # $fullApps = $this.basicApps + $this.extraApps;
 
   [void] Configure() {
     $this.LinkModules();
     $this.install.InstallAll();
     $this.SetPowerOptions();
 
+    $currentPsDir = Split-Path -Parent $PROFILE;
+    $parentPsDir = Split-Parent -Parent $currentPsDir;
+
     # Auto-created by PowerShell 5.x until 6.x+ is a system default.
     # Create and set hidden attribute to exclude from 'ls'.
-    $oldPsDir = "$($env:USERPROFILE)\Documents\WindowsPowerShell";
+    $oldPsDir = Join-Path $parentPsDir "WindowsPowerShell";
+    # $oldPsDir = "$($env:USERPROFILE)\Documents\WindowsPowerShell";
     if (-not (Test-Path -Path $oldPsDir)) {
       $ret = & New-Item -Path $oldPsDir -ItemType Directory;
       $ret.Attributes = 'Hidden';
@@ -28,7 +32,8 @@ class Dotfiles {
 
     # PowerShell config is loaded from this dir.
     # Create and set hidden attribute to exclude from 'ls'.
-    $psDir = "$($env:USERPROFILE)\Documents\PowerShell";
+    # $psDir = "$($env:USERPROFILE)\Documents\PowerShell";
+    $psDir = Join-Path $parentPsDir "PowerShell";
     if (-not (Test-Path -Path $psDir)) {
       $ret = & New-Item -Path $psDir -ItemType Directory;
       $ret.Attributes = 'Hidden';
