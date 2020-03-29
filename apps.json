@@ -26,10 +26,6 @@
     "installType": "scoop",
     "configDir": "%USERPROFILE%\\scoop\\apps\\mpv\\current\\portable_config"
   },
-  "potplayer": {
-    "name": "potplayer",
-    "installType": "scoop"
-  },
   "sharpkeys": {
     "name": "sharpkeys",
     "installType": "scoop"
