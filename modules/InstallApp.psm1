@@ -51,9 +51,8 @@ class InstallApp {
 
         if ($app.ContainsKey("imselect")) {
           $outFile = $this.ExpandEnv($app["imselect"]["outFile"]);
-          if (Test-Path $outFile -PathType Leaf) {
-            Invoke-WebRequest -Uri $app["imselect"]["uri"] -OutFile $outFile;
-          }
+          if (Test-Path -Path $outFile -PathType Leaf) { return;}
+          Invoke-WebRequest -Uri $app["imselect"]["uri"] -OutFile $outFile;
         }
       }
 
