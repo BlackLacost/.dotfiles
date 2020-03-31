@@ -49,7 +49,6 @@
   "html.autoClosingTags": false,
   "html.mirrorCursorOnMatchingTag": false,
   "powershell.integratedConsole.showOnStartup": false,
-  "powershell.powerShellExePath": "C:\\Users\\black\\scoop\\apps\\pwsh\\current\\pwsh.exe",
   "prettier.singleQuote": true,
   "prettier.printWidth": 100,
   "prettier.bracketSpacing": true,

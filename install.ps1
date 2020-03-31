@@ -11,3 +11,12 @@ function LinkModules {
 
 git clone "https://github.com/BlackLacost/.dotfiles.git" "$env:USERPROFILE\.dotfiles";
 LinkModules;
+
+$currentPsDir = Split-Path -parent $profile;
+$parentPsDir = Split-Path -Parent $currentPsDir;
+$psDir = Join-Path $parentPsDir "PowerShell";
+$dotfilesDir = "$env:USERPROFILE\.dotfiles\";
+$psProfileCfg = Join-Path $dotfilesDir "profile.ps1";
+if (-not (Test-Path -Path "$psDir\profile.ps1")) {
+  New-Item -ItemType SymbolicLink -Path $psDir -Name "profile.ps1" -Target $psProfileCfg -Force
+}

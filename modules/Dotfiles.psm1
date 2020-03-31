@@ -18,7 +18,9 @@ class Dotfiles {
     $this.install.InstallAll();
     $this.SetPowerOptions();
 
-    # $currentPsDir = Split-Path -Parent "$(PROFILE)";
+    $currentPsDir = Split-Path -parent "$($this.profile)";
+    # Write-Host $this.profile;
+    Write-Host $currentPsDir;
     # $parentPsDir = Split-Path -Parent $currentPsDir;
 
     # Auto-created by PowerShell 5.x until 6.x+ is a system default.
@@ -34,6 +36,7 @@ class Dotfiles {
     # Create and set hidden attribute to exclude from 'ls'.
     $psDir = "$($env:USERPROFILE)\Documents\PowerShell";
     # $psDir = Join-Path $parentPsDir "PowerShell";
+    Write-Host $psDir;
     if (-not (Test-Path -Path $psDir)) {
       $ret = & New-Item -Path $psDir -ItemType Directory;
       $ret.Attributes = 'Hidden';
