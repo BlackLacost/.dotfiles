@@ -1,37 +1,52 @@
-# this is a small modification of the hyperlink/unlink function
-# from the Power Format Pack: Copyright 2014-2017 Stefan van den Akker <neftas@protonmail.com>
+# Anki add-on to insert hyperlinks from the editor
 
-# the code from the PFP (mostfly from hyperlink.py and utilities.py)
-# is mostly from L47-L169 and the icons.
-# the function setupEditorButtonsFilter is taken from "Auto Markdown"
-# from https://ankiweb.net/shared/info/1030875226 which should be
-# Copyright 2018 anonymous
-#      probably reddit user /u/NavyTeal, see
-#      https://www.reddit.com/r/Anki/comments/9t7acy/bringing_markdown_to_anki_21/
+# Copyright 2014-2017 Stefan van den Akker <neftas@protonmail.com>
+#           2018- ijgnd
+#           2020 Arthur Milchior
+
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 
 
 import json
 import os
 
-from anki import version
-from anki.hooks import addHook, wrap
+from anki.hooks import addHook
 from anki.lang import _
 from aqt import mw
-from aqt.qt import *
 from aqt.editor import Editor
+from aqt.qt import QApplication, QKeySequence
 
-from .window import Hyperlink
 from .helper_functions import escape_html_chars, is_valid_url
+from .window import Hyperlink
 
 addon_path = os.path.dirname(__file__)
 
 
 def gc(arg, fail=False):
-    return mw.addonManager.getConfig(__name__).get(arg, fail)
+    conf = mw.addonManager.getConfig(__name__)
+    if conf:
+        return conf.get(arg, fail)
+    else:
+        return fail
 
 
 def hlunlink(editor):
     editor.web.eval("setFormat('unlink')")
+
+
 Editor.hlunlink = hlunlink
 
 
@@ -40,8 +55,10 @@ def toggle_hyperlink(editor):
     h = Hyperlink(editor, editor.parentWindow, selected)
     if hasattr(h, "replacement"):
         editor.web.eval(
-                    "document.execCommand('insertHTML', false, %s);"
-                    % json.dumps(h.replacement))
+            "document.execCommand('insertHTML', false, %s);"
+            % json.dumps(h.replacement))
+
+
 Editor.toggle_hyperlink = toggle_hyperlink
 
 
@@ -50,14 +67,15 @@ def keystr(k):
     return key.toString(QKeySequence.NativeText)
 
 
-def setupEditorButtonsFilter(buttons, editor):
+def setupEditorButtons(buttons, editor):
     b = editor.addButton(
         os.path.join(addon_path, "icons", "hyperlink.png"),
         "hyperlinkbutton",
         toggle_hyperlink,
-        tip="Insert Hyperlink ({})".format(keystr(gc("shortcut_insert_link", ""))),
+        tip="Insert Hyperlink ({})".format(
+            keystr(gc("shortcut_insert_link", ""))),
         keys=gc('shortcut_insert_link')
-        )
+    )
     buttons.append(b)
 
     if gc('unlink_button_and_shortcut', True):
@@ -65,13 +83,16 @@ def setupEditorButtonsFilter(buttons, editor):
             os.path.join(addon_path, "icons", "remove_hyperlink.png"),
             "remove_hyperlink_button",
             hlunlink,
-            tip="remove hyperlink ({})".format(keystr(gc("shortcut_unlink", ""))),
+            tip="remove hyperlink ({})".format(
+                keystr(gc("shortcut_unlink", ""))),
             keys=gc('shortcut_unlink', "")
-            )
+        )
         buttons.append(c)
 
     return buttons
-addHook("setupEditorButtons", setupEditorButtonsFilter)
+
+
+addHook("setupEditorButtons", setupEditorButtons)
 
 
 def format_link_string_as_html_hyperlink(editor, data, selectedtext, QueryLinkText):
@@ -92,8 +113,10 @@ def format_link_string_as_html_hyperlink(editor, data, selectedtext, QueryLinkTe
         if selectedtext.startswith(i):
             replacement = i + replacement
     editor.web.eval(
-                "document.execCommand('insertHTML', false, %s);"
-                % json.dumps(replacement))
+        "document.execCommand('insertHTML', false, %s);"
+        % json.dumps(replacement))
+
+
 Editor.format_link_string_as_html_hyperlink = format_link_string_as_html_hyperlink
 
 
@@ -120,6 +143,8 @@ def add_to_context(view, menu):
     if url.isValid():
         a = menu.addAction(_("Copy URL"))
         a.triggered.connect(lambda _, v="", u=url: set_clip(v, u))
+
+
 addHook("EditorWebView.contextMenuEvent", add_to_context)
 
 
@@ -136,5 +161,7 @@ def _reviewerContextMenu(view, menu):
     if url.isValid():
         a = menu.addAction(_("Copy URL"))
         a.triggered.connect(lambda _, v=view, u=url: set_clip(v, u))
+
+
 if gc("show_in_reviewer_context_menu"):
     addHook('AnkiWebView.contextMenuEvent', _reviewerContextMenu)

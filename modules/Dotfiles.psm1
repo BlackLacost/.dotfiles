@@ -18,35 +18,35 @@ class Dotfiles {
     $this.install.InstallAll();
     $this.SetPowerOptions();
 
-    $currentPsDir = Split-Path -parent "$($this.profile)";
+    # $currentPsDir = Split-Path -parent "$($this.profile)";
     # Write-Host $this.profile;
-    Write-Host $currentPsDir;
+    # Write-Host $currentPsDir;
     # $parentPsDir = Split-Path -Parent $currentPsDir;
 
     # Auto-created by PowerShell 5.x until 6.x+ is a system default.
     # Create and set hidden attribute to exclude from 'ls'.
     # $oldPsDir = Join-Path $parentPsDir "WindowsPowerShell";
-    $oldPsDir = "$($env:USERPROFILE)\Documents\WindowsPowerShell";
-    if (-not (Test-Path -Path $oldPsDir)) {
-      $ret = & New-Item -Path $oldPsDir -ItemType Directory;
-      $ret.Attributes = 'Hidden';
-    }
+    # $oldPsDir = "$($env:USERPROFILE)\Documents\WindowsPowerShell";
+    # if (-not (Test-Path -Path $oldPsDir)) {
+    #   $ret = & New-Item -Path $oldPsDir -ItemType Directory;
+    #   $ret.Attributes = 'Hidden';
+    # }
 
     # PowerShell config is loaded from this dir.
     # Create and set hidden attribute to exclude from 'ls'.
-    $psDir = "$($env:USERPROFILE)\Documents\PowerShell";
+    # $psDir = "$($env:USERPROFILE)\Documents\PowerShell";
     # $psDir = Join-Path $parentPsDir "PowerShell";
-    Write-Host $psDir;
-    if (-not (Test-Path -Path $psDir)) {
-      $ret = & New-Item -Path $psDir -ItemType Directory;
-      $ret.Attributes = 'Hidden';
-    }
+    # Write-Host $psDir;
+    # if (-not (Test-Path -Path $psDir)) {
+    #   $ret = & New-Item -Path $psDir -ItemType Directory;
+    #   $ret.Attributes = 'Hidden';
+    # }
 
     # Symlink PowerShel config file into PowerShell config dir.
-    $psProfileCfg = "$($this.dotfilesDir)\profile.ps1";
-    if (-not (Test-Path -Path "$psDir\profile.ps1")) {
-      New-Item -ItemType SymbolicLink ` -Path $psDir -Name "profile.ps1" -Target $psProfileCfg -Force
-    }
+    # $psProfileCfg = "$($this.dotfilesDir)\profile.ps1";
+    # if (-not (Test-Path -Path "$psDir\profile.ps1")) {
+    #   New-Item -ItemType SymbolicLink ` -Path $psDir -Name "profile.ps1" -Target $psProfileCfg -Force
+    # }
   }
 
   LinkModules() {
