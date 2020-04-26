@@ -1,21 +1,25 @@
 #!/bin/bash
 
-keybindings_file="$HOME/.config/Code/User/keybindings.json"
-settings_file="$HOME/.config/Code/User/settings.json"
+link () {
+	target_file=$1
+	dest_file=$2
 
+	if [[ -f $dest_file ]]; then
+		if [[ -f $dest_file.backup ]]; then
+			rm $dest_file
+		else
+			mv $dest_file $dest_file.backup
+		fi
+	fi
 
-if [ -f $keybindings_file ]; then
-    mv $keybindings_file $keybindings_file.backup
-fi
-if [ -h $keybindings_file ]; then
-    rm $keybindings_file
-fi
-ln config/vscode/keybindings.json $keybindings_file
+	if [ -h $dest_file ]; then
+		rm $dest_file
+	fi
 
-if [ -f $settings_file ]; then
-    mv $settings_file $settings_file.backup
-fi
-if [ -h $settings_file ]; then
-    rm $settings_file
-fi
-ln config/vscode/settings.json $settings_file
+	ln $target_file $dest_file
+}
+
+link ~/.dotfiles/.config/i3/config ~/.config/i3/config
+link ~/.dotfiles/.config/i3blocks/config ~/.config/i3blocks/config
+link ~/.dotfiles/.local/bin/statusbar/volume ~/.local/bin/statusbar/volume
+
