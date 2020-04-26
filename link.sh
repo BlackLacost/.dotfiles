@@ -1,25 +1,31 @@
 #!/bin/bash
 
-link () {
+backup_file() {
+	file=$1
+	if [ -f $file.backup ]; then
+		rm $dest_file
+	else
+		mv $dest_file $dest_file.backup
+	fi
+}
+
+link_file() {
 	target_file=$1
 	dest_file=$2
-
-	if [[ -f $dest_file ]]; then
-		if [[ -f $dest_file.backup ]]; then
-			rm $dest_file
-		else
-			mv $dest_file $dest_file.backup
-		fi
-	fi
-
-	if [ -h $dest_file ]; then
-		rm $dest_file
-	fi
-
+	[ -f $dest_file ] && $backup_file $dest_file
+	[ -h $dest_file ] && rm $dest_file
 	ln $target_file $dest_file
 }
 
-link ~/.dotfiles/.config/i3/config ~/.config/i3/config
-link ~/.dotfiles/.config/i3blocks/config ~/.config/i3blocks/config
-link ~/.dotfiles/.local/bin/statusbar/volume ~/.local/bin/statusbar/volume
+
+link_dir() {
+	dir=$1
+	for f in $(find $dir); do
+		[ -d $f ] && [ ! -d ~/$f ] && mkdir -p ~/$f
+		[ -f $f ] && link_file $(realpath $f) ~/$f
+	done
+}
+
+link_dir .config
+link_dir .local
 
