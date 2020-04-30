@@ -28,4 +28,4 @@ link_dir() {
 
 link_dir .config
 link_dir .local
-
+link_file .vimrc ~/.vimrc
