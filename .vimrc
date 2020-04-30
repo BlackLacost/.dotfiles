@@ -1,8 +1,13 @@
 " Plugins{{{
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $HOME/.vimrc
+endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -12,9 +17,9 @@ Plug 'scrooloose/nerdcommenter'
 call plug#end()
 "}}}
 " Colors{{{
-syntax enable
+syntax on
 set t_Co=256                " t_** is terminal_options
-set background=dark
+set background=light
 "}}}
 " Fonts and Encoding{{{
 set encoding=UTF-8
@@ -42,11 +47,11 @@ else
 endif
 " }}}
 " UI Layout{{{
-set relativenumber
+set number relativenumber
 set nocursorline
 set nowrap
-set textwidth=79
-set colorcolumn=80
+set textwidth=0
+set colorcolumn=0
 "}}}
 " Searching{{{
 set incsearch              " Search as characters are entered
@@ -101,9 +106,9 @@ nmap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) - 10)<CR>
 "}}}
 " Plugins options {{{1
 " 'morhetz/gruvbox'{{{2
-let g:gruvbox_italic=1
-colorscheme gruvbox
-set termguicolors
+" let g:gruvbox_italic=1
+" set termguicolors
+" colorscheme gruvbox
 " }}}
 " 'scrooloose/nerdtree'{{{2
 nmap <C-n> :NERDTreeToggle<CR>
