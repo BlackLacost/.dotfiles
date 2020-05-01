@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'morhetz/gruvbox'
+Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -52,6 +53,13 @@ set nocursorline
 set nowrap
 set textwidth=0
 set colorcolumn=0
+"}}}
+" Disable automatic commenting on newline:{{{
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" }}}
+" Automatically deletes all trailing whitespace and newlines at end of file on save{{{
+autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritePre * %s/\n\+\%$//e
 "}}}
 " Searching{{{
 set incsearch              " Search as characters are entered
@@ -118,6 +126,8 @@ let g:coc_global_extensions = [
     \ 'coc-highlight',
     \ ]
 "}}}
+" TODO: remap to <C-/> 'scrooloose/nerdcommenter'{{{2
+vmap <C-c> <plug>NERDCommenterToggle
+nmap <C-c> <plug>NERDCommenterToggle
 "}}}
-vmap ++ <plug>NERDCommenterToggle
-nmap ++ <plug>NERDCommenterToggle
+"}}}
