@@ -17,15 +17,29 @@ link_file() {
 	ln $target_file $dest_file
 }
 
-link_home() {
-	for item in $(find home | sed '1d'); do
-        item_without_home=$(echo $item | sed 's|home/||')
-		[ -d $item ] && [ ! -d ~/$item_without_home ] && mkdir -p ~/$item_without_home
-		[ -f $item ] && link_file $(realpath $item) ~/$item_without_home
+link_dirs_in_dir() {
+    dir=$1
+	for item in $(find $dir | sed '1d'); do
+        item_without_root_dir=$(echo $item | sed "s|$dir/||")
+		[ -d $item ] && [ ! -d ~/$item_without_root_dir ] && mkdir -p ~/$item_without_root_dir
+		[ -f $item ] && link_file $(realpath $item) ~/$item_without_root_dir
 	done
-    echo "Linked home dir"
+    echo "Linked $dir dir"
 }
 
-link_home
-link_file config/git/.gitconfig ~/.gitconfig
+link_dir() {
+    dir=$1
+    dest_dir=$2
+    parent_dir=$(dirname $dir)
 
+	for item in $(find $dir); do
+        item_without_parent_dir=$(echo $item | sed "s|$parent_dir/||")
+		[ -d $item ] && [ ! -d $dest_dir/$item_without_parent_dir ] && mkdir -p $dest_dir/$item_without_parent_dir
+		[ -f $item ] && link_file $(realpath $item) $dest_dir/$item_without_parent_dir
+	done
+    echo "Linked $dir to $dest_dir"
+}
+
+link_dirs_in_dir home
+link_dir config/mpv/ ~/.config
+link_file config/git/.gitconfig ~/.gitconfig
