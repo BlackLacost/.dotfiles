@@ -17,6 +17,24 @@ Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
 "}}}
+" Some Basics{{{
+set mouse=a
+"}}}
+" Cursor{{{
+"Cursor settings:
+"  1 -> blinking block
+"  2 -> solid block
+"  3 -> blinking underscore
+"  4 -> solid underscore
+"  5 -> blinking vertical bar
+"  6 -> solid vertical bar
+" Из-за смены курсоров в vi mode bash курсор нужно
+" автоматически сбрасывать при входе в vim
+autocmd VimEnter * silent execute '!echo -ne "\e[2 q"' | redraw!
+let &t_SI.="\e[6 q" "SI = INSERT mode
+let &t_SR.="\e[4 q" "SR = REPLACE mode
+let &t_EI.="\e[2 q" "EI = NORMAL mode (ELSE)
+"}}}
 " Colors{{{
 syntax on
 set t_Co=256                " t_** is terminal_options
