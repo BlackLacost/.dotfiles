@@ -1,4 +1,5 @@
 $include /etc/inputrc
+# man readline
 set editing-mode vi
 $if mode=vi
 

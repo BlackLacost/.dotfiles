@@ -45,10 +45,10 @@ bindsym $mod+Shift+space    floating toggle
 #bindsym $mod+space          focus mode_toggle
 
 bindsym $mod+Escape         workspace prev
-# bindsym $mod+Shift+Escape   exec --no-startup-id prompt "Exit i3?" "i3 exit"
+bindsym $mod+Shift+Escape   exec --no-startup-id prompt "Exit i3?" "i3 exit"
 
 # bindsym $mod+BackSpace
-#bindsym $mod+Shift+BackSpace    exec --no-startup-id prompt "Reboot computer?" "$reboot"
+bindsym $mod+Shift+BackSpace    exec --no-startup-id prompt "Reboot computer?" "$reboot"
 
 #bindsym $mod+grave      exec --no-startup-id dmenuunicode
 ##bindsym $mod+asciitilde
@@ -61,9 +61,8 @@ bindsym $mod+Escape         workspace prev
 ##bindsym $mod+Pause
 
 # #---Letter Key Bindings---# #
-#bindsym $mod+q          [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
-#bindsym $mod+Shift+q        [con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
-bindsym $mod+Shift+q kill
+bindsym $mod+q              [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
+bindsym $mod+Shift+q        [con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
 
 bindsym $mod+w              exec --no-startup-id chromium
 #bindsym $mod+Shift+w        exec $term -e nmtui
@@ -71,7 +70,7 @@ bindsym $mod+w              exec --no-startup-id chromium
 #bindsym $mod+e              exec $term -e neomutt && pkill -RTMIN+12 i3blocks
 bindsym $mod+Shift+e        exec --no-startup-id tutorialvids
 
-#bindsym $mod+r              exec $term -e lf
+bindsym $mod+r              exec $term -e lf
 bindsym $mod+Shift+r        exec --no-startup-id winresize
 
 bindsym $mod+t              split toggle
@@ -131,7 +130,7 @@ bindsym $mod+z              gaps outer current plus 5
 bindsym $mod+Shift+z        gaps outer current minus 5
 
 #bindsym $mod+x              exec --no-startup-id xset dpms force off && mpc pause && pauseallmpv && slock &
-#bindsym $mod+Shift+x        exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
+bindsym $mod+Shift+x        exec --no-startup-id prompt "Shutdown computer?" "$shutdown"
 
 #bindsym $mod+c              exec --no-startup-id cabl
 #bindsym $mod+Shift+c        exec --no-startup-id camtoggle
