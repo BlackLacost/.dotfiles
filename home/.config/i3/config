@@ -3,14 +3,14 @@
 # #---Basic Definitions---# #
 set $inner_gaps 15
 set $outer_gaps 15
-set $term --no-startup-id st
+set $term --no-startup-id $TERMINAL
 # Alt (Mod1), WinKey (Mod4)
 set $mod Mod4
 # set $stoprec --no-startup-id dmenurecord kill
-set $shutdown sudo -A shutdown -h now
-set $reboot sudo -A reboot
-set $netrefresh --no-startup-id sudo -A systemctl restart NetworkManager
-set $hibernate sudo -A systemctl suspend
+set $shutdown shutdown -h now
+set $reboot reboot
+set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
+set $hibernate sudo systemctl suspend
 
 # #---Gaps---# #
 for_window [class="^.*"] border pixel 2
@@ -64,7 +64,7 @@ bindsym $mod+Shift+BackSpace    exec --no-startup-id prompt "Reboot computer?" "
 bindsym $mod+q              [con_id="__focused__" instance="^(?!dropdown_).*$"] kill
 bindsym $mod+Shift+q        [con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
 
-bindsym $mod+w              exec --no-startup-id chromium
+bindsym $mod+w              exec --no-startup-id $BROWSER
 #bindsym $mod+Shift+w        exec $term -e nmtui
 
 #bindsym $mod+e              exec $term -e neomutt && pkill -RTMIN+12 i3blocks
@@ -225,8 +225,8 @@ bindsym $mod+F5     exec --no-startup-id $netrefresh
 #bindsym $mod+F6     exec --no-startup-id torwrap
 #bindsym $mod+F7     exec --no-startup-id td-toggle
 #bindsym $mod+F8     exec --no-startup-id mailsync
-#bindsym $mod+F9     exec --no-startup-id dmenumount
-#bindsym $mod+F10    exec --no-startup-id dmenuumount
+bindsym $mod+F9     exec --no-startup-id dmenumount
+bindsym $mod+F10    exec --no-startup-id dmenuumount
 #bindsym $mod+F11    exec --no-startup-id ducksearch
 #bindsym $mod+F12    exec $term -e nmtui
 #bindsym $mod+Shift+F1   exec --no-startup-id toggle-welcome
@@ -290,7 +290,7 @@ bindsym XF86Calculator                  exec --no-startup-id ddspawn dropdowncal
 bindsym XF86Explorer        exec $term -e lf
 ##bindsym XF86Send      exec
 ##bindsym XF86Xfer      exec
-bindsym XF86WWW         exec --no-startup-id chromium
+bindsym XF86WWW         exec --no-startup-id $BROWSER
 ##bindsym XF86DOS       exec
 bindsym XF86ScreenSaver     exec exec --no-startup-id lockscreen
 ##bindsym XF86RotateWindows exec
@@ -352,11 +352,3 @@ bindsym XF86Documents           exec $term -e lf ~/Documents
 ##bindsym XF86Battery       exec
 ##bindsym XF86Bluetooth     exec
 bindsym XF86WLAN                exec $netrefresh
-
-# #---Startup Applications---# #
-# Keyboard layout (man xkeyboard-config)
-exec_always --no-startup-id setxkbmap -layout us,ru && setxkbmap -option 'grp:win_space_toggle' && setxkbmap -option 'ctrl:swapcaps' &
-# Set wallpaper
-exec --no-startup-id feh --bg-scale ~/.config/wall.png
-# Program for transparency
-exec --no-startup-id xcompmgr &
