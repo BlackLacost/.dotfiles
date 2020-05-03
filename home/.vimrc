@@ -45,6 +45,7 @@ set encoding=UTF-8
 " }}}
 " Spaces & Tabs{{{
 set expandtab
+set smartindent
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -138,6 +139,7 @@ nmap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) - 10)<CR>
 " }}}
 " 'scrooloose/nerdtree'{{{2
 nmap <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 " }}}
 " neoclide/coc.nvim{{{2
 let g:coc_global_extensions = [
