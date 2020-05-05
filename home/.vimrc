@@ -8,17 +8,22 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'junegunn/goyo.vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 "}}}
 " Some Basics{{{
 set mouse=a
+filetype plugin on      " need for vimwiki
 "}}}
 " Cursor{{{
 "Cursor settings:
@@ -89,6 +94,14 @@ augroup filetype_vim
     autocmd FileType vim setlocal foldmethod=marker foldlevel=0
 augroup END
 " }}}
+" Compiling{{{
+" ~~~~~ Compile document
+map <leader>c :w! \| !compiler <c-r>%<CR>
+" ~~~~~ Turn on Autocompiler mode
+"map <leader>a :!setsid autocomp % &<CR>
+" ~~~~~ Open corresponding .pdf/.html or preview
+map <leader>p :!opout <c-r>%<CR><CR>
+"}}}
 " Abbreviations{{{
 iabbrev bg@ blacklacost@gmail.com
 iabbrev ilbg -- <cr>Ilya Lisin<cr>blacklacost@gmail.com
@@ -150,4 +163,18 @@ let g:coc_global_extensions = [
 vmap <C-c> <plug>NERDCommenterToggle
 nmap <C-c> <plug>NERDCommenterToggle
 "}}}
+" 'iamcco/markdown-preview.nvim'{{{2
+" set to 1, nvim will open the preview window after entering the markdown buffer
+" default: 0
+let g:mkdp_auto_start = 0
+nmap <leader>m <Plug>MarkdownPreview
+nmap <leader>mt <Plug>MarkdownPreviewToggle
+"}}}
+" 'vimwiki/vimwiki'{{{2
+let g:vimwiki_ext2syntax = {'.md': 'markdown'}
+let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+"}}}
+" 'junegunn/goyo.vim'{{{2
+map <leader>f :Goyo \| set bg=light \| set linebreak<CR>
+" }}}
 "}}}
