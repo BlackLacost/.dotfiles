@@ -44,6 +44,10 @@ let &t_SI.="\e[6 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[2 q" "EI = NORMAL mode (ELSE)
 "}}}
+" Clipbard{{{
+" yank, delete, put используют помимо unnamed регистра (""), еще и "+.
+set clipboard=unnamedplus
+"}}}
 " Colors{{{
 syntax on
 set t_Co=256                " t_** is terminal_options
@@ -122,6 +126,10 @@ iabbrev ilbg -- <cr>Ilya Lisin<cr>blacklacost@gmail.com
 " Mappings{{{
 set pastetoggle=<F2>
 
+" Для удобной работы в PRIMARY buffer
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+
 " Более удобное передвижение блоков
 vnoremap > >gv
 vnoremap < <gv
@@ -133,7 +141,9 @@ nnoremap k gk
 nnoremap gk k
 
 " Позволяет не пользоваться capslock
-"inoremap <C-u> <Esc>gUiwea
+inoremap <leader><C-u> <Esc>gUiwea
+inoremap <leader><C-d> <Esc>guiwea
+inoremap <leader><C-t> <Esc>g~iwea
 
 " Switching between buffers
 " Set commands to switching between buffers
