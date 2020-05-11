@@ -6,7 +6,7 @@ export PATH="$PATH:$(find "$HOME/.local/bin/" -type d | tr '\n' ':' | sed 's/:*$
 # Default programs:
 export EDITOR="vim"
 export TERMINAL="st"
-export BROWSER="brave"
+export BROWSER="chromium"
 export READER="zathura"
 
 # fzf
