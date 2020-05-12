@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Этот файл нужно включить в .bashrc или .zshrc
+
+# Use neovim for vim if present.
+command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
+
+# Команды в verbose mode по-умолчанию
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -vI" \
+	mkd="mkdir -pv" \
+	ls="ls -hN --color=auto --group-directories-first" \
+    ll="ls -la"
+
+# These common commands are just too long! Abbreviate them.
+alias \
+	ka="killall" \
+	g="git" \
+	sdn="sudo shutdown -h now" \
+	f="$FILE" \
+	e="$EDITOR" \
+	v="$EDITOR" \
+	p="sudo pacman" \
+	z="zathura"

@@ -4,13 +4,12 @@
 export PATH="$PATH:$(find "$HOME/.local/bin/" -type d | tr '\n' ':' | sed 's/:*$//')"
 
 # Default programs:
-export EDITOR="vim"
+export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="chromium"
 export READER="zathura"
 
 # fzf
-#FD_OPTIONS="--hidden --follow --exclude .git --exclude node_modules"
 FD_OPTIONS="--hidden \
             --exclude .git \
             --exclude node_modules \

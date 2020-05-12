@@ -44,7 +44,7 @@ let &t_SI.="\e[6 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[2 q" "EI = NORMAL mode (ELSE)
 "}}}
-" Clipbard{{{
+" Clipboard{{{
 " yank, delete, put используют помимо unnamed регистра (""), еще и "+.
 set clipboard=unnamedplus
 "}}}
@@ -64,9 +64,11 @@ set tabstop=4
 set shiftwidth=4
 "}}}
 " Leader & LocalLeader{{{
-let mapleader = "\<Space>"
-"noremap M <nop>
-let maplocalleader = ","
+" Пробовал leader на пробел, но тогда если используешь leader в insert mode,
+" то получаешь лаг каждый раз когда жмешь пробел.
+let mapleader = ","
+noremap M <nop>
+let maplocalleader = "M"
 " }}}
 " Edit & Save vimrc{{{
 " Редактирование и сохранение vimrc
