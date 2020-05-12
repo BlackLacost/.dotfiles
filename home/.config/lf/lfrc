@@ -84,6 +84,12 @@ cmd bulkrename ${{
 # Bindings
 # Remove some defaults
 map c
+map r
+
+# defaults mappgin
+map e $$EDITOR $f
+map i $$PAGER $f
+map w $$SHELL
 
 map <c-f> $lf -remote "send $id select '$(fzf)'"
 map J $lf -remote "send $id cd $(awk '{if ($1!="#") print $2}' ${XDG_CONFIG_HOME:-$HOME/.config}/directories | fzf)"
@@ -107,8 +113,6 @@ map ri push rA<a-b><a-b><a-f> # before extention
 map ra push rA<a-b> # after extention
 map b bulkrename
 
-map <c-e> down
-map <c-y> up
 map V push :!nvim<space>
 
 # chmod

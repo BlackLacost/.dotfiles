@@ -2,12 +2,13 @@
 h   ~/
 dc  ~/Documents
 dw  ~/Downloads
-dt  ~/.dotfiles/
 m   ~/Music
 pp  ~/Pictures
 vv  ~/Videos
+sf  ~/soft
 sy  ~/syncfolder
 cf  ~/.config
+dt  ~/.dotfiles/
 sc  ~/.local/bin
 wi  ~/.wi
 mn  /mnt

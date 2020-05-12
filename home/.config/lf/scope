@@ -39,7 +39,8 @@ handle_mime() {
             man ./ "${FILE_PATH}" | col -b
             ;;
         text/* | */xml)
-            if [ "$( stat --printf='%s' -- "${FILE_PATH}" )" -gt "${HIGHLIGHT_SIZE_MAX}" ]; then
+            filesize="$( stat --printf='%s' -- "${FILE_PATH}" )"
+            if [ $filesize -gt "${HIGHLIGHT_SIZE_MAX}" ]; then
                 exit 2
             fi
             if [ "$( tput colors )" -ge 256 ]; then
@@ -56,8 +57,11 @@ handle_mime() {
             atool --list -- "${FILE_PATH}"
             ;;
         image/*)
-            chafa --fill=block --symbols=block -c 256 \
-                  -s 80x"${HEIGHT}" "${FILE_PATH}" || exit 1
+            chafa --fill=block \
+                  --symbols=block \
+                  -c 256 \
+                  -s 80x"${HEIGHT}" "${FILE_PATH}" \
+                  || exit 1
             ;;
         video/* | audio/*|application/octet-stream)
             mediainfo "${FILE_PATH}" || exit 1
