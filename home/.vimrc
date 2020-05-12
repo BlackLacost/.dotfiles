@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'morhetz/gruvbox'
+Plug 'majutsushi/tagbar'
 Plug 'lyokha/vim-xkbswitch'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -200,9 +201,29 @@ augroup filetype_rst
     autocmd FileType rst setlocal nowrap textwidth=80 colorcolumn=81
 augroup END
 "}}}
+" rst2ctags{{{
+" Add support for reStructuredText files in tagbar.
+let g:tagbar_type_rst = {
+    \ 'ctagstype': 'rst',
+    \ 'ctagsbin' : 'rst2ctags',
+    \ 'ctagsargs' : '-f - --sort=yes --sro=»',
+    \ 'kinds' : [
+        \ 's:sections',
+        \ 'i:images'
+    \ ],
+    \ 'sro' : '»',
+    \ 'kind2scope' : {
+        \ 's' : 'section',
+    \ },
+    \ 'sort': 0,
+\ }
+"}}}
 " Plugins options {{{1
 " 'lyokha/vim-xkbswitch'{{{2
 let g:XkbSwitchEnabled = 1
+"}}}
+" 'majutsushi/tagbar'{{{2
+nnoremap <F8> :TagbarToggle<CR>
 "}}}
 " 'junegunn/fzf'{{{2
 " This is the default extra key bindings
