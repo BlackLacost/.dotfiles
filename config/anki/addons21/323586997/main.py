@@ -5,15 +5,17 @@
 
 
 import sys, aqt, random
+import anki.sched
 from aqt import mw
-from anki.hooks import wrap
+from anki.hooks import wrap, runHook
 from aqt.utils import getText
 from anki.utils import ids2str
+from anki.lang import _
+
 from .rememorize import *
 from .utils import *
-from .const import *
-import anki.sched
-from anki.lang import _
+from .const import BROWSER_TAG
+from .lib.com.lovac42.anki.version import ANKI21, CCBC
 
 
 remem=ReMemorize()
@@ -104,8 +106,14 @@ def reposition(self, _old):
     frm.setupUi(d)
     frm.start.setMinimum(0)
 
-    txt = _("Reschedule due date:")
-    frm.label.setText(txt)
+    frm.label.setText("""\
+<b>ReMemorize</b>: set due date <br>\
+(same as negative numbers during review) <br>""")
+    frm.shift.setChecked(False)
+    frm.shift.setText("""\
+Increment n step(s) for each card?
+(Start=1, Step=1) cA:1, cB:2, cC:3, cD:4
+(Start=2, Step=2) cA:2, cB:4, cC:6, cD:8""")
     if not d.exec_(): return
     self.model.beginReset()
     self.mw.requireReset()

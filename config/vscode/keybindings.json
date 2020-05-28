@@ -117,5 +117,9 @@
   {
     "key": "ctrl+k ctrl+o",
     "command": "workbench.action.files.openFile"
+  },
+  {
+    "key": "ctrl+k t",
+    "command": "workbench.action.tasks.runTask"
   }
 ]

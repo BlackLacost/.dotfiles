@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file './addtable.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.1
+# Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -122,3 +120,4 @@ class Ui_Dialog(object):
         self.label_6.setText(_translate("Dialog", "First row is head"))
         self.label_9.setText(_translate("Dialog", "styling"))
         self.label_11.setText(_translate("Dialog", "center table"))
+

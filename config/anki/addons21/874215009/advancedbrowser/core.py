@@ -5,10 +5,11 @@
 import time
 from operator import itemgetter
 
-from anki.cards import Card
-from anki.hooks import addHook, runHook
+from PyQt5 import QtWidgets
+from anki.hooks import runHook
 from aqt import *
-from aqt.browser import Browser, DataModel, StatusDelegate
+from aqt import gui_hooks
+from aqt.browser import Browser, DataModel, SearchContext, StatusDelegate
 
 from . import config
 from .column import Column, CustomColumn
@@ -26,6 +27,9 @@ class AdvancedDataModel(DataModel):
         list of custom types has already been populated."""
         super(AdvancedDataModel, self).__init__(browser)
 
+        gui_hooks.browser_will_search.append(self.willSearch)
+        gui_hooks.browser_did_search.append(self.didSearch)
+
         # Keep a reference to this function; we need the original later
         self._columnData = DataModel.columnData
 
@@ -35,7 +39,7 @@ class AdvancedDataModel(DataModel):
         # Keep a copy of the original active columns to restore on closing.
         self.origActiveCols = list(self.activeCols)
 
-        configuredCols = self.browser.mw.col.conf.get(CONF_KEY, None)
+        configuredCols = self.browser.mw.col.get_config(CONF_KEY)
         if configuredCols:
             # We've used this add-on before and have a configured list of columns.
             # Adjust activeCols to reflect it.
@@ -51,8 +55,8 @@ class AdvancedDataModel(DataModel):
             self.activeCols = [col for col in configuredCols if col in valids]
 
             # Also make sure the sortType is valid
-            if self.browser.mw.col.conf['sortType'] not in valids:
-                self.browser.mw.col.conf['sortType'] = 'noteFld'
+            if self.browser.mw.col.get_config('sortType') not in valids:
+                self.browser.mw.col.set_config('sortType', 'noteFld')
                 # If there is no sorted column, we add the 'Sort Field' column
                 # and sort on that. This method is one way to guarantee that we
                 # always start with at least one valid column.
@@ -108,148 +112,59 @@ class AdvancedDataModel(DataModel):
         if type in self.browser.customTypes:
             return self.browser.customTypes[type].onData(c, n, type)
 
-    def search(self, txt):
-        """We swap out the col.findCards function with our custom myFindCards,
-        call the original search(), then put it back to its original version.
-
-        if the configuration uniqueNote holds, cards are filtered to keep only one card by note.
-        """
-        self.beginReset()
-        orig = self.col.findCards
-        self.col.findCards = self.myFindCards
-        super(AdvancedDataModel, self).search(txt)
-        if self.browser.mw.col.conf.get("advbrowse_uniqueNote", False):
-            self.one_card_by_note()
-        self.col.findCards = orig
-        self.endReset()
-
-    def one_card_by_note(self):
-        nids = set()
-        filtered_card = []
-        selected_card = self.browser.mw.reviewer.card
-        selected_cid = selected_card.id if selected_card else 0
-        selected_nid = selected_card.nid if selected_card else 0
-        idx_of_selected_note = None
-        # position of the unique card of note currently in reviewer
-        for cid in self.cards:
-            card = self.browser.mw.col.getCard(cid)
-            nid = card.nid
-            if nid not in nids:
-                filtered_card.append(cid)
-                nids.add(nid)
-                if nid == selected_nid:
-                    idx_of_selected_note = len(filtered_card) - 1
-            elif cid == selected_cid:  # nid in nids
-                filtered_card.pop(idx_of_selected_note)
-                filtered_card.append(cid)
-        self.cards = filtered_card
-
-    def myFindCards(self, query, order):
-        """This function takes over the call chain of
-        Collection.findCards -> Finder.findCards but only handles custom
-        columns maintained by the add-on. If we find that the column
-        to be sorted is a built-in column, we defer to the original
-        Finder.findCards.
-
-        Our version differs in its approach by building a more
-        efficiently sortable query for the cases where it makes sense
-        to do so."""
-
-        finder = anki.find.Finder(self.col)
-        cTypes = self.browser.customTypes
-
+    def willSearch(self, ctx: SearchContext):
         # If the column is not a custom one handled by this add-on, do it
         # internally.
-        type = self.col.conf['sortType']
+        cTypes = self.browser.customTypes
+        type = self.col.get_config('sortType')
         if type not in cTypes:
-            return finder.findCards(query, order=True)
+            return
 
-        # We bypass _query() and _order and write our own combined version
-        #
-        # NOTE: the "order by x is null, x is '', x is X" pattern is to
-        # ensure null values and empty strings are sorted after useful
-        # values. The default is to place them first, which we don't want.
-
-        tokens = finder._tokenize(query)
-        preds, args = finder._where(tokens)
-        if preds is None:
-            return []
-
-        if preds:
-            preds = "(" + preds + ")"
-        else:
-            preds = "1"
-
-        order = cTypes[type].onSort()
-
-        t = time.time()
-        drop = False
-
+        cc = cTypes[type]
+        order = cc.onSort()
         if not order:
-            #print("NO SORT PATH")
-
-            if "n." not in preds:
-                sql = "select c.id from cards c where "
-            else:
-                sql = "select c.id from cards c, notes n where c.nid=n.id and "
-            sql += preds
-        elif cTypes[type].cacheSortValue or "select" in order.lower():
-            # Use a temporary table to store the results of the ORDER BY
-            # clause for efficiency since we repeatedly access those values.
-            #print("TEMP SORT TABLE PATH")
-            try:
-                if "n." not in preds:
-                    tmpSql = ("create temp table tmp as select *, %s as srt "
-                              "from cards c where %s" % (order, preds))
-                else:
-                    tmpSql = ("create temp table tmp as select *, %s as srt "
-                              "from cards c, notes n where c.nid=n.id and %s"
-                              % (order, preds))
-
-                #print("Temp sort table sql: " + tmpSql)
-                self.col.db.execute(tmpSql, *args)
-                drop = True
-                args = {}  # We've consumed them, so empty this.
-            except Exception as ex:
-                #print("Failed to create temp sort table: ", ex)
-                return []
-
-            sql = ("""
-select id, srt from tmp order by tmp.srt is null, tmp.srt is '',
-case when tmp.srt glob '*[^0-9.]*' then tmp.srt else cast(tmp.srt AS real) end
-collate nocase""")
-
+            ctx.order = None
         else:
-            # This is used for the remaining basic columns like internal fields
-            #print("NORMAL SORT PATH")
+            if self.col.get_config('sortBackwards'):
+                order = order.replace(" asc", " desc")
+            ctx.order = order
 
-            if "n." not in preds and "n." not in order:
-                sql = "select * from cards c where "
-            else:
-                sql = "select * from cards c, notes n where c.nid=n.id and "
+        self.time = time.time()
 
-            sql += preds
-            sql += ("""
-order by %s is null, %s is '',
-case when (%s) glob '*[^0-9.]*' then (%s) else cast((%s) AS real) end
-collate nocase """ %
-                    (order, order, order, order, order))
+        # If this column relies on a temporary table for sorting, build it now
+        if cc.sortTableFunction:
+            cc.sortTableFunction()
 
-        try:
-            #print("sql :" + sql)
-            res = self.col.db.list(sql, *args)
-        except Exception as ex:
-            #print("Error finding cards:", ex)
-            return []
-        finally:
-            if drop:
-                self.col.db.execute("drop table tmp")
 
-        if self.col.conf['sortBackwards']:
-            res.reverse()
 
-        #print("Search took: %dms" % ((time.time() - t)*1000))
-        return res
+    def didSearch(self, ctx: SearchContext):
+        #print("Search took: %dms" % ((time.time() - self.time)*1000))
+        pass
+
+
+    def flags(self, index):
+        s = super().flags(index)
+        if config.getSelectable() != "No interaction":
+            s = s | Qt.ItemIsEditable
+        return s
+
+    def setData(self, index, value, role):
+        if role not in (Qt.DisplayRole, Qt.EditRole):
+            return False
+        old_value = self.columnData(index)
+        if value == old_value:
+            return False
+        col = index.column()
+        c = self.getCard(index)
+
+        type = self.columnType(col)
+        if type in self.browser.customTypes:
+            r = self.browser.customTypes[type].setData(c, value)
+            if r is True:
+                self.dataChanged.emit(index, index, [role])
+            return r
+        else:
+            return False
 
 
 class AdvancedStatusDelegate(StatusDelegate):
@@ -292,11 +207,6 @@ class AdvancedBrowser(Browser):
         origInit(self, mw)
         Browser.__init__ = origInit
 
-        tn = QAction(('- Only show notes -'), self)
-        tn.setShortcut(QKeySequence(config.getNoteModeShortcut()))
-        self.addAction(tn)
-        tn.triggered.connect(self.toggleUniqueNote)
-
         # Remove excluded columns after the browser is built. Doing it here
         # is mostly a compromise in complexity. The alternative is to
         # rewrite the order of the original __init__ method, which is
@@ -305,12 +215,16 @@ class AdvancedBrowser(Browser):
 
         # Workaround for double-saving (see closeEvent)
         self.saveEvent = False
+        if config.getSelectable() == "Editable":
+            self.form.tableView.setEditTriggers(
+                QtWidgets.QAbstractItemView.DoubleClicked)
 
     def newCustomColumn(self, type, name, onData, onSort=None,
-                        cacheSortValue=False):
+                        setData=None, sortTableFunction=False):
         """Add a CustomColumn to the browser. See CustomColumn for a
         detailed description of the parameters."""
-        cc = CustomColumn(type, name, onData, onSort, cacheSortValue)
+        cc = CustomColumn(type, name, onData, onSort,
+                          sortTableFunction, setData=setData)
         self.customTypes[cc.type] = cc
         return cc
 
@@ -395,16 +309,6 @@ class AdvancedBrowser(Browser):
         # Start adding from the top
         addToSubgroup(main, contextMenu.items())
 
-        # Add unique note toggle
-        a = main.addAction("- Only show notes -")
-        a.setCheckable(True)
-        # This shortcut has no effect since it's attached to the context menu
-        # which needs to be open, but the visual indicator is still useful.
-        # The real shortcut is in init.
-        a.setShortcut(QKeySequence(config.getNoteModeShortcut()))
-        a.setChecked(self.mw.col.conf.get("advbrowse_uniqueNote", False))
-        a.toggled.connect(self.toggleUniqueNote)
-
         main.exec_(gpos)
 
     def closeEvent(self, evt):
@@ -421,7 +325,7 @@ class AdvancedBrowser(Browser):
 
         if not self.saveEvent:
             # Save ours
-            self.mw.col.conf[CONF_KEY] = self.model.activeCols
+            self.mw.col.set_config(CONF_KEY, self.model.activeCols)
             # Restore old
             self.model.activeCols = self.model.origActiveCols
             # Restore built-in columns we removed
@@ -429,33 +333,18 @@ class AdvancedBrowser(Browser):
             # Only save once
             self.saveEvent = True
 
+        gui_hooks.browser_will_search.remove(self.model.willSearch)
+        gui_hooks.browser_did_search.remove(self.model.didSearch)
+
         # Let Anki do its stuff now
         super(AdvancedBrowser, self).closeEvent(evt)
 
-    def toggleUniqueNote(self):
-        self.model.beginReset()
-        self.mw.col.conf["advbrowse_uniqueNote"] = not self.mw.col.conf.get(
-            "advbrowse_uniqueNote", False)
-        self.onSearchActivated()
-        self.model.endReset()
-
     def _onSortChanged(self, idx, ord):
         type = self.model.activeCols[idx]
-        if type in ("question", "answer:"):
-            return super()._onSortChanged(idx, ord)
-        if self.col.conf['sortType'] != type:
-            self.col.conf['sortType'] = type
-            # default to descending for non-text fields
-            if type == "noteFld":
-                ord = not ord
-            self.col.conf['sortBackwards'] = ord
-            self.search()
-        else:
-            if self.col.conf['sortBackwards'] != ord:
-                self.col.conf['sortBackwards'] = ord
-                self.model.reverse()
-        self.setSortIndicator()
-
+        if type in self.customTypes:
+            if self.col.get_config('sortType') == type:
+                self.col.set_config('sortType', "")
+        super(AdvancedBrowser, self)._onSortChanged(idx, ord)
 
 # Override DataModel with our subclass
 aqt.browser.DataModel = AdvancedDataModel

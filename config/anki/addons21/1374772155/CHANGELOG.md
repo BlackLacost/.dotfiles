@@ -12,6 +12,15 @@ If you enjoy Image Occlusion Enhanced, please consider supporting my work on Pat
 
 ## [Unreleased]
 
+## [1.3.0-alpha6] - 2020-04-28
+
+### [Download](https://github.com/glutanimate/image-occlusion-enhanced/releases/tag/v1.3.0-alpha6)
+
+### Fixed
+
+- Fixed note editing support on Anki 2.1.24+ (thanks to @zjosua for the fix!)
+- Fixed a rare error that would occur when the add-on would update its template (thanks to Emma for the report!)
+
 ## [1.3.0-alpha5] - 2019-09-11
 
 ### [Download](https://github.com/glutanimate/image-occlusion-enhanced/releases/tag/v1.3.0-alpha5)
@@ -442,7 +451,8 @@ A tremendous version jump, I know, but this is the most comprehensive update to 
 - Still needs a lot of testing!
 
 
-[Unreleased]: https://github.com/Glutanimate/image-occlusion-enhanced/compare/v1.3.0-alpha4...HEAD
+[Unreleased]: https://github.com/Glutanimate/image-occlusion-enhanced/compare/v1.3.0-alpha5...HEAD
+[1.3.0-alpha5]: https://github.com/Glutanimate/image-occlusion-enhanced/compare/v1.3.0-alpha4...v1.3.0-alpha5
 [1.3.0-alpha4]: https://github.com/Glutanimate/image-occlusion-enhanced/compare/v1.3.0-alpha3...v1.3.0-alpha4
 [1.3.0-alpha3]: https://github.com/Glutanimate/image-occlusion-enhanced/compare/v1.3.0-alpha2...v1.3.0-alpha3
 [1.3.0-alpha2]: https://github.com/Glutanimate/image-occlusion-enhanced/compare/v1.3.0-alpha1...v1.3.0-alpha2

@@ -3,9 +3,10 @@
 # https://github.com/hssm/advanced-browser
 import re
 
+from anki.cards import Card
 from anki.hooks import addHook, wrap
 from aqt import *
-from aqt.main import AnkiQt
+from aqt.utils import showWarning
 
 from .config import getEachFieldInSingleList
 
@@ -30,6 +31,8 @@ class NoteFields:
         # {fld['name'] -> CustomColumn}}
         self.customColumns = {}
 
+        self.fieldsToMidOrdPairs = {}
+
         self.advBrowser = advBrowser
         self.buildMappings()
 
@@ -53,6 +56,7 @@ class NoteFields:
                     modelGroup.addItem(self.customColumns[fld['name']])
 
     def buildMappings(self):
+        self.fieldsToMidOrdPairs = {}
         for model in mw.col.models.all():
             # For some reason, some mids return as unicode, so convert to int
             mid = int(model['id'])
@@ -71,76 +75,96 @@ class NoteFields:
                 self.modelFieldPos[mid32][name] = ord
                 if type not in self.fieldTypes:  # avoid dupes
                     self.fieldTypes[type] = name
-
-        # Convenience method to create lambdas without scope clobbering
-        def getOnSort(f):
-            return lambda: f
+                self.fieldsToMidOrdPairs.setdefault(
+                    name, []).append((mid, ord))
 
         def fldOnData(c, n, t):
             field = self.fieldTypes[t]
             if field in c.note().keys():
                 return NoteFields.htmlToTextLine(c.note()[field])
 
+        def setData_(name):
+            def setData(c: Card, value: str):
+                n = c.note()
+                if not name in n:
+                    showWarning(_("""The field "%s" does not belong to the note type "%s".""") % (
+                        name, m["name"]))
+                    return False
+                self.advBrowser.editor.loadNote()
+                n[name] = value
+                return True
+            return setData
+
         for type, name in self.fieldTypes.items():
             if name not in self.customColumns:
-                srt = ("(select valueForField(mid, flds, '%s') "
-                       "from notes where id = c.nid)" % name)
+                def sortTableFunction(name=name):
+                    col = mw.col
+                    vals = []
+                    col.db.execute("drop table if exists tmp")
+                    col.db.execute(
+                        "create temp table tmp (nid int primary key, fld text)")
+                    for mid, ord in self.fieldsToMidOrdPairs.get(name):
+                        notes = mw.col.db.all(
+                            f"select id, field_at_index(flds, {ord}) from notes where mid = {mid}"
+                        )
+                        for note in notes:
+                            id = note[0]
+                            val = NoteFields.htmlToTextLine(note[1])
+                            if not val:
+                                val = None
+                            vals.append([id, val])
+                    mw.col.db.executemany(
+                        "insert into tmp values (?,?)", vals
+                    )
+
+                select = "(select fld from tmp where nid = n.id)"
+                srt = (
+                    f"""
+                    case when {select} glob '*[^0-9.]*' then {select} else cast({select} AS real) end
+                    collate nocase asc nulls last
+                    """
+                )
 
                 cc = self.advBrowser.newCustomColumn(
                     type=type,
                     name=name,
                     onData=fldOnData,
-                    onSort=getOnSort(srt)
+                    sortTableFunction=sortTableFunction,
+                    onSort=lambda: srt,
+                    setData=setData_(name),
                 )
                 self.customColumns[name] = cc
         self.advBrowser.setupColumns()
 
-    # based on the one in utils.py, but keep media file names
+    def getSortClause(self, fieldName: str) -> str:
+        def tuple_to_str(tup) -> str:
+            (ntid, ord) = tup
+            return f"when n.mid = {ntid} then field_at_index(n.flds, {ord})"
+
+        tups = self.fieldsToMidOrdPairs.get(fieldName, [])
+        if not tups:
+            # no such field
+            return "false"
+
+        whenBody = " ".join(map(tuple_to_str, tups))
+        return f"(case {whenBody} else null end) collate nocase asc nulls last"
+
+    # Based on the one in utils.py, but keep media file names
     def htmlToTextLine(s):
         s = s.replace("<br>", " ")
         s = s.replace("<br />", " ")
         s = s.replace("<div>", " ")
         s = s.replace("\n", " ")
-        s = re.sub(r"\[sound:([^]]+)\]", "\\1", s)  # this line is different
-        s = re.sub(r"\[\[type:[^]]+\]\]", "", s)
+        s = reSound.sub("\\1", s)  # this line is different
+        s = reType.sub("", s)
         s = anki.utils.stripHTMLMedia(s)
         s = s.strip()
         return s
 
-    def valueForField(self, mid, flds, fldName):
-        """Function called from SQLite to get the value of a field,
-        given a field name and the model id for the note.
-
-        mid is the model id. The model contains the definition of a note,
-        including the names of all fields.
-
-        flds contains the text of all fields, delimited by the character
-        "x1f". We split this and index into it according to a precomputed
-        index for the model (mid) and field name (fldName).
-
-        fldName is the name of the field we are after."""
-
-        try:
-            index = self.modelFieldPos.get(mid).get(fldName, None)
-            if index is not None:
-                fieldsList = flds.split("\x1f", index+1)
-                return NoteFields.htmlToTextLine(fieldsList[index])
-        except Exception as ex:
-            pass
-            # print("Failed to get value for field.")
-            # print("Mid: " + str(mid or 'None'))
-            # print("flds: " + str(flds or 'None'))
-            # print("fldName: " + str(fldName or 'None'))
-            # print("_modelFieldPos: " + str(self.modelFieldPos))
-            # print("Error was: ", ex)
-
-    def myLoadCollection(self, _self):
-        # Create a new SQL function that we can use in our queries.
-        mw.col.db._db.create_function("valueForField", 3, self.valueForField)
-        return True
-
+# Precompile some regexes for efficiency
+reSound = re.compile(r"\[sound:([^]]+)\]")
+reType = re.compile(r"\[\[type:[^]]+\]\]")
 
 nf = NoteFields()
 addHook("advBrowserLoaded", nf.onAdvBrowserLoad)
 addHook("advBrowserBuildContext", nf.onBuildContextMenu)
-AnkiQt.loadCollection = wrap(AnkiQt.loadCollection, nf.myLoadCollection)

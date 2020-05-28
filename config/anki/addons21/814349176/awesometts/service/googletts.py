@@ -240,7 +240,7 @@ class GoogleTTS(Service):
         ("vi-VN-Wavenet-D", "Vietnamese (vi-VN-Wavenet-D)"),
     ]
 
-    _audio_profile = [
+    _audio_device_profile = [
         ("default", "Default"),
         ("wearable-class-device", "Smart watches and other wearables, like Apple Watch, Wear OS watch"),
         ("handset-class-device", "Smartphones, like Google Pixel, Samsung Galaxy, Apple iPhone"),
@@ -306,8 +306,9 @@ class GoogleTTS(Service):
             dict(
                 key='profile',
                 label="Profile",
-                values=self._audio_profile,
+                values=self._audio_device_profile,
                 transform=lambda value: value,
+                default='default',
             )
         ]
 

@@ -4,8 +4,13 @@
 # License: GNU GPL, version 3 or later; http://www.gnu.org/copyleft/gpl.html
 
 
-from anki import version
-CCBC = version.endswith("ccbc")
-ANKI21 = version.startswith("2.1.") and not CCBC
+from .lib.com.lovac42.anki.version import ANKI21
+BROWSER_TAG = "_reschedule" if ANKI21 else "reschedule"
 
-BROWSER_TAG="_reschedule" if ANKI21 else "reschedule"
+import os
+ADDON_PATH = os.path.dirname(__file__)
+
+ADDON_NAME = "rememorize"
+
+TARGET_STABLE_VERSION = 23
+

@@ -4,9 +4,10 @@
 # Support: https://github.com/lovac42/Blitzkrieg
 
 
-import anki
+import os
 
-try:
-    POINT_VERSION = anki.utils.pointVersion()
-except AttributeError:
-    POINT_VERSION = int(anki.version.split('.')[-1])
+ADDON_PATH = os.path.dirname(__file__)
+
+ADDON_NAME = "Blitzkrieg"
+
+TARGET_STABLE_VERSION = 23

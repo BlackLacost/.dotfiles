@@ -27,6 +27,10 @@ def getNoteModeShortcut():
     return getUserOption().get("Keyboard shortcut for note browser mode", "Ctrl+Alt+N")
 
 
+def getSelectable():
+    return getUserOption().get("Table content", "No interaction")
+
+
 def update(_):
     global userOption
     userOption = None
