@@ -8,7 +8,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'morhetz/gruvbox'
-Plug 'majutsushi/tagbar'
 Plug 'lyokha/vim-xkbswitch'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -20,9 +19,11 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
+Plug 'majutsushi/tagbar'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 "Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 Plug 'gu-fan/riv.vim'
+Plug 'Rykka/InstantRst'
 
 call plug#end()
 "}}}
