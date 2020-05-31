@@ -7,7 +7,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 Plug 'lyokha/vim-xkbswitch'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -53,7 +53,7 @@ set clipboard=unnamedplus
 " Colors{{{
 syntax on
 set t_Co=256                " t_** is terminal_options
-set background=light
+set background=dark
 "}}}
 " Fonts and Encoding{{{
 set encoding=UTF-8
@@ -299,9 +299,9 @@ command! -bang -nargs=* GGrep
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 "}}}
 " 'morhetz/gruvbox'{{{2
-" let g:gruvbox_italic=1
-" set termguicolors
-" colorscheme gruvbox
+let g:gruvbox_italic=1
+set termguicolors
+colorscheme gruvbox
 " }}}
 " 'scrooloose/nerdtree'{{{2
 nmap <C-n> :NERDTreeToggle<CR>

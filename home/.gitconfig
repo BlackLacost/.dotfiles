@@ -1,0 +1,14 @@
+[user]
+email = blacklacost@gmail.com
+name = Ilya Lisin
+
+[core]
+editor = "vim"
+autocrlf = input
+safecrlf = false
+
+[format]
+pretty = oneline
+
+[pull]
+rebase = true

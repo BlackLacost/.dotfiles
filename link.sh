@@ -42,4 +42,3 @@ link_dir() {
 
 link_dirs_in_dir home
 link_dir config/mpv/ ~/.config
-link_file config/git/.gitconfig ~/.gitconfig
