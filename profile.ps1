@@ -38,7 +38,7 @@ function ggca($commit) {
 }
 function ggaca($commit) { git add .; ggca($commit); }
 function ggd($file) { git diff HEAD $file; }
-function ggl { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit; }
+/*function ggl { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit; }*/
 function ggp { git push; }
 
 function touch($file) { "" | Out-File $file }
