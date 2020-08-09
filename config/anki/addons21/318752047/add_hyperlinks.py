@@ -28,37 +28,38 @@ from anki.lang import _
 from aqt import mw
 from aqt.editor import Editor
 from aqt.qt import QApplication, QKeySequence
+from aqt.utils import openLink
 
+from .config import gc
 from .helper_functions import escape_html_chars, is_valid_url
 from .window import Hyperlink
 
 addon_path = os.path.dirname(__file__)
 
 
-def gc(arg, fail=False):
-    conf = mw.addonManager.getConfig(__name__)
-    if conf:
-        return conf.get(arg, fail)
-    else:
-        return fail
-
-
 def hlunlink(editor):
     editor.web.eval("setFormat('unlink')")
-
-
 Editor.hlunlink = hlunlink
 
 
 def toggle_hyperlink(editor):
     selected = editor.web.selectedText()
     h = Hyperlink(editor, editor.parentWindow, selected)
-    if hasattr(h, "replacement"):
-        editor.web.eval(
-            "document.execCommand('insertHTML', false, %s);"
-            % json.dumps(h.replacement))
-
-
+    if h.exec():
+        # for details see issue #7,
+        # https://github.com/ijgnd/anki21__editor_add_hyperlink/issues/7
+        # relying on web.selectedText() means that I lose html formatting
+        # and in 2.1 insertHTML into a e.g. a bold section means that the
+        # inserted part is no longer bold.
+        # A proper solution would mean that I'd also have to handle text
+        # that a user changed. But then I can no longer use document.execCommand('CreateLink'
+        # So I only document.execCommand('CreateLink when the user didn't change the link text
+        # in the dialog.
+        if selected == h.text:
+            js = """ document.execCommand("CreateLink", false, %s); """ % json.dumps(h.url)
+        else:
+            js = """ document.execCommand("insertHTML", false, %s); """ % json.dumps(h.replacement)
+        editor.web.eval(js)
 Editor.toggle_hyperlink = toggle_hyperlink
 
 
@@ -90,8 +91,6 @@ def setupEditorButtons(buttons, editor):
         buttons.append(c)
 
     return buttons
-
-
 addHook("setupEditorButtons", setupEditorButtons)
 
 
@@ -99,13 +98,13 @@ def format_link_string_as_html_hyperlink(editor, data, selectedtext, QueryLinkTe
     url = selectedtext.strip()
     if QueryLinkText:
         h = Hyperlink(editor, editor.parentWindow, selectedtext, True)
-        if hasattr(h, "replacement"):
+        if h.exec():
             replacement = h.replacement
         else:
             return
     else:
         text = selectedtext.strip()
-        replacement = Hyperlink.create_anchor(url, text)
+        replacement = Hyperlink.combine_to_hyperlink(url, text)
     wspace = [' ', ]
     for i in wspace:
         if selectedtext.endswith(i):
@@ -115,8 +114,6 @@ def format_link_string_as_html_hyperlink(editor, data, selectedtext, QueryLinkTe
     editor.web.eval(
         "document.execCommand('insertHTML', false, %s);"
         % json.dumps(replacement))
-
-
 Editor.format_link_string_as_html_hyperlink = format_link_string_as_html_hyperlink
 
 
@@ -128,8 +125,8 @@ def add_to_context(view, menu):
     if not (url.toString() or data.linkText()):
         # not a html hyperlink
         if is_valid_url(selectedtext.strip()):
-            if gc('contextmenu_show_make_clickable', False):
-                a = menu.addAction(_("Hyperlink - make clickable"))
+            if gc('contextmenu_show_transform_selected_url_to_hyperlink', False):
+                a = menu.addAction(_("Hyperlink - transform to hyperlink"))
                 # a.setShortcut(QKeySequence("Ctrl+Alt+ö"))  #doesn't work
                 a.triggered.connect(lambda _, e=view.editor, u=data, s=selectedtext:
                                     format_link_string_as_html_hyperlink(e, u, s, False))
@@ -137,14 +134,15 @@ def add_to_context(view, menu):
                 a = menu.addAction(_("Hyperlink - set link text "))
                 a.triggered.connect(lambda _, e=view.editor, u=data, s=selectedtext:
                                     format_link_string_as_html_hyperlink(e, u, s, True))
-    if (data.linkUrl().toString() or data.linkText()) and gc('contextmenu_show_unlink', False):
+    if (data.linkUrl().toString() or data.linkText()) and gc('contextmenu_show_unlink'):
         a = menu.addAction(_("Hyperlink - unlink "))
         a.triggered.connect(lambda _, e=view.editor: hlunlink(e))
-    if url.isValid():
+    if url.isValid() and gc("contextmenu_show_copy_url"):
         a = menu.addAction(_("Copy URL"))
         a.triggered.connect(lambda _, v="", u=url: set_clip(v, u))
-
-
+    if url.isValid() and gc("contextmenu_show_open_in_browser"):
+        a = menu.addAction(_("Open URL"))
+        a.triggered.connect(lambda _, u=url: openLink(u))
 addHook("EditorWebView.contextMenuEvent", add_to_context)
 
 
@@ -161,7 +159,5 @@ def _reviewerContextMenu(view, menu):
     if url.isValid():
         a = menu.addAction(_("Copy URL"))
         a.triggered.connect(lambda _, v=view, u=url: set_clip(v, u))
-
-
 if gc("show_in_reviewer_context_menu"):
     addHook('AnkiWebView.contextMenuEvent', _reviewerContextMenu)

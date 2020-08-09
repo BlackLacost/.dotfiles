@@ -9,12 +9,12 @@
   "profiles": [
     {
       "guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
+      "hidden": false,
       "name": "Arch",
+      "source": "Windows.Terminal.Wsl",
       "colorScheme": "Gruvbox Dark",
       "useAcrylic": true,
       "acrylicOpacity": 0.75,
-      "source": "Windows.Terminal.Wsl",
-      "hidden": false,
       "fontFace": "Monoid NF",
       "fontSize": 11,
       "startingDirectory": "//wsl$/Arch/home/blacklacost"
@@ -42,10 +42,22 @@
       "fontSize": 11
     },
     {
-        "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-        "hidden": false,
-        "name": "Azure Cloud Shell",
-        "source": "Windows.Terminal.Azure"
+      "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+      "hidden": false,
+      "name": "Azure Cloud Shell",
+      "source": "Windows.Terminal.Azure"
+    },
+    {
+      "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+      "hidden": false,
+      "name": "Ubuntu-20.04",
+      "source": "Windows.Terminal.Wsl",
+      "colorScheme": "Gruvbox Dark",
+      "useAcrylic": true,
+      "acrylicOpacity": 0.75,
+      "fontFace": "Monoid NF",
+      "fontSize": 11,
+      "startingDirectory": "//wsl$/Ubuntu-20.04/home/blacklacost"
     }
   ],
 

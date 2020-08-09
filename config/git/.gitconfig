@@ -4,8 +4,9 @@ name = Ilya Lisin
 
 [core]
 editor = "vim"
-autocrlf = input
-safecrlf = false
+eol = lf
+autocrlf = false
+safecrlf = warn
 
 [format]
 pretty = oneline
