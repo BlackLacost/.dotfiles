@@ -189,5 +189,13 @@
 
   // Wallaby
   "wallaby.startAutomatically": false,
-  "sqltools.useNodeRuntime": true
+  "sqltools.useNodeRuntime": true,
+
+  // Vetur
+  // Отключение валидация с помощью vetur, так как
+  // я это делаю с помощью es-lint и prettier
+  "vetur.validation.template": false,
+
+  // Eslint
+  "eslint.validate": ["vue", "html", "javascript"]
 }
