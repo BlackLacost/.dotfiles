@@ -84,7 +84,7 @@ class TSDockWidget(QDockWidget):
     def specialInit(self):
         """ regardless of which QDockWidget-ctor has been used, this method
         should be called """
-
+        self._sizehint = None
         self._contentWidget = None
         changeBGColor(self,BG_COLOR_TITLE_BAR)
         #self._addContextMenu()
@@ -105,8 +105,16 @@ class TSDockWidget(QDockWidget):
 
     def addTSItem(self):
         print("add field called")
+    
+    def resize(self, width, height):
+        self._sizehint = QtCore.QSize(width, height)
 
-    pass
+    def sizeHint(self):
+        print('sizeHint:', self._sizehint)
+        if self._sizehint is not None:
+            return self._sizehint
+        return super(TSDockWidget, self).sizeHint()
+    
 
 
 # BIG TODO: restructure:

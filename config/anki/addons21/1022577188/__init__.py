@@ -114,6 +114,7 @@ from anki.hooks import wrap
 from aqt.editor import Editor
 from aqt.browser import Browser
 from aqt.editcurrent import EditCurrent
+from aqt.qt import qconnect
 
 from aqt.utils import showInfo
 
@@ -197,21 +198,21 @@ class SessionPersistenceMgmt:
             2.1 no: try to load from file or create new one"""
             #showInfo("loadDataFromMwOrFs")
             tsDataNew = None
-            gLogger.debug("loadDataFromMwOrFs")
+            gLogger.debug("__init__::loadDataFromMwOrFs")
             # === first: try to load from mw (anki-god)===
             if( isAnkiDataInMwAvailable()):
                 # make TS persistent for next call
                 tsDataNew = getTsDataFromAnkiMw()
-                gLogger.debug("data from Mw loaded")
+                gLogger.debug("__init__::data from Mw loaded")
                 #showInfo("dug: get data from mw; \nfloating: " + str(tsDataNew.dockWidgetData.isFloating))
             else: # === second: try to load from file ===
                 tsDataNew = TSDataPersistent.PersistanceMgmt.loadDataFromFilesystem()
                 #showInfo("dug: get data from file")
-                gLogger.debug("load from fs")
+                gLogger.debug("__init__::load from fs")
                 # === third: no mw-data, no saved files => just use empty data === #
                 if(None == tsDataNew):
                     tsDataNew = TSDataPersistent()
-                    gLogger.debug("   nothing found; use a new one")
+                    gLogger.debug("__init__::   nothing found; use a new one")
                     pass
 
                 # now save it in Mw for the next time
@@ -237,20 +238,20 @@ class SessionPersistenceMgmt:
             updateAnkiMwDataFromGui. We could clean up, but as always...
             I'm afraid of breaking something and I want to get it done.
             So take care, if you ever change this part"""
-            gLogger.debug("updateAnkiMwTSContentDataFromDialog called")
+            gLogger.debug("__init__::updateAnkiMwTSContentDataFromDialog called")
 
             if(hasattr(addCardsOrBrowserDialog,gITEM_NAME_OF_OBJECT_IN_DIALOG)):
-                gLogger.debug("     save TS data to mw")
+                gLogger.debug("__init__::     save TS data to mw")
                 ts = getTagSelector(addCardsOrBrowserDialog)
                 ts.updateDataFromGui()
             else:
-                gLogger.debug("     no tagSelector found, that we could save")
+                gLogger.debug("__init__::     no tagSelector found, that we could save")
 
         # --------------------------------------------------------------------
 
         @staticmethod
         def updateAnkiMwDataFromGui(addCardsOrBrowserDialog):
-            gLogger.debug("updateAnkiMwDataFromGui called")
+            gLogger.debug("__init__::updateAnkiMwDataFromGui called")
 
             if(hasattr(addCardsOrBrowserDialog,gITEM_NAME_OF_OBJECT_IN_DIALOG)):
                 # ATTENTION FOR CHANGES:
@@ -258,25 +259,25 @@ class SessionPersistenceMgmt:
                 updateAnkiMwTSContentDataFromDialog. We could clean up, but as always...
                 I'm afraid of breaking something and I want to get it done.
                 So take care, if you ever change this part"""
-                gLogger.debug("     save TS data to mw")
+                gLogger.debug("__init__::     save TS data to mw")
                 ts = getTagSelector(addCardsOrBrowserDialog)
                 ts.updateDataFromGui()
                 # now try and save the state of our gui to mw(anki-god)
                 try:
-                    gLogger.debug("     save DockWidget data to mw")
+                    gLogger.debug("__init__::     save DockWidget data to mw")
                     dockData = GuiDialogInjector.getCurrentDockWidgetData(
                                 addCardsOrBrowserDialog)
-                    gLogger.debug("     " + dockData.toString())
+                    gLogger.debug("__init__::     " + dockData.toString())
                     ts.getData().setDockWidgetData( dockData )
                     getTsDataFromAnkiMw().setDockWidgetData( dockData )
                 except:
-                    gLogger.debug("     could not save DockWidget data to mw")
+                    gLogger.debug("__init__::     could not save DockWidget data to mw")
                     pass # couldn't save data. That probably happened, because
                     # the browser was opened and closed, without opening a card even once
                     #showInfo("dug: couldn't save widget data")
             else:
                 pass
-                gLogger.debug("     no tagSelector found, that we could save")
+                gLogger.debug("__init__::     no tagSelector found, that we could save")
                 #showInfo("dug: no tagSelector found, that we could save")
             pass
 
@@ -381,6 +382,39 @@ class TagSelector:
 
     # -------------------------------------------------------------------
 
+# ========================================================================
+# ========================================================================
+
+class TSMainWindow(QMainWindow):
+    """Special main window, that forwards a close event
+    to a containing dialog
+    Reason for this class:
+     - "Esc" in addCardsDialog would destroy the mainwindow
+        (that is needed for the dockwidget), but not the dialog.
+        The result is an almost empty addCards dialog. To prevent
+        this, we need to forward close events from this mainwindow
+        to the surrounding dialog"""
+
+    def __init__(self, surroundingDialog):
+        """@param surroundingDialog: should be an addCards dialog (or similar)"""
+        super(TSMainWindow, self).__init__()
+        self.parentDialog = surroundingDialog
+
+    def closeEvent(self, closeEvent):
+        gLogger.debug("TSMainWindow::closeEvent")
+        closeEvent.ignore()
+        try:
+            self.parentDialog.reject()
+        except:
+            gLogger.debug("TSMainWindow::closeEvent: reject didnt work")
+            # once, this happend in the browser.
+            # no idea how and why that happened...
+            # just try close() randomly
+            try:
+                self.parentDialog.close()
+                gLogger.debug("TSMainWindow::closeEvent: close worked")
+            except:
+                pass
 
 # ========================================================================
 # ========================================================================
@@ -390,16 +424,15 @@ class GuiDialogInjector:
     # --------------------------------------------------------------------------
 
     @staticmethod
-    def getAddonMainWindow(dialogForm):
+    def getAddonMainWindow(dialogForm, addCardsDialog):
         """ return the addonMainWindow (that can be used from foreign classes
             as well. It will only be created, if necessary. Otherwise just
             returned"""
         if(hasattr(dialogForm, "addonMainWindow") == False):
-            mainWindow = QMainWindow()
+            mainWindow = TSMainWindow(addCardsDialog)
             # move the current anki-content inside a main-window.
             mainWindow.setCentralWidget(dialogForm.fieldsArea)
-            dialogForm.addonMainWindow = mainWindow
-
+            dialogForm.addonMainWindow = mainWindow                        
         return dialogForm.addonMainWindow
 
     @staticmethod
@@ -409,11 +442,11 @@ class GuiDialogInjector:
             ,dockWidgetData = DockWidgetData()):
         """@return: Widget for the/a new area"""
 
-        gLogger.debug("injectDockingWidgetCalled")
+        gLogger.debug("__init__::GuiDialogInjector::injectDockingWidgetCalled")
         # ----------------------------------------------------------------------
         # ---------- create main window ----------------------------------------
         # ----------------------------------------------------------------------
-        mainWindow = GuiDialogInjector.getAddonMainWindow(addCardsDialogForm)
+        mainWindow = GuiDialogInjector.getAddonMainWindow(addCardsDialogForm, addCardsDialog)
 
         """
             The Input-fields at the addcards-dialog (addCardsDialogForm.fieldsArea)
@@ -448,7 +481,7 @@ class GuiDialogInjector:
         # ----------------------------------------------------------------------
         # ----------- Create Widget, where the dockwidget is contained ---------
         # ----------------------------------------------------------------------
-        tsDockWidget.setWidget(dockWidgetContentSizable)
+        tsDockWidget.setWidget(dockWidgetContentSizable) 
 
 
         # ----------------------------------------------------------------------
@@ -460,7 +493,7 @@ class GuiDialogInjector:
         # the resizing must be called before show is called! due to the lack of qt
         #   to actually resize a widget programmatically
         dockWidgetContentSizable.resize(dockWidgetData.width, dockWidgetData.height)
-
+        
         if(dockWidgetData.isVisible == False):
             tsDockWidget.hide()
         # ATTENTION: tsDockWidget.show() must not be called here!
@@ -514,9 +547,9 @@ class GuiDialogInjector:
         dockData.isVisible = dockWidget.isVisibleTo(addCardsWidget)
         dockData.isFloating = dockWidget.isFloating()
         dockData.floatingPosX = dockWidget.pos().x() #20 # TODO: put a real value here
-        dockData.floatingPosY = dockWidget.pos().y() #20 # TODO: put a real value here
-        dockData.width = dockWidget.width()
-        dockData.height = dockWidget.height()
+        dockData.floatingPosY = dockWidget.pos().y() #20 # TODO: put a real value here       
+        dockData.width = dockWidget.widget().width()
+        dockData.height = dockWidget.widget().height()
 
         return dockData
 
@@ -524,6 +557,7 @@ class GuiDialogInjector:
 
     @staticmethod
     def removeDockWindow(FormObject):
+        gLogger.debug("__init__::GuiDialogInjector::removeDockWindow()")
         FormObject.addonMainWindow.removeDockWidget(FormObject.tsDockWidget)
         pass
 
@@ -546,9 +580,9 @@ class GuiDialogInjector:
 # ========================================================================
 
 def main_TSInjection(addCardsOrBrowserDialog):
-    gLogger.debug("main_TSInjection called")
+    gLogger.debug("__init__::main_TSInjection called")
     if(True or not hasattr(addCardsOrBrowserDialog,gITEM_NAME_OF_OBJECT_IN_DIALOG)):
-        gLogger.debug("   - craete Tag selector")
+        gLogger.debug("__init__::   - create Tag selector")
         # ---- loadTS data -----
         tagSelector = TagSelector()
         tagSelector.setData(SessionPersistenceMgmt.loadDataFromMwOrFs())
@@ -569,7 +603,7 @@ def main_TSInjection(addCardsOrBrowserDialog):
 def main_onAddCardsDialogWasNotClosed(aqtAddCardsDialog):
     """ if the user said "no" to "are you sure to close the dialog?"
     we need this function to recreate the TS again"""
-    gLogger.debug("main_onAddCardsDialogWasClosed")
+    gLogger.debug("__init__::main_onAddCardsDialogWasClosed")
     if(aqtAddCardsDialog.isVisible()):
         aqtAddCardsDialog.form.tsDockWidget.show()
     pass
@@ -580,6 +614,7 @@ def main_onMaybeCloseAddCardsDialog(addCardsOrBrowserDialog):
         "if the dialog should really close".
         Save data and
     """
+    gLogger.debug("__init__::main_onMaybeCloseAddCardsDialog()")
     SessionPersistenceMgmt.updateAnkiMwDataFromGui(addCardsOrBrowserDialog)
     closeTS(addCardsOrBrowserDialog)
 
@@ -637,7 +672,7 @@ def getAlreadyDestroyed(dialog):
 
 def main_onBrowserItemChangedAfter(browserDialog, currentNote, previousNote):
     """After a new card was selected, - if it's a single one - insert TagSelector"""
-    gLogger.debug("start TS from BrowseritemChanged")
+    gLogger.debug("__init__::start TS from BrowseritemChanged")
     alreadyDestroyed = getAlreadyDestroyed(browserDialog)
 
     if(hasattr(browserDialog,"singleCard")):
@@ -681,7 +716,7 @@ def deactivate_notReally():
             "\n3. restart Anki" )
 
 def main_unloadTagSelector():
-    gLogger.debug("Unload Tag Selector")
+    gLogger.debug("__init__::Unload Tag Selector")
     """save data to disk, remove object from mw"""
 
     # Save to file do Disk only when anki is closed ( don't stress SSDs )
@@ -692,13 +727,13 @@ def main_unloadTagSelector():
         TSDataPersistent.PersistanceMgmt.saveDataToFilesystem(getTsDataFromAnkiMw())
     # set it back to None to show, it's not present anymore
     setTsDataInAnkiMw(None)
-    gLogger.debug("    tsData:" + str(mw.tagSelectorData))
+    gLogger.debug("__init__::    tsData:" + str(mw.tagSelectorData))
 
 
 
 gSetupTagSelectorFinished = False
 def main_onProfileLoad():
-        gLogger.debug("onProfileLoad")
+        gLogger.debug("__init__::onProfileLoad")
         """ This function is here, so addons are loaded *AFTER* the profile was chosen"""
         # ==========================================================================
         # ============= first things to do: set global variables!   ================
@@ -711,16 +746,33 @@ def main_onProfileLoad():
 
         global gSetupTagSelectorFinished
         if(not gSetupTagSelectorFinished):
-            gLogger.debug("    do only once-stuff")
+            gLogger.debug("__init__::    do only once-stuff")
             gSetupTagSelectorFinished = True
             # ==========================================================================
             # ============= create menu items under Addons: ===================
             # ==========================================================================
             mw.TS_actionClearData = QAction("clear saved data", mw)
             mw.TS_actionClearData.triggered.connect(clearData)
+
+            # create tagselector specific menu item
+            tsMenu = QMenu(gAddonNamePrettyString, mw)
+            a = tsMenu.addAction("clear saved data")            
+            qconnect(a.triggered, clearData)
+
+
+            # insert it into GUI
+            try:
+                # note: 'try' because we don't want to crash if
+                #       anki internals for menues changed
+                menu = mw.form.menuTools
+                menu.insertMenu(mw.form.actionAdd_ons, tsMenu)            
+            except:
+                pass
+
+            #mw.form.menuExtras            
             # The menu goes to
             # Tools -> Add-Ons -> TagSelector
-# TODO: add again
+# Code for old anki
 ##            for child in mw.form.menuPlugins.children():
 ##                try:
 ##                    if(child.title() == gNAME_OF_THIS_FILE):
@@ -731,7 +783,7 @@ def main_onProfileLoad():
 ##                    continue
 
 def main_wrapFunctions():
-    gLogger.debug("wrapFunctions")
+    gLogger.debug("__init__::wrapFunctions")
     # ==========================================================================
     # ==========================================================================
     # ===============  set all the hooks & wraps for TS ========================
@@ -742,9 +794,11 @@ def main_wrapFunctions():
         # problem with reject is: our method is called, even if the user pressed "no"
         #   , because everything happens in the same method (see addcars.reject)
         try:
-            # newer Ankiverions:
+            # newer Ankiverions:            
             AddCards._reject = wrap(AddCards._reject, main_onMaybeCloseAddCardsDialog,"before")
+            
         except:
+            gLogger.debug("main_wrapFunctions()::fallback version of wraps")
             # fallback for older ankiversions
             AddCards.reject = wrap(AddCards.reject, main_onMaybeCloseAddCardsDialog,"before")
             AddCards.reject = wrap(AddCards.reject, main_onAddCardsDialogWasNotClosed)
@@ -757,7 +811,7 @@ def main_wrapFunctions():
 
     if(config["Enable TagSelector in EditNotes"] == "YES"):
         def bufferForInjection(diag, unused):
-            gLogger.debug("start TS from EditCurrentDialog")
+            gLogger.debug("__init__::start TS from EditCurrentDialog")
             main_TSInjection(diag)
             pass
         EditCurrent.__init__ = wrap(EditCurrent.__init__, bufferForInjection)
