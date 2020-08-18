@@ -26,8 +26,16 @@ $d.Configure()
 - swap caps and ctrl using sharpkeys
 - Установить Master PDF Editor
 
-Linux
+WSL
+
+Установить:
+
+ArchWSL
+pyenv
+
+настроить ssh
 
 ```
 sh link.sh
+git clone git@github.com:BlackLacost/.xi.git
 ```

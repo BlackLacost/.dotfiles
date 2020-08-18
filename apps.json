@@ -88,7 +88,7 @@
   "xi": {
     "name": "xi",
     "installType": "git",
-    "uri": "https://gitlab.com/blacklacost/xi.git",
+    "uri": "https://github.com/BlackLacost/.xi.git",
     "dstDir": "%USERPROFILE%\\.xi"
   },
   "editorconfig": {
