@@ -59,7 +59,7 @@
   "python.linting.pylintEnabled": true,
   "python.linting.pylintArgs": ["--load-plugins", "pylint_django", "--errors-only"],
 
-  "editor.tabSize": 4,
+  "editor.tabSize": 2,
   "editor.renameOnType": true,
   "emmet.includeLanguages": {
     "django-html": "html",
