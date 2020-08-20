@@ -3,7 +3,7 @@ email = blacklacost@gmail.com
 name = Ilya Lisin
 
 [core]
-editor = "code"
+editor = "code -w"
 autocrlf = input
 safecrlf = false
 
