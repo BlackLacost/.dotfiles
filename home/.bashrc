@@ -49,6 +49,9 @@ if [ -d $HOME/.pyenv ]; then
   eval "$(pyenv virtualenv-init -)"
 fi
 
+# Auto complete for pipenv.
+eval "$(pipenv --completion)"
+
 # Always install dependencies in .venv for pipenv.
 export PIPENV_VENV_IN_PROJECT="1"
 # Do not lock dependencies (very slow).

@@ -43,7 +43,8 @@ pyenv install <version>
 Установка nvm
 
 ```
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+cd ~
+git clone https://github.com/nvm-sh/nvm.git .nvm
 ```
 
 настроить ssh
