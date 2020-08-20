@@ -52,6 +52,9 @@
   "python.sortImports.args": ["-m 3", "-tc"],
   "html.format.enable": true,
 
+  // VirtualEnv
+  "python.pythonPath": "./.venv/bin/python",
+
   // Linting
   "python.languageServer": "Jedi",
   // "python.languageServer": "Microsoft",
