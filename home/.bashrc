@@ -49,13 +49,16 @@ if [ -d $HOME/.pyenv ]; then
   eval "$(pyenv virtualenv-init -)"
 fi
 
-# Auto complete for pipenv.
+# Pipenv auto completion
 eval "$(pipenv --completion)"
 
 # Always install dependencies in .venv for pipenv.
 export PIPENV_VENV_IN_PROJECT="1"
 # Do not lock dependencies (very slow).
 export PIPENV_SKIP_LOCK="1"
+
+# Django auto completion
+. ~/.config/django/django_bash_completion.sh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
