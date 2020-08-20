@@ -185,10 +185,30 @@
   "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\im-select.exe",
   "vim.autoSwitchInputMethod.switchIMCmd": "C:\\im-select.exe {im}",
   "vim.camelCaseMotion.enable": true,
-  "vim.easymotion": true,
+  "vim.easymotion": false,
   "vim.ignorecase": true,
-  "vim.leader": "<space>",
   "vim.useSystemClipboard": false,
+  "vim.leader": "<space>",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "y"],
+      "after": ["\"", "+", "y"]
+    },
+    {
+      "before": ["<leader>", "p"],
+      "after": ["\"", "+", "p"]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "y"],
+      "after": ["\"", "+", "y"]
+    },
+    {
+      "before": ["<leader>", "p"],
+      "after": ["\"", "+", "p"]
+    }
+  ],
 
   // Wallaby
   "wallaby.startAutomatically": false,

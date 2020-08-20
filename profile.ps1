@@ -3,7 +3,6 @@ try {
 }
 catch {
 }
-
 function cddc() { Set-Location ~/Documents; }
 function cddl() { Set-Location ~/Downloads; }
 function cddt() { Set-Location ~/Desktop; }
@@ -13,6 +12,7 @@ function cdp() { Set-Location D:/code; }
 function cdx() { Set-Location ~/.xi; }
 function jnote() { Set-Location ~/python; jupyter notebook; }
 
+function g($command) { git $command; }
 function ggs() { git status; }
 function gga($file) {
   if ($file) {
