@@ -42,6 +42,9 @@
   "editor.lineNumbers": "relative",
   "editor.minimap.enabled": false,
   "editor.rulers": [78],
+  "editor.quickSuggestions": {
+    "strings": true
+  },
 
   // Autoformat
   "editor.formatOnSave": true,
@@ -66,10 +69,10 @@
   "editor.renameOnType": true,
   "emmet.includeLanguages": {
     "django-html": "html",
-    // "vue-html": "jade",
-    // "vue": "jade"
     "vue-html": "html",
     "vue": "html"
+    // "vue-html": "jade",
+    // "vue": "jade"
   },
   "emmet.syntaxProfiles": {
     "vue-html": "jade",
@@ -175,17 +178,13 @@
   // "pyright.disableOrganizeImports": false,
   "pyright.disableLanguageServices": true,
 
-  // Puglint
-  "puglint.enable": true,
-  "puglint.run": "onSave",
-
   // Vim
   "vim.autoSwitchInputMethod.enable": true,
   "vim.autoSwitchInputMethod.defaultIM": "1033",
   "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\im-select.exe",
   "vim.autoSwitchInputMethod.switchIMCmd": "C:\\im-select.exe {im}",
   "vim.camelCaseMotion.enable": true,
-  "vim.easymotion": false,
+  "vim.easymotion": true,
   "vim.ignorecase": true,
   "vim.useSystemClipboard": false,
   "vim.leader": "<space>",
@@ -220,5 +219,12 @@
   "vetur.validation.template": false,
 
   // Eslint
-  "eslint.validate": ["vue", "html", "javascript"]
+  "eslint.validate": ["vue", "html", "javascript"],
+
+  // Stylelint
+  // Требуется для tailwind
+  "css.validate": false,
+
+  // Tailwind intellisense
+  "tailwindCSS.emmetCompletions": true
 }
