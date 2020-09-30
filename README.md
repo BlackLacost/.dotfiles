@@ -52,3 +52,12 @@ git clone https://github.com/nvm-sh/nvm.git .nvm
 sh link.sh
 git clone git@github.com:BlackLacost/.xi.git
 ```
+
+Backup wsl linux и восстановление.
+
+```
+wsl --export Arch ./archwsl.tar
+
+mkdir ~/AppData/Local/MyDistro
+wsl --import Arch ~/AppData/Local/MyDistro ./archwsl.tar --version 2
+```
