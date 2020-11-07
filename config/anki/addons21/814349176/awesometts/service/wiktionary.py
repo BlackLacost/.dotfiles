@@ -20,6 +20,7 @@
 Service implementation for Wiktionary single word pronunciations
 """
 
+import os
 import re
 
 from .base import Service
@@ -65,16 +66,6 @@ class Wiktionary(Service):
         'uz': 'Uzbek', 'li': 'Limburgish', 'my': 'Burmese',
         'or': 'Oriya', 'te': 'Telugu',
     }
-
-    def __init__(self, *args, **kwargs):
-        if self.IS_MACOSX:
-            raise EnvironmentError(
-                "Wiktionary cannot be used on Mac OS X due to mplayer "
-                "crashes while converting the audio. If you are able to fix "
-                "this, please send a pull request."
-            )
-
-        super(Wiktionary, self).__init__(*args, **kwargs)
 
     def desc(self):
         """
@@ -152,20 +143,14 @@ class Wiktionary(Service):
         # multiple pronunciations, but since there is no trivial
         # way to choose between them, this should be good enough
         # for now.
-        matcher = re.search("//.*\\.og[ga]", webpage)
+        matcher = re.search(r'"(//upload.wikimedia.org/[^"]+\.ogg)"', webpage)
 
         if not matcher:
             raise IOError("Wiktionary doesn't have any audio for this input.")
-        oggurl = "https:" + matcher.group(0)
 
-        ogg_path = self.path_temp('ogg')
-        wav_path = self.path_temp('wav')
+        ogg_url = "https:" + matcher.group(1)
+        mp3_url = ogg_url.replace('/commons/', '/commons/transcoded/') + \
+                  '/' + os.path.basename(ogg_url) + '.mp3'
 
-        try:
-            self.net_download(ogg_path, oggurl,
-                              require=dict(mime='application/ogg', size=1024))
-            self.net_dump(wav_path, ogg_path)
-            self.cli_transcode(wav_path, path)
-
-        finally:
-            self.path_unlink(ogg_path, wav_path)
+        self.net_download(path, mp3_url,
+                          require=dict(mime='audio/mpeg', size=1024))

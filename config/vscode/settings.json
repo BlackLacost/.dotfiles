@@ -30,6 +30,9 @@
     "**/.pytest_cache": true
   },
 
+  // Common
+  "window.restoreWindows": "all",
+
   // Editor
   "editor.acceptSuggestionOnEnter": "off",
   "editor.acceptSuggestionOnCommitCharacter": false,
@@ -160,6 +163,7 @@
   },
 
   // PLUGINS
+  "extensions.autoUpdate": true,
 
   // Beautify
   "beautify.language": {
@@ -222,9 +226,14 @@
   "eslint.validate": ["vue", "html", "javascript"],
 
   // Stylelint
-  // Требуется для tailwind
+  // Выключить внутреннюю валидацию, так как она
+  // мешала работе tailwind
   "css.validate": false,
+  "scss.validate": false,
 
   // Tailwind intellisense
-  "tailwindCSS.emmetCompletions": true
+  "tailwindCSS.emmetCompletions": true,
+  "cSpell.enableFiletypes": ["!javascript", "!json", "!jsonc", "!python", "!scss", "xi"],
+  "cSpell.language": "en,ru",
+  "cSpell.userWords": ["font", "font semibold", "semibold"]
 }
