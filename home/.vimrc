@@ -7,7 +7,8 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'lyokha/vim-xkbswitch'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -54,6 +55,10 @@ set clipboard=unnamedplus
 syntax on
 set t_Co=256                " t_** is terminal_options
 set background=dark
+
+if has("termguicolors")
+    set termguicolors
+endif
 "}}}
 " Fonts and Encoding{{{
 set encoding=UTF-8
@@ -299,10 +304,13 @@ command! -bang -nargs=* GGrep
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 "}}}
 " 'morhetz/gruvbox'{{{2
-let g:gruvbox_italic=1
-set termguicolors
-colorscheme gruvbox
+"let g:gruvbox_italic=1
+"set termguicolors
+"colorscheme gruvbox
 " }}}
+" 'challenger-deep-theme/vim' {{{
+colorscheme challenger_deep
+"}}}
 " 'scrooloose/nerdtree'{{{2
 nmap <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
@@ -331,3 +339,5 @@ let g:vimwiki_list = [{'path': '~/.knowledge', 'syntax': 'markdown', 'ext': '.md
 map <leader>f :Goyo \| set bg=light \| set linebreak<CR>
 " }}}
 "}}}
+" Trancparency
+hi! Normal ctermbg=NONE guibg=NONE

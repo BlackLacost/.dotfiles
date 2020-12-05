@@ -20,8 +20,9 @@ alias ved="deactivate"
 
 ##  256-colors in terminal for apps that knows how to use it.
 export TERM=xterm-256color
+#export TERM=xterm-24bit
 
-export EDITOR="code"
+export EDITOR="vim"
 
 source /usr/share/git/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
@@ -35,9 +36,9 @@ YELLOW="$(echo -e "\e[33m")"
 BLUE="$(echo -e "\e[34m")"
 MAGENTA="$(echo -e "\e[35m")"
 RESET="$(echo -e "\e[00m")"
-# PS1='\[${MAGENTA}\][\w]\[${RESET}\] \[${BLUE}\]$(__git_ps1 "(%s)")\[${RESET}\] \n\[${GREEN}\]\$\u\[${RESET}\] ➡️  '
-PS1='\[${MAGENTA}\]\W\[${RESET}\]$(__git_ps1 "\[${GREEN}\] (%s)\[${RESET}\]") ➡️  '
-PS2='↪️️  '
+# PS1='\[${MAGENTA}\][\w]\[${RESET}\] \[${BLUE}\]$(__git_ps1 "(%s)")\[${RESET}\] \n\[${GREEN}\]\$\u\[${RESET}\] -> '
+PS1='\[${MAGENTA}\]\W\[${RESET}\]$(__git_ps1 "\[${GREEN}\] (%s)\[${RESET}\]") -> '
+PS2='-> '
 
 ##* Usefull for npm tools that are not installed globally
 export PATH=$PATH:./node_modules/.bin
