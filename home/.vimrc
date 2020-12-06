@@ -341,3 +341,4 @@ map <leader>f :Goyo \| set bg=light \| set linebreak<CR>
 "}}}
 " Trancparency
 hi! Normal ctermbg=NONE guibg=NONE
+set pyxversion=3
