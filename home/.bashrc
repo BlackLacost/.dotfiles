@@ -18,12 +18,6 @@ alias vec="python -m venv .venv"
 alias vea=". .venv/bin/activate"
 alias ved="deactivate"
 
-##  256-colors in terminal for apps that knows how to use it.
-export TERM=xterm-256color
-#export TERM=xterm-24bit
-
-export EDITOR="vim"
-
 source /usr/share/git/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
@@ -39,29 +33,3 @@ RESET="$(echo -e "\e[00m")"
 # PS1='\[${MAGENTA}\][\w]\[${RESET}\] \[${BLUE}\]$(__git_ps1 "(%s)")\[${RESET}\] \n\[${GREEN}\]\$\u\[${RESET}\] -> '
 PS1='\[${MAGENTA}\]\W\[${RESET}\]$(__git_ps1 "\[${GREEN}\] (%s)\[${RESET}\]") -> '
 PS2='-> '
-
-##* Usefull for npm tools that are not installed globally
-export PATH=$PATH:./node_modules/.bin
-
-##  Load pyenv, if installed
-if [ -d $HOME/.pyenv ]; then
-  export PYENV_ROOT=$HOME/.pyenv/
-  export PATH="$HOME/.pyenv/bin:$PATH"
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
-
-# Pipenv auto completion
-eval "$(pipenv --completion)"
-
-# Always install dependencies in .venv for pipenv.
-export PIPENV_VENV_IN_PROJECT="1"
-# Do not lock dependencies (very slow).
-export PIPENV_SKIP_LOCK="1"
-
-# Django auto completion
-. ~/.config/django/django_bash_completion.sh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

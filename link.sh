@@ -3,9 +3,9 @@
 backup_file() {
 	file=$1
 	if [ -f $file.backup ]; then
-		rm $dest_file
+		rm $file
 	else
-		mv $dest_file $dest_file.backup
+		mv $file $file.backup
 	fi
 }
 
@@ -40,5 +40,6 @@ link_dir() {
     echo "Linked $dir to $dest_dir"
 }
 
+[ -f ~/.bash_profile ] && mv ~/.bash_profile ~/.bash_profile.bak
 link_dirs_in_dir home
 link_dir config/mpv/ ~/.config

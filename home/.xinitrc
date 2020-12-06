@@ -39,5 +39,7 @@ setxkbmap -layout us,ru && \
 $HOME/.screenlayout/display.sh
 nitrogen --restore &
 xsetroot -cursor_name left_ptr
-picom -f &
+# -f for fade when open/close windows
+#picom -f &
+picom &
 exec bspwm
