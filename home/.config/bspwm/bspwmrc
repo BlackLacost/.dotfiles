@@ -2,7 +2,6 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 $HOME/.config/polybar/launch.sh
-$HOME/.config/scripts/spotify/launchlistener.sh &
 
 # bspc monitor -d I II III IV V VI VII VIII IX X
 bspc monitor HDMI1 -d I II III IV V
