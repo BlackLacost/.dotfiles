@@ -129,6 +129,19 @@ XF86AudioRaiseVolume
 XF86AudioMute
     pactl set-sink-mute 0 toggle
 
+# music control
+XF86AudioPlay
+	playerctl play-pause
+
+XF86AudioNext
+	playerctl next
+
+XF86AudioPrev
+	playerctl previous
+
+XF86AudioStop
+	playerctl stop
+
 # brightness control for notebook
 XF86MonBrightnessDown
     xbacklight -dec 5
