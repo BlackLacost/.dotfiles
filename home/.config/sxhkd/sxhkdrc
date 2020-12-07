@@ -122,25 +122,16 @@ super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 # volume control
-XF86AudioLowerVolume
-    amixer set Master 5%-
-XF86AudioRaiseVolume
-    amixer set Master 5%+
+XF86Audio{Lower,Raise}Volume
+    amixer set Master 5%{-,+}
+#XF86AudioRaiseVolume
+    #amixer set Master 5%+
 XF86AudioMute
     pactl set-sink-mute 0 toggle
 
 # music control
-XF86AudioPlay
-	playerctl play-pause
-
-XF86AudioNext
-	playerctl next
-
-XF86AudioPrev
-	playerctl previous
-
-XF86AudioStop
-	playerctl stop
+XF86Audio{Play,Next,Prev,Stop}
+    playerctl {play-pause,next,previous,stop}
 
 # brightness control for notebook
 XF86MonBrightnessDown
