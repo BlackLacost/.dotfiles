@@ -21,6 +21,8 @@ alias ved="deactivate"
 # Avoid duplicate bash history
 export HISTCONTROL=ignoredups:erasedups
 
+source $HOME/.webdavfs/secret
+
 source /usr/share/git/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
