@@ -18,6 +18,8 @@ alias vec="python -m venv .venv"
 alias vea=". .venv/bin/activate"
 alias ved="deactivate"
 
+alias vifm="$HOME/.config/vifm/scripts/vifmrun"
+
 # Avoid duplicate bash history
 export HISTCONTROL=ignoredups:erasedups
 
