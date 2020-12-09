@@ -18,6 +18,9 @@ alias vec="python -m venv .venv"
 alias vea=". .venv/bin/activate"
 alias ved="deactivate"
 
+# Avoid duplicate bash history
+export HISTCONTROL=ignoredups:erasedups
+
 source /usr/share/git/git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
