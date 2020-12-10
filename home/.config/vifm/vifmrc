@@ -522,10 +522,6 @@ nnoremap <a-o> :sync %c<cr>
 " Swap panes
 nnoremap <c-u> <c-w>x
 
-" My map
-map > :!vifmimg inc<CR>
-map < :!vifmimg dec<CR>
-
 " ------------------------------------------------------------------------------
 
 " Various customization examples
@@ -550,3 +546,22 @@ map < :!vifmimg dec<CR>
 "     vifm --server-name "$VIFM_SERVER_NAME" --remote +"cd '$PWD'"
 "
 " let $VIFM_SERVER_NAME = v:servername
+
+map > :!vifmimg inc<CR>
+map < :!vifmimg dec<CR>
+
+" cd Directories
+nnoremap cdh :cd<cr>
+
+nnoremap cddw :cd ~/downloads<cr>
+nnoremap cddt :cd ~/.dotfiles<cr>
+
+nnoremap cdc :cd ~/.config<cr>
+nnoremap cdcb :cd ~/.config/bspwm<cr>
+nnoremap cdcs :cd ~/.config/shkdk<cr>
+nnoremap cdcv :cd ~/.config/vifm<cr>
+
+nnoremap cdmw :cd /mnt/maildisk<cr>
+nnoremap cdmr :cd ~/maildisk<cr>
+
+nnoremap cdv :cd ~/videos<cr>
