@@ -19,6 +19,7 @@ alias vea=". .venv/bin/activate"
 alias ved="deactivate"
 
 alias vifm="$HOME/.config/vifm/scripts/vifmrun"
+alias vim="nvim"
 
 # Avoid duplicate bash history
 export HISTCONTROL=ignoredups:erasedups
