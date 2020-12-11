@@ -19,6 +19,10 @@ super + Escape
 # bspwm hotkeys
 #
 
+# Poweroff, suspend, reboot
+super + {_,shift,alt} + BackSpace
+    systemctl {suspend,poweroff,reboot}
+
 # quit/restart bspwm
 super + alt + {q,r}
 	bspc {quit,wm -r}
