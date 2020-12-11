@@ -26,6 +26,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 "Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 Plug 'gu-fan/riv.vim'
 Plug 'Rykka/InstantRst'
+Plug 'jmcantrell/vim-virtualenv'
+Plug 'PieterjanMontens/vim-pipenv'
 
 call plug#end()
 "}}}
