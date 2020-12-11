@@ -66,6 +66,8 @@ endif
 set encoding=UTF-8
 
 " Spaces & Tabs
+" Позволяет при табуляции вставлять пробелы.
+" Чтобы вставить Tab когда опция включена нажми CTRL+v Tab
 set expandtab
 set smarttab
 set smartindent
