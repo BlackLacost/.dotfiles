@@ -1,6 +1,8 @@
-" Редактирование и сохранение vimrc
-nnoremap <Leader>ev :split $HOME/.vimrc<cr>
-nnoremap <Leader>sv :source $HOME/.vimrc<cr>
+" Редактирование и source init.vim
+nnoremap <Leader>ev :split $HOME/.config/nvim/init.vim<cr>
+nnoremap <Leader>evm :split $HOME/.config/nvim/mappings.vim<cr>
+nnoremap <Leader>evs :split $HOME/.config/nvim/basic-settings.vim<cr>
+nnoremap <Leader>sv :source $HOME/.config/nvim/init.vim<cr>
 
 set pastetoggle=<F2>
 
