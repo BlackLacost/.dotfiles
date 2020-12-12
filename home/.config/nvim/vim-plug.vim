@@ -28,5 +28,6 @@ Plug 'gu-fan/riv.vim'
 Plug 'Rykka/InstantRst'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'PieterjanMontens/vim-pipenv'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()

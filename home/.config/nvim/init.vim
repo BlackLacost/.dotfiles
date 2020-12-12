@@ -16,6 +16,7 @@ source $HOME/.config/nvim/plug-config/nerdcommenter.vim
 source $HOME/.config/nvim/plug-config/markdown.vim
 source $HOME/.config/nvim/plug-config/vimwiki.vim
 source $HOME/.config/nvim/plug-config/goyo.vim
+source $HOME/.config/nvim/plug-config/fugitive.vim
 
 " Trancparency
 hi! Normal ctermbg=NONE guibg=NONE
