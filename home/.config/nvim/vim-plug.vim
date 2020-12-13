@@ -29,5 +29,6 @@ Plug 'Rykka/InstantRst'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'PieterjanMontens/vim-pipenv'
 Plug 'tpope/vim-fugitive'
+Plug 'blacklacost/potion'
 
 call plug#end()
