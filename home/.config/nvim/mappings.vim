@@ -1,6 +1,14 @@
+" Leader & LocalLeader
+" Пробовал leader на пробел, но тогда если используешь leader в insert mode,
+" то получаешь лаг каждый раз когда жмешь пробел.
+let mapleader = ","
+noremap M <nop>
+let maplocalleader = "M"
+
 " Редактирование и source init.vim
-nnoremap <Leader>ev :split $HOME/.config/nvim/init.vim<cr>
+nnoremap <Leader>evi :split $HOME/.config/nvim/init.vim<cr>
 nnoremap <Leader>evm :split $HOME/.config/nvim/mappings.vim<cr>
+nnoremap <Leader>evp :split $HOME/.config/nvim/vim-plug.vim<cr>
 nnoremap <Leader>evs :split $HOME/.config/nvim/basic-settings.vim<cr>
 nnoremap <Leader>sv :source $HOME/.config/nvim/init.vim<cr>
 

@@ -41,13 +41,6 @@ set smartindent
 set tabstop=4
 set shiftwidth=4
 
-" Leader & LocalLeader
-" Пробовал leader на пробел, но тогда если используешь leader в insert mode,
-" то получаешь лаг каждый раз когда жмешь пробел.
-let mapleader = ","
-noremap M <nop>
-let maplocalleader = "M"
-
 " UI Layout
 set number relativenumber
 set nocursorline
