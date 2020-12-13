@@ -30,5 +30,6 @@ Plug 'jmcantrell/vim-virtualenv'
 Plug 'PieterjanMontens/vim-pipenv'
 Plug 'tpope/vim-fugitive'
 Plug 'blacklacost/potion'
+Plug 'blacklacost/xi.vim'
 
 call plug#end()
