@@ -33,8 +33,8 @@ source $HOME/.webdavfs/secret
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
 
-export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!*/{.git,node_modules}/**'"
-export FZF_CTRL_T_COMMAND="rg -i --files --hidden --no-ignore-vcs --glob '!*{.git,node_modules}/**'"
+export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!{.git,node_modules,*.pyc}'"
+export FZF_CTRL_T_COMMAND="rg -i --files --hidden --no-ignore-vcs --glob '!{.git,node_modules,*.pyc}'"
 export FZF_ALT_C_COMMAND="fd --type d --hidden --exclude '.git'"
 
 # git
