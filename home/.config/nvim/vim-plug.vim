@@ -31,5 +31,6 @@ Plug 'PieterjanMontens/vim-pipenv'
 Plug 'tpope/vim-fugitive'
 Plug 'blacklacost/potion'
 Plug 'blacklacost/xi.vim'
+Plug 'blacklacost/memory-color-theme.vim'
 
 call plug#end()

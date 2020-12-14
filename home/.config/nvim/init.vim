@@ -2,8 +2,9 @@ source $HOME/.config/nvim/vim-plug.vim
 source $HOME/.config/nvim/basic-settings.vim
 
 " Themes
-"source $HOME/.config/nvim/themes/gruvbox.vim
-source $HOME/.config/nvim/themes/challenger-deep.vim
+source $HOME/.config/nvim/themes/gruvbox.vim
+"source $HOME/.config/nvim/themes/challenger-deep.vim
+source $HOME/.config/nvim/themes/memorycolor.vim
 
 " Plugin Configuration
 source $HOME/.config/nvim/plug-config/coc.vim
