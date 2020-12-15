@@ -340,6 +340,10 @@ let g:fzf_action = {
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 map <C-f> :Files<CR>
+map <C-f>c :Files<CR>
+map <C-f>r :Files /<CR>
+map <C-f>d :Files ~/.dotfiles<CR>
+map <C-f>h :Files ~<CR>
 map <C-b> :Buffers<CR>
 nnoremap <leader>g :Rg<CR>
 nnoremap <leader>t :Tags<CR>
