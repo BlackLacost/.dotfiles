@@ -17,6 +17,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'PieterjanMontens/vim-pipenv'
+Plug 'airblade/vim-rooter'
 Plug 'blacklacost/potion'
 
 " }}}
@@ -444,6 +445,11 @@ let g:XkbSwitchEnabled = 1
 
 let g:vimwiki_ext2syntax = {'.md': 'markdown'}
 let g:vimwiki_list = [{'path': '~/.knowledge', 'syntax': 'markdown', 'ext': '.md'}]
+
+"}}}
+" Rooter: {{{
+
+let g:rooter_cd_cmd = 'lcd'
 
 "}}}
 
