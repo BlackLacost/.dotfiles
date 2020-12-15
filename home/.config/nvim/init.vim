@@ -52,6 +52,7 @@ Plug 'morhetz/gruvbox'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'blacklacost/memory-color-theme.vim'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 
@@ -205,6 +206,7 @@ colorscheme memorycolor
 " Airline: {{{
 
 let g:airline_powerline_fonts = 1
+let g:airline_theme = 'deus'
 
 "}}}
 " Coc: {{{
