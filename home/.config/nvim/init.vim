@@ -88,7 +88,6 @@ set cursorline
 set nowrap
 set textwidth=80
 set colorcolumn=81
-set foldcolumn=1
 
 " Disable automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -128,11 +127,15 @@ augroup SearchHighlightOff
     autocmd InsertEnter * set nohlsearch
 augroup END
 " }}}
-" Folding{{{
+" Folding: {{{
+
+set foldcolumn=0
+
 augroup filetype_vim
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker foldlevel=0
 augroup END
+
 " }}}
 " Compiling{{{
 
