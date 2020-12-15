@@ -12,7 +12,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'lyokha/vim-xkbswitch'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-"Plug 'vim-airline/vim-airline'
 Plug 'junegunn/goyo.vim'
 Plug 'scrooloose/nerdtree'
 "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -43,6 +42,7 @@ Plug 'blacklacost/xi.vim'
 Plug 'morhetz/gruvbox'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'blacklacost/memory-color-theme.vim'
+Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
@@ -192,6 +192,11 @@ colorscheme memorycolor
 "}}}
 
 " Plugin Configuration
+" Airline: {{{
+
+let g:airline_powerline_fonts = 1
+
+"}}}
 " Coc: {{{
 
 let g:coc_global_extensions = [

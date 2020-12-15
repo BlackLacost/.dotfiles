@@ -61,3 +61,9 @@ wsl --export Arch ./archwsl.tar
 mkdir ~/AppData/Local/MyDistro
 wsl --import Arch ~/AppData/Local/MyDistro ./archwsl.tar --version 2
 ```
+
+Поддержка powerline fonts для vim airlines
+
+```
+sudo pacman -S powerline-fonts
+```
