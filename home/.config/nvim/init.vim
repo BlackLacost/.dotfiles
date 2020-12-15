@@ -26,8 +26,9 @@ Plug 'blacklacost/potion'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'majutsushi/tagbar'
+Plug 'majutsusmi/tagbar'
 Plug 'vifm/vifm.vim'
+Plug 'easymotion/vim-easymotion'
 
 "}}}
 " Git: {{{
@@ -82,7 +83,7 @@ set tabstop=4
 set shiftwidth=4
 
 " UI Layout
-set number relativenumber
+set nonumber norelativenumber
 set cursorline
 set nowrap
 set textwidth=80
