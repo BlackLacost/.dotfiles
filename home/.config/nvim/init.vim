@@ -1,4 +1,5 @@
-" Vim-plug: {{{
+" Vim-plug: ====================================================================
+" Autoload vim-plug: {{{
 
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -6,49 +7,58 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $HOME/.config/nvim/init.vim
 endif
 
+"}}}
 call plug#begin('~/.config/nvim/plugged')
+" General plugins: {{{
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'lyokha/vim-xkbswitch'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
-Plug 'scrooloose/nerdtree'
-"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'vifm/vifm.vim'
-Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdcommenter'
-Plug 'majutsushi/tagbar'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'PieterjanMontens/vim-pipenv'
 Plug 'blacklacost/potion'
 
-" Git
+" }}}
+" Navigation: {{{
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'majutsushi/tagbar'
+Plug 'vifm/vifm.vim'
+
+"}}}
+" Git: {{{
+
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" Syntax
-Plug 'PotatoesMaster/i3-vim-syntax'
+"}}}
+" Syntax: {{{
 
-" For wiki and documentation
+Plug 'PotatoesMaster/i3-vim-syntax'
 "Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 "Plug 'gu-fan/riv.vim'
 "Plug 'Rykka/InstantRst'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'blacklacost/xi.vim'
 
-" Themes
+"}}}
+" Themes: {{{
+
 Plug 'morhetz/gruvbox'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'blacklacost/memory-color-theme.vim'
 Plug 'vim-airline/vim-airline'
-
-call plug#end()
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
 
 "}}}
+call plug#end()
 
-" Settigns:
+" Settigns: ====================================================================
 " Basic: {{{
 
 set mouse=a
@@ -191,7 +201,7 @@ colorscheme memorycolor
 
 "}}}
 
-" Plugin Configuration
+" Plugin Configuration: ========================================================
 " Airline: {{{
 
 let g:airline_powerline_fonts = 1
@@ -398,7 +408,7 @@ let g:vimwiki_list = [{'path': '~/.knowledge', 'syntax': 'markdown', 'ext': '.md
 
 "}}}
 
-" Mappings
+" Mappings: ====================================================================
 " General: {{{
 " Leader & LocalLeader
 " Пробовал leader на пробел, но тогда если используешь leader в insert mode,
