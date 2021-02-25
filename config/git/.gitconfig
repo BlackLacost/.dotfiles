@@ -13,6 +13,3 @@ pretty = oneline
 
 [pull]
 rebase = true
-
-[credential]
-	helper = manager
