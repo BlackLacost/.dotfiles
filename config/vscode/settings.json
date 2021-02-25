@@ -66,7 +66,11 @@
   // "python.languageServer": "Microsoft",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
-  "python.linting.pylintArgs": ["--load-plugins", "pylint_django", "--errors-only"],
+  "python.linting.pylintArgs": [
+    "--load-plugins",
+    "pylint_django",
+    "--errors-only"
+  ],
 
   "editor.tabSize": 2,
   "editor.renameOnType": true,
@@ -233,7 +237,14 @@
 
   // Tailwind intellisense
   "tailwindCSS.emmetCompletions": true,
-  "cSpell.enableFiletypes": ["!javascript", "!json", "!jsonc", "!python", "!scss", "xi"],
+  "cSpell.enableFiletypes": [
+    "!javascript",
+    "!json",
+    "!jsonc",
+    "!python",
+    "!scss",
+    "xi"
+  ],
   "cSpell.language": "en,ru",
   "cSpell.userWords": ["font", "font semibold", "semibold"]
 }

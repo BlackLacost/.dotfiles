@@ -13,10 +13,10 @@
     "installType": "scoop",
     "configDir": "%USERPROFILE%"
   },
-  "chrome": {
-    "name": "googlechrome",
-    "installType": "scoop"
-  },
+  // "chrome": {
+  //   "name": "googlechrome",
+  //   "installType": "scoop"
+  // },
   "monoid-nf": {
     "name": "Monoid-NF",
     "installType": "scoop"
@@ -34,10 +34,10 @@
     "name": "telegram",
     "installType": "scoop"
   },
-  "vim": {
-    "name": "vim",
-    "installType": "scoop"
-  },
+  // "vim": {
+  //   "name": "vim",
+  //   "installType": "scoop"
+  // },
   "vscode": {
     "name": "vscode",
     "installType": "scoop",
