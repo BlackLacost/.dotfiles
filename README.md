@@ -8,7 +8,7 @@
 
 - Install Windows Terminal via WindowsStore
 - Disable python app execution alias
-- Установить последный [PowerShell](https://github.com/PowerShell/PowerShell/releases) core через msi
+- Установить последний [PowerShell](https://github.com/PowerShell/PowerShell/releases) core через msi
 - Если сайт 7zip блокируется, то надо настроить VPN
 
 Запустить PowerShell core 7 под **админом**
@@ -25,16 +25,24 @@ $d.Configure()
 - swap caps and ctrl using sharpkeys
 - Установить Master PDF Editor
 
-WSL
+[WSL](https://docs.microsoft.com/ru-ru/windows/wsl/install-win10#manual-installation-steps)
 
 Установить:
 
 ArchWSL
 
+```
+scoop bucket add extras
+scoop install archwsl
+```
+
+[PostInstall](https://wsldl-pg.github.io/ArchW-docs/How-to-Setup/#setup-after-install)
+
 Установка pyenv
 
 ```
 curl https://pyenv.run | bash
+pacman -S base-devel openssl zlib
 pyenv install --list
 pyenv install <version>
 ```
