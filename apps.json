@@ -101,6 +101,11 @@
     "installType": "config",
     "configDir": "%USERPROFILE%"
   },
+  "ssh": {
+    "name": "ssh",
+    "installType": "config",
+    "configDir": "%USERPROFILE%\\.ssh"
+  },
   "windows_terminal": {
     "name": "windows_terminal",
     "installType": "config",
