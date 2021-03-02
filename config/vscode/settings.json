@@ -246,5 +246,18 @@
     "xi"
   ],
   "cSpell.language": "en,ru",
-  "cSpell.userWords": ["font", "font semibold", "semibold"]
+  "cSpell.userWords": [
+    "font",
+    "font semibold",
+    "semibold"
+  ],
+  "spellright.language": [
+    "en",
+    "ru"
+  ],
+  "spellright.documentTypes": [
+    "markdown",
+    "latex",
+    "plaintext"
+  ]
 }
