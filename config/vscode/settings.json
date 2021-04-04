@@ -62,18 +62,14 @@
   "python.pythonPath": "./.venv/bin/python",
 
   // Linting
-  "python.languageServer": "Jedi",
+  "python.languageServer": "Pylance",
   // "python.languageServer": "Microsoft",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
-  "python.linting.pylintArgs": [
-    "--load-plugins",
-    "pylint_django",
-    "--errors-only"
-  ],
+  "python.linting.pylintArgs": ["--load-plugins", "pylint_django", "--errors-only"],
 
   "editor.tabSize": 2,
-  "editor.renameOnType": true,
+  "editor.linkedEditing": true,
   "emmet.includeLanguages": {
     "django-html": "html",
     "vue-html": "html",
@@ -108,7 +104,6 @@
   "explorer.confirmDelete": false,
   "todo-tree.tree.showScanModeButton": false,
   "vsicons.dontShowNewVersionMessage": true,
-  "python.dataScience.askForKernelRestart": false,
 
   // Search
   "search.exclude": {
@@ -122,6 +117,9 @@
   },
   "search.showLineNumbers": true,
 
+  // Type checking
+  "python.analysis.typeCheckingMode": "strict",
+
   // Настройки под разные технологии
 
   "[markdown]": {
@@ -134,7 +132,8 @@
     "editor.rulers": [72, 50]
   },
   "[python]": {
-    "editor.defaultFormatter": null
+    "editor.defaultFormatter": null,
+    "editor.tabSize": 4
     // "editor.codeActionsOnSave": {
     //   "source.organizeImports": true,
     //   "source.fixAll": true
@@ -237,27 +236,20 @@
 
   // Tailwind intellisense
   "tailwindCSS.emmetCompletions": true,
-  "cSpell.enableFiletypes": [
-    "!javascript",
-    "!json",
-    "!jsonc",
-    "!python",
-    "!scss",
-    "xi"
-  ],
+  "cSpell.enableFiletypes": ["!javascript", "!json", "!jsonc", "!python", "!scss", "xi"],
   "cSpell.language": "en,ru",
-  "cSpell.userWords": [
-    "font",
-    "font semibold",
-    "semibold"
+  "cSpell.userWords": ["font", "font semibold", "semibold"],
+  "spellright.language": ["en", "ru"],
+  "spellright.documentTypes": ["markdown", "latex", "plaintext"],
+  "jupyter.askForKernelRestart": false,
+  "workbench.editorAssociations": [
+    {
+      "viewType": "jupyter.notebook.ipynb",
+      "filenamePattern": "*.ipynb"
+    }
   ],
-  "spellright.language": [
-    "en",
-    "ru"
-  ],
-  "spellright.documentTypes": [
-    "markdown",
-    "latex",
-    "plaintext"
-  ]
+  "python.analysis.extraPaths": [],
+  "json.maxItemsComputed": 50000,
+  "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "XXX", "[ ]", "[x]"],
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)"
 }

@@ -3,6 +3,7 @@
 ## TODO
 
 - code . работает некорректно в wsl, если vscode установлен через scoop.
+- PIPENV_SKIP_LOCK=1,PIPENV_VENV_IN_PROJECT=1 для windows
 
 ## Установка
 

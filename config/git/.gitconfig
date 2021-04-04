@@ -14,3 +14,7 @@ pretty = oneline
 
 [pull]
 rebase = true
+[init]
+	defaultBranch = main
+[credential]
+	helper = manager-core
