@@ -1,0 +1,12 @@
+{
+    "name": "Coronavirus Tracker",
+    "package": "1313091126",
+    "ankiweb_id": "1313091126",
+    "author": "Glutanimate",
+    "version": "v0.1.1",
+    "homepage": "https://github.com/glutanimate/coronavirus-tracker",
+    "conflicts": [
+        "coronavirus_tracker"
+    ],
+    "mod": 1587550251
+}

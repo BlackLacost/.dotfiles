@@ -62,6 +62,7 @@
   "python.pythonPath": "./.venv/bin/python",
 
   // Linting
+  "python.analysis.typeCheckingMode": "basic",
   "python.languageServer": "Pylance",
   // "python.languageServer": "Microsoft",
   "python.linting.enabled": true,
@@ -116,9 +117,6 @@
     "**/tmp": true
   },
   "search.showLineNumbers": true,
-
-  // Type checking
-  "python.analysis.typeCheckingMode": "strict",
 
   // Настройки под разные технологии
 
