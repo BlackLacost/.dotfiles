@@ -2,3 +2,20 @@ Host github.com
     HostName github.com
     User BlackLacost
     IdentityFile ~/.ssh/ryzen
+
+Host web
+    HostName 34.136.58.78
+    User blacklacost
+    IdentityFile ~/.ssh/gcloud
+
+Host poco
+    HostName 192.168.111.170
+    User black
+    Port 8022 
+    IdentityFile ~/.ssh/pocox3
+
+Host mikrotik
+    HostName 192.168.111.254
+    User admin
+    Port 2222 
+    IdentityFile ~/.ssh/mikrotik
