@@ -42,7 +42,7 @@
   "editor.fontSize": 12,
   "editor.fontLigatures": true,
   "editor.links": true,
-  "editor.lineNumbers": "relative",
+  "editor.lineNumbers": "on",
   "editor.minimap.enabled": false,
   "editor.rulers": [78],
   "editor.quickSuggestions": {
@@ -66,12 +66,8 @@
   "python.languageServer": "Pylance",
   // "python.languageServer": "Microsoft",
   "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.linting.pylintArgs": [
-    "--load-plugins",
-    "pylint_django",
-    "--errors-only"
-  ],
+  "python.linting.pylintEnabled": false,
+  "python.linting.pylintArgs": ["--load-plugins", "pylint_django", "--errors-only"],
 
   "editor.tabSize": 2,
   "editor.linkedEditing": true,
@@ -134,7 +130,7 @@
   },
   "[python]": {
     "editor.defaultFormatter": null,
-    "editor.tabSize": 4
+    "editor.tabSize": 8
     // "editor.codeActionsOnSave": {
     //   "source.organizeImports": true,
     //   "source.fixAll": true
@@ -237,35 +233,26 @@
 
   // Tailwind intellisense
   "tailwindCSS.emmetCompletions": true,
-  "cSpell.enableFiletypes": [
-    "!javascript",
-    "!json",
-    "!jsonc",
-    "!python",
-    "!scss",
-    "xi"
-  ],
+  "cSpell.enableFiletypes": ["!javascript", "!json", "!jsonc", "!python", "!scss", "xi"],
   "cSpell.language": "en,ru",
   "cSpell.userWords": ["font", "font semibold", "semibold"],
   "spellright.language": ["en", "ru"],
   "spellright.documentTypes": ["markdown", "latex", "plaintext"],
   "jupyter.askForKernelRestart": false,
-  "workbench.editorAssociations": [
-    {
-      "viewType": "jupyter.notebook.ipynb",
-      "filenamePattern": "*.ipynb"
-    }
-  ],
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
   "python.analysis.extraPaths": [],
   "json.maxItemsComputed": 50000,
-  "todo-tree.general.tags": [
-    "BUG",
-    "HACK",
-    "FIXME",
-    "TODO",
-    "XXX",
-    "[ ]",
-    "[x]"
-  ],
-  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)"
+  "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "XXX", "[ ]", "[x]"],
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+  "editor.cursorStyle": "line",
+  "editor.insertSpaces": false,
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "editor.wordWrap": "off",
+  "jupyter.interactiveWindowMode": "perFile",
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  }
 }

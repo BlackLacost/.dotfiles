@@ -39,6 +39,7 @@ class AzureTTS(Service):
     __slots__ = [
         '_access_token',
         '_expire_time',
+        '_api_key',
     ]
 
     NAME = "Microsoft Azure Text to Speech"
@@ -294,6 +295,7 @@ class AzureTTS(Service):
     def __init__(self, *args, **kwargs):
         self._access_token = None
         self._expire_time = None
+        self._api_key = None
         super(AzureTTS, self).__init__(*args, **kwargs)
 
     def _languageCode(self, name):
@@ -357,19 +359,16 @@ class AzureTTS(Service):
                 default=1.00,
             ),
 
-            dict(
-                key='pitch',
-                label="Pitch",
-                values=(0.0, 2.00),
-                transform=float,
-                default=0.00,
-            ),
         ]
 
     def run(self, text, options, path):
         """
         Send a synthesis request to the Text-to-Speech API.
         """
+
+        if self._api_key != options['key']:
+            self._api_key = options['key']
+            self._access_token = None
 
         if self._access_token is None or time.monotonic() > self._expire_time:
             fetch_token_url = 'https://{}.api.cognitive.microsoft.com/sts/v1.0/issueToken'.format(options['region'])
@@ -381,13 +380,9 @@ class AzureTTS(Service):
 
         lang = self._languageCode(options['voice'])
 
-        body = """<speak version="1.0" xmlns="https://www.w3.org/2001/10/synthesis" xml:lang="{}">
-                    <voice name="{}">
-                      <prosody rate="{}">
-                        {}
-                      </prosody>
-                    </voice>
-                  </speak>""".format(lang, options['voice'], options['speed'], html.escape(text))
+        body = '<speak version="1.0" xmlns="https://www.w3.org/2001/10/synthesis" xml:lang="{}">'.format(lang)
+        body += '<voice name="{}"><prosody rate="{}">{}</prosody></voice>'.format(options['voice'], options['speed'], text)
+        body += '</speak>'
 
         body = body.encode("utf-8")
 

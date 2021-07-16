@@ -152,19 +152,39 @@
     "command": "workbench.action.terminal.split"
   },
   {
-    "key": "ctrl+shift+k",
+    "key": "ctrl+alt+t",
+    "command": "workbench.action.terminal.new"
+  },
+  {
+    "key": "ctrl+alt+j",
     "command": "workbench.action.terminal.focusNext"
   },
   {
-    "key": "ctrl+shift+j",
-    "command": "workbench.action.terminal.focusNext"
+    "key": "ctrl+alt+k",
+    "command": "workbench.action.terminal.focusPrevious"
   },
   {
-    "key": "ctrl+shift+l",
+    "key": "ctrl+alt+l",
     "command": "workbench.action.terminal.focusNextPane"
   },
   {
-    "key": "ctrl+shift+h",
+    "key": "ctrl+alt+h",
     "command": "workbench.action.terminal.focusPreviousPane"
+  },
+  {
+    "key": "ctrl+, l",
+    "command": "workbench.action.openSettings"
+  },
+  {
+    "key": "ctrl+,",
+    "command": "-workbench.action.openSettings"
+  },
+  {
+    "key": "ctrl+, k",
+    "command": "workbench.action.openGlobalKeybindings"
+  },
+  {
+    "key": "ctrl+k ctrl+s",
+    "command": "-workbench.action.openGlobalKeybindings"
   }
 ]
