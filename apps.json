@@ -79,6 +79,30 @@
     "name": "qbittorrent",
     "installType": "scoop"
   },
+  "nvm": {
+    "name": "qbittorrent",
+    "installType": "scoop"
+  },
+  "ripgrep": {
+    "name": "ripgrep",
+    "installType": "scoop"
+  },
+  "fzf": {
+    "name": "fzf",
+    "installType": "scoop"
+  },
+  "fd": {
+    "name": "fd",
+    "installType": "scoop"
+  },
+  "sqlite": {
+    "name": "sqlite",
+    "installType": "scoop"
+  },
+  "tableplus": {
+    "name": "tableplus",
+    "installType": "scoop"
+  },
   "dotfiles": {
     "name": "dotfiles",
     "installType": "git",
