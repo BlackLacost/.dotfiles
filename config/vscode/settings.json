@@ -42,12 +42,13 @@
   "editor.fontSize": 12,
   "editor.fontLigatures": true,
   "editor.links": true,
-  "editor.lineNumbers": "on",
+  "editor.lineNumbers": "off",
   "editor.minimap.enabled": false,
   "editor.rulers": [78],
   "editor.quickSuggestions": {
     "strings": true
   },
+  "editor.copyWithSyntaxHighlighting": true,
 
   // Autoformat
   "editor.formatOnSave": true,
@@ -87,8 +88,21 @@
   "search.useIgnoreFiles": true,
   "terminal.integrated.fontFamily": "Monoid, Monoid NF",
   "terminal.integrated.fontSize": 12,
-  "terminal.integrated.rendererType": "dom",
-  "terminal.integrated.shell.windows": "pwsh.exe",
+  // "terminal.integrated.shell.windows": "pwsh.exe",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    },
+    "Command Prompt": {
+      "path": ["${env:windir}\\Sysnative\\cmd.exe", "${env:windir}\\System32\\cmd.exe"],
+      "args": [],
+      "icon": "terminal-cmd"
+    },
+    "Git Bash": {
+      "source": "Git Bash"
+    }
+  },
   "telemetry.enableTelemetry": false,
   "window.openFoldersInNewWindow": "on",
   "window.menuBarVisibility": "toggle",
@@ -130,7 +144,7 @@
   },
   "[python]": {
     "editor.defaultFormatter": null,
-    "editor.tabSize": 8
+    "editor.tabSize": 4
     // "editor.codeActionsOnSave": {
     //   "source.organizeImports": true,
     //   "source.fixAll": true
@@ -153,10 +167,14 @@
   },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.rulers": [80]
     // "prettier": {
     //   "trailingComma": "none"
     // }
+  },
+  "[typescript]": {
+    "editor.rulers": [80]
   },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -175,7 +193,7 @@
 
   // Prettier
   "prettier.singleQuote": true,
-  "prettier.printWidth": 100,
+  "prettier.printWidth": 78,
   "prettier.bracketSpacing": true,
 
   // Pyright
@@ -233,9 +251,30 @@
 
   // Tailwind intellisense
   "tailwindCSS.emmetCompletions": true,
-  "cSpell.enableFiletypes": ["!javascript", "!json", "!jsonc", "!python", "!scss", "xi"],
+  "cSpell.enableFiletypes": [
+    "!javascript",
+    "!javascriptreact",
+    "!json",
+    "!jsonc",
+    "!python",
+    "!scss",
+    "!typescript",
+    "!typescriptreact",
+    "xi"
+  ],
   "cSpell.language": "en,ru",
-  "cSpell.userWords": ["font", "font semibold", "semibold"],
+  "cSpell.userWords": [
+    "Ilya",
+    "Mila",
+    "Olya",
+    "Vanya",
+    "font",
+    "font semibold",
+    "fullname",
+    "semibold",
+    "unfollow",
+    "unfollowed"
+  ],
   "spellright.language": ["en", "ru"],
   "spellright.documentTypes": ["markdown", "latex", "plaintext"],
   "jupyter.askForKernelRestart": false,
@@ -254,5 +293,6 @@
   "notebook.cellToolbarLocation": {
     "default": "right",
     "jupyter-notebook": "left"
-  }
+  },
+  "workbench.activityBar.visible": false
 }

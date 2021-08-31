@@ -18,3 +18,5 @@ rebase = true
 	defaultBranch = main
 [credential]
 	helper = manager-core
+[credential "helperselector"]
+	selected = manager-core

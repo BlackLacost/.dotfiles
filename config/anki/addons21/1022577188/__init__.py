@@ -7,7 +7,7 @@
 
 # enable/disable TagSelector
 gEnableTagSelectorInAddCards = YES
-gEnableTagSelectorInBrowser = YES
+gEnableTagSelectorInBrowser = NO # does not work anymore after Anki 2.1.46
 gEnableTagSelectorInEditNotes = YES
 
 gShareDataAmongDecks = NO # if this is said to "YES", you can access the same tags
@@ -432,7 +432,7 @@ class GuiDialogInjector:
             mainWindow = TSMainWindow(addCardsDialog)
             # move the current anki-content inside a main-window.
             mainWindow.setCentralWidget(dialogForm.fieldsArea)
-            dialogForm.addonMainWindow = mainWindow                        
+            dialogForm.addonMainWindow = mainWindow
         return dialogForm.addonMainWindow
 
     @staticmethod
@@ -481,7 +481,15 @@ class GuiDialogInjector:
         # ----------------------------------------------------------------------
         # ----------- Create Widget, where the dockwidget is contained ---------
         # ----------------------------------------------------------------------
-        tsDockWidget.setWidget(dockWidgetContentSizable) 
+
+        # TODO: use the code below and see, if we get the scrolling feature.
+        #       Be careful! This might interfere with the resizing, because
+        #       restoring size uses widget()
+        #scrollArea = QScrollArea(tsDockWidget)
+        #tsDockWidget.setWidget(scrollArea)
+        #scrollArea.setWidget(dockWidgetContentSizable)
+
+        tsDockWidget.setWidget(dockWidgetContentSizable)
 
 
         # ----------------------------------------------------------------------
@@ -493,7 +501,7 @@ class GuiDialogInjector:
         # the resizing must be called before show is called! due to the lack of qt
         #   to actually resize a widget programmatically
         dockWidgetContentSizable.resize(dockWidgetData.width, dockWidgetData.height)
-        
+
         if(dockWidgetData.isVisible == False):
             tsDockWidget.hide()
         # ATTENTION: tsDockWidget.show() must not be called here!
@@ -547,7 +555,7 @@ class GuiDialogInjector:
         dockData.isVisible = dockWidget.isVisibleTo(addCardsWidget)
         dockData.isFloating = dockWidget.isFloating()
         dockData.floatingPosX = dockWidget.pos().x() #20 # TODO: put a real value here
-        dockData.floatingPosY = dockWidget.pos().y() #20 # TODO: put a real value here       
+        dockData.floatingPosY = dockWidget.pos().y() #20 # TODO: put a real value here
         dockData.width = dockWidget.widget().width()
         dockData.height = dockWidget.widget().height()
 
@@ -756,7 +764,7 @@ def main_onProfileLoad():
 
             # create tagselector specific menu item
             tsMenu = QMenu(gAddonNamePrettyString, mw)
-            a = tsMenu.addAction("clear saved data")            
+            a = tsMenu.addAction("clear saved data")
             qconnect(a.triggered, clearData)
 
 
@@ -765,11 +773,11 @@ def main_onProfileLoad():
                 # note: 'try' because we don't want to crash if
                 #       anki internals for menues changed
                 menu = mw.form.menuTools
-                menu.insertMenu(mw.form.actionAdd_ons, tsMenu)            
+                menu.insertMenu(mw.form.actionAdd_ons, tsMenu)
             except:
                 pass
 
-            #mw.form.menuExtras            
+            #mw.form.menuExtras
             # The menu goes to
             # Tools -> Add-Ons -> TagSelector
 # Code for old anki
@@ -794,9 +802,9 @@ def main_wrapFunctions():
         # problem with reject is: our method is called, even if the user pressed "no"
         #   , because everything happens in the same method (see addcars.reject)
         try:
-            # newer Ankiverions:            
+            # newer Ankiverions:
             AddCards._reject = wrap(AddCards._reject, main_onMaybeCloseAddCardsDialog,"before")
-            
+
         except:
             gLogger.debug("main_wrapFunctions()::fallback version of wraps")
             # fallback for older ankiversions
@@ -804,10 +812,10 @@ def main_wrapFunctions():
             AddCards.reject = wrap(AddCards.reject, main_onAddCardsDialogWasNotClosed)
 
 
-    if (config["Enable TagSelector in Browser"] == "YES"):
-        Browser.onRowChanged = wrap(Browser._onRowChanged, main_onBrowserItemChangedAfter)
-        Browser.closeEvent = wrap(Browser.closeEvent, main_onBrowserDialogClose, "before")
-        #Browser.closeEvent = wrap(Browser.closeEvent, test, "before")
+    #if (config["Enable TagSelector in Browser"] == "YES"):
+    #    Browser.onRowChanged = wrap(Browser._onRowChanged, main_onBrowserItemChangedAfter)
+    #    Browser.closeEvent = wrap(Browser.closeEvent, main_onBrowserDialogClose, "before")
+    #    #Browser.closeEvent = wrap(Browser.closeEvent, test, "before")
 
     if(config["Enable TagSelector in EditNotes"] == "YES"):
         def bufferForInjection(diag, unused):

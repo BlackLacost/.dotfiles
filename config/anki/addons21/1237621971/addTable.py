@@ -1,139 +1,27 @@
-"""
-Addon for Anki 2.1 that inserts tables
-this is a modification and extension of the table function from neftas' Power Format Pack
-
-
-Copyright: 2018- ijgnd
-           2014-2017 Stefan van den Akker <neftas@protonmail.com>
-
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>
-"""
-
-
 import json
-import os
 import re
-from pprint import pprint as pp
+from pprint import pprint as pp  # noqa
 import uuid
 
 
-from anki import version
-from anki.hooks import addHook, wrap
-from aqt import mw
+from anki.hooks import addHook
 from aqt.qt import *
-from aqt.editor import Editor
 from aqt.utils import tooltip
 
-from .forms import addtable
+from .config import gc, wcm
+from .forms import addtable  # noqa
 
 
 addon_path = os.path.dirname(__file__)
 
+import markdown
+from markdown.extensions.abbr import AbbrExtension
+from markdown.extensions.codehilite import CodeHiliteExtension  # noqa
+from markdown.extensions.def_list import DefListExtension  # noqa
+from markdown.extensions.fenced_code import FencedCodeExtension  # noqa
+from markdown.extensions.footnotes import FootnoteExtension  # noqa
+from markdown.extensions.tables import TableExtension
 
-def gc(arg, fail=False):
-    conf = mw.addonManager.getConfig(__name__)
-    if conf:
-        return conf.get(arg, fail)
-    else:
-        return fail
-
-
-def wcs(key, newvalue, addnew=False):
-    config = mw.addonManager.getConfig(__name__)
-    if not (key in config or addnew):
-        return False
-    else:
-        config[key] = newvalue
-        mw.addonManager.writeConfig(__name__, config)
-        return True
-
-
-# mw.addonManager.writeConfig writes a json file to disc, calling it repeatedly might slow
-# down Anki?
-def wcm(list_):
-    config = mw.addonManager.getConfig(__name__)
-    success = True
-    for i in list_:
-        key = i[0]
-        newvalue = i[1]
-        if len(i) == 3:
-            addnew = i[2]
-        else:
-            addnew = False
-        if not (key in config or addnew):
-            success = False
-        else:
-            config[key] = newvalue
-    mw.addonManager.writeConfig(__name__, config)
-    return success
-
-
-# check and maybe transform config.json: old V3 to tableaddon_configlevel_2020-04-27
-def maybe_adjust_config():
-    conf = mw.addonManager.getConfig(__name__)
-    if not conf:
-        return
-    if conf.get("tableaddon_configlevel_2020-04-27", None):
-        return
-    if not "table_style_css_V3" in conf:
-        return
-    styling = conf.get("table_style_css_V3")
-    originalstyling = styling.copy()
-    if not isinstance(styling, dict):
-        return
-    newnames = {
-        "less ugly - full width": "basic - full width",
-        "less ugly - minimal width": "basic - minimal width",       
-    }
-    for name in list(styling):
-        if name in newnames:
-            styling[newnames.get(name)] = styling.pop(name)            
-    newvalues = {
-        "basic - full width": {
-            "old": " style='font-size: 85%; width: 100%; border-collapse: collapse; border: 1px solid black;' ",
-            "new": " class='table_class_basic_full_width' style='font-size: 85%; width: 100%; border-collapse: collapse; border: 1px solid;' "
-        },
-        "basic - minimal width": {
-            "old": " style='font-size: 85%; border-collapse: collapse; border: 1px solid black;' ",
-            "new": " class='table_class_basic_minimal_width' style='font-size: 85%; border-collapse: collapse; border: 1px solid;' "
-        },
-        "no outside border": {
-            "old": " style='font-size: 85%; width: 100%; border-style: hidden; border-collapse: collapse;' ",
-            "new": " class='table_class_no_outside_border' style='font-size: 85%; width: 100%; border-style: hidden; border-collapse: collapse;' "
-        },
-        "pfp - style": {
-            "old": " style='font-size: 95%; width: 100%; border-collapse: collapse;' ",
-            "new": " class='table_class_pfp_style' style='font-size: 95%; width: 100%; border-collapse: collapse;' "
-        }
-    }
-    for key in list(styling):
-        if key in newvalues:
-            vals = styling.get(key, None)
-            if vals and isinstance(vals, dict) and "TABLE_STYLING" in vals:
-                if vals["TABLE_STYLING"] == newvalues[key]["old"]:
-                    styling[key]["TABLE_STYLING"] = newvalues[key]["new"]
-
-    default = conf.get("table_style__default", None)
-    if default:
-        for old, new in newnames.items():
-            if default == old:
-                conf["table_style__default"] = new
-
-    conf["tableaddon_configlevel_2020-04-27"] = True
-    mw.addonManager.writeConfig(__name__, conf)
-addHook('profileLoaded', maybe_adjust_config)
 
 
 def get_alignment(s):
@@ -157,7 +45,7 @@ def get_alignment(s):
 
 
 place_holder_table = {
-    # "strings in source" : ["strings in result", "temporary placeholder"]
+    # "strings in source" : TableExtension["strings in result", "temporary placeholder"]
     "\|": ["&#124;", str(uuid.uuid4())],
 }
 
@@ -191,6 +79,25 @@ QLabel    { padding-top: 7%; }
 """  # height: 10px; margin: 0px; }"
 
 
+class TableBase:
+    def insert_table(self, tstyle, head_row, body_rows):
+        if head_row:
+            html = """
+            <table {0}>
+                <thead><tr>{1}</tr></thead>
+                <tbody>{2}</tbody>
+            </table>""".format(tstyle, head_row, body_rows)
+        else:
+            html = """
+            <table {0}>
+                <tbody>{1}</tbody>
+            </table>""".format(tstyle, body_rows)
+
+        self.editor.web.eval(  # noqa
+                "document.execCommand('insertHTML', false, %s);"
+                % json.dumps(html))
+
+
 class TableDialog(QDialog):
     def __init__(self, parent):
         self.parent = parent
@@ -215,7 +122,7 @@ class TableDialog(QDialog):
         d.cb_center.setChecked(True if gc("table_center_by_default", False) else False)
 
         smembers = [gc('table_style__default'), ]
-        for s in gc('table_style_css_V3').keys():
+        for s in gc('table_style_css_V4').keys():
             if s != gc('table_style__default'):
                 smembers.append(s)
         d.sb_styling.addItems(smembers)
@@ -271,27 +178,11 @@ class TableDialog(QDialog):
         QDialog.accept(self)
 
 
-class Table():
-    def __init__(self, editor, parent_window, selected_text):
-        """
-        note: ignore the DRY principle and don't try to merge the part from
-        show_dialog and create_table_from_selection that creates the styling.
-        """
+class TableFromDialog(TableBase):
+    def __init__(self, editor, parent_window):
         self.editor = editor
         self.parent_window = parent_window
-        self.selected_text = selected_text
-        if self.selected_text:
-            # if no suitable selected text, present user with dialog
-            if not self.selected_text.count("\n"):  # there is a single line of text
-                tooltip("Select more than one line to create a table. Aborting ...")
-                return
-            elif all(c in ("|", "\n") for c in self.selected_text):  # there is no content in table
-                tooltip("No content for table. Aborting ...")
-                return
-            else:
-                self.create_table_from_selection()
-        else:
-            self.show_dialog()
+        self.show_dialog()
 
     def show_dialog(self):
         d = TableDialog(self.parent_window)
@@ -300,9 +191,9 @@ class Table():
                 num_rows = d.num_rows - 1
             else:
                 num_rows = d.num_rows
-            Tstyle = gc('table_style_css_V3')[d.styling]['TABLE_STYLING']
-            Hstyle = gc('table_style_css_V3')[d.styling]['HEAD_STYLING']
-            Bstyle = gc('table_style_css_V3')[d.styling]['BODY_STYLING']
+            Tstyle = gc('table_style_css_V4')[d.styling]['TABLE_STYLING']
+            Hstyle = gc('table_style_css_V4')[d.styling]['HEAD_STYLING']
+            Bstyle = gc('table_style_css_V4')[d.styling]['BODY_STYLING']
 
             if d.center:
                 if "style='" in Tstyle:
@@ -339,22 +230,13 @@ class Table():
             body_rows = "<tr>{}</tr>".format(body_column) * num_rows
             self.insert_table(Tstyle, head_row, body_rows)
 
-    def insert_table(self, Tstyle, head_row, body_rows):
-        if head_row:
-            html = """
-            <table {0}>
-                <thead><tr>{1}</tr></thead>
-                <tbody>{2}</tbody>
-            </table>""".format(Tstyle, head_row, body_rows)
-        else:
-            html = """
-            <table {0}>
-                <tbody>{1}</tbody>
-            </table>""".format(Tstyle, body_rows)
 
-        self.editor.web.eval(
-                "document.execCommand('insertHTML', false, %s);"
-                % json.dumps(html))
+class TableFromMarkdownLike(TableBase):
+    def __init__(self, editor, parent_window, selected_text):
+        self.editor = editor
+        self.parent_window = parent_window
+        self.selected_text = selected_text
+        self.create_table_from_selection()
 
     def create_table_from_selection(self):
         # - split on newlines
@@ -362,6 +244,39 @@ class Table():
         #   markdown tables might not work and a space might generate a new column
         # - To include a pipe as content escape the backslash (as in GFM spec)
         stx = self.selected_text
+
+        if False:  # gc("md: format selection with markdown package"):
+            # noqa
+            # seems to be working
+            # html = markdown.markdown(stx, extensions=[
+            #     AbbrExtension(),
+            #     # CodeHiliteExtension(
+            #     #     noclasses = True, 
+            #     #     linenums = config.shouldShowCodeLineNums(), 
+            #     #     pygments_style = config.getCodeColorScheme()
+            #     # ),
+            #     DefListExtension(),
+            #     FencedCodeExtension(),
+            #     FootnoteExtension(),
+            #     TableExtension(),
+            #     ], output_format="html5")
+
+            # seems to be working
+            html = markdown.markdown(stx, extensions=[
+                    AbbrExtension(),
+                    TableExtension(),
+                ], output_format="html")
+
+            # not working: table extension not found
+            # html = markdown.markdown(stx, extensions=["tables"], output_format="html5")
+
+            # print(html)
+            self.editor.web.eval(
+                    "document.execCommand('insertHTML', false, %s);"
+                    % json.dumps(html))
+            return
+
+
         for k, v in place_holder_table.items():
             stx = stx.replace(k, v[1])
         first = [x.strip() for x in stx.split("\n") if x]
@@ -387,40 +302,61 @@ class Table():
         width = 100 / max_num_cols
 
         # check for "-|-|-" alignment row
-        second[1] = [re.sub(r"-+", '-', x) for x in second[1]]
-        if all(x.strip(":") in ("-", "") for x in second[1]):
-            start = 2
+        def alignment_row(cell_list):
+            l = [re.sub(r"-+", '-', x) for x in cell_list]
+            return all(x.strip(":") in ("-", "") for x in l)
+
+        one = alignment_row(second[0])
+        two = alignment_row(second[1])
+        
+        if all([one, two]):
+            tooltip("Error. The top two rows seem to be alignment rows.")
+            return
+
+        align_line = []
+        alignments = []
+
+        if one:
+            use_header = False
+            align_line = second[0]
+            start = 1
+        elif two:
+            use_header = second[0]
             align_line = second[1]
-            len_align_line = len(align_line)
+            start = 2
+        else:
+            use_header = second[0] if gc("md: format selection text, default to head") else False
+            alignments = ["left"] * max_num_cols
+            start = 1 if gc("md: format selection text, default to head") else 0
+
+        if one or two:
+            len_align_line = len(align_line)  # noqa
             if len_align_line < max_num_cols:
                 align_line += ["-"] * (max_num_cols - len_align_line)
-            alignments = list()
-            for elem in second[1]:
+            for elem in align_line:
                 alignments.append(get_alignment(elem))
-        else:
-            alignments = ["left"] * max_num_cols
-            start = 1
 
         # create a table
         styling = gc("table_style__default")
-        Tstyle = gc('table_style_css_V3')[styling]['TABLE_STYLING']
-        Hstyle = gc('table_style_css_V3')[styling]['HEAD_STYLING']
-        Bstyle = gc('table_style_css_V3')[styling]['BODY_STYLING']
+        Tstyle = gc('table_style_css_V4')[styling]['TABLE_STYLING']
+        Hstyle = gc('table_style_css_V4')[styling]['HEAD_STYLING']
+        Bstyle = gc('table_style_css_V4')[styling]['BODY_STYLING']
 
         head_row = ""
-        head_html = "<th {0}>{1}</th>"
-        for elem, alignment in zip(second[0], alignments):
-            style = "width:{0:.0f}%; text-align:{1};".format(width, alignment)
-            head_row += head_html.format(Hstyle.format(style), elem)
-        extra_cols = ""
-        if len(second[0]) < max_num_cols:
-            diff = len(second[0]) - max_num_cols
-            assert diff < 0, \
-                "Difference between len(second[0]) and max_num_cols is positive"
-            for alignment in alignments[diff:]:
+        if use_header:
+            head_html = "<th {0}>{1}</th>"
+            for elem, alignment in zip(use_header, alignments):
                 style = "width:{0:.0f}%; text-align:{1};".format(width, alignment)
-                extra_cols += head_html.format(Hstyle.format(style), "")
-        head_row += extra_cols
+                head_row += head_html.format(Hstyle.format(style), elem)
+            extra_cols = ""
+            if len(use_header) < max_num_cols:
+                diff = len(use_header) - max_num_cols
+                assert diff < 0, \
+                    "Difference between len(use_header) and max_num_cols is positive"
+                for alignment in alignments[diff:]:
+                    style = "width:{0:.0f}%; text-align:{1};".format(width, alignment)
+                    extra_cols += head_html.format(Hstyle.format(style), "")
+            head_row += extra_cols
 
         body_rows = ""
         for row in second[start:]:
@@ -446,8 +382,15 @@ class Table():
 
 def toggle_table(editor):
     selection = editor.web.selectedText()
-    Table(editor, editor.parentWindow, selection if selection else None)
-Editor.toggle_table = toggle_table
+    if not selection:
+        TableFromDialog(editor, editor.parentWindow)
+    else:
+        if not selection.count("\n"):  # there is a single line of text
+            tooltip("Select more than one line to create a table. Aborting ...")
+        elif all(c in ("|", "\n") for c in selection):  # there is no content in table
+            tooltip("No content for table. Aborting ...")
+        else:
+            TableFromMarkdownLike(editor, editor.parentWindow, selection)
 
 
 def setupEditorButtonsFilter(buttons, editor):
