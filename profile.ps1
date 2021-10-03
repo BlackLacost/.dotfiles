@@ -11,6 +11,7 @@ function cdh() { Set-Location ~; }
 function cdp() { Set-Location D:/code; }
 function cdx() { Set-Location ~/.xi; }
 function jnote() { Set-Location ~/python; jupyter notebook; }
+function webp() { cdp; cd web-playground; code .; }
 
 function g($command) { git $command; }
 function ggs() { git status; }

@@ -12,6 +12,10 @@
   //   "name": "googlechrome",
   //   "installType": "scoop"
   // },
+  "dbeaver": {
+    "name": "dbeaver",
+    "installType": "scoop"
+  },
   "fzf": {
     "name": "fzf",
     "installType": "scoop"
