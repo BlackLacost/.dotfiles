@@ -1,65 +1,4 @@
-" VimPlug: =====================================================================
-" Autoload vim-plug: {{{
-
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $HOME/.config/nvim/init.vim
-endif
-
-"}}}
-call plug#begin('~/.config/nvim/plugged')
-" General plugins: {{{
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'lyokha/vim-xkbswitch'
-Plug 'junegunn/goyo.vim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'jmcantrell/vim-virtualenv'
-Plug 'PieterjanMontens/vim-pipenv'
-Plug 'airblade/vim-rooter'
-Plug 'blacklacost/potion'
-
-" }}}
-" Navigation: {{{
-
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'majutsusmi/tagbar'
-Plug 'vifm/vifm.vim'
-Plug 'easymotion/vim-easymotion'
-
-"}}}
-" Git: {{{
-
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
-"}}}
-" Syntax: {{{
-
-Plug 'PotatoesMaster/i3-vim-syntax'
-"Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
-"Plug 'gu-fan/riv.vim'
-"Plug 'Rykka/InstantRst'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-Plug 'blacklacost/xi.vim'
-
-"}}}
-" Themes: {{{
-
-Plug 'morhetz/gruvbox'
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
-Plug 'blacklacost/memory-color-theme.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
-
-"}}}
-call plug#end()
+lua require('plugins')
 
 " Settigns: ====================================================================
 " Basic: {{{
@@ -472,10 +411,10 @@ let maplocalleader = "M"
 
 
 " Редактирование и source init.vim
-nnoremap <Leader>evi :split $HOME/.config/nvim/init.vim<cr>
-nnoremap <Leader>evm :split $HOME/.config/nvim/mappings.vim<cr>
-nnoremap <Leader>evp :split $HOME/.config/nvim/vim-plug.vim<cr>
-nnoremap <Leader>evs :split $HOME/.config/nvim/basic-settings.vim<cr>
+nnoremap <Leader>ev :split $HOME/.config/nvim/init.vim<cr>
+"nnoremap <Leader>evm :split $HOME/.config/nvim/mappings.vim<cr>
+"nnoremap <Leader>evp :split $HOME/.config/nvim/vim-plug.vim<cr>
+"nnoremap <Leader>evs :split $HOME/.config/nvim/basic-settings.vim<cr>
 nnoremap <Leader>sv :source $HOME/.config/nvim/init.vim<cr>
 
 set pastetoggle=<F2>
