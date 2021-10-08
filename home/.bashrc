@@ -27,7 +27,9 @@ alias rgf="rg --files | rg"
 # Avoid duplicate bash history
 export HISTCONTROL=ignoredups:erasedups
 
-source $HOME/.webdavfs/secret
+if [ -f $HOME/.webdavfs/secret ]; then
+  source $HOME/.webdavfs/secret
+fi
 
 # fzf
 source /usr/share/fzf/key-bindings.bash
@@ -53,3 +55,5 @@ RESET="$(echo -e "\e[00m")"
 # PS1='\[${MAGENTA}\][\w]\[${RESET}\] \[${BLUE}\]$(__git_ps1 "(%s)")\[${RESET}\] \n\[${GREEN}\]\$\u\[${RESET}\] -> '
 PS1='\[${MAGENTA}\]\W\[${RESET}\]$(__git_ps1 "\[${GREEN}\] (%s)\[${RESET}\]") -> '
 PS2='-> '
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
