@@ -13,7 +13,7 @@ export BROWSER="brave"
 export READER="zathura"
 
 ##  256-colors in terminal for apps that knows how to use it.
-export TERM=xterm-256color
+# export TERM=xterm-256color
 
 # fzf
 FD_OPTIONS="--hidden \

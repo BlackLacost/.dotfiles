@@ -21,6 +21,9 @@ alias ved="deactivate"
 alias vifm="$HOME/.config/vifm/scripts/vifmrun"
 alias vim="nvim"
 
+# colors
+# export TERM=xterm-24bit
+
 # ripgrep
 alias rgf="rg --files | rg"
 
