@@ -2,8 +2,11 @@
 # ~/.bashrc
 #
 
+echo "bashrc loading..."
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+echo "bashrc interactively loading..."
 
 alias ls='ls --color=auto'
 alias g=git

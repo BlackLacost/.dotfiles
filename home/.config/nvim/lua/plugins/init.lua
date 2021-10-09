@@ -12,12 +12,27 @@ return require('packer').startup(function()
     use 'terrortylor/nvim-comment'
     require('nvim_comment').setup()
 
-    -- use 'scrooloose/nerdtree'
     use {
         'kyazdani42/nvim-tree.lua',
         requires = 'kyazdani42/nvim-web-devicons',
         config = function() require'plugins/nvim_tree' end
     }
+
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/nvim-cmp'
+
+    -- For vsnip user.
+--     use 'hrsh7th/cmp-vsnip'
+--     use 'hrsh7th/vim-vsnip'
+--
+    -- For luasnip user.
+    use 'L3MON4D3/LuaSnip'
+    use 'saadparwaiz1/cmp_luasnip'
+
+    -- For ultisnips user.
+    -- use 'SirVer/ultisnips'
+    -- use 'quangnguyen30192/cmp-nvim-ultisnips'
 
     -- use 'jmcantrell/vim-virtualenv'
     -- use 'PieterjanMontens/vim-pipenv'
