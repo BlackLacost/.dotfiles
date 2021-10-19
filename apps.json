@@ -29,6 +29,10 @@
     "installType": "scoop",
     "configDir": "%USERPROFILE%"
   },
+  "lazygit": {
+    "name": "lazygit",
+    "installType": "scoop"
+  },
   "monoid-nf": {
     "name": "Monoid-NF",
     "installType": "scoop"
@@ -58,10 +62,10 @@
     "name": "sqlite",
     "installType": "scoop"
   },
-  "tableplus": {
-    "name": "tableplus",
-    "installType": "scoop"
-  },
+  // "tableplus": {
+  //   "name": "tableplus",
+  //   "installType": "scoop"
+  // },
   "telegram": {
     "name": "telegram",
     "installType": "scoop"
@@ -81,19 +85,15 @@
       "grigoryvp.language-xi",
       "grigoryvp.memory-theme",
       "Gruntfuggly.todo-tree",
-      "HookyQR.beautify",
       "ms-azuretools.vscode-docker",
-      "ms-pyright.pyright",
       "ms-python.python",
       "ms-vscode-remote.remote-containers",
       "ms-vscode-remote.remote-ssh",
       "ms-vscode-remote.remote-ssh-edit",
       "ms-vscode-remote.remote-wsl",
       "ms-vscode-remote.vscode-remote-extensionpack",
-      "octref.vetur",
       "ritwickdey.LiveServer",
       "techer.open-in-browser",
-      "thebarkman.vscode-djaneiro",
       "vscode-icons-team.vscode-icons",
       "vscodevim.vim",
       "yzhang.markdown-all-in-one"
@@ -103,22 +103,22 @@
       "outFile": "C:\\im-select.exe"
     }
   },
-  "whatsapp": {
-    "name": "whatsapp",
-    "installType": "scoop"
-  },
+  // "whatsapp": {
+  //   "name": "whatsapp",
+  //   "installType": "scoop"
+  // },
   "dotfiles": {
     "name": "dotfiles",
     "installType": "git",
     "uri": "https://github.com/BlackLacost/.dotfiles.git",
     "dstDir": "%USERPROFILE%\\.dotfiles"
   },
-  "xi": {
-    "name": "xi",
-    "installType": "git",
-    "uri": "https://github.com/BlackLacost/.xi.git",
-    "dstDir": "%USERPROFILE%\\.xi"
-  },
+  // "xi": {
+  //   "name": "xi",
+  //   "installType": "git",
+  //   "uri": "https://github.com/BlackLacost/.xi.git",
+  //   "dstDir": "%USERPROFILE%\\.xi"
+  // },
   "editorconfig": {
     "name": "editorconfig",
     "installType": "config",
