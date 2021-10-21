@@ -28,6 +28,13 @@ git reset --hard
 - swap caps and ctrl using sharpkeys
 - Установить Master PDF Editor
 
+- poetry
+
+```
+(Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python -
+poetry config virtualenvs.in-project true
+```
+
 [WSL](https://docs.microsoft.com/ru-ru/windows/wsl/install-win10#manual-installation-steps)
 
 Установить:

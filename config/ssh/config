@@ -1,7 +1,7 @@
 Host github.com
     HostName github.com
     User BlackLacost
-    IdentityFile ~/.ssh/ryzen
+    IdentityFile ~/.ssh/github
 
 Host web
     HostName 34.132.155.18
