@@ -44,6 +44,13 @@ function ggp { git push; }
 
 function touch($file) { "" | Out-File $file }
 
+function ftask($port) {
+  netstat -ano | findstr :$port
+}
+function ktask($taskPid) {
+  taskkill /PID $taskPid /F
+}
+
 # Reload the Shell
 function Reload-Powershell {
     $newProcess = new-object System.Diagnostics.ProcessStartInfo "PowerShell";

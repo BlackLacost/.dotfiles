@@ -68,7 +68,11 @@
   // "python.languageServer": "Microsoft",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": false,
-  "python.linting.pylintArgs": ["--load-plugins", "pylint_django", "--errors-only"],
+  "python.linting.pylintArgs": [
+    "--load-plugins",
+    "pylint_django",
+    "--errors-only"
+  ],
 
   "editor.tabSize": 2,
   "editor.linkedEditing": true,
@@ -95,7 +99,10 @@
       "icon": "terminal-powershell"
     },
     "Command Prompt": {
-      "path": ["${env:windir}\\Sysnative\\cmd.exe", "${env:windir}\\System32\\cmd.exe"],
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ],
       "args": [],
       "icon": "terminal-cmd"
     },
@@ -103,7 +110,6 @@
       "source": "Git Bash"
     }
   },
-  "telemetry.enableTelemetry": false,
   "window.openFoldersInNewWindow": "on",
   "window.menuBarVisibility": "toggle",
   "window.zoomLevel": 2,
@@ -179,6 +185,9 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+
+  // TypeScript
+  "typescript.preferences.importModuleSpecifier": "non-relative",
 
   // PLUGINS
   "extensions.autoUpdate": true,
@@ -283,7 +292,15 @@
   },
   "python.analysis.extraPaths": [],
   "json.maxItemsComputed": 50000,
-  "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "TODO", "XXX", "[ ]", "[x]"],
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "XXX",
+    "[ ]",
+    "[x]"
+  ],
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
   "editor.cursorStyle": "line",
   "editor.insertSpaces": false,
@@ -294,5 +311,6 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
-  "security.workspace.trust.untrustedFiles": "open"
+  "security.workspace.trust.untrustedFiles": "open",
+  "python.defaultInterpreterPath": "./.venv/bin/python"
 }
