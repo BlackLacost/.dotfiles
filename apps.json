@@ -43,7 +43,11 @@
     "configDir": "%USERPROFILE%\\scoop\\apps\\mpv\\current\\portable_config"
   },
   "nvm": {
-    "name": "qbittorrent",
+    "name": "nvm",
+    "installType": "scoop"
+  },
+  "python": {
+    "name": "python",
     "installType": "scoop"
   },
   "qbittorrent": {
