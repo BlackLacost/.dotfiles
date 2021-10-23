@@ -113,7 +113,7 @@
   "window.openFoldersInNewWindow": "on",
   "window.menuBarVisibility": "toggle",
   "window.zoomLevel": 2,
-  "workbench.iconTheme": "vscode-icons",
+  "workbench.iconTheme": "material-icon-theme",
   "workbench.colorTheme": "grigoryvp memory theme",
   "task.problemMatchers.neverPrompt": {
     "npm": true
@@ -187,7 +187,7 @@
   },
 
   // TypeScript
-  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifier": "relative",
 
   // PLUGINS
   "extensions.autoUpdate": true,
