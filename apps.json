@@ -74,6 +74,10 @@
     "name": "telegram",
     "installType": "scoop"
   },
+  "youtube-dl": {
+    "name": "youtube-dl",
+    "installType": "scoop"
+  },
   // "vim": {
   //   "name": "vim",
   //   "installType": "scoop"
