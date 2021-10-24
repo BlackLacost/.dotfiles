@@ -3,10 +3,8 @@ function setClipboard(text) {
 }
 
 function copySub() {
-  var sub_text = mp
-    .get_property('sub-text')
-    .replace(/\n/g, ' ')
-    .replace(/"/g, "'")
+  var sub_text =
+    mp.get_property('sub-text').replace(/\n/g, ' ').replace(/"/g, "'") + ' '
   setClipboard(sub_text)
   mp.osd_message('Copied to Clipboard: ' + sub_text)
 }

@@ -4,7 +4,7 @@
 --          This script uses Subliminal to download subtitles,
 --          so make sure to specify your system's Subliminal location below:
 -- local subliminal = '/opt/anaconda3/bin/subliminal'
-local subliminal = 'C:\\Users\\black\\.pyenv\\pyenv-win\\versions\\2.7.17\\Scripts\\subliminal'
+local subliminal = 'C:\\Users\\black\\scoop\\apps\\python\\current\\Scripts\\subliminal'
 --=============================================================================
 -->>    SUBTITLE LANGUAGE:
 --=============================================================================
@@ -37,7 +37,7 @@ local languages = {
 local logins = {
 --          { '--addic7ed', 'USERNAME', 'PASSWORD' },
 --          { '--legendastv', 'USERNAME', 'PASSWORD' },
---          { '--opensubtitles', 'USERNAME', 'PASSWORD' },
+            { '--opensubtitles', 'BlackLacost', 'bkmz5Open6!' },
 --          { '--subscenter', 'USERNAME', 'PASSWORD' },
 }
 --=============================================================================
@@ -231,6 +231,6 @@ function log(string, secs)
 end
 
 
-mp.add_key_binding('ctrl+y', 'download_subs', download_subs)
-mp.add_key_binding('ctrl+alt+y', 'download_subs2', download_subs2)
+mp.add_key_binding('', 'download_subs', download_subs)
+mp.add_key_binding('', 'download_subs2', download_subs2)
 mp.register_event('file-loaded', control_downloads)
