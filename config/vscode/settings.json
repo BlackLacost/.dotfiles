@@ -65,7 +65,6 @@
   // Linting
   "python.analysis.typeCheckingMode": "basic",
   "python.languageServer": "Pylance",
-  // "python.languageServer": "Microsoft",
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": false,
   "python.linting.pylintArgs": [
