@@ -220,6 +220,22 @@
   "vim.leader": "<space>",
   "vim.normalModeKeyBindingsNonRecursive": [
     {
+      "before": ["j"],
+      "after": ["g", "j"]
+    },
+    {
+      "before": ["k"],
+      "after": ["g", "k"]
+    },
+    {
+      "before": ["g", "j"],
+      "after": ["j"]
+    },
+    {
+      "before": ["g", "k"],
+      "after": ["k"]
+    },
+    {
       "before": ["<leader>", "y"],
       "after": ["\"", "+", "y"]
     },
