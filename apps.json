@@ -33,6 +33,10 @@
     "name": "lazygit",
     "installType": "scoop"
   },
+  "heroku-cli": {
+    "name": "heroku-cli",
+    "installType": "scoop"
+  },
   "monoid-nf": {
     "name": "Monoid-NF",
     "installType": "scoop"

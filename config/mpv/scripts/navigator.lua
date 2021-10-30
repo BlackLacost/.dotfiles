@@ -36,8 +36,8 @@ local settings = {
     'O:\\H.Media\\Movies',
     'O:\\H.Media\\Music',
     'O:\\H.Media\\XXX',
-    'D:\\Zona Downloads',
-    windows_downloads
+    'D:\\Downloads',
+    'D:\\Zona Downloads'
   },
   --list of paths to ignore. the value is anything that returns true for if-statement.
   --directory ignore entries must end with a trailing slash,
