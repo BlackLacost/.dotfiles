@@ -77,6 +77,9 @@ $PSReadLineOptions = @{
 }
 Set-PSReadLineOption @PSReadLineOptions
 
+# GitHub Cli autocomplete
+Invoke-Expression -Command $(gh completion -s powershell | Out-String)
+
 #region conda initialize
 # !! Contents within this block are managed by 'conda init' !!
 # (& "conda" "shell.powershell" "hook") | Out-String | Invoke-Expression

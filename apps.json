@@ -29,6 +29,10 @@
     "installType": "scoop",
     "configDir": "%USERPROFILE%"
   },
+  "gh": {
+    "name": "gh",
+    "installType": "scoop"
+  },
   "lazygit": {
     "name": "lazygit",
     "installType": "scoop"

@@ -20,3 +20,5 @@ rebase = true
 	helper = manager-core
 [credential "helperselector"]
 	selected = manager-core
+[push]
+	default = simple
