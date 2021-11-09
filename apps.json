@@ -8,6 +8,10 @@
     "installType": "scoop",
     "configDir": "%USERPROFILE%\\scoop\\apps\\anki\\current\\data"
   },
+  "aria2": {
+    "name": "aria2",
+    "installType": "scoop"
+  },
   // "chrome": {
   //   "name": "googlechrome",
   //   "installType": "scoop"
