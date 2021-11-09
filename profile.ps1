@@ -44,11 +44,17 @@ function ggp { git push; }
 
 function touch($file) { "" | Out-File $file }
 
-function ftask($port) {
-  netstat -ano | findstr :$port
+function Find-TaskPid {
+  param (
+    $TaskPort
+  )
+  netstat -ano | findstr :$TaskPort
 }
-function ktask($taskPid) {
-  taskkill /PID $taskPid /F
+function Close-Task {
+  param (
+    $TaskPid
+  )
+  taskkill /PID $TaskPid /F
 }
 
 # Reload the Shell
