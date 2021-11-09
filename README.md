@@ -21,6 +21,7 @@ scoop install git
 (Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/BlackLacost/.dotfiles/master/install.ps1).Content | Invoke-Expression
 $d = New-Dotfiles
 $d.Configure()
+Set-Proxy
 nvm install lts
 nvm use lts
 npm install -g yarn

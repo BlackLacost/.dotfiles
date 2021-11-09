@@ -69,6 +69,25 @@ function ll($dst) {
   Get-ChildItem $dst
 }
 
+function Set-Proxy {
+  param (
+    $ProxyScriptUrl = 'https://antizapret.prostovpn.org/proxy.pac'
+  )
+  Set-ItemProperty `
+    -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings' `
+    -Name 'AutoConfigURL' `
+    -Value $ProxyScriptUrl
+  Write-Output "Установлен proxy script $ProxyScriptUrl"
+}
+
+function Get-Proxy {
+  Get-ItemProperty `
+    -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings' `
+    -Name 'AutoConfigURL' `
+    | Select-Object "AutoConfigURL"
+}
+
+
 $PSReadLineOptions = @{
   EditMode = "Vi"
   HistoryNoDuplicates = $true
