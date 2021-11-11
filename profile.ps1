@@ -39,8 +39,32 @@ function ggca($commit) {
 }
 function ggaca($commit) { git add .; ggca($commit); }
 function ggd($file) { git diff HEAD $file; }
-function ggl { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit; }
-function ggp { git push; }
+
+function Read-GitLog {
+  param (
+    [bool]$All = $false
+  )
+
+  if ($All) {
+    git log `
+      --graph `
+      --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' `
+      --abbrev-commit `
+      --all
+  } else {
+    git log `
+      --graph `
+      --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' `
+      --abbrev-commit `
+      --all
+  }
+}
+Set-Alias -Name ggl -Value Read-GitLog
+
+function Push-Git {
+  git push;
+}
+Set-Alias -Name ggp -Value Push-Git
 
 function touch($file) { "" | Out-File $file }
 
@@ -92,15 +116,25 @@ function Get-Proxy {
     -Name 'AutoConfigURL' `
     | Select-Object "AutoConfigURL"
 }
-
+function OnViModeChange {
+  if ($args[0] -eq 'Command') {
+      # Set the cursor to a blinking block.
+      Write-Host -NoNewLine "`e[1 q"
+  } else {
+      # Set the cursor to a blinking line.
+      Write-Host -NoNewLine "`e[5 q"
+  }
+}
 
 $PSReadLineOptions = @{
   EditMode = "Vi"
   HistoryNoDuplicates = $true
   HistorySearchCursorMovesToEnd = $true
-  ViModeIndicator = "Prompt"
+  ViModeIndicator = "Script"
+  ViModeChangeHandler = $Function:OnViModeChange
 }
 Set-PSReadLineOption @PSReadLineOptions
+Write-Host -NoNewLine "`e[5 q"
 
 # GitHub Cli autocomplete
 Invoke-Expression -Command $(gh completion -s powershell | Out-String)
