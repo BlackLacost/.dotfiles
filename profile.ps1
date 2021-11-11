@@ -40,7 +40,20 @@ function ggca($commit) {
 function ggaca($commit) { git add .; ggca($commit); }
 function ggd($file) { git diff HEAD $file; }
 
-function Read-GitLog {
+function Compare-GitFiles {
+  param (
+    $File
+  )
+
+  if ($File) {
+    git diff HEAD $File
+  } else {
+    git diff HEAD
+  }
+}
+Set-Alias -Name ggd -Value Compare-GitFiles
+
+function Get-GitLog {
   param (
     [bool]$All = $false
   )
@@ -56,10 +69,9 @@ function Read-GitLog {
       --graph `
       --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' `
       --abbrev-commit `
-      --all
   }
 }
-Set-Alias -Name ggl -Value Read-GitLog
+Set-Alias -Name ggl -Value Get-GitLog
 
 function Push-Git {
   git push;
