@@ -58,6 +58,10 @@
     "name": "nvm",
     "installType": "scoop"
   },
+  "obsidian": {
+    "name": "obsidian",
+    "installType": "scoop"
+  },
   "python": {
     "name": "python",
     "installType": "scoop"
