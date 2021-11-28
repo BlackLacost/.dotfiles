@@ -154,6 +154,11 @@
     "installType": "config",
     "configDir": "%USERPROFILE%"
   },
+  "npm": {
+    "name": "npm",
+    "installType": "config",
+    "configDir": "%USERPROFILE%"
+  },
   "prettier": {
     "name": "prettier",
     "installType": "config",
