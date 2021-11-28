@@ -87,7 +87,7 @@
     "vue": "jade"
   },
   "emmet.triggerExpansionOnTab": true,
-  "html.autoClosingTags": false,
+  "html.autoClosingTags": true,
   "search.useIgnoreFiles": true,
   "terminal.integrated.fontFamily": "Monoid, Monoid NF",
   "terminal.integrated.fontSize": 12,
@@ -139,6 +139,9 @@
   // Настройки под разные технологии
 
   "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn"
+  },
+  "[mdx]": {
     "editor.wordWrap": "wordWrapColumn"
   },
   "[powershell]": {
