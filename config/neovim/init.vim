@@ -105,7 +105,8 @@ endif
 let mapleader = ","
 
 " Редактирование и source init.vim
-nnoremap <leader>ev :split $MYVIMRC<CR>
+nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <leader>es :split $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 set pastetoggle=<F2>
@@ -138,10 +139,6 @@ nnoremap <C-X> :bprevious<bar>split<bar>bnext<bar>bdelete<CR>
 " Сделать двойны кавычки для выделенного блока
 vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>`>ll
 
-nnoremap <silent> <C-h> :call WinMove('h')<CR>
-nnoremap <silent> <C-j> :call WinMove('j')<CR>
-nnoremap <silent> <C-k> :call WinMove('k')<CR>
-nnoremap <silent> <C-l> :call WinMove('l')<CR>
 
 function! WinMove(key)
 	let t:curwin = winnr()
@@ -162,6 +159,23 @@ nmap <silent> <Leader>+ :exe "resize " . (winheight(0) + 10)<CR>
 nmap <silent> <Leader>- :exe "resize " . (winheight(0) - 10)<CR>
 nmap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) + 10)<CR>
 nmap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) - 10)<CR>
+
+" nnoremap <silent> <C-w>h :call WinMove('h')<CR>
+" nnoremap <silent> <C-w>j :call WinMove('j')<CR>
+" nnoremap <silent> <C-w>k :call WinMove('k')<CR>
+" nnoremap <silent> <C-w>l :call WinMove('l')<CR>
+
+" Terminal
+tnoremap <leader><Esc> <C-\><C-n>
+
+tmap <C-w>h <C-\><C-n><C-w>h
+tmap <C-w>j <C-\><C-n><C-w>j
+tmap <C-w>k <C-\><C-n><C-w>k
+tmap <C-w>l <C-\><C-n><C-w>l
+
+nnoremap <C-w>tv :execute "rightbelow vsplit term://bash" \| :execute "vertical resize 70"<CR>
+nnoremap <C-w>ts :execute "rightbelow split term://bash" \| :execute "resize 10"<CR>
+
 " }}}
 " LSP {{{
 lua << EOF
