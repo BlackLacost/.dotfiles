@@ -5,7 +5,7 @@
     "when": "editorTextFocus"
   },
   {
-    "key": "ctrl+a ]",
+    "key": "ctrl+]",
     "command": "editor.action.openLink"
   },
   {
@@ -22,7 +22,7 @@
     "when": "editorTextFocus && vim.active"
   },
   {
-    "key": "ctrl+a n",
+    "key": "ctrl+, n",
     "command": "explorer.newFile"
   },
   {
@@ -206,5 +206,13 @@
     "key": "ctrl+n",
     "command": "-extension.vim_ctrl+n",
     "when": "editorTextFocus && vim.active && vim.use<C-n> && !inDebugRepl || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
+  },
+  {
+    "key": "ctrl+, ctrl+\\",
+    "command": "workbench.action.splitEditorOrthogonal"
+  },
+  {
+    "key": "ctrl+k ctrl+\\",
+    "command": "-workbench.action.splitEditorOrthogonal"
   }
 ]
