@@ -213,6 +213,25 @@ nnoremap <leader>ff <cmd>Telescope find_files hidden=true<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+lua << EOF
+require('telescope').setup{
+  defaults = {
+    -- Default configuration for telescope goes here:
+    -- config_key = value,
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--hidden"
+    }
+  }
+}
+EOF
 " }}}
 " Nvim Tree {{{
 let g:nvim_tree_quit_on_open = 1 "0 by default, closes the tree when you open a file
