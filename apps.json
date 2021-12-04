@@ -169,6 +169,11 @@
     "installType": "config",
     "configDir": "%USERPROFILE%"
   },
+  "vifm": {
+    "name": "vifm",
+    "installType": "config",
+    "configDir": "%USERPROFILE%\\.vifm"
+  },
   "ssh": {
     "name": "ssh",
     "installType": "config",
