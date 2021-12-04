@@ -1,16 +1,20 @@
+" Base {{{
 set mouse=a  " enable mouse
 set encoding=utf-8
 set number
+set relativenumber
+set cursorline
 set noswapfile
 set scrolloff=7
-
+set colorcolumn=79
+set textwidth=78
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set expandtab
-set autoindent
-set fileformat=unix
-filetype indent on      " load filetype-specific indent files
+set expandtab " spaces instead of tab
+" set autoindent
+" set fileformat=unix
+" filetype indent on      " load filetype-specific indent files
 
 let mapleader = ","
 
@@ -19,6 +23,25 @@ nnoremap <Leader>ev :split $MYVIMRC<CR>
 nnoremap <Leader>sv :source $MYVIMRC<CR>
 
 set pastetoggle=<F2>
+"}}}
+" Searching{{{
+set incsearch              " Search as characters are entered
+
+" Включение подсветки всех совпадений для удобства
+nnoremap / :set hlsearch<cr>/
+
+" Когда начинаешь уже редактировать, то дополнительные подсветки будут раздрожать
+augroup SearchHighlightOff
+    autocmd!
+    autocmd InsertEnter * set nohlsearch
+augroup END
+" }}}
+" PlugVim {{{
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 call plug#begin('~/.vim/plugged')
 
@@ -34,19 +57,33 @@ Plug 'morhetz/gruvbox'  " colorscheme gruvbox
 Plug 'mhartington/oceanic-next'  " colorscheme OceanicNext
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'ayu-theme/ayu-vim'
+Plug 'blacklacost/memory-color-theme.vim'
 
+" Switch input method
+Plug 'brglng/vim-im-select'
+
+" Git
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+" Telescope
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  
+Plug 'nvim-lua/plenary.nvim'
 
 call plug#end()
-
-
-colorscheme gruvbox
-" colorscheme OceanicNext
+"}}}
+" Colors: {{{
+" colorscheme memorycolor
+" colorscheme gruvbox
+"colorscheme OceanicNext
 "let g:material_terminal_italics = 1
 " variants: default, palenight, ocean, lighter, darker, default-community,
 "           palenight-community, ocean-community, lighter-community,
 "           darker-community
-"let g:material_theme_style = 'darker'
-"colorscheme material
+let g:material_theme_style = 'darker'
+colorscheme material
+
 if (has('termguicolors'))
   set termguicolors
 endif
@@ -54,21 +91,14 @@ endif
 " variants: mirage, dark, dark
 "let ayucolor="mirage"
 "colorscheme ayu
-
-
-
-" turn off search highlight
-nnoremap ,<space> :nohlsearch<CR>
-
-
-
+"}}}
+" LSP {{{
 lua << EOF
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
 -- luasnip setup
 local luasnip = require 'luasnip'
-
 -- nvim-cmp setup
 local cmp = require 'cmp'
 cmp.setup {
@@ -85,7 +115,7 @@ cmp.setup {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
@@ -159,7 +189,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'tsserver' }
+local servers = { 'tsserver', 'vimls' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -169,9 +199,19 @@ for _, lsp in ipairs(servers) do
   }
 end
 EOF
-
-
-
+"}}}
+" Im-Select {{{
+let g:im_select_command = 'im-select.exe'
+let g:im_select_default = '1033'
+"}}}
+" Telescope {{{
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" }}}
+" Buffer {{{
 " Delete buffer while keeping window layout (don't close buffer's windows).
 " Version 2008-11-18 from http://vim.wikia.com/wiki/VimTip165
 if v:version < 700 || exists('loaded_bclose') || &cp
@@ -249,6 +289,15 @@ nnoremap <silent> <Leader>bd :Bclose<CR>
 map gn :bn<cr>
 map gp :bp<cr>
 map gw :Bclose<cr>
+"}}}
+" Folding: {{{
 
-set colorcolumn=79
+set foldcolumn=0
+
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker foldlevel=0
+augroup END
+
+" }}}
 
