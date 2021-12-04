@@ -1,6 +1,7 @@
 " Base {{{
 set mouse=a  " enable mouse
 set encoding=utf-8
+set nowrap
 set number
 set relativenumber
 set cursorline
@@ -8,21 +9,26 @@ set noswapfile
 set scrolloff=7
 set colorcolumn=79
 set textwidth=78
+
+" Spaces & Tabs
+" Заменяет табиуляции на пробелы.
+" Чтобы вставить Tab когда опция включена нажми CTRL+v Tab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set expandtab " spaces instead of tab
+set expandtab " Заменяет табиуляции на пробелы.
+
 " set autoindent
 " set fileformat=unix
 " filetype indent on      " load filetype-specific indent files
 
-let mapleader = ","
+" Disable automatic commenting on newline:
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" Редактирование и source init.vim
-nnoremap <Leader>ev :split $MYVIMRC<CR>
-nnoremap <Leader>sv :source $MYVIMRC<CR>
-
-set pastetoggle=<F2>
+" Automatically deletes all trailing whitespace
+autocmd BufWritePre * %s/\s\+$//e
+" and newlines at end of file on save
+autocmd BufWritePre * %s/\n\+\%$//e
 "}}}
 " Searching{{{
 set incsearch              " Search as characters are entered
@@ -71,7 +77,7 @@ Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
 " Telescope
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-lua/plenary.nvim'
 
 call plug#end()
@@ -95,6 +101,68 @@ endif
 "let ayucolor="mirage"
 "colorscheme ayu
 "}}}
+" Mapping {{{
+let mapleader = ","
+
+" Редактирование и source init.vim
+nnoremap <leader>ev :split $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
+set pastetoggle=<F2>
+"
+" Для удобной работы в PRIMARY buffer
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+
+" Более удобное передвижение блоков
+vnoremap > >gv
+vnoremap < <gv
+
+" Чтобы удобней работать, когда включен wrap
+nnoremap j gj
+nnoremap gj j
+nnoremap k gk
+nnoremap gk k
+
+" Позволяет не пользоваться capslock
+inoremap <leader><C-u> <Esc>gUiwea
+inoremap <leader><C-d> <Esc>guiwea
+inoremap <leader><C-t> <Esc>g~iwea
+
+" Switching between buffers
+" Set commands to switching between buffers
+nnoremap <Tab> :bnext!<CR>
+nnoremap <S-Tab> :bprevious!<CR>
+nnoremap <C-X> :bprevious<bar>split<bar>bnext<bar>bdelete<CR>
+"
+" Сделать двойны кавычки для выделенного блока
+vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>`>ll
+
+nnoremap <silent> <C-h> :call WinMove('h')<CR>
+nnoremap <silent> <C-j> :call WinMove('j')<CR>
+nnoremap <silent> <C-k> :call WinMove('k')<CR>
+nnoremap <silent> <C-l> :call WinMove('l')<CR>
+
+function! WinMove(key)
+	let t:curwin = winnr()
+    execute "wincmd ".a:key
+
+	if (t:curwin == winnr())
+		if (match(a:key,'[jk]'))
+			wincmd v
+		else
+			wincmd s
+		endif
+
+        execute "wincmd ".a:key
+    endif
+endfunction
+
+nmap <silent> <Leader>+ :exe "resize " . (winheight(0) + 10)<CR>
+nmap <silent> <Leader>- :exe "resize " . (winheight(0) - 10)<CR>
+nmap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) + 10)<CR>
+nmap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) - 10)<CR>
+" }}}
 " LSP {{{
 lua << EOF
 -- Set completeopt to have a better completion experience
@@ -174,7 +242,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<C-i>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -507,9 +575,9 @@ command! -bang -complete=buffer -nargs=? Bclose call <SID>Bclose(<q-bang>, <q-ar
 nnoremap <silent> <Leader>bd :Bclose<CR>
 
 
-map gn :bn<cr>
-map gp :bp<cr>
-map gw :Bclose<cr>
+"map gn :bn<cr>
+"map gp :bp<cr>
+"map gw :Bclose<cr>
 "}}}
 " Folding: {{{
 
@@ -521,4 +589,3 @@ augroup filetype_vim
 augroup END
 
 " }}}
-
