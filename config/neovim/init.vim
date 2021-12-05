@@ -57,6 +57,8 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
 
+Plug 'jose-elias-alvarez/null-ls.nvim'
+
 " color schemas
 Plug 'morhetz/gruvbox'  " colorscheme gruvbox
 Plug 'mhartington/oceanic-next'  " colorscheme OceanicNext
@@ -270,6 +272,14 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
+  -- format on save
+  if client.resolved_capabilities.document_formatting then
+    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+  end
+
+  -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
+  client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -285,6 +295,34 @@ for _, lsp in ipairs(servers) do
 end
 EOF
 "}}}
+" Null ls {{{
+lua << EOF
+local null_ls = require "null-ls"
+local b = null_ls.builtins
+
+null_ls.config {
+  sources = {
+    b.formatting.prettier.with {
+      filetypes = {
+        "typescriptreact",
+        "typescript",
+        "javascriptreact",
+        "javascript",
+        "svelte",
+        "json",
+        "yaml",
+        "markdown",
+        "graphql",
+        "css",
+        "html",
+      },
+    },
+  },
+}
+
+require("lspconfig")["null-ls"].setup({})
+EOF
+" }}}
 " Im-Select {{{
 let g:im_select_command = 'im-select.exe'
 let g:im_select_default = '1033'
