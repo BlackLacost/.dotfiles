@@ -13,9 +13,9 @@ set textwidth=78
 " Spaces & Tabs
 " Заменяет табиуляции на пробелы.
 " Чтобы вставить Tab когда опция включена нажми CTRL+v Tab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set expandtab " Заменяет табиуляции на пробелы.
 
 " set autoindent
