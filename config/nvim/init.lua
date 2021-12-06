@@ -8,4 +8,6 @@ require('autopairs-config')
 require('keybindings')
 require('whichkey-config')
 require('telescope-config')
+require('cmp-config')
 vim.cmd('colorscheme nord')
+

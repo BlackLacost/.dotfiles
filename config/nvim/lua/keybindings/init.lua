@@ -13,6 +13,4 @@ map('v', '>', '>gv', { noremap = true, silent = false })
 
 -- nvim-tree
   map('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-  map('n', '<leader>r', ':NvimTreeRefresh<CR>', { noremap = true, silent = false })
-  map('n', '<leader>n', ':NvimTreeFindFile<CR>', { noremap = true, silent = false })
 

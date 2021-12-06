@@ -15,17 +15,16 @@ vim.o.backup = false
 vim.o.writebackup = false
 vim.o.updatetime = 300
 vim.o.timeoutlen = 100
-vim.o.clipboard = 'unnamedplus'
 vim.o.hlsearch = true
 vim.o.ignorecase = true -- Игнорировать регистр букв при поиске
 vim.o.scrolloff = 3
 vim.o.sidescrolloff = 5
-vim.o.mouse = "a" -- Включение мыши
+vim.o.mouse = 'a' -- Включение мыши
 vim.wo.wrap = false
 vim.wo.number = true
 vim.wo.relativenumber = true
 vim.o.cursorline = true
-vim.wo.signcolumn = "yes" -- Всегда отображать вертикальную колонку для символов диагностики
+vim.wo.signcolumn = 'yes' -- Всегда отображать вертикальную колонку для символов диагностики
 vim.o.tabstop = 2
 vim.bo.tabstop = 2
 vim.o.softtabstop = 2
@@ -35,3 +34,18 @@ vim.o.autoindent = true
 vim.bo.autoindent = true
 vim.o.expandtab = true
 vim.bo.expandtab = true
+
+vim.o.clipboard = 'unnamedplus'
+vim.g.clipboard = {
+  name = 'win32yank-wsl',
+  copy = {
+    ['+'] = 'win32yank.exe -i --crlf',
+    ['*'] = 'win32yank.exe -i --crlf'
+  },
+  paste = {
+    ['+'] = 'win32yank.exe -o --lf',
+    ['*'] = 'win32yank.exe -o --lf'
+  },
+  cache_enable = 0,
+}
+
