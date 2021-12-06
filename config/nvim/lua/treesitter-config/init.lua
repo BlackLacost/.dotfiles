@@ -19,6 +19,13 @@ require'nvim-treesitter.configs'.setup {
   },
   autotag = {
     enable = true
+  },
+  rainbow = {
+    enable = true,
+    -- Подсвечивает html теги полностью, а не только скобки
+    extended_mode = true,
+    -- Do not enable for files with more than n lines, int
+    max_file_lines = nil,
   }
 }
 
