@@ -22,7 +22,9 @@ return require('packer').startup(function()
   }
 
   use { 'windwp/nvim-ts-autotag' }
-
   -- Разноцветные скобочки
   use { 'p00f/nvim-ts-rainbow' }
+  use { 'windwp/nvim-autopairs' }
+
+
 end)
