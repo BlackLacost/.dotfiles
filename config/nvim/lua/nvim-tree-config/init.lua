@@ -1,9 +1,3 @@
-vim.cmd[[
-nnoremap <C-n> :NvimTreeToggle<CR>
-nnoremap <leader>r :NvimTreeRefresh<CR>
-nnoremap <leader>n :NvimTreeFindFile<CR>
-]]
-
 -- following options are the default
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 require'nvim-tree'.setup {
