@@ -146,8 +146,8 @@
     "installType": "config",
     "configDir": "%USERPROFILE%"
   },
-  "neovim": {
-    "name": "neovim",
+  "nvim": {
+    "name": "nvim",
     "installType": "config",
     "configDir": "%USERPROFILE%\\AppData\\Local\\nvim"
   },
