@@ -1,3 +1,6 @@
 *~
 .cache/
 .nvimlog
+
+# Ignore auto gen file by packer
+packer_compiled.lua
