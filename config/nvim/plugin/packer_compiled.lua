@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/home/blacklacost/.local/share/nvim/site/pack/packer/start/nord-vim",
     url = "https://github.com/arcticicestudio/nord-vim"
   },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/home/blacklacost/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/kyazdani42/nvim-tree.lua"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/home/blacklacost/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
