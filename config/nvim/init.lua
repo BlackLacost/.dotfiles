@@ -9,5 +9,6 @@ require('keybindings')
 require('whichkey-config')
 require('telescope-config')
 require('lsp')
+require('colorizer-config')
 vim.cmd('colorscheme nord')
 

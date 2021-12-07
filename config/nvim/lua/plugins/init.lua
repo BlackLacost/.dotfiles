@@ -60,4 +60,6 @@ return require('packer').startup(function()
 
   -- This tiny plugin adds vscode-like pictograms to neovim built-in lsp
   use { 'onsails/lspkind-nvim' }
+
+  use { 'norcalli/nvim-colorizer.lua' }
 end)
