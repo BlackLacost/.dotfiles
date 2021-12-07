@@ -62,4 +62,6 @@ return require('packer').startup(function()
   use { 'onsails/lspkind-nvim' }
 
   use { 'norcalli/nvim-colorizer.lua' }
+
+  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 end)
