@@ -49,3 +49,7 @@ vim.g.clipboard = {
   cache_enable = 0,
 }
 
+if vim.fn.has "win32" == 1 then
+  vim.o.shell = "pwsh"
+end
+
