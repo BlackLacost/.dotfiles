@@ -12,5 +12,14 @@ map('v', '<', '<gv', { noremap = true, silent = false })
 map('v', '>', '>gv', { noremap = true, silent = false })
 
 -- nvim-tree
-  map('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+map('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+
+-- Terminal
+map('t', '<C-h>', '<C-\\><C-n><C-h>', { noremap = true, silent = false })
+map('t', '<C-j>', '<C-\\><C-n><C-j>', { noremap = true, silent = false })
+map('t', '<C-k>', '<C-\\><C-n><C-k>', { noremap = true, silent = false })
+map('t', '<C-l>', '<C-\\><C-n><C-l>', { noremap = true, silent = false })
+
+map('n', '<C-w>tv', ':execute "vsplit" | :execute "terminal" | :execute "vertical resize 70"<cr>', { noremap = true, silent = false })
+map('n', '<C-w>ts', ':execute "split" | :execute "terminal" | :execute "resize 12"<cr>', { noremap = true, silent = false })
 

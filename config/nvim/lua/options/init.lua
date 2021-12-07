@@ -53,3 +53,8 @@ if vim.fn.has "win32" == 1 then
   vim.o.shell = "pwsh"
 end
 
+-- terminals
+-- always start in insert mode
+vim.cmd("autocmd TermOpen * startinsert")
+-- disable line numbers
+vim.cmd("autocmd TermOpen * setlocal nonumber norelativenumber")
