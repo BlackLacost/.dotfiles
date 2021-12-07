@@ -1,5 +1,24 @@
 local wk = require("which-key")
 
+local Terminal = require('toggleterm.terminal').Terminal
+
+local toggle_float = function ()
+  local float = Terminal:new({ direction = 'float' })
+  return float:toggle()
+end
+
+local toggle_horizontal = function ()
+  return Terminal:new({ direction = 'horizontal' }):toggle()
+end
+
+local toggle_lazygit = function ()
+  return Terminal:new({ cmd = 'lazygit', direction = 'float' }):toggle()
+end
+
+local toggle_python = function ()
+  return Terminal:new({ cmd = 'python', direction = 'float' }):toggle()
+end
+
 local mappings = {
   q = { ':q<cr>', 'Quit' },
   Q = { ':wq<cr>', 'Quit & Save' },
@@ -25,6 +44,13 @@ local mappings = {
     name = "Comment",
     l = { name = "Line" }
   },
+  t = {
+    name = 'Terminal',
+    h = { toggle_horizontal, 'Horizontal Terminal' },
+    f = { toggle_float, 'Float Terminal' },
+    l = { toggle_lazygit, 'LazyGit' },
+    p = { toggle_python, 'Python' },
+  }
 }
 
 local opts = { prefix = '<leader>' }

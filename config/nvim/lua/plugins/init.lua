@@ -68,4 +68,8 @@ return require('packer').startup(function()
   use { 'mhartington/formatter.nvim'}
 
   use { 'terrortylor/nvim-comment' }
+
+  -- Toggle Terminal
+  use { 'akinsho/toggleterm.nvim' }
+
 end)

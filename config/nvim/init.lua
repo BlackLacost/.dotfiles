@@ -13,5 +13,6 @@ require('colorizer-config')
 require('gitsigns-config')
 require('formatter-config')
 require('comment-config')
+require('toggleterm-config')
 vim.cmd('colorscheme nord')
 
