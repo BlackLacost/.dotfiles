@@ -1,5 +1,5 @@
 try {
-  Import-Module posh-git;
+  oh-my-posh --init --shell pwsh --config ~/scoop/apps/oh-my-posh/current/themes/star.omp.json | Invoke-Expression
 }
 catch {
 }
