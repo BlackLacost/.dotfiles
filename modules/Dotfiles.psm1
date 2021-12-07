@@ -66,8 +66,9 @@ class Dotfiles {
 
   hidden SymlinkAllInDir($srcDir, $dstDir) {
     Get-ChildItem $srcDir | ForEach-Object {
-      $srcPath = Join-Path $srcDir $_.Name;
-      New-Item -ItemType SymbolicLink -Path $dstDir -Name $_.Name -Target $srcPath -Force;
+      New-Item -ItemType Junction -Path $dstDir -Target $srcDir -Force;
+      #$srcPath = Join-Path $srcDir $_.Name;
+      # New-Item -ItemType SymbolicLink -Path $dstDir -Name $_.Name -Target $srcPath -Force;
     }
   }
 
