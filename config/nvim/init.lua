@@ -11,5 +11,6 @@ require('telescope-config')
 require('lsp')
 require('colorizer-config')
 require('gitsigns-config')
+require('formatter-config')
 vim.cmd('colorscheme nord')
 
