@@ -21,6 +21,10 @@ local mappings = {
     e = {'<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', "Show line diagnostics"},
     q = {'<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', "Show loclist"}
   },
+  c = {
+    name = "Comment",
+    l = { name = "Line" }
+  },
 }
 
 local opts = { prefix = '<leader>' }

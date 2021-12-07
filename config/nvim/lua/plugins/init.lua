@@ -66,4 +66,6 @@ return require('packer').startup(function()
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 
   use { 'mhartington/formatter.nvim'}
+
+  use { 'terrortylor/nvim-comment' }
 end)
