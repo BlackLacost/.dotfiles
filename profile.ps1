@@ -3,6 +3,9 @@ try {
 }
 catch {
 }
+
+Set-Alias -Name v -Value nvim
+
 function cddc() { Set-Location ~/Documents; }
 function cddl() { Set-Location ~/Downloads; }
 function cddt() { Set-Location ~/Desktop; }
