@@ -54,9 +54,9 @@ require("telescope").setup({
 			},
 		},
 	},
-  pickers = {
-    find_files = {
-      find_command = { "fd", "--type", "f", "--hidden" }
-    }
-  }
+	pickers = {
+		find_files = {
+			find_command = { "fd", "--type", "f", "--hidden" },
+		},
+	},
 })

@@ -1,9 +1,9 @@
-vim.cmd('filetype plugin indent on')
+vim.cmd("filetype plugin indent on")
 -- vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.hidden = true -- default on
-vim.o.whichwrap = 'b,s' -- vim.o.whichwrap = 'b,s,<,>,[,],h,l'
+vim.o.whichwrap = "b,s" -- vim.o.whichwrap = 'b,s,<,>,[,],h,l'
 vim.o.pumheight = 10
-vim.o.fileencoding = 'utf-8'
+vim.o.fileencoding = "utf-8"
 vim.o.cmdheight = 2
 vim.o.splitbelow = true -- При горизонтальном сплите, окно сплита появится внизу
 vim.o.splitright = true
@@ -19,12 +19,12 @@ vim.o.hlsearch = true
 vim.o.ignorecase = true -- Игнорировать регистр букв при поиске
 vim.o.scrolloff = 3
 vim.o.sidescrolloff = 5
-vim.o.mouse = 'a' -- Включение мыши
+vim.o.mouse = "a" -- Включение мыши
 vim.wo.wrap = false
 vim.wo.number = true
 vim.wo.relativenumber = true
 vim.o.cursorline = true
-vim.wo.signcolumn = 'yes' -- Всегда отображать вертикальную колонку для символов диагностики
+vim.wo.signcolumn = "yes" -- Всегда отображать вертикальную колонку для символов диагностики
 vim.o.tabstop = 2
 vim.bo.tabstop = 2
 vim.o.softtabstop = 2
@@ -35,23 +35,22 @@ vim.bo.autoindent = true
 vim.o.expandtab = true
 vim.bo.expandtab = true
 
-vim.o.clipboard = 'unnamedplus'
+vim.o.clipboard = "unnamedplus"
 vim.g.clipboard = {
-  name = 'win32yank-wsl',
-  copy = {
-    ['+'] = 'win32yank.exe -i --crlf',
-    ['*'] = 'win32yank.exe -i --crlf'
-  },
-  paste = {
-    ['+'] = 'win32yank.exe -o --lf',
-    ['*'] = 'win32yank.exe -o --lf'
-  },
-  cache_enable = 0,
+	name = "win32yank-wsl",
+	copy = {
+		["+"] = "win32yank.exe -i --crlf",
+		["*"] = "win32yank.exe -i --crlf",
+	},
+	paste = {
+		["+"] = "win32yank.exe -o --lf",
+		["*"] = "win32yank.exe -o --lf",
+	},
+	cache_enable = 0,
 }
 
 vim.g.im_select_command = "im-select.exe"
 vim.g.im_select_default = "1033"
-
 
 -- if vim.fn.has "win32" == 1 then
 --   vim.o.shell = "pwsh"
