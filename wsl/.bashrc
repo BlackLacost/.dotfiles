@@ -11,6 +11,9 @@ source /usr/share/nvm/init-nvm.sh
 # Enable vim-mode
 set -o vi
 
+# Avoid duplicate bash history
+export HISTCONTROL=ignoredups:erasedups
+
 alias ls='ls --color=auto'
 alias dokku='$HOME/.dokku/contrib/dokku_client.sh'
 alias v='nvim'
