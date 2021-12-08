@@ -1,7 +1,5 @@
 require("lsp/cmp")
 require("lsp/diagnostic_signs")
--- require('lsp/language_servers')
-
 local lsp_installer = require("nvim-lsp-installer")
 
 -- Register a handler that will be called for all installed servers.
