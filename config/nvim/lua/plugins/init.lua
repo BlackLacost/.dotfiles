@@ -72,4 +72,5 @@ return require('packer').startup(function()
   -- Toggle Terminal
   use { 'akinsho/toggleterm.nvim' }
 
+  use { 'brglng/vim-im-select' }
 end)
