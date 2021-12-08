@@ -19,6 +19,9 @@ alias ls='ls --color=auto'
 alias g=git
 alias ggl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
+alias cdd='cd ~/.dotfiles'
+alias cdp='cd ~/code'
+
 alias dokku='$HOME/.dokku/contrib/dokku_client.sh'
 alias v='nvim'
 
