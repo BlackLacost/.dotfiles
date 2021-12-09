@@ -4,7 +4,7 @@ vim.o.hidden = true -- default on
 vim.o.whichwrap = "b,s" -- vim.o.whichwrap = 'b,s,<,>,[,],h,l'
 vim.o.pumheight = 10
 vim.o.fileencoding = "utf-8"
-vim.o.cmdheight = 2
+vim.o.cmdheight = 1
 vim.o.splitbelow = true -- При горизонтальном сплите, окно сплита появится внизу
 vim.o.splitright = true
 vim.opt.termguicolors = true
