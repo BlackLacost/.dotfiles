@@ -14,6 +14,8 @@ set -o vi
 # Avoid duplicate bash history
 export HISTCONTROL=ignoredups:erasedups
 
+mkcd() { mkdir -p "$@" && cd "$@"; }
+
 alias ls='ls --color=auto'
 
 alias g=git
