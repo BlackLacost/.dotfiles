@@ -19,7 +19,6 @@ local toggle_python = function()
 	return Terminal:new({ cmd = "python", direction = "float" }):toggle()
 end
 
-
 local mappings = {
 	q = { ":q<cr>", "Quit" },
 	Q = { ":wq<cr>", "Quit & Save" },
@@ -29,6 +28,7 @@ local mappings = {
 	f = { ":Telescope find_files<cr>", "Telescope Find Files" },
 	g = { ":Telescope live_grep<cr>", "Telescope Live Grep" },
 	r = { ":Telescope resume<cr>", "Telescope Resume" },
+	b = { ":Telescope buffers<cr>", "Telescope Buffers" },
 	l = {
 		name = "LSP",
 		i = { ":LspInfo<cr>", "Connected Language Servers" },
