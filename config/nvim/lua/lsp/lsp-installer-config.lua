@@ -33,20 +33,21 @@ lsp_installer.on_server_ready(function(server)
 		on_attach = on_attach,
 	}
 
-	local opts = {}
-
-	if server.name == "sumneko_lua" then
-		opts.settings = {
-			Lua = {
-				diagnostics = {
-					globals = { "vim", "use" },
+	-- Now we'll create a server_opts table where we'll specify our custom LSP server configuration
+	local server_opts = {
+		-- Provide settings that should only apply to the "eslintls" server
+		["sumneko_lua"] = function()
+			default_opts.settings = {
+				Lua = {
+					diagnostics = {
+						globals = { "vim", "use" },
+					},
 				},
-			},
-		}
-	end
+			}
+		end,
+	}
 
-	-- This setup() function is exactly the same as lspconfig's setup function.
-	-- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-	local server_options = opts[server.name] and opts[server.name]() or default_opts
+	-- Use the server's custom settings, if they exist, otherwise default to the default options
+	local server_options = server_opts[server.name] and server_opts[server.name]() or default_opts
 	server:setup(server_options)
 end)
