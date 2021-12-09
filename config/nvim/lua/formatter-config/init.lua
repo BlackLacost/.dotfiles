@@ -1,7 +1,18 @@
 local function prettier()
 	return {
-		exe = "prettierd",
-		args = { vim.api.nvim_buf_get_name(0) },
+		exe = "prettier",
+		args = {
+			"--stdin-filepath",
+			vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+			"--single-quote",
+			"--no-semi",
+			"--arrow-parens",
+			"always",
+			"--print-width",
+			"80",
+			"--trailing-comma",
+			"all",
+		},
 		stdin = true,
 	}
 end
@@ -38,3 +49,13 @@ vim.api.nvim_set_keymap("n", "<leader>p", "<cmd>MyFormat<CR>", { noremap = true,
 
 -- 2000 timeout on formatting_seq_sync because eslint lsp is slow
 vim.cmd([[ command! MyFormat :lua vim.lsp.buf.formatting_seq_sync({}, 2000); vim.cmd "Format" <CR> ]])
+
+vim.api.nvim_exec(
+	[[
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost *.js,*.ts,*.yml,*.yaml,*.json,*.css,*.scss,*.md,*.lua FormatWrite
+augroup END
+]],
+	true
+)
