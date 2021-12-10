@@ -49,6 +49,14 @@ lsp_installer.on_server_ready(function(server)
 				},
 			}
 		end,
+
+		["jsonls"] = function()
+			default_opts.settings = {
+				json = {
+					schemas = require("schemastore").json.schemas(),
+				},
+			}
+		end,
 	}
 
 	-- Use the server's custom settings, if they exist, otherwise default to the default options
