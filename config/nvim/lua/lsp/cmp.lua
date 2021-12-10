@@ -43,6 +43,12 @@ cmp.setup({
 	formatting = {
 		format = lspkind.cmp_format({
 			with_text = true, -- do not show text alongside icons
+			menu = {
+				buffer = "[Buffer]",
+				nvim_lsp = "[LSP]",
+				vsnip = "[vSnip]",
+				nvim_lua = "[Lua]",
+			},
 			maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 		}),
 	},
