@@ -8,7 +8,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 })
 
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "html", "javascript", "lua", "typescript" },
+	ensure_installed = { "html", "javascript", "lua", "typescript", "json", "jsonc" },
 	sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
 	highlight = {
 		enable = true, -- false will disable the whole extension
@@ -23,6 +23,9 @@ require("nvim-treesitter.configs").setup({
 		extended_mode = true,
 		-- Do not enable for files with more than n lines, int
 		max_file_lines = nil,
+	},
+	context_commentstring = {
+		enable = true,
 	},
 	autopairs = {
 		enable = true,

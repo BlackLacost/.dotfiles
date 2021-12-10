@@ -27,6 +27,7 @@ require("formatter").setup({
 		yaml = { prettier },
 		prisma = { prettier },
 		json = { prettier },
+		jsonc = { prettier },
 		lua = {
 			function()
 				return {
