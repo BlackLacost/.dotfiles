@@ -52,6 +52,9 @@ vim.g.clipboard = {
 vim.g.im_select_command = "im-select.exe"
 vim.g.im_select_default = "1033"
 
+-- Disable automatic commenting on newline
+vim.cmd([[autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o]])
+
 -- if vim.fn.has "win32" == 1 then
 --   vim.o.shell = "pwsh"
 -- end
