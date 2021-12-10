@@ -24,12 +24,17 @@ local function on_attach(client, bufnr)
 	buf_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
 end
 
+--Enable (broadcasting) snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 -- Register a handler that will be called for all installed servers.
 -- Alternatively, you may also register handlers on specific server instances instead (see example below).
 lsp_installer.on_server_ready(function(server)
 	-- Specify the default options which we'll use to setup all servers
 	local default_opts = {
 		on_attach = on_attach,
+		capabilities = capabilities,
 	}
 
 	-- Now we'll create a server_opts table where we'll specify our custom LSP server configuration
