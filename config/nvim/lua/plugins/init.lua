@@ -20,6 +20,7 @@ return require("packer").startup(function()
 
 	-- Улучшенная подсветка ключевых слов
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+	use({ "nvim-treesitter/nvim-tree-docs" })
 
 	-- status line
 	use({
