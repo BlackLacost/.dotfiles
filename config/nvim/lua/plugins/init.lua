@@ -74,4 +74,13 @@ return require("packer").startup(function()
 	use({ "akinsho/toggleterm.nvim" })
 
 	use({ "brglng/vim-im-select" })
+
+	use({
+		"iamcco/markdown-preview.nvim", -- preview markdown output in browser
+		opt = true,
+		ft = { "markdown" },
+		config = "vim.cmd[[doautocmd BufEnter]]",
+		run = "cd app && yarn install",
+		cmd = "MarkdownPreview",
+	})
 end)
