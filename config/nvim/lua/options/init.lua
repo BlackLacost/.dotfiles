@@ -57,6 +57,20 @@ vim.cmd([[autocmd FileType * setlocal formatoptions-=cro]])
 
 vim.cmd([[autocmd BufNewFile,BufRead {apps,tsconfig*}.json setlocal filetype=jsonc]])
 
+vim.cmd([[
+augroup AllFileType
+  autocmd!
+  autocmd FileType * set nowrap
+augroup END
+]])
+
+vim.cmd([[
+augroup Markdown
+  autocmd!
+  autocmd FileType markdown set wrap
+augroup END
+]])
+
 -- if vim.fn.has "win32" == 1 then
 --   vim.o.shell = "pwsh"
 -- end
