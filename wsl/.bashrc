@@ -10,6 +10,7 @@ source /usr/share/nvm/init-nvm.sh
 
 # Enable vim-mode
 set -o vi
+set show-mode-in-prompt on
 
 # Avoid duplicate bash history
 export HISTCONTROL=ignoredups:erasedups
