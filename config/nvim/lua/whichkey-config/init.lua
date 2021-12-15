@@ -19,6 +19,14 @@ local toggle_python = function()
 	return Terminal:new({ cmd = "python", direction = "float" }):toggle()
 end
 
+local open_in_browser = function()
+	if vim.fn.has("win32") == 1 then
+		return vim.cmd(":execute ':silent !chrome.exe %'")
+	end
+
+	return vim.cmd(":execute ':silent !wslview %'")
+end
+
 local mappings = {
 	q = { ":q<cr>", "Quit" },
 	Q = { ":wq<cr>", "Quit & Save" },
@@ -30,7 +38,7 @@ local mappings = {
 	g = { ":Telescope live_grep<cr>", "Telescope Live Grep" },
 	r = { ":Telescope resume<cr>", "Telescope Resume" },
 	b = { ":Telescope buffers<cr>", "Telescope Buffers" },
-	o = { ":execute ':silent !wslview %'<cr>", "Open in Browser" },
+	o = { open_in_browser, "Open in Browser" },
 	l = {
 		name = "LSP",
 		i = { ":LspInfo<cr>", "Connected Language Servers" },
