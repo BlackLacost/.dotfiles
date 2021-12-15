@@ -30,6 +30,7 @@ local mappings = {
 	g = { ":Telescope live_grep<cr>", "Telescope Live Grep" },
 	r = { ":Telescope resume<cr>", "Telescope Resume" },
 	b = { ":Telescope buffers<cr>", "Telescope Buffers" },
+	o = { ":execute ':silent !wslview %'<cr>", "Open in Browser" },
 	l = {
 		name = "LSP",
 		i = { ":LspInfo<cr>", "Connected Language Servers" },
