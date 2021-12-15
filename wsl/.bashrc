@@ -15,6 +15,10 @@ set show-mode-in-prompt on
 # Avoid duplicate bash history
 export HISTCONTROL=ignoredups:erasedups
 
+# Add chrome.exe in windows PATH
+# Install wslview
+export BROWSER='chrome.exe'
+
 mkcd() { mkdir -p "$@" && cd "$@"; }
 
 alias ls='ls --color=auto'
