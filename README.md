@@ -73,6 +73,10 @@ cd ~
 git clone https://github.com/nvm-sh/nvm.git .nvm
 ```
 
+Установка wslu (wslview)
+
+Download the latest package from [release](https://github.com/wslutilities/wslu/releases) and install using the command: `sudo pacman -U *.zst`
+
 настроить ssh
 
 ```
