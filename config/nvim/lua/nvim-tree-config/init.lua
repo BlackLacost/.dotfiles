@@ -1,3 +1,11 @@
+local open_on_different_systems = function()
+	if vim.fn.has("wsl") == 1 then
+		return "wslview"
+	end
+
+	return nil
+end
+
 -- following options are the default
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 require("nvim-tree").setup({
@@ -28,12 +36,12 @@ require("nvim-tree").setup({
 		ignore_list = {},
 	},
 	system_open = {
-		cmd = nil,
+		cmd = open_on_different_systems(),
 		args = {},
 	},
 	filters = {
 		dotfiles = false,
-		custom = { '.git' },
+		custom = { ".git" },
 	},
 	git = {
 		enable = true,
