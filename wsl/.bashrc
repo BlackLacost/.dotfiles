@@ -19,9 +19,12 @@ export HISTCONTROL=ignoredups:erasedups
 # Install wslview
 export BROWSER='chrome.exe'
 
+export EDITOR='nvim'
+
 mkcd() { mkdir -p "$@" && cd "$@"; }
 
 alias ls='ls --color=auto'
+alias ll='ls -la --color=auto'
 
 alias g=git
 alias ggl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
