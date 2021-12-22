@@ -11,9 +11,6 @@ map("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 map("v", "<", "<gv", { noremap = true, silent = true })
 map("v", ">", ">gv", { noremap = true, silent = true })
 
--- nvim-tree
-map("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
-
 -- Terminal
 map("t", "<C-y>", [[<C-\><C-n>]], { noremap = false, silent = true })
 map("t", "<C-h>", [[<C-\><C-n><C-w>h]], { noremap = true, silent = true })

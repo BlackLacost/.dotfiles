@@ -34,8 +34,8 @@ require("nvim-treesitter.configs").setup({
 	tree_docs = {
 		enable = true,
 		keymaps = {
-			doc_node_at_cursor = "<leader>j",
-			doc_all_in_range = "<leader>j",
+			doc_node_at_cursor = "<leader>rj",
+			doc_all_in_range = "<leader>rj",
 		},
 	},
 })
