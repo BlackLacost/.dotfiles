@@ -45,7 +45,8 @@ lsp_installer.on_server_ready(function(server)
 			default_opts.settings = {
 				Lua = {
 					diagnostics = {
-						globals = { "vim", "use" },
+						-- Global mp for mpv scripts
+						globals = { "vim", "use", "mp" },
 					},
 				},
 			}
