@@ -41,6 +41,7 @@ require("formatter").setup({
 		scss = { prettier },
 		graphql = { prettier },
 		markdown = { prettier },
+		telekasten = { prettier },
 	},
 })
 

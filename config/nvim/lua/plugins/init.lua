@@ -74,6 +74,12 @@ return require("packer").startup(function()
 	-- Toggle Terminal
 	use({ "akinsho/toggleterm.nvim" })
 
+	-- Telekasten
+	use({
+		"renerocksai/telekasten.nvim",
+		requires = { "renerocksai/calendar-vim" },
+	})
+
 	use({ "brglng/vim-im-select" })
 
 	use({
