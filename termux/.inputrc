@@ -1,0 +1,39 @@
+$include /etc/inputrc
+
+#################### VIM ####################
+# FOR MORE INFORMATION CHECK:
+# https://wiki.archlinux.org/index.php/Readline
+# man readline
+
+# TURN ON VIM (E.G. FOR READLINE)
+set editing-mode vi
+$if mode=vi
+
+# SHOW THE VIM MODE IN THE PROMPT (COMMAND OR INSERT)
+set show-mode-in-prompt on
+# SET THE MODE STRING AND CURSOR TO INDICATE THE VIM MODE
+#   FOR THE NUMBER AFTER `\e[`:
+#     0: blinking block
+#     1: blinking block (default)
+#     2: steady block
+#     3: blinking underline
+#     4: steady underline
+#     5: blinking bar (xterm)
+#     6: steady bar (xterm)
+set vi-ins-mode-string (I)\1\e[5 q\e]12;green\a\2
+set vi-cmd-mode-string (C)\1\e[1 q\e]12;orange\a\2
+
+
+set keymap vi-command
+# these are for vi-command mode
+Control-l: clear-screen
+Control-a: beginning-of-line
+Control-e: end-of-line
+
+set keymap vi-insert
+# these are for vi-insert mode
+Control-l: clear-screen
+Control-a: beginning-of-line
+Control-e: end-of-line
+
+$endif

@@ -35,22 +35,24 @@ vim.bo.autoindent = true
 vim.o.expandtab = true
 vim.bo.expandtab = true
 
-vim.o.clipboard = "unnamedplus"
-vim.g.clipboard = {
-	name = "win32yank-wsl",
-	copy = {
-		["+"] = "win32yank.exe -i --crlf",
-		["*"] = "win32yank.exe -i --crlf",
-	},
-	paste = {
-		["+"] = "win32yank.exe -o --lf",
-		["*"] = "win32yank.exe -o --lf",
-	},
-	cache_enable = 0,
-}
+if vim.fn.has "wsl" == 1 then
+  vim.o.clipboard = "unnamedplus"
+  vim.g.clipboard = {
+    name = "win32yank-wsl",
+    copy = {
+      ["+"] = "win32yank.exe -i --crlf",
+      ["*"] = "win32yank.exe -i --crlf",
+    },
+    paste = {
+      ["+"] = "win32yank.exe -o --lf",
+      ["*"] = "win32yank.exe -o --lf",
+    },
+    cache_enable = 0,
+  }
 
-vim.g.im_select_command = "im-select.exe"
-vim.g.im_select_default = "1033"
+  vim.g.im_select_command = "im-select.exe"
+  vim.g.im_select_default = "1033"
+end
 
 -- Disable automatic commenting on newline
 vim.cmd([[autocmd FileType * setlocal formatoptions-=cro]])
