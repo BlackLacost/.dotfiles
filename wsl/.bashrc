@@ -43,5 +43,7 @@ alias cdp='cd ~/code'
 alias dokku='$HOME/.dokku/contrib/dokku_client.sh'
 alias v='nvim'
 
+alias ghc='gh repo clone `gh repo list --limit=1000 | awk '"'"'{ print $1 }'"'"' | fzf`'
+
 eval "$(oh-my-posh --init --shell bash --config ~/.poshthemes/star.omp.json)"
 
