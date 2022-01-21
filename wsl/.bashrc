@@ -49,5 +49,7 @@ function ss() {
   $BROWSER https://www.google.com/search?q=`echo $* | jq -sRr @uri`
 }
 
+source ~/.private
+
 eval "$(oh-my-posh --init --shell bash --config ~/.poshthemes/star.omp.json)"
 
