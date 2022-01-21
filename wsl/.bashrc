@@ -45,5 +45,9 @@ alias v='nvim'
 
 alias ghc='gh repo clone `gh repo list --limit=1000 | awk '"'"'{ print $1 }'"'"' | fzf`'
 
+function ss() {
+  $BROWSER https://www.google.com/search?q=`echo $* | jq -sRr @uri`
+}
+
 eval "$(oh-my-posh --init --shell bash --config ~/.poshthemes/star.omp.json)"
 
