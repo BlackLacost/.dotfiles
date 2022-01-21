@@ -6,17 +6,17 @@
             "command": 
             {
                 "action": "moveFocus",
-                "direction": "left"
+                "direction": "right"
             },
-            "keys": "ctrl+alt+h"
+            "keys": "ctrl+alt+l"
         },
         {
             "command": 
             {
                 "action": "moveFocus",
-                "direction": "right"
+                "direction": "left"
             },
-            "keys": "ctrl+alt+l"
+            "keys": "ctrl+alt+h"
         },
         {
             "command": 
@@ -38,17 +38,17 @@
             "command": 
             {
                 "action": "resizePane",
-                "direction": "left"
+                "direction": "down"
             },
-            "keys": "ctrl+shift+alt+h"
+            "keys": "ctrl+alt+shift+j"
         },
         {
             "command": 
             {
                 "action": "resizePane",
-                "direction": "down"
+                "direction": "left"
             },
-            "keys": "ctrl+shift+alt+j"
+            "keys": "ctrl+alt+shift+h"
         },
         {
             "command": 
@@ -56,7 +56,7 @@
                 "action": "resizePane",
                 "direction": "right"
             },
-            "keys": "ctrl+shift+alt+l"
+            "keys": "ctrl+alt+shift+l"
         },
         {
             "command": 
@@ -64,7 +64,7 @@
                 "action": "resizePane",
                 "direction": "up"
             },
-            "keys": "ctrl+shift+alt+k"
+            "keys": "ctrl+alt+shift+k"
         },
         {
             "command": 
@@ -260,9 +260,10 @@
     "copyOnSelect": true,
     "defaultProfile": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
     "experimental.input.forceVT": true,
+    "experimental.rendering.forceFullRepaint": true,
     "focusFollowMouse": true,
     "initialCols": 100,
-    "initialRows": 53,
+    "initialRows": 50,
     "language": "en-US",
     "launchMode": "default",
     "profiles": 
@@ -556,7 +557,10 @@
             "yellow": "#808000"
         }
     ],
-    "tabSwitcherMode": "mru",
+    "showTabsInTitlebar": true,
+    "tabSwitcherMode": "disabled",
+    "tabWidthMode": "titleLength",
     "theme": "system",
+    "useAcrylicInTabRow": true,
     "windowingBehavior": "useExisting"
 }
