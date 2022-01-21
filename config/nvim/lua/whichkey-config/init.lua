@@ -52,6 +52,13 @@ local mappings = {
 		p = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "Go to Prev" },
 		s = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", "Show line diagnostics" },
 	},
+	D = {
+		name = "Database",
+		e = { ":DBUIToggle<CR>", "DB UI Toggle" },
+		f = { ":DBUIFindBuffer<CR>", "DB Find Buffer" },
+		r = { ":DBUIRenameBuffer<CR>", "DB Rename Buffer" },
+		l = { ":DBUILastQueryInfo<CR>", "DB Last Query Info" },
+	},
 	h = {
 		name = "Git Signs",
 		b = { "Blame" },

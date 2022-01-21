@@ -80,6 +80,9 @@ return require("packer").startup(function()
 		requires = { "renerocksai/calendar-vim" },
 	})
 
+	use("tpope/vim-dadbod")
+	use("kristijanhusak/vim-dadbod-ui")
+
 	use({ "brglng/vim-im-select" })
 
 	use({
