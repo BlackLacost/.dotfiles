@@ -10,3 +10,5 @@ ln -s $HOME/.dotfiles/config/npm/.npmrc ~ -f
 ln -s $HOME/.dotfiles/wsl/.bashrc ~ -f
 ln -s $HOME/.dotfiles/wsl/.inputrc ~ -f
 
+# Link scripts
+ln -s $HOME/.dotfiles/home/.local/bin/gen_pass.sh ~/.local/bin -f
