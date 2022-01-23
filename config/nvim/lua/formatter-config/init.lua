@@ -2,6 +2,10 @@ local function prettier()
 	return {
 		exe = "prettier",
 		args = {
+			-- Определяет приоритет использования настроек
+			"--config-precedence",
+			-- Если конфиг файл, например, .prettierrc существует, то он имеет приоритет.
+			"prefer-file",
 			"--stdin-filepath",
 			vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
 			"--single-quote",
