@@ -13,7 +13,7 @@ local function prettier()
 			"--arrow-parens",
 			"always",
 			"--print-width",
-			"80",
+			"100",
 			"--trailing-comma",
 			"all",
 		},
