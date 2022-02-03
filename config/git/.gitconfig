@@ -19,7 +19,7 @@ defaultBranch = main
 [credential]
 helper = manager-core
 [credential "helperselector"]
-selected = manager-core
+	selected = manager-core
 [push]
 default = simple
 

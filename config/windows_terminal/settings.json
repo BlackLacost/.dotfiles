@@ -6,17 +6,17 @@
             "command": 
             {
                 "action": "moveFocus",
-                "direction": "right"
+                "direction": "left"
             },
-            "keys": "ctrl+alt+l"
+            "keys": "ctrl+alt+h"
         },
         {
             "command": 
             {
                 "action": "moveFocus",
-                "direction": "left"
+                "direction": "right"
             },
-            "keys": "ctrl+alt+h"
+            "keys": "ctrl+alt+l"
         },
         {
             "command": 
@@ -38,17 +38,17 @@
             "command": 
             {
                 "action": "resizePane",
-                "direction": "down"
+                "direction": "left"
             },
-            "keys": "ctrl+alt+shift+j"
+            "keys": "ctrl+alt+shift+h"
         },
         {
             "command": 
             {
                 "action": "resizePane",
-                "direction": "left"
+                "direction": "down"
             },
-            "keys": "ctrl+alt+shift+h"
+            "keys": "ctrl+alt+shift+j"
         },
         {
             "command": 
@@ -559,7 +559,7 @@
     ],
     "showTabsInTitlebar": true,
     "tabSwitcherMode": "disabled",
-    "tabWidthMode": "titleLength",
+    "tabWidthMode": "equal",
     "theme": "system",
     "useAcrylicInTabRow": true,
     "windowingBehavior": "useExisting"
