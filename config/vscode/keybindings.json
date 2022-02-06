@@ -38,7 +38,7 @@
     "command": "PowerShellCommands.focus"
   },
   {
-    "key": "ctrl+k f",
+    "key": "ctrl+, f",
     "command": "workbench.action.quickOpen"
   },
   {
@@ -46,15 +46,11 @@
     "command": "-workbench.action.quickOpen"
   },
   {
-    "key": "ctrl+, s",
-    "command": "workbench.action.toggleSidebarVisibility"
-  },
-  {
     "key": "ctrl+, o",
     "command": "workbench.action.addRootFolder"
   },
   {
-    "key": "ctrl+, s",
+    "key": "ctrl+, c",
     "command": "workbench.action.toggleSidebarVisibility"
   },
   {
@@ -62,16 +58,12 @@
     "command": "workbench.view.explorer"
   },
   {
-    "key": "ctrl+, g",
+    "key": "ctrl+, l",
     "command": "workbench.view.scm"
   },
   {
     "key": "ctrl+, d",
     "command": "workbench.view.debug"
-  },
-  {
-    "key": "ctrl+w",
-    "command": "workbench.action.closeActiveEditor"
   },
   {
     "key": "ctrl+;",
@@ -172,7 +164,7 @@
     "command": "workbench.action.terminal.focusPreviousPane"
   },
   {
-    "key": "ctrl+, l",
+    "key": "ctrl+, s",
     "command": "workbench.action.openSettings"
   },
   {
@@ -214,5 +206,27 @@
   {
     "key": "ctrl+k ctrl+\\",
     "command": "-workbench.action.splitEditorOrthogonal"
+  },
+  {
+    "key": "ctrl+k b",
+    "command": "workbench.files.action.focusOpenEditorsView",
+    "when": "workbench.explorer.openEditorsView.active"
+  },
+  {
+    "key": "ctrl+k e",
+    "command": "-workbench.files.action.focusOpenEditorsView",
+    "when": "workbench.explorer.openEditorsView.active"
+  },
+  {
+    "key": "ctrl+k a",
+    "command": "workbench.action.closeSidebar"
+  },
+  {
+    "key": "alt+q",
+    "command": "workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "-workbench.action.closeActiveEditor"
   }
 ]
