@@ -135,6 +135,7 @@
     "**/tmp": true
   },
   "search.showLineNumbers": true,
+  "typescript.workspaceSymbols.scope": "currentProject",
 
   // Настройки под разные технологии
 

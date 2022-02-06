@@ -38,7 +38,7 @@
     "command": "PowerShellCommands.focus"
   },
   {
-    "key": "ctrl+p",
+    "key": "ctrl+k f",
     "command": "workbench.action.quickOpen"
   },
   {
@@ -94,7 +94,7 @@
     "when": "inDebugMode"
   },
   {
-    "key": "ctrl+, f",
+    "key": "ctrl+k g",
     "command": "workbench.action.findInFiles"
   },
   {
