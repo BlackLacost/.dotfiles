@@ -61,6 +61,7 @@
 
   // VirtualEnv
   "python.pythonPath": "./.venv/bin/python",
+  "python.defaultInterpreterPath": "./.venv/bin/python",
 
   // Linting
   "python.analysis.typeCheckingMode": "basic",
@@ -138,19 +139,47 @@
   "typescript.workspaceSymbols.scope": "currentProject",
 
   // Настройки под разные технологии
+  "[django-html]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+
+  "[git-commit]": {
+    "editor.rulers": [72, 50]
+  },
+
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
+
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.rulers": [80]
+  },
+
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 
   "[markdown]": {
     "editor.wordWrap": "wordWrapColumn"
   },
+
   "[mdx]": {
     "editor.wordWrap": "wordWrapColumn"
   },
+
   "[powershell]": {
     "editor.rulers": [120]
   },
-  "[git-commit]": {
-    "editor.rulers": [72, 50]
+
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
   },
+
   "[python]": {
     "editor.defaultFormatter": null,
     "editor.tabSize": 4
@@ -160,33 +189,15 @@
     // }
     // "editor.formatOnSaveTimeout": 3000
   },
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "editor.tabSize": 2
+
+  "[typescript]": {
+    "editor.rulers": [80]
   },
+
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "editor.tabSize": 2
-  },
-  "[django-html]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "HookyQR.beautify"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "editor.rulers": [80]
-    // "prettier": {
-    //   "trailingComma": "none"
-    // }
-  },
-  "[typescript]": {
-    "editor.rulers": [80]
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
   // TypeScript
@@ -330,6 +341,5 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
-  "security.workspace.trust.untrustedFiles": "open",
-  "python.defaultInterpreterPath": "./.venv/bin/python"
+  "security.workspace.trust.untrustedFiles": "open"
 }
