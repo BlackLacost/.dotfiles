@@ -49,6 +49,9 @@
     "strings": true
   },
   "editor.copyWithSyntaxHighlighting": true,
+  // Colorized brackets
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
 
   // Autoformat
   "editor.formatOnSave": true,
@@ -79,7 +82,8 @@
   "emmet.includeLanguages": {
     "django-html": "html",
     "vue-html": "html",
-    "vue": "html"
+    "vue": "html",
+    "javascript": "javascriptreact"
     // "vue-html": "jade",
     // "vue": "jade"
   },
@@ -113,8 +117,8 @@
   "window.openFoldersInNewWindow": "on",
   "window.menuBarVisibility": "toggle",
   "window.zoomLevel": 2,
-  "workbench.iconTheme": "material-icon-theme",
-  "workbench.colorTheme": "grigoryvp memory theme",
+  "workbench.iconTheme": "eq-material-theme-icons-darker",
+  "workbench.colorTheme": "Material Theme Darker High Contrast",
   "task.problemMatchers.neverPrompt": {
     "npm": true
   },
@@ -226,8 +230,8 @@
   // Vim
   "vim.autoSwitchInputMethod.enable": true,
   "vim.autoSwitchInputMethod.defaultIM": "1033",
-  "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\im-select.exe",
-  "vim.autoSwitchInputMethod.switchIMCmd": "C:\\im-select.exe {im}",
+  "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe",
+  "vim.autoSwitchInputMethod.switchIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe {im}",
   "vim.camelCaseMotion.enable": true,
   "vim.easymotion": true,
   "vim.ignorecase": true,
@@ -341,5 +345,8 @@
     "default": "right",
     "jupyter-notebook": "left"
   },
-  "security.workspace.trust.untrustedFiles": "open"
+  "security.workspace.trust.untrustedFiles": "open",
+  "redhat.telemetry.enabled": true,
+  "git.autofetch": true,
+  "git.confirmSync": false
 }

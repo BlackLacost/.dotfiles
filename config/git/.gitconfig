@@ -3,7 +3,7 @@ email = blacklacost@gmail.com
 name = Ilya Lisin
 
 [core]
-editor = "nvim"
+editor = "code -w"
 eol = lf
 autocrlf = false
 safecrlf = warn
