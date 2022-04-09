@@ -1,11 +1,9 @@
 """
 Addon for Anki 2.1 that inserts tables
-this is a modification and extension of the table function from neftas' Power Format Pack
-
-
 Copyright: 2018- ijgnd
-           2014-2017 Stefan van den Akker <neftas@protonmail.com>
-
+this is a modification and extension of the table function from neftas' Power Format Pack
+which had this copyright notice: 
+Copyright: 2014-2017 Stefan van den Akker <neftas@protonmail.com>    
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -24,4 +22,4 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>
 from . import addTable
 from . import update_config
 from . import install_time_log
-from . import update_message
+# from . import update_message
