@@ -38,6 +38,9 @@
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.autoClosingBrackets": "beforeWhitespace",
   "editor.autoClosingQuotes": "beforeWhitespace",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
   "editor.fontFamily": "Monoid, Monoid NF",
   "editor.fontSize": 12,
   "editor.fontLigatures": true,
@@ -117,7 +120,7 @@
   "window.openFoldersInNewWindow": "on",
   "window.menuBarVisibility": "toggle",
   "window.zoomLevel": 2,
-  "workbench.iconTheme": "eq-material-theme-icons-darker",
+  "workbench.iconTheme": "material-icon-theme",
   "workbench.colorTheme": "Material Theme Darker High Contrast",
   "task.problemMatchers.neverPrompt": {
     "npm": true
@@ -195,6 +198,7 @@
   },
 
   "[typescript]": {
+    "editor.tabSize": 2,
     "editor.rulers": [80]
   },
 
