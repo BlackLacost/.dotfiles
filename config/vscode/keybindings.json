@@ -526,5 +526,27 @@
     "key": "shift+f4",
     "command": "-search.action.focusPreviousSearchResult",
     "when": "hasSearchResult || inSearchEditor"
+  },
+  {
+    "key": "ctrl+, x",
+    "command": "workbench.view.extensions",
+    "when": "viewContainer.workbench.view.extensions.enabled"
+  },
+  {
+    "key": "ctrl+shift+x",
+    "command": "-workbench.view.extensions",
+    "when": "viewContainer.workbench.view.extensions.enabled"
+  },
+  {
+    "key": "ctrl+, r",
+    "command": "targetsContainers.focus"
+  },
+  {
+    "key": "ctrl+, shift+r",
+    "command": "devVolumes.focus"
+  },
+  {
+    "key": "ctrl+, shift+d",
+    "command": "workbench.view.extension.dockerView"
   }
 ]

@@ -62,18 +62,18 @@
         {
             "command": 
             {
-                "action": "switchToTab",
-                "index": 3
-            },
-            "keys": "alt+4"
-        },
-        {
-            "command": 
-            {
                 "action": "resizePane",
                 "direction": "up"
             },
             "keys": "ctrl+alt+shift+k"
+        },
+        {
+            "command": 
+            {
+                "action": "switchToTab",
+                "index": 3
+            },
+            "keys": "alt+4"
         },
         {
             "command": 
@@ -120,16 +120,16 @@
             "keys": "alt+j"
         },
         {
+            "command": "scrollUpPage",
+            "keys": "alt+shift+k"
+        },
+        {
             "command": 
             {
                 "action": "switchToTab",
                 "index": 5
             },
             "keys": "alt+6"
-        },
-        {
-            "command": "scrollUpPage",
-            "keys": "alt+shift+k"
         },
         {
             "command": "scrollDownPage",
@@ -140,12 +140,12 @@
             "keys": "alt+v"
         },
         {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 7
-            },
-            "keys": "alt+8"
+            "command": "unbound",
+            "keys": "f11"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+enter"
         },
         {
             "command": 
@@ -156,12 +156,12 @@
             "keys": "alt+c"
         },
         {
-            "command": "unbound",
-            "keys": "f11"
-        },
-        {
-            "command": "unbound",
-            "keys": "alt+enter"
+            "command": 
+            {
+                "action": "switchToTab",
+                "index": 7
+            },
+            "keys": "alt+8"
         },
         {
             "command": "closePane",
@@ -193,18 +193,18 @@
         {
             "command": 
             {
-                "action": "switchToTab",
-                "index": 6
-            },
-            "keys": "alt+7"
-        },
-        {
-            "command": 
-            {
                 "action": "newTab",
                 "index": 2
             },
             "keys": "ctrl+alt+3"
+        },
+        {
+            "command": 
+            {
+                "action": "switchToTab",
+                "index": 6
+            },
+            "keys": "alt+7"
         },
         {
             "command": 
@@ -226,17 +226,17 @@
             "command": 
             {
                 "action": "switchToTab",
-                "index": 4
+                "index": 1
             },
-            "keys": "alt+5"
+            "keys": "alt+2"
         },
         {
             "command": 
             {
                 "action": "switchToTab",
-                "index": 1
+                "index": 4
             },
-            "keys": "alt+2"
+            "keys": "alt+5"
         },
         {
             "command": 
@@ -327,6 +327,12 @@
                 "hidden": false,
                 "name": "Developer Command Prompt for VS 2017",
                 "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{34a13805-9b56-5e89-9234-f02de44bd971}",
+                "hidden": false,
+                "name": "PowerShell 7 (x86)",
+                "source": "Windows.Terminal.PowershellCore"
             }
         ]
     },

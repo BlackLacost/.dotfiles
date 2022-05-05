@@ -2,8 +2,7 @@
   // Files
 
   "files.associations": {
-    "*.html": "html",
-    "**/templates/**/*.html": "django-html"
+    "*.html": "html"
   },
 
   // The default end of line character.
@@ -39,7 +38,8 @@
   "editor.autoClosingBrackets": "beforeWhitespace",
   "editor.autoClosingQuotes": "beforeWhitespace",
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": true,
+    "source.addMissingImports": true
   },
   "editor.fontFamily": "Monoid, Monoid NF",
   "editor.fontSize": 12,
@@ -146,11 +146,6 @@
   "typescript.workspaceSymbols.scope": "currentProject",
 
   // Настройки под разные технологии
-  "[django-html]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "HookyQR.beautify"
-  },
-
   "[git-commit]": {
     "editor.rulers": [72, 50]
   },
@@ -213,11 +208,6 @@
 
   // PLUGINS
   "extensions.autoUpdate": true,
-
-  // Beautify
-  "beautify.language": {
-    "html": ["django-html"]
-  },
 
   // Life Server
   "liveServer.settings.donotShowInfoMsg": true,
@@ -352,5 +342,7 @@
   "security.workspace.trust.untrustedFiles": "open",
   "redhat.telemetry.enabled": true,
   "git.autofetch": true,
-  "git.confirmSync": false
+  "git.confirmSync": false,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "workbench.activityBar.visible": false
 }
