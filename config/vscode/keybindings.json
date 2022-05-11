@@ -548,5 +548,15 @@
   {
     "key": "ctrl+, shift+d",
     "command": "workbench.view.extension.dockerView"
+  },
+  {
+    "key": "ctrl+k k",
+    "command": "editor.action.triggerParameterHints",
+    "when": "editorHasSignatureHelpProvider && editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+space",
+    "command": "-editor.action.triggerParameterHints",
+    "when": "editorHasSignatureHelpProvider && editorTextFocus"
   }
 ]
