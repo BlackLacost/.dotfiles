@@ -1,12 +1,11 @@
-function setClipboard(text) {
-  mp.commandv('run', 'powershell', 'set-clipboard "' + text + '"')
+'use strict'
+
+var Clipboard = require('./modules/clipboard')
+
+function main() {
+  var subText =
+    mp.get_property('sub-text').replace(/\n/g, ' ') + ' '.replace(/"/g, "'")
+  Clipboard.setWithMessage(subText)
 }
 
-function copySub() {
-  var sub_text =
-    mp.get_property('sub-text').replace(/\n/g, ' ').replace(/"/g, "'") + ' '
-  setClipboard(sub_text)
-  mp.osd_message('Copied to Clipboard: ' + sub_text)
-}
-
-mp.add_key_binding('', 'copySub', copySub)
+mp.add_key_binding('', 'copySub', main)
