@@ -206,7 +206,7 @@
   },
 
   // TypeScript
-  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
 
   // PLUGINS
   "extensions.autoUpdate": true,
@@ -346,6 +346,5 @@
   "redhat.telemetry.enabled": true,
   "git.autofetch": true,
   "git.confirmSync": false,
-  "terminal.integrated.enableMultiLinePasteWarning": false,
-  "workbench.activityBar.visible": false
+  "terminal.integrated.enableMultiLinePasteWarning": false
 }
