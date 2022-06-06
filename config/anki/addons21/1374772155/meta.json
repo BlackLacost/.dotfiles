@@ -1,1 +1,1 @@
-{"name": "Image Occlusion Enhanced for Anki 21 alpha", "mod": 1588040516, "conflicts": ["image_occlusion_enhanced"], "disabled": false, "max_point_version": 24, "min_point_version": 0, "branch_index": 0}
+{"name": "Image Occlusion Enhanced for Anki 21 alpha", "mod": 1588040516, "conflicts": ["image_occlusion_enhanced"], "disabled": false, "max_point_version": -49, "min_point_version": 0, "branch_index": 0, "update_enabled": true}
