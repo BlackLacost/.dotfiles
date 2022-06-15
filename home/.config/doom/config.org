@@ -116,9 +116,6 @@ I wrapped most of this block in (after! org).  Without this, my settings might b
   )
 #+end_src
 
-#+RESULTS:
-: ~/Org/Roam
-
 * Registers
 Emacs registers are compartments where you can save text, rectangles and positions for later use. Once you save text or a rectangle in a register, you can copy it into the buffer once or many times; once you save a position in a register, you can jump back to that position once or many times.  The default GNU Emacs keybindings for these commands (with the exception of counsel-register) involves 'C-x r' followed by one or more other keys.  I wanted to make this a little more user friendly, and since I am using Doom Emacs, I choose to replace the 'C-x r' part of the key chords with 'SPC r'.
 
@@ -152,7 +149,7 @@ Emacs registers are compartments where you can save text, rectangles and positio
        :desc "Point to register" "SPC" #'point-to-register))
 #+end_src
 
-* TODO Shell
+* Shell
 Settings for the various shells and terminal emulators within Emacs.
 
 ** [[https://www.gnu.org/software/emacs/manual/html_mono/eshell.html][Eshell]]
