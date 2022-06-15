@@ -68,7 +68,7 @@ Emoji for task priority.
   (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
 #+end_src
 
-* Org Mode
+* TODO [#C] Org Mode
 If you use `org' and don't want your org files in the default location below, change `org-directory'. It must be set before org loads!
 
 #+begin_src emacs-lisp
@@ -81,7 +81,8 @@ I wrapped most of this block in (after! org).  Without this, my settings might b
 
 #+begin_src emacs-lisp
 (after! org
-  (setq org-agenda-files '("~/Org" "~/dotfiles")
+  ;; TODO Agenda doesn't work in hidden directories
+  (setq org-agenda-files '("~/Org" "~/.config/doom")
         ;; org-priority-faces     ; Colors for priority
         ;; '((?A :foreground "#e45649")
         ;;   (?B :foreground "#da8548")
