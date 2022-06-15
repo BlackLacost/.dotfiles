@@ -164,11 +164,11 @@ Settings for the various shells and terminal emulators within Emacs.
       eshell-visual-commands'("bash" "htop" "ssh" "top"))
 
 (map! :leader
-      (:prefix ("e". "Eshell")
+      (:prefix ("e". "Terminal")
        :desc "Eshell" "s" #'eshell
        :desc "Eshell popup toggle" "t" #'+eshell/toggle
-       :desc "Counsel eshell history" "h" #'counsel-esh-history)
-      :desc "Vterm popup toggle" "v t" #'+vterm/toggle)
+       :desc "Consult terminal history" "h" #'consult-history
+       :desc "Vterm popup toggle" "v" #'+vterm/toggle))
 #+end_src
 
 * User Info

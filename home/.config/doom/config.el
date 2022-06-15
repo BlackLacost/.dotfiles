@@ -1,6 +1,6 @@
 (beacon-mode 1)
 
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-material)
 
 (setq display-line-numbers 'visual)
 (map! :leader
@@ -21,7 +21,8 @@
 (setq org-directory "~/Org/")
 
 (after! org
-  (setq org-agenda-files '("~/Org" "~/dotfiles")
+  ;; TODO Agenda doesn't work in hidden directories
+  (setq org-agenda-files '("~/Org" "~/.config/doom")
         ;; org-priority-faces     ; Colors for priority
         ;; '((?A :foreground "#e45649")
         ;;   (?B :foreground "#da8548")
@@ -77,11 +78,11 @@
       eshell-visual-commands'("bash" "htop" "ssh" "top"))
 
 (map! :leader
-      (:prefix ("e". "Eshell")
+      (:prefix ("e". "Terminal")
        :desc "Eshell" "s" #'eshell
        :desc "Eshell popup toggle" "t" #'+eshell/toggle
-       :desc "Counsel eshell history" "h" #'counsel-esh-history)
-      :desc "Vterm popup toggle" "v t" #'+vterm/toggle)
+       :desc "Consult terminal history" "h" #'consult-history
+       :desc "Vterm popup toggle" "v" #'+vterm/toggle))
 
 (setq user-full-name "Ilya Lisin"
       user-mail-address "blacklacost@gmail.com")
