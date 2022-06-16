@@ -66,6 +66,7 @@
 
 (after! org-roam
   (setq org-roam-directory "~/Org/Roam"
+        org-roam-dailies-directory "daily/" ; daily is default, put here for explicit
         org-roam-completion-everywhere t  ; Try complete roam links everywhere (outside of [[]])
         org-roam-capture-templates
         '(
