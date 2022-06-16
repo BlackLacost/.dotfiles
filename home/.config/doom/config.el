@@ -86,7 +86,16 @@
         )
   ;; TODO work, but error when start emacs
   ;; (map! ("C-M-i" . completion-at-point))
+  (map! :leader
+        :desc "Insert immediate node" "n r I" #'org-roam-node-insert-immediate)
   )
+
+(defun org-roam-node-insert-immediate (arg &rest args)
+  (interactive "P")
+  (let ((args (cons arg args))
+        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                  '(:immediate-finish t)))))
+    (apply #'org-roam-node-insert args)))
 
 (map! :leader
       (:prefix ("r" . "registers")
