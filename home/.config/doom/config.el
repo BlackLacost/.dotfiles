@@ -11,6 +11,16 @@
        :desc "Toggle line highlight globally" "H" #'global-hl-line-mode
        :desc "Toggle truncate lines" "t" #'toggle-truncate-lines))
 
+(setq doom-font (font-spec :family "Source Code Pro" :size 18)
+      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 18)
+      doom-big-font (font-spec :family "Source Code Pro" :size 28))
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
+
 (use-package org-fancy-priorities
   :ensure t
   :hook

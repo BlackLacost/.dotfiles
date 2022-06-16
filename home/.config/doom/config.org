@@ -56,6 +56,27 @@ This determines the style of line numbers in effect:
        :desc "Toggle truncate lines" "t" #'toggle-truncate-lines))
 #+end_src
 
+* Fonts
+Settings related to fonts within Doom Emacs:
+
+- ‘doom-font’ – standard monospace font that is used for most things in Emacs.
+- ‘doom-variable-pitch-font’ – variable font which is useful in some Emacs plugins.
+- ‘doom-big-font’ – used in doom-big-font-mode; useful for presentations.
+- ‘font-lock-comment-face’ – for comments.
+- ‘font-lock-keyword-face’ – for keywords with special significance like ‘setq’ in elisp.
+
+#+begin_src emacs-lisp
+(setq doom-font (font-spec :family "Source Code Pro" :size 18)
+      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 18)
+      doom-big-font (font-spec :family "Source Code Pro" :size 28))
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
+#+end_src
+
 * Org Fancy Priorities
 Emoji for task priority.
 
