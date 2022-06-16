@@ -61,8 +61,20 @@
         org-journal-time-prefix "* "
         org-journal-date-format "%a, %Y-%m-%d"
         org-journal-file-format "%Y-%m-%d.org"
-        org-roam-directory "~/Org/Roam"
         )
+  )
+
+(after! org-roam
+  (setq org-roam-directory "~/Org/Roam"
+        org-roam-completion-everywhere t  ; Try complete roam links everywhere (outside of [[]])
+        org-roam-capture-templates
+        '(("d" "default" plain
+           "%?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+           :unnarrowed t))
+        )
+  ;; TODO work, but error when start emacs
+  ;; (map! ("C-M-i" . completion-at-point))
   )
 
 (map! :leader
