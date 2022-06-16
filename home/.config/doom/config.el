@@ -68,10 +68,20 @@
   (setq org-roam-directory "~/Org/Roam"
         org-roam-completion-everywhere t  ; Try complete roam links everywhere (outside of [[]])
         org-roam-capture-templates
-        '(("d" "default" plain
-           "%?"
+        '(
+          ("d" "default" plain
+           (file "~/Org/Roam/Templates/DefaultTemplate.org")
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
-           :unnarrowed t))
+           :unnarrowed t)
+          ("b" "book notes" plain
+           (file "~/Org/Roam/Templates/BookNoteTemplate.org")
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+           :unnarrowed t)
+          ("p" "project" plain
+           (file "~/Org/Roam/Templates/ProjectTemplate.org")
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:")
+           :unnarrowed t)
+          )
         )
   ;; TODO work, but error when start emacs
   ;; (map! ("C-M-i" . completion-at-point))
