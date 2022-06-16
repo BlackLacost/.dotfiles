@@ -94,5 +94,8 @@
        :desc "Consult terminal history" "h" #'consult-history
        :desc "Vterm popup toggle" "v" #'+vterm/toggle))
 
+(after! flyspell
+  (setq flyspell-default-dictionary "en_US"))
+
 (setq user-full-name "Ilya Lisin"
       user-mail-address "blacklacost@gmail.com")

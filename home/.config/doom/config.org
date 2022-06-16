@@ -192,6 +192,13 @@ Settings for the various shells and terminal emulators within Emacs.
        :desc "Vterm popup toggle" "v" #'+vterm/toggle))
 #+end_src
 
+* Spell
+
+#+begin_src emacs-lisp
+(after! flyspell
+  (setq flyspell-default-dictionary "en_US"))
+#+end_src
+
 * User Info
 Some functionality uses this to identify you, e.g. GPG configuration, email clients, file templates and snippets. It is optional.
 
