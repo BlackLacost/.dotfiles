@@ -50,3 +50,4 @@
 ;(unpin! t)
 (package! beacon)                    ; Подсветка курсора при переключение окна
 (package! org-fancy-priorities)      ; Иконки для приоритета задач
+(package! org-gtd)

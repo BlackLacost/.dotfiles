@@ -88,7 +88,6 @@
   ;; (map! ("C-M-i" . completion-at-point))
   (map! :leader
         :desc "Insert immediate node" "n r I" #'org-roam-node-insert-immediate
-        :desc "Insert immediate node" "n r I" #'org-roam-node-insert-immediate
         )
   )
 
@@ -115,6 +114,21 @@
 
 ;; Build the agenda list the first time for the session
 ;; (my/org-roam-refresh-agenda-list)
+
+(use-package! org-gtd
+  :after org
+  :config
+  (map! :leader
+        (:prefix ("d" . "GDT")
+         :desc "Add" "a" #'org-gtd-capture
+         :desc "Engage" "e" #'org-gtd-engage
+         :desc "Process Inbox" "p" #'org-gtd-process-inbox
+         :desc "Show All Next" "n" #'org-gtd-show-all-next
+         :desc "Show Stuck Projects" "s" #'org-gtd-show-all-next
+         :desc "Choose" "c" #'org-gtd-choose
+         ))
+  (define-key org-gtd-process-map (kbd "C-c c") #'org-gtd-choose)
+  )
 
 (map! :leader
       (:prefix ("r" . "registers")

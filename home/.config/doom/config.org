@@ -137,7 +137,7 @@ I wrapped most of this block in (after! org).  Without this, my settings might b
   )
 #+end_src
 
-* TODO Org Roam
+** TODO Org Roam
 
 | COMMAND                            | DESCRIPTION                     | KEYBINDING  |
 |------------------------------------+---------------------------------+-------------|
@@ -186,13 +186,12 @@ Daily directory must be *RELATIVE* to roam directory.
   ;; (map! ("C-M-i" . completion-at-point))
   (map! :leader
         :desc "Insert immediate node" "n r I" #'org-roam-node-insert-immediate
-        :desc "Insert immediate node" "n r I" #'org-roam-node-insert-immediate
         )
   )
 
 #+end_src
 
-** Immediate Note
+*** Immediate Note
 
 Create immediate default note.
 
@@ -205,7 +204,7 @@ Create immediate default note.
     (apply #'org-roam-node-insert args)))
 #+end_src
 
-** [[https://youtu.be/CUkuyW6hr18?t=295][Agenda list by tag]]
+*** [[https://youtu.be/CUkuyW6hr18?t=295][Agenda list by tag]]
 
 #+begin_src emacs-lisp
 ;; (defun my/org-roam-filter-by-tag (tag-name)
@@ -224,6 +223,25 @@ Create immediate default note.
 
 ;; Build the agenda list the first time for the session
 ;; (my/org-roam-refresh-agenda-list)
+#+end_src
+
+** GTD
+
+#+begin_src emacs-lisp
+(use-package! org-gtd
+  :after org
+  :config
+  (map! :leader
+        (:prefix ("d" . "GDT")
+         :desc "Add" "a" #'org-gtd-capture
+         :desc "Engage" "e" #'org-gtd-engage
+         :desc "Process Inbox" "p" #'org-gtd-process-inbox
+         :desc "Show All Next" "n" #'org-gtd-show-all-next
+         :desc "Show Stuck Projects" "s" #'org-gtd-show-all-next
+         :desc "Choose" "c" #'org-gtd-choose
+         ))
+  (define-key org-gtd-process-map (kbd "C-c c") #'org-gtd-choose)
+  )
 #+end_src
 
 * Registers
