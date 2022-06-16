@@ -31,8 +31,8 @@
 (setq org-directory "~/Org/")
 
 (after! org
-  ;; TODO Agenda doesn't work in hidden directories
-  (setq org-agenda-files '("~/Org" "~/.config/doom")
+  ;; TODO Agenda doesn't work in hidden directories and subdirectories
+  (setq org-agenda-files '("~/Org" "~/.config/doom" "~/Org/Roam" "~/Org/Roam/daily")
         ;; org-priority-faces     ; Colors for priority
         ;; '((?A :foreground "#e45649")
         ;;   (?B :foreground "#da8548")
@@ -87,7 +87,9 @@
   ;; TODO work, but error when start emacs
   ;; (map! ("C-M-i" . completion-at-point))
   (map! :leader
-        :desc "Insert immediate node" "n r I" #'org-roam-node-insert-immediate)
+        :desc "Insert immediate node" "n r I" #'org-roam-node-insert-immediate
+        :desc "Insert immediate node" "n r I" #'org-roam-node-insert-immediate
+        )
   )
 
 (defun org-roam-node-insert-immediate (arg &rest args)
@@ -96,6 +98,23 @@
         (org-roam-capture-templates (list (append (car org-roam-capture-templates)
                                                   '(:immediate-finish t)))))
     (apply #'org-roam-node-insert args)))
+
+;; (defun my/org-roam-filter-by-tag (tag-name)
+;;   (lambda (node)
+;;     (member tag-name (org-roam-node-tags node))))
+
+;; (defun my/org-roam-list-notes-by-tag (tag-name)
+;;   (mapcar #'org-roam-node-file
+;;           (seq-filter
+;;            (my/org-roam-filter-by-tag tag-name)
+;;            (org-roam-node-list))))
+
+;; (defun my/org-roam-refresh-agenda-list ()
+;;   (interactive)
+;;   (setq org-agenda-files (my/org-roam-list-notes-by-tag "project")))
+
+;; Build the agenda list the first time for the session
+;; (my/org-roam-refresh-agenda-list)
 
 (map! :leader
       (:prefix ("r" . "registers")
