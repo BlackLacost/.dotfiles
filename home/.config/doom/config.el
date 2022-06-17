@@ -31,38 +31,118 @@
 (setq org-directory "~/Org/")
 
 (after! org
-  ;; TODO Agenda doesn't work in hidden directories and subdirectories
-  (setq org-agenda-files '("~/Org" "~/.config/doom" "~/Org/Roam" "~/Org/Roam/daily")
-        ;; org-priority-faces     ; Colors for priority
-        ;; '((?A :foreground "#e45649")
-        ;;   (?B :foreground "#da8548")
-        ;;   (?C :foreground "#0098dd"))
-        org-todo-keywords      ; This overwrites the default Doom org-todo-keywords
-        '((sequence
-           "TODO(t)"           ; A task that is ready to be tackled
-           "BLOG(b)"           ; Blog writing assignments
-           "GYM(g)"            ; Things to accomplish at the gym
-           "PROJ(p)"           ; A project that contains other tasks
-           "VIDEO(v)"          ; Video assignments
-           "WAIT(w)"           ; Something is holding up this task
-           "|"                 ; The pipe necessary to separate "active" states and "inactive" states
-           "DONE(d)"           ; Task has been completed
-           "CANCELLED(c)"))    ; Task has been cancelled
-        ;; org-todo-keyword-faces
-        ;; `(("TODO" :foreground "#7c7c75" :weight normal :underline t)
-        ;;   ("WAITING" :foreground "#9f7efe" :weight normal :underline t)
-        ;;   ("INPROGRESS" :foreground "#0098dd" :weight normal :underline t)
-        ;;   ("DONE" :foreground "#50a14f" :weight normal :underline t)
-        ;;   ("CANCELLED" :foreground "#ff6480" :weight normal :underline t))))
-        deft-extensions '("txt" "tex" "org")
-        deft-directory "~/Org"
-        deft-recursive t
-        org-journal-date-prefix "#+TITLE: "
+  (setq org-journal-date-prefix "#+TITLE: "
         org-journal-time-prefix "* "
         org-journal-date-format "%a, %Y-%m-%d"
-        org-journal-file-format "%Y-%m-%d.org"
-        )
-  )
+        org-journal-file-format "%Y-%m-%d.org"))
+
+(after! org
+  (setq deft-extensions '("txt" "tex" "org")
+        deft-directory "~/Org"
+        deft-recursive t))
+
+(after! org
+  ;; TODO Agenda doesn't work in hidden directories and subdirectories
+  (setq org-agenda-files '("~/Org"
+                           "~/.config/doom"
+                           "~/Org/Roam"
+                           "~/Org/Roam/daily")
+        org-agenda-start-with-log-mode t
+        org-log-done 'time     ; Log time when task done
+        ;; NOTE I don't undestand this
+        org-log-into-drawer t
+        org-todo-keywords      ; This overwrites the default Doom org-todo-keywords
+        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+          (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)"))
+
+        ;; Configure custom agenda views
+        org-agenda-custom-commands
+        '(("d" "Dashboard"
+           ((agenda "" ((org-deadline-warning-days 7)))
+            (todo "NEXT"
+                  ((org-agenda-overriding-header "Next Tasks")))
+            (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+
+          ("n" "Next Tasks"
+           ((todo "NEXT"
+                  ((org-agenda-overriding-header "Next Tasks")))))
+
+          ("W" "Work Tasks" tags-todo "+work-email") ;; - for exclude tag
+
+          ;; Low-effort next actions
+          ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
+           ((org-agenda-overriding-header "Low Effort Tasks")
+            (org-agenda-max-todos 20)
+            (org-agenda-files org-agenda-files)))
+
+          ("w" "Workflow Status"
+           ((todo "WAIT"
+                  ((org-agenda-overriding-header "Waiting on External")
+                   (org-agenda-files org-agenda-files)))
+            (todo "REVIEW"
+                  ((org-agenda-overriding-header "In Review")
+                   (org-agenda-files org-agenda-files)))
+            (todo "PLAN"
+                  ((org-agenda-overriding-header "In Planning")
+                   (org-agenda-todo-list-sublevels nil)
+                   (org-agenda-files org-agenda-files)))
+            (todo "BACKLOG"
+                  ((org-agenda-overriding-header "Project Backlog")
+                   (org-agenda-todo-list-sublevels nil)
+                   (org-agenda-files org-agenda-files)))
+            (todo "READY"
+                  ((org-agenda-overriding-header "Ready for Work")
+                   (org-agenda-files org-agenda-files)))
+            (todo "ACTIVE"
+                  ((org-agenda-overriding-header "Active Projects")
+                   (org-agenda-files org-agenda-files)))
+            (todo "COMPLETED"
+                  ((org-agenda-overriding-header "Completed Projects")
+                   (org-agenda-files org-agenda-files)))
+            (todo "CANC"
+                  ((org-agenda-overriding-header "Cancelled Projects")
+                   (org-agenda-files org-agenda-files))))))
+
+        ;; default tags when org-set-tags-command
+        ;; when select tag use:
+        ;; SPC - clear all tags
+        ;; ! - add tag
+        ;; RET - add tag and exit
+        org-tag-alist
+        '((:startgroup)
+                                        ; Put mutually exclusive tags here
+          ("@errand" . ?E)
+          ("@home" . ?H)
+          ("@work" . ?W)
+          ("agenda" . ?a)
+          ("planning" . ?p)
+          ("publish" . ?P)
+          ("batch" . ?b)
+          ("note" . ?n)
+          ("idea" . ?i)
+          ("thinking" . ?t))
+
+        ;; Move task to another file
+        org-refile-targets
+        '(("Archive.org" :maxlevel . 2)
+          ("Tasks.org" :maxlevel . 1))
+        ;; Save Org buffers after refiling!
+        (advice-add 'org-refile :after 'org-save-all-org-buffers)
+
+
+        ))
+
+
+;; org-priority-faces     ; Colors for priority
+;; '((?A :foreground "#e45649")
+;;   (?B :foreground "#da8548")
+;;   (?C :foreground "#0098dd"))
+;; org-todo-keyword-faces
+;; `(("TODO" :foreground "#7c7c75" :weight normal :underline t)
+;;   ("WAITING" :foreground "#9f7efe" :weight normal :underline t)
+;;   ("INPROGRESS" :foreground "#0098dd" :weight normal :underline t)
+;;   ("DONE" :foreground "#50a14f" :weight normal :underline t)
+;;   ("CANCELLED" :foreground "#ff6480" :weight normal :underline t))))
 
 (after! org-roam
   (setq org-roam-directory "~/Org/Roam"
