@@ -63,16 +63,51 @@
 ;;           (?C :foreground "#0098dd"))))
 
 (after! org
-  ;; Move task to another file
   (setq org-refile-targets
         '(("Archive/2022-Archive.org" :maxlevel . 1)
           ("Tasks.org" :maxlevel . 1)))
   ;; Save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers))
 
+(defun dw/read-file-as-string (path)
+  (with-temp-buffer
+    (insert-file-contents path)
+    (buffer-string)))
+
+(after! org
+  (setq org-capture-templates
+        `(("t" "Tasks / Projects")
+          ("tt" "Task" entry (file+olp "~/Org/Tasks.org" "Inbox")
+           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
+          ("ts" "Clocked Entry Subtask" entry (clock)
+           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
+
+          ("j" "Journal Entries")
+          ("jj" "Journal" entry
+           (file+olp+datetree "~/Org/journal.org")
+           "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
+           ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
+           :clock-in :clock-resume
+           :empty-lines 1)
+          ("jm" "Meeting" entry
+           (file+olp+datetree "~/Org/journal.org")
+           "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
+           :clock-in :clock-resume
+           :empty-lines 1)
+
+          ("w" "Workflows")
+          ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal.org")
+           "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
+
+          ("m" "Metrics Capture")
+          ("mw" "Weight" table-line (file+headline "~/Org/metrics.org" "Weight")
+           "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)
+          ("mf" "Fitness" table-line (file+headline "~/Org/metrics.org" "Fitness")
+           "| %U | %^{Type} | %^{Notes} |" :kill-buffer t))))
+
 (after! org
   ;; TODO Agenda doesn't work in hidden directories and subdirectories
-  (setq org-agenda-files '("~/Org" "~/.config/doom" "~/Org/Roam" "~/Org/Roam/daily")
+  (setq org-agenda-files '("~/Org" "~/Org/Roam" "~/Org/Roam/daily")
         org-agenda-start-with-log-mode t
         org-log-done 'time     ; Log time when task done
         ;; NOTE I don't undestand this
@@ -141,8 +176,7 @@
         org-roam-dailies-directory "daily/" ; daily is default, put here for explicit
         org-roam-completion-everywhere t  ; Try complete roam links everywhere (outside of [[]])
         org-roam-capture-templates
-        '(
-          ("d" "default" plain
+        '(("d" "default" plain
            (file "~/Org/Roam/Templates/DefaultTemplate.org")
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
            :unnarrowed t)
@@ -153,15 +187,13 @@
           ("p" "project" plain
            (file "~/Org/Roam/Templates/ProjectTemplate.org")
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:")
-           :unnarrowed t)
-          )
-        )
+           :unnarrowed t)))
   ;; TODO work, but error when start emacs
   ;; (map! ("C-M-i" . completion-at-point))
+  ;; NOTE try but doesn't work
+  ;; (define-key global-map (kbd "C-M-i") #'completion-at-point)
   (map! :leader
-        :desc "Insert immediate node" "n r I" #'org-roam-node-insert-immediate
-        )
-  )
+        :desc "Insert immediate node" "n r I" #'org-roam-node-insert-immediate))
 
 (defun org-roam-node-insert-immediate (arg &rest args)
   (interactive "P")
