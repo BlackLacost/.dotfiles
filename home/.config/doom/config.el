@@ -64,7 +64,7 @@
 
 (after! org
   (setq org-refile-targets
-        '(("Archive/2022-Archive.org" :maxlevel . 1)
+        '(("2022-Archive.org" :maxlevel . 1)
           ("Tasks.org" :maxlevel . 1)))
   ;; Save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers))
