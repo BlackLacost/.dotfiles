@@ -21,13 +21,6 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-(use-package org-fancy-priorities
-  :ensure t
-  :hook
-  (org-mode . org-fancy-priorities-mode)
-  :config
-  (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
-
 (setq org-directory "~/Org/")
 
 (after! org
@@ -42,25 +35,65 @@
         deft-recursive t))
 
 (after! org
+  (setq org-tag-alist
+        '((:startgroup)
+          ;; Put mutually exclusive tags here
+          (:endgroup)
+          ("@errand" . ?E)
+          ("@home" . ?H)
+          ("@work" . ?W)
+          ("agenda" . ?a)
+          ("planning" . ?p)
+          ("publish" . ?P)
+          ("batch" . ?b)
+          ("note" . ?n)
+          ("idea" . ?i))))
+
+(use-package org-fancy-priorities
+  :ensure t
+  :hook
+  (org-mode . org-fancy-priorities-mode)
+  :config
+  (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
+
+;; (after! org
+;;   (setq org-priority-faces
+;;         '((?A :foreground "#e45649")
+;;           (?B :foreground "#da8548")
+;;           (?C :foreground "#0098dd"))))
+
+(after! org
+  ;; Move task to another file
+  (setq org-refile-targets
+        '(("Archive/2022-Archive.org" :maxlevel . 1)
+          ("Tasks.org" :maxlevel . 1)))
+  ;; Save Org buffers after refiling!
+  (advice-add 'org-refile :after 'org-save-all-org-buffers))
+
+(after! org
   ;; TODO Agenda doesn't work in hidden directories and subdirectories
-  (setq org-agenda-files '("~/Org"
-                           "~/.config/doom"
-                           "~/Org/Roam"
-                           "~/Org/Roam/daily")
+  (setq org-agenda-files '("~/Org" "~/.config/doom" "~/Org/Roam" "~/Org/Roam/daily")
         org-agenda-start-with-log-mode t
         org-log-done 'time     ; Log time when task done
         ;; NOTE I don't undestand this
-        org-log-into-drawer t
-        org-todo-keywords      ; This overwrites the default Doom org-todo-keywords
-        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-          (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)"))
+        org-log-into-drawer t))
 
-        ;; Configure custom agenda views
-        org-agenda-custom-commands
+(after! org
+  (setq org-todo-keywords      ; This overwrites the default Doom org-todo-keywords
+        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+          (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)"))))
+        ;; org-todo-keyword-faces
+        ;; `(("TODO" :foreground "#7c7c75" :weight normal :underline t)
+        ;;   ("WAIT" :foreground "#9f7efe" :weight normal :underline t)
+        ;;   ("NEXT" :foreground "#0098dd" :weight normal :underline t)
+        ;;   ("DONE" :foreground "#50a14f" :weight normal :underline t)
+        ;;   ("CANC" :foreground "#ff6480" :weight normal :underline t))
+
+(after! org
+  (setq org-agenda-custom-commands
         '(("d" "Dashboard"
            ((agenda "" ((org-deadline-warning-days 7)))
-            (todo "NEXT"
-                  ((org-agenda-overriding-header "Next Tasks")))
+            (todo "NEXT" ((org-agenda-overriding-header "Next Tasks")))
             (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
 
           ("n" "Next Tasks"
@@ -101,48 +134,7 @@
                    (org-agenda-files org-agenda-files)))
             (todo "CANC"
                   ((org-agenda-overriding-header "Cancelled Projects")
-                   (org-agenda-files org-agenda-files))))))
-
-        ;; default tags when org-set-tags-command
-        ;; when select tag use:
-        ;; SPC - clear all tags
-        ;; ! - add tag
-        ;; RET - add tag and exit
-        org-tag-alist
-        '((:startgroup)
-                                        ; Put mutually exclusive tags here
-          ("@errand" . ?E)
-          ("@home" . ?H)
-          ("@work" . ?W)
-          ("agenda" . ?a)
-          ("planning" . ?p)
-          ("publish" . ?P)
-          ("batch" . ?b)
-          ("note" . ?n)
-          ("idea" . ?i)
-          ("thinking" . ?t))
-
-        ;; Move task to another file
-        org-refile-targets
-        '(("Archive.org" :maxlevel . 2)
-          ("Tasks.org" :maxlevel . 1))
-        ;; Save Org buffers after refiling!
-        (advice-add 'org-refile :after 'org-save-all-org-buffers)
-
-
-        ))
-
-
-;; org-priority-faces     ; Colors for priority
-;; '((?A :foreground "#e45649")
-;;   (?B :foreground "#da8548")
-;;   (?C :foreground "#0098dd"))
-;; org-todo-keyword-faces
-;; `(("TODO" :foreground "#7c7c75" :weight normal :underline t)
-;;   ("WAITING" :foreground "#9f7efe" :weight normal :underline t)
-;;   ("INPROGRESS" :foreground "#0098dd" :weight normal :underline t)
-;;   ("DONE" :foreground "#50a14f" :weight normal :underline t)
-;;   ("CANCELLED" :foreground "#ff6480" :weight normal :underline t))))
+                   (org-agenda-files org-agenda-files))))))))
 
 (after! org-roam
   (setq org-roam-directory "~/Org/Roam"
