@@ -42,6 +42,7 @@
           ("@errand" . ?E)
           ("@home" . ?H)
           ("@work" . ?W)
+          ("@street" . ?S)
           ("agenda" . ?a)
           ("planning" . ?p)
           ("publish" . ?P)
@@ -128,11 +129,18 @@
   (setq org-agenda-custom-commands
         '(("d" "Dashboard"
            ((agenda "" ((org-deadline-warning-days 7)))
-            (todo "NEXT" ((org-agenda-overriding-header "Next Tasks")))
-            (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+            (tags-todo "+PRIORITY=\"A\""
+                       ((org-agenda-overriding-header "High Priority")))
+            (todo "NEXT"
+                  ((org-agenda-overriding-header "Next Actions")
+                   (org-agenda-max-todos nil)))
+            (todo "TODO"
+                  ((org-agenda-overriding-header "Unprocessed Inbox Tasks")
+                   (org-agenda-text-search-extra-files nil)))))
 
           ("n" "Next Tasks"
-           ((todo "NEXT"
+           ((agenda "" ((org-deadline-warning-days 7)))
+            (todo "NEXT"
                   ((org-agenda-overriding-header "Next Tasks")))))
 
           ("W" "Work Tasks" tags-todo "+work-email") ;; - for exclude tag
@@ -170,6 +178,13 @@
             (todo "CANC"
                   ((org-agenda-overriding-header "Cancelled Projects")
                    (org-agenda-files org-agenda-files))))))))
+
+;; (after! org
+;;   (require 'org-habit)
+;;   (add-tolist 'org-modules 'org-habit)
+;;   (after! org
+;;     (setq! org-habit-graph-column 60))
+;;   )
 
 (after! org-roam
   (setq org-roam-directory "~/Org/Roam"
