@@ -21,109 +21,14 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-(setq org-directory "~/Org/")
-
-(after! org
-  (setq org-journal-date-prefix "#+TITLE: "
-        org-journal-time-prefix "* "
-        org-journal-date-format "%a, %Y-%m-%d"
-        org-journal-file-format "%Y-%m-%d.org"))
-
-(after! org
-  (setq deft-extensions '("txt" "tex" "org")
-        deft-directory "~/Org"
-        deft-recursive t))
-
-(after! org
-  (setq org-tag-alist
-        '((:startgroup)
-          ;; Put mutually exclusive tags here
-          (:endgroup)
-          ("@errand" . ?E)
-          ("@home" . ?H)
-          ("@work" . ?W)
-          ("@street" . ?S)
-          ("agenda" . ?a)
-          ("planning" . ?p)
-          ("publish" . ?P)
-          ("batch" . ?b)
-          ("note" . ?n)
-          ("idea" . ?i))))
-
-(use-package org-fancy-priorities
-  :ensure t
-  :hook
-  (org-mode . org-fancy-priorities-mode)
-  :config
-  (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
-
-;; (after! org
-;;   (setq org-priority-faces
-;;         '((?A :foreground "#e45649")
-;;           (?B :foreground "#da8548")
-;;           (?C :foreground "#0098dd"))))
-
-(after! org
-  (setq org-refile-targets
-        '(("2022-Archive.org" :maxlevel . 1)
-          ("Tasks.org" :maxlevel . 1)))
-  ;; Save Org buffers after refiling!
-  (advice-add 'org-refile :after 'org-save-all-org-buffers))
-
-(defun dw/read-file-as-string (path)
-  (with-temp-buffer
-    (insert-file-contents path)
-    (buffer-string)))
-
-(after! org
-  (setq org-capture-templates
-        `(("t" "Tasks / Projects")
-          ("tt" "Task" entry (file+olp "~/Org/Tasks.org" "Inbox")
-           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
-          ("ts" "Clocked Entry Subtask" entry (clock)
-           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
-
-          ("j" "Journal Entries")
-          ("jj" "Journal" entry
-           (file+olp+datetree "~/Org/journal.org")
-           "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
-           ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
-           :clock-in :clock-resume
-           :empty-lines 1)
-          ("jm" "Meeting" entry
-           (file+olp+datetree "~/Org/journal.org")
-           "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
-           :clock-in :clock-resume
-           :empty-lines 1)
-
-          ("w" "Workflows")
-          ("we" "Checking Email" entry (file+olp+datetree "~/Org/journal.org")
-           "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
-
-          ("m" "Metrics Capture")
-          ("mw" "Weight" table-line (file+headline "~/Org/metrics.org" "Weight")
-           "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)
-          ("mf" "Fitness" table-line (file+headline "~/Org/metrics.org" "Fitness")
-           "| %U | %^{Type} | %^{Notes} |" :kill-buffer t))))
-
 (after! org
   ;; TODO Agenda doesn't work in hidden directories and subdirectories
-  (setq org-agenda-files '("~/Org" "~/Org/Roam" "~/Org/Roam/daily")
+  (setq org-agenda-files '("~/mail_cloud/org/gtd/inbox.org" "~/mail_cloud/org/gtd/gtd.org" "~/mail_cloud/org/gtd/tickler.org" "~/mail_cloud/org/habit.org")
         org-agenda-start-with-log-mode t
         org-log-done 'time     ; Log time when task done
+        org-log-reschedule nil
         ;; NOTE I don't undestand this
         org-log-into-drawer t))
-
-(after! org
-  (setq org-todo-keywords      ; This overwrites the default Doom org-todo-keywords
-        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-          (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)"))))
-        ;; org-todo-keyword-faces
-        ;; `(("TODO" :foreground "#7c7c75" :weight normal :underline t)
-        ;;   ("WAIT" :foreground "#9f7efe" :weight normal :underline t)
-        ;;   ("NEXT" :foreground "#0098dd" :weight normal :underline t)
-        ;;   ("DONE" :foreground "#50a14f" :weight normal :underline t)
-        ;;   ("CANC" :foreground "#ff6480" :weight normal :underline t))
 
 (after! org
   (setq org-agenda-custom-commands
@@ -179,28 +84,90 @@
                   ((org-agenda-overriding-header "Cancelled Projects")
                    (org-agenda-files org-agenda-files))))))))
 
-;; (after! org
-;;   (require 'org-habit)
-;;   (add-tolist 'org-modules 'org-habit)
-;;   (after! org
-;;     (setq! org-habit-graph-column 60))
-;;   )
+(defun dw/read-file-as-string (path)
+  (with-temp-buffer
+    (insert-file-contents path)
+    (buffer-string)))
+
+(after! org
+  (setq org-capture-templates
+        `(("t" "Tasks / Projects")
+          ("tt" "Task" entry (file "~/mail_cloud/org/gtd/inbox.org")
+           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
+          ("ts" "Clocked Entry Subtask" entry (clock)
+           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
+
+          ("j" "Journal Entries")
+          ("jj" "Journal" entry
+           (file+olp+datetree "~/mail_cloud/org/journal.org")
+           "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
+           ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
+           :clock-in :clock-resume
+           :empty-lines 1)
+          ("jm" "Meeting" entry
+           (file+olp+datetree "~/mail_cloud/org/journal.org")
+           "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
+           :clock-in :clock-resume
+           :empty-lines 1)
+
+          ("w" "Workflows")
+          ("we" "Checking Email" entry (file+olp+datetree "~/mail_cloud/org/journal.org")
+           "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
+
+          ("m" "Metrics Capture")
+          ("mw" "Weight" table-line (file+headline "~/mail_cloud/org/metrics.org" "Weight")
+           "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)
+          ("mf" "Fitness" table-line (file+headline "~/mail_cloud/org/metrics.org" "Fitness")
+           "| %U | %^{Type} | %^{Notes} |" :kill-buffer t))))
+
+(after! org
+  (setq deft-extensions '("txt" "tex" "org")
+        deft-directory "~/mail_cloud/org"
+        deft-recursive t))
+
+(setq org-directory "~/mail_cloud/org/")
+
+(use-package! org-gtd
+  :after org
+  :config
+  (map! :leader
+        (:prefix ("d" . "GDT")
+         :desc "Add" "a" #'org-gtd-capture
+         :desc "Engage" "e" #'org-gtd-engage
+         :desc "Process Inbox" "p" #'org-gtd-process-inbox
+         :desc "Show All Next" "n" #'org-gtd-show-all-next
+         :desc "Show Stuck Projects" "s" #'org-gtd-show-all-next
+         :desc "Choose" "c" #'org-gtd-choose
+         ))
+  (define-key org-gtd-process-map (kbd "C-c c") #'org-gtd-choose)
+  )
+
+;; (require 'org-habit)
+;; (add-tolist 'org-modules 'org-habit)
+(after! org
+  (setq! org-habit-graph-column 60))
+
+(after! org
+  (setq org-journal-date-prefix "#+TITLE: "
+        org-journal-time-prefix "* "
+        org-journal-date-format "%a, %Y-%m-%d"
+        org-journal-file-format "%Y-%m-%d.org"))
 
 (after! org-roam
-  (setq org-roam-directory "~/Org/Roam"
+  (setq org-roam-directory "~/mail_cloud/org/roam"
         org-roam-dailies-directory "daily/" ; daily is default, put here for explicit
         org-roam-completion-everywhere t  ; Try complete roam links everywhere (outside of [[]])
         org-roam-capture-templates
         '(("d" "default" plain
-           (file "~/Org/Roam/Templates/DefaultTemplate.org")
+           (file "~/mail_cloud/org/roam/templates/default_template.org")
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
            :unnarrowed t)
           ("b" "book notes" plain
-           (file "~/Org/Roam/Templates/BookNoteTemplate.org")
+           (file "~/mail_cloud/org/roam/templates/book_note_template.org")
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
            :unnarrowed t)
           ("p" "project" plain
-           (file "~/Org/Roam/Templates/ProjectTemplate.org")
+           (file "~/mail_cloud/org/roam/templates/project_template.org")
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:")
            :unnarrowed t)))
   ;; TODO work, but error when start emacs
@@ -234,20 +201,57 @@
 ;; Build the agenda list the first time for the session
 ;; (my/org-roam-refresh-agenda-list)
 
-(use-package! org-gtd
-  :after org
+(use-package org-fancy-priorities
+  :ensure t
+  :hook
+  (org-mode . org-fancy-priorities-mode)
   :config
-  (map! :leader
-        (:prefix ("d" . "GDT")
-         :desc "Add" "a" #'org-gtd-capture
-         :desc "Engage" "e" #'org-gtd-engage
-         :desc "Process Inbox" "p" #'org-gtd-process-inbox
-         :desc "Show All Next" "n" #'org-gtd-show-all-next
-         :desc "Show Stuck Projects" "s" #'org-gtd-show-all-next
-         :desc "Choose" "c" #'org-gtd-choose
-         ))
-  (define-key org-gtd-process-map (kbd "C-c c") #'org-gtd-choose)
-  )
+  (setq org-fancy-priorities-list '("⚡" "⬆" "⬇" "☕")))
+
+;; (after! org
+;;   (setq org-priority-faces
+;;         '((?A :foreground "#e45649")
+;;           (?B :foreground "#da8548")
+;;           (?C :foreground "#0098dd"))))
+
+(after! org
+  (setq org-refile-targets
+        '(("~/mail_cloud/org/gtd/gtd.org" :maxlevel . 3)
+          ("~/mail_cloud/org/gtd/someday.org" :level . 1)
+          ("~/mail_cloud/org/gtd/tickler.org" :maxlevel . 2)))
+  ;; Save Org buffers after refiling!
+  (advice-add 'org-refile :after 'org-save-all-org-buffers))
+
+(after! org
+  (setq org-todo-repeat-to-state "NEXT"))
+
+(after! org
+  (setq org-tag-alist
+        '((:startgroup)
+          ;; Put mutually exclusive tags here
+          (:endgroup)
+          ("@errand" . ?E)
+          ("@home" . ?H)
+          ("@phone" . ?P)
+          ("@work" . ?W)
+          ("@street" . ?S)
+          ("agenda" . ?a)
+          ("planning" . ?p)
+          ("publish" . ?P)
+          ("batch" . ?b)
+          ("note" . ?n)
+          ("idea" . ?i))))
+
+(after! org
+  (setq org-todo-keywords      ; This overwrites the default Doom org-todo-keywords
+        '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+          (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)"))))
+        ;; org-todo-keyword-faces
+        ;; `(("TODO" :foreground "#7c7c75" :weight normal :underline t)
+        ;;   ("WAIT" :foreground "#9f7efe" :weight normal :underline t)
+        ;;   ("NEXT" :foreground "#0098dd" :weight normal :underline t)
+        ;;   ("DONE" :foreground "#50a14f" :weight normal :underline t)
+        ;;   ("CANC" :foreground "#ff6480" :weight normal :underline t))
 
 (map! :leader
       (:prefix ("r" . "registers")
