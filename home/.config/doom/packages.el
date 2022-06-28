@@ -49,5 +49,6 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (package! beacon)                    ; Подсветка курсора при переключение окна
+(package! openwith)
 (package! org-fancy-priorities)      ; Иконки для приоритета задач
 (package! org-gtd)

@@ -87,7 +87,8 @@ I wrapped most of this block in (after! org).  Without this, my settings might b
 #+begin_src emacs-lisp
 (after! org
   ;; TODO Agenda doesn't work in hidden directories and subdirectories
-  (setq org-agenda-files '("~/mail_cloud/org/gtd/inbox.org" "~/mail_cloud/org/gtd/gtd.org" "~/mail_cloud/org/gtd/tickler.org" "~/mail_cloud/org/habit.org")
+  ;; (setq org-agenda-files '("~/cloud/mailru/org/gtd/inbox.org" "~/cloud/mailru/org/gtd/gtd.org" "~/cloud/mailru/org/gtd/tickler.org" "~/cloud/mailru/org/habit.org")
+  (setq org-agenda-files (list "gtd/inbox.org" "gtd/gtd.org" "gtd/tickler.org" "habit.org")
         org-agenda-start-with-log-mode t
         org-log-done 'time     ; Log time when task done
         org-log-reschedule nil
@@ -116,8 +117,7 @@ Configure custom agenda views
 
           ("n" "Next Tasks"
            ((agenda "" ((org-deadline-warning-days 7)))
-            (todo "NEXT"
-                  ((org-agenda-overriding-header "Next Tasks")))))
+            (todo "NEXT" ((org-agenda-overriding-header "Next Tasks")))))
 
           ("W" "Work Tasks" tags-todo "+work-email") ;; - for exclude tag
 
@@ -173,33 +173,40 @@ Configure custom agenda views
 
 (after! org
   (setq org-capture-templates
-        `(("t" "Tasks / Projects")
-          ("tt" "Task" entry (file "~/mail_cloud/org/gtd/inbox.org")
+        `(("i" "Inbox" entry (file "gtd/inbox.org")
+           ,(concat "* TODO %?\n"
+                    "/Entered on/ %U"))
+          ("@" "Inbox [mu4e]" entry (file "inbox.org")
+           ,(concat "* TODO Process \"%a\" %?\n"
+                    "/Entered on/ %U"))
+
+          ("t" "Tasks / Projects")
+          ("tt" "Task" entry (file "gtd/inbox.org")
            "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
           ("ts" "Clocked Entry Subtask" entry (clock)
            "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
 
           ("j" "Journal Entries")
           ("jj" "Journal" entry
-           (file+olp+datetree "~/mail_cloud/org/journal.org")
+           (file+olp+datetree "~/cloud/mailru/org/journal.org")
            "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
            ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
            :clock-in :clock-resume
            :empty-lines 1)
           ("jm" "Meeting" entry
-           (file+olp+datetree "~/mail_cloud/org/journal.org")
+           (file+olp+datetree "~/cloud/mailru/org/journal.org")
            "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
            :clock-in :clock-resume
            :empty-lines 1)
 
           ("w" "Workflows")
-          ("we" "Checking Email" entry (file+olp+datetree "~/mail_cloud/org/journal.org")
+          ("we" "Checking Email" entry (file+olp+datetree "~/cloud/mailru/org/journal.org")
            "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
 
           ("m" "Metrics Capture")
-          ("mw" "Weight" table-line (file+headline "~/mail_cloud/org/metrics.org" "Weight")
+          ("mw" "Weight" table-line (file+headline "~/cloud/mailru/org/metrics.org" "Weight")
            "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)
-          ("mf" "Fitness" table-line (file+headline "~/mail_cloud/org/metrics.org" "Fitness")
+          ("mf" "Fitness" table-line (file+headline "~/cloud/mailru/org/metrics.org" "Fitness")
            "| %U | %^{Type} | %^{Notes} |" :kill-buffer t))))
 #+end_src
 
@@ -208,7 +215,7 @@ Configure custom agenda views
 #+begin_src emacs-lisp
 (after! org
   (setq deft-extensions '("txt" "tex" "org")
-        deft-directory "~/mail_cloud/org"
+        deft-directory "~/cloud/mailru/org"
         deft-recursive t))
 #+end_src
 
@@ -216,7 +223,7 @@ Configure custom agenda views
 If you use `org' and don't want your org files in the default location below, change `org-directory'. It must be set before org loads!
 
 #+begin_src emacs-lisp
-(setq org-directory "~/mail_cloud/org/")
+(setq org-directory "~/cloud/mailru/org/")
 #+end_src
 
 ** GTD
@@ -282,20 +289,20 @@ Daily directory must be *RELATIVE* to roam directory.
 
 #+begin_src emacs-lisp
 (after! org-roam
-  (setq org-roam-directory "~/mail_cloud/org/roam"
+  (setq org-roam-directory "~/cloud/mailru/org/roam"
         org-roam-dailies-directory "daily/" ; daily is default, put here for explicit
         org-roam-completion-everywhere t  ; Try complete roam links everywhere (outside of [[]])
         org-roam-capture-templates
         '(("d" "default" plain
-           (file "~/mail_cloud/org/roam/templates/default_template.org")
+           (file "~/cloud/mailru/org/roam/templates/default_template.org")
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
            :unnarrowed t)
           ("b" "book notes" plain
-           (file "~/mail_cloud/org/roam/templates/book_note_template.org")
+           (file "~/cloud/mailru/org/roam/templates/book_note_template.org")
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
            :unnarrowed t)
           ("p" "project" plain
-           (file "~/mail_cloud/org/roam/templates/project_template.org")
+           (file "~/cloud/mailru/org/roam/templates/project_template.org")
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: :project:")
            :unnarrowed t)))
   ;; TODO work, but error when start emacs
@@ -367,9 +374,9 @@ Colors for priority
 #+begin_src emacs-lisp
 (after! org
   (setq org-refile-targets
-        '(("~/mail_cloud/org/gtd/gtd.org" :maxlevel . 3)
-          ("~/mail_cloud/org/gtd/someday.org" :level . 1)
-          ("~/mail_cloud/org/gtd/tickler.org" :maxlevel . 2)))
+        '(("~/cloud/mailru/org/gtd/gtd.org" :maxlevel . 3)
+          ("~/cloud/mailru/org/gtd/someday.org" :level . 1)
+          ("~/cloud/mailru/org/gtd/tickler.org" :maxlevel . 2)))
   ;; Save Org buffers after refiling!
   (advice-add 'org-refile :after 'org-save-all-org-buffers))
 #+end_src

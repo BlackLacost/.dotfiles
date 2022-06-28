@@ -8,3 +8,5 @@ packer_compiled.lua
 # Ignore vifm files
 vifminfo.json
 vifm-help.txt
+
+watch_later/
