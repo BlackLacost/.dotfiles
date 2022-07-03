@@ -52,6 +52,12 @@
     "strings": true
   },
   "editor.copyWithSyntaxHighlighting": true,
+
+  // Import
+  "javascript.suggest.autoImports": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+
   // Colorized brackets
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
@@ -120,7 +126,7 @@
   "window.openFoldersInNewWindow": "on",
   "window.menuBarVisibility": "toggle",
   "window.zoomLevel": 2,
-  "workbench.iconTheme": "material-icon-theme",
+  "workbench.iconTheme": "eq-material-theme-icons-darker",
   "workbench.colorTheme": "Material Theme Darker High Contrast",
   "task.problemMatchers.neverPrompt": {
     "npm": true
@@ -204,9 +210,6 @@
     "editor.formatOnSave": true,
     "editor.tabSize": 2
   },
-
-  // TypeScript
-  "typescript.preferences.importModuleSpecifier": "non-relative",
 
   // PLUGINS
   "extensions.autoUpdate": true,
