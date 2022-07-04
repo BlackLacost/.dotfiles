@@ -4,9 +4,14 @@ DOTFILES_DIR=$HOME/.dotfiles
 
 source $DOTFILES_DIR/linux/nvm_install.sh
 
+ln -sfr $DOTFILES_DIR/home/.config/bashrc/ ~/.config
+if ! grep -qF "source ~/.config/bashrc/basic.sh" ~/.bashrc; then
+  echo "source ~/.config/bashrc/basic.sh" >> ~/.bashrc
+fi
+
 # Link directories
 # ln -sr $HOME/.dotfiles/config/vifm ~/.config -f
-ln -sfr $DOTFILES_DIR/config/nvim ~/.config
+ln -sfr $DOTFILES_DIR/config/nvim/ ~/.config
 ln -sfr $DOTFILES_DIR/home/.config/alacritty/ ~/.config
 ln -sfr $DOTFILES_DIR/home/.config/doom/ ~/.config
 if ! grep -qF "source ~/.config/doom/bashrc" ~/.bashrc; then
