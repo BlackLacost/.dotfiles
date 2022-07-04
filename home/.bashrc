@@ -8,6 +8,8 @@ echo "bashrc loading..."
 [[ $- != *i* ]] && return
 echo "bashrc interactively loading..."
 
+mkcd() { mkdir -p "$@" && cd "$@"; }
+
 alias ls='ls --color=auto'
 alias g=git
 alias ggl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
