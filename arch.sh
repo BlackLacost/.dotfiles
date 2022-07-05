@@ -4,14 +4,22 @@ DOTFILES_DIR=$HOME/.dotfiles
 
 source $DOTFILES_DIR/linux/nvm_install.sh
 
+# Basic
 ln -sfr $DOTFILES_DIR/home/.config/bashrc/ ~/.config
 if ! grep -qF "source ~/.config/bashrc/basic.sh" ~/.bashrc; then
   echo "source ~/.config/bashrc/basic.sh" >> ~/.bashrc
 fi
 
+# Git
 ln -sfr $DOTFILES_DIR/home/.config/git/ ~/.config
 if ! grep -qF "source ~/.config/git/bashrc.sh" ~/.bashrc; then
   echo "source ~/.config/git/bashrc.sh" >> ~/.bashrc
+fi
+
+# Wireguard
+ln -sfr $DOTFILES_DIR/home/.config/wireguard/ ~/.config
+if ! grep -qF "source ~/.config/wireguard/bashrc.sh" ~/.bashrc; then
+  echo "source ~/.config/wireguard/bashrc.sh" >> ~/.bashrc
 fi
 
 # Link directories
