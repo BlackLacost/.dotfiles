@@ -9,6 +9,11 @@ if ! grep -qF "source ~/.config/bashrc/basic.sh" ~/.bashrc; then
   echo "source ~/.config/bashrc/basic.sh" >> ~/.bashrc
 fi
 
+ln -sfr $DOTFILES_DIR/home/.config/git/ ~/.config
+if ! grep -qF "source ~/.config/git/bashrc.sh" ~/.bashrc; then
+  echo "source ~/.config/git/bashrc.sh" >> ~/.bashrc
+fi
+
 # Link directories
 # ln -sr $HOME/.dotfiles/config/vifm ~/.config -f
 ln -sfr $DOTFILES_DIR/config/nvim/ ~/.config
