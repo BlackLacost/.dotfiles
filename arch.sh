@@ -16,6 +16,9 @@ if ! grep -qF "source ~/.config/git/bashrc.sh" ~/.bashrc; then
   echo "source ~/.config/git/bashrc.sh" >> ~/.bashrc
 fi
 
+#Rclone
+ln -sf $DOTFILES_DIR/home/.config/systemd/user/rclone@mailru.service ~/.config/systemd/user
+
 # Wireguard
 ln -sfr $DOTFILES_DIR/home/.config/wireguard/ ~/.config
 if ! grep -qF "source ~/.config/wireguard/bashrc.sh" ~/.bashrc; then
