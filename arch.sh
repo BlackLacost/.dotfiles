@@ -25,9 +25,15 @@ if ! grep -qF "source ~/.config/wireguard/bashrc.sh" ~/.bashrc; then
   echo "source ~/.config/wireguard/bashrc.sh" >> ~/.bashrc
 fi
 
+# vscode
+ln -sfr $DOTFILES_DIR/config/vscode/snippets ~/.config/Code/User
+ln -sf $DOTFILES_DIR/config/vscode/keybindings.json ~/.config/Code/User
+ln -sf $DOTFILES_DIR/config/vscode/settings.json ~/.config/Code/User
+
 # Link directories
 # ln -sr $HOME/.dotfiles/config/vifm ~/.config -f
 ln -sfr $DOTFILES_DIR/config/nvim/ ~/.config
+ln -sfr $DOTFILES_DIR/config/anki/addons21 ~/.local/share/Anki2
 ln -sfr $DOTFILES_DIR/home/.config/alacritty/ ~/.config
 ln -sfr $DOTFILES_DIR/home/.config/doom/ ~/.config
 if ! grep -qF "source ~/.config/doom/bashrc" ~/.bashrc; then
@@ -36,8 +42,6 @@ fi
 ln -sfr $DOTFILES_DIR/home/.config/zathura/ ~/.config
 
 # Link files
-ln -sf $DOTFILES_DIR/config/vscode/keybindings.json ~/.config/Code/User
-ln -sf $DOTFILES_DIR/config/vscode/settings.json ~/.config/Code/User
 ln -sf $DOTFILES_DIR/home/.gitconfig ~
 # ln -s $HOME/.dotfiles/config/git/.gitconfig ~ -f
 # ln -s $HOME/.dotfiles/config/npm/.npmrc ~ -f
