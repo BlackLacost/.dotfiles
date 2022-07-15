@@ -2,6 +2,9 @@
 email = blacklacost@gmail.com
 name = Ilya Lisin
 
+[init]
+defaultBranch = "main"
+
 [core]
 editor = "code -w"
 autocrlf = input
