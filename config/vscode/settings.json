@@ -352,5 +352,6 @@
   "terminal.integrated.enableMultiLinePasteWarning": false,
   "[env]": {
     "editor.defaultFormatter": "IronGeek.vscode-env"
-  }
+  },
+  "workbench.activityBar.visible": false
 }
