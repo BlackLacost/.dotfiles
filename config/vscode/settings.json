@@ -32,15 +32,23 @@
   // Common
   "window.restoreWindows": "all",
 
+  // Imports
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "source.addMissingImports": true
+  },
+  "editor.foldingImportsByDefault": false,
+  "javascript.suggest.autoImports": true,
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
   // Editor
   "editor.acceptSuggestionOnEnter": "off",
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.autoClosingBrackets": "beforeWhitespace",
   "editor.autoClosingQuotes": "beforeWhitespace",
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true,
-    "source.addMissingImports": true
-  },
   "editor.fontFamily": "Monoid, Monoid NF",
   "editor.fontSize": 12,
   "editor.fontLigatures": true,
@@ -52,11 +60,6 @@
     "strings": true
   },
   "editor.copyWithSyntaxHighlighting": true,
-
-  // Import
-  "javascript.suggest.autoImports": true,
-  "typescript.preferences.importModuleSpecifier": "non-relative",
-  "javascript.preferences.importModuleSpecifier": "non-relative",
 
   // Colorized brackets
   "editor.bracketPairColorization.enabled": true,
@@ -124,7 +127,6 @@
     }
   },
   "window.openFoldersInNewWindow": "on",
-  "window.menuBarVisibility": "toggle",
   "window.zoomLevel": 2,
   "workbench.iconTheme": "eq-material-theme-icons-darker",
   "workbench.colorTheme": "Material Theme Darker High Contrast",
@@ -132,8 +134,6 @@
     "npm": true
   },
   "explorer.confirmDragAndDrop": false,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "typescript.updateImportsOnFileMove.enabled": "always",
   "explorer.confirmDelete": false,
   "todo-tree.tree.showScanModeButton": false,
   "vsicons.dontShowNewVersionMessage": true,
@@ -232,6 +232,10 @@
   // "vim.autoSwitchInputMethod.defaultIM": "1033",
   // "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe",
   // "vim.autoSwitchInputMethod.switchIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe {im}",
+  "vim.autoSwitchInputMethod.enable": true,
+  "vim.autoSwitchInputMethod.defaultIM": "us",
+  "vim.autoSwitchInputMethod.obtainIMCmd": "/usr/bin/xkb-switch",
+  "vim.autoSwitchInputMethod.switchIMCmd": "/usr/bin/xkb-switch -s {im}",
   "vim.camelCaseMotion.enable": true,
   "vim.easymotion": true,
   "vim.ignorecase": true,
@@ -353,5 +357,6 @@
   "[env]": {
     "editor.defaultFormatter": "IronGeek.vscode-env"
   },
-  "workbench.activityBar.visible": false
+  "workbench.activityBar.visible": false,
+  "window.menuBarVisibility": "toggle"
 }

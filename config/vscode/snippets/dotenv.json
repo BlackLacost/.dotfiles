@@ -15,5 +15,15 @@
       "DATABASE_URL=\"postgresql://\\${DB_USER}:\\${DB_PASS}@\\${DB_HOST}:\\${DB_PORT}/\\${DB_NAME}?schema=public\""
     ],
     "description": "Postgresql DATABASE_URL desc"
+  },
+  "Heroku API envoroments": {
+    "prefix": "hapi",
+    "body": [
+      "PREFIX=${1:bl}",
+      "PROJECT_NAME=${2:site-api}",
+      "TOKEN_SECRET=${3:super_secret}",
+      "TOKEN_EXPIRE=${4:1h}",
+      "CLIENT_URL=$0"
+    ]
   }
 }

@@ -610,5 +610,9 @@
     "key": "down",
     "command": "-list.focusDown",
     "when": "listFocus && !inputFocus"
+  },
+  {
+    "key": "ctrl+, ctrl+s",
+    "command": "workbench.action.openSnippets"
   }
 ]
