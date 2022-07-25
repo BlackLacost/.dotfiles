@@ -1,5 +1,0 @@
-[volume]
-command=~/.local/bin/statusbar/volume
-LABEL=VOL 
-interval=once
-signal=10

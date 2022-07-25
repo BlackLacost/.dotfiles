@@ -127,7 +127,7 @@
     }
   },
   "window.openFoldersInNewWindow": "on",
-  "window.zoomLevel": 2,
+  "window.zoomLevel": 3,
   "workbench.iconTheme": "eq-material-theme-icons-darker",
   "workbench.colorTheme": "Material Theme Darker High Contrast",
   "task.problemMatchers.neverPrompt": {
@@ -288,6 +288,7 @@
   "vetur.validation.template": false,
 
   // Eslint
+  "eslint.enable": false,
   "eslint.validate": ["vue", "html", "javascript"],
 
   // Stylelint
