@@ -1,5 +1,6 @@
 *~
 .cache/
+watch_later/
 .nvimlog
 
 # Ignore auto gen file by packer
