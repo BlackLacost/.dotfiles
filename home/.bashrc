@@ -27,7 +27,6 @@ export EDITOR=nvim
 export BROWSER=firefox
 export READER="zathura"
 
-
 ##  256-colors in terminal for apps that knows how to use it.
 # export TERM=xterm-256color
 
@@ -55,9 +54,10 @@ alias ll='exa --group-directories-first \
 alias lsa='ls --all'
 alias lla='ll --all'
 alias lt='exa --tree --level=2 --classify --sort=ext --icons'
+alias nnn="nnn -e"
 alias g=git
 alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias glga="git log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias glga="glg --all"
 alias gcmm='git commit -m'
 alias gcma='git commit --amend'
 alias gsw='git switch'
@@ -95,6 +95,9 @@ fi
 # fzf
 source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
+
+# git
+source /usr/share/git/completion/git-completion.bash
 
 # fzf
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!{.git,node_modules,*.pyc}'"
