@@ -20,7 +20,7 @@
   // search specific excludes. Read more about glob patterns
   // [here](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options).
   "files.exclude": {
-    "**/.git": true,
+    "**/.git": false,
     "**/.svn": true,
     "**/.hg": true,
     "**/CVS": true,

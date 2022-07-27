@@ -21,5 +21,9 @@
       "  })",
       "}"
     ]
+  },
+  "Try Catch": {
+    "prefix": "trycatchs",
+    "body": ["try {", "  $0", "} catch (${1:err}) {", "  ${2:next(err)}", "}"]
   }
 }
