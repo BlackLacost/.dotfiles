@@ -29,8 +29,9 @@ ln -sfr $DOTFILES_DIR/home/.config/zathura/ ~/.config
 ln -sf $DOTFILES_DIR/home/.gitconfig ~
 ln -sf $DOTFILES_DIR/home/.bashrc ~
 ln -sf $DOTFILES_DIR/home/.inputrc ~
-ln -sf $DOTFILES_DIR/home/.xprofile ~
-ln -sf $DOTFILES_DIR/config/npm/.npmrc ~
+ln -sf $DOTFILES_DIR/home/.xinitrc ~
+#ln -sf $DOTFILES_DIR/home/.xprofile ~
+#ln -sf $DOTFILES_DIR/config/npm/.npmrc ~
 
 # Link scripts
 # ln -s $HOME/.dotfiles/home/.local/bin/gen_pass.sh ~/.local/bin -f

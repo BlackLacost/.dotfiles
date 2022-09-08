@@ -56,7 +56,7 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
 file_manager = "nnn -e"
-browser = os.getenv("BROWSER") or "firefox"
+browser = os.getenv("BROWSER") or "google-chrome-stable"
 editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -632,4 +632,4 @@ end)
 -- A lightweight compositor for X11  https://github.com/yshui/picom
 awful.spawn.with_shell("picom")
 -- Wallpaper manager. Set wallpaper first before restore it.
-awful.spawn.with_shell("nitrogen --restore")
+-- awful.spawn.with_shell("nitrogen --restore")

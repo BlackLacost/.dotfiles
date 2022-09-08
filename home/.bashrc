@@ -17,15 +17,18 @@ fi
 #eval "$(pipenv --completion)"
 
 # Always install dependencies in .venv for pipenv.
-export PIPENV_VENV_IN_PROJECT="1"
+#export PIPENV_VENV_IN_PROJECT="1"
 # Do not lock dependencies (very slow).
-export PIPENV_SKIP_LOCK="1"
+#export PIPENV_SKIP_LOCK="1"
 
 export TERM=alacritty
 export VISUAL=nvim
 export EDITOR=nvim
-export BROWSER=firefox
 export READER="zathura"
+export BROWSER=google-chrome-stable
+# xdg-settings set default-web-browser google-chrome-stable.desktop
+# xdg-mime default google-chrome.desktop x-scheme-handler/http
+# xdg-mime default google-chrome.desktop x-scheme-handler/https
 
 ##  256-colors in terminal for apps that knows how to use it.
 # export TERM=xterm-256color
