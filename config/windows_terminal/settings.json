@@ -7,9 +7,57 @@
             "command": 
             {
                 "action": "moveFocus",
+                "direction": "up"
+            },
+            "keys": "ctrl+alt+k"
+        },
+        {
+            "command": 
+            {
+                "action": "switchToTab",
+                "index": 5
+            },
+            "keys": "alt+6"
+        },
+        {
+            "command": 
+            {
+                "action": "newTab",
+                "index": 1
+            },
+            "keys": "ctrl+alt+2"
+        },
+        {
+            "command": 
+            {
+                "action": "switchToTab",
+                "index": 8
+            },
+            "keys": "alt+9"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
                 "direction": "right"
             },
             "keys": "ctrl+alt+l"
+        },
+        {
+            "command": 
+            {
+                "action": "resizePane",
+                "direction": "up"
+            },
+            "keys": "ctrl+alt+shift+k"
+        },
+        {
+            "command": 
+            {
+                "action": "resizePane",
+                "direction": "down"
+            },
+            "keys": "ctrl+alt+shift+j"
         },
         {
             "command": 
@@ -22,10 +70,26 @@
         {
             "command": 
             {
-                "action": "moveFocus",
-                "direction": "up"
+                "action": "newTab",
+                "index": 0
             },
-            "keys": "ctrl+alt+k"
+            "keys": "ctrl+alt+1"
+        },
+        {
+            "command": 
+            {
+                "action": "switchToTab",
+                "index": 6
+            },
+            "keys": "alt+7"
+        },
+        {
+            "command": 
+            {
+                "action": "resizePane",
+                "direction": "left"
+            },
+            "keys": "ctrl+alt+shift+h"
         },
         {
             "command": 
@@ -39,33 +103,9 @@
             "command": 
             {
                 "action": "resizePane",
-                "direction": "down"
-            },
-            "keys": "ctrl+alt+shift+j"
-        },
-        {
-            "command": 
-            {
-                "action": "resizePane",
-                "direction": "left"
-            },
-            "keys": "ctrl+alt+shift+h"
-        },
-        {
-            "command": 
-            {
-                "action": "resizePane",
                 "direction": "right"
             },
             "keys": "ctrl+alt+shift+l"
-        },
-        {
-            "command": 
-            {
-                "action": "resizePane",
-                "direction": "up"
-            },
-            "keys": "ctrl+alt+shift+k"
         },
         {
             "command": 
@@ -74,6 +114,13 @@
                 "index": 3
             },
             "keys": "alt+4"
+        },
+        {
+            "command": 
+            {
+                "action": "scrollDown"
+            },
+            "keys": "alt+j"
         },
         {
             "command": 
@@ -87,19 +134,19 @@
         {
             "command": 
             {
+                "action": "switchToTab",
+                "index": 0
+            },
+            "keys": "alt+1"
+        },
+        {
+            "command": 
+            {
                 "action": "splitPane",
                 "split": "right",
                 "splitMode": "duplicate"
             },
             "keys": "ctrl+alt+v"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 0
-            },
-            "keys": "alt+1"
         },
         {
             "command": "toggleFullscreen",
@@ -113,23 +160,8 @@
             "keys": "alt+k"
         },
         {
-            "command": 
-            {
-                "action": "scrollDown"
-            },
-            "keys": "alt+j"
-        },
-        {
             "command": "scrollUpPage",
             "keys": "alt+shift+k"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 5
-            },
-            "keys": "alt+6"
         },
         {
             "command": "scrollDownPage",
@@ -150,6 +182,14 @@
         {
             "command": 
             {
+                "action": "switchToTab",
+                "index": 2
+            },
+            "keys": "alt+3"
+        },
+        {
+            "command": 
+            {
                 "action": "copy",
                 "singleLine": false
             },
@@ -164,6 +204,14 @@
             "keys": "alt+8"
         },
         {
+            "command": 
+            {
+                "action": "newTab",
+                "index": 2
+            },
+            "keys": "ctrl+alt+3"
+        },
+        {
             "command": "closePane",
             "keys": "alt+q"
         },
@@ -173,38 +221,6 @@
                 "action": "closeTab"
             },
             "keys": "alt+w"
-        },
-        {
-            "command": 
-            {
-                "action": "newTab",
-                "index": 0
-            },
-            "keys": "ctrl+alt+1"
-        },
-        {
-            "command": 
-            {
-                "action": "newTab",
-                "index": 1
-            },
-            "keys": "ctrl+alt+2"
-        },
-        {
-            "command": 
-            {
-                "action": "newTab",
-                "index": 2
-            },
-            "keys": "ctrl+alt+3"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 6
-            },
-            "keys": "alt+7"
         },
         {
             "command": 
@@ -237,22 +253,6 @@
                 "index": 4
             },
             "keys": "alt+5"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 2
-            },
-            "keys": "alt+3"
-        },
-        {
-            "command": 
-            {
-                "action": "switchToTab",
-                "index": 8
-            },
-            "keys": "alt+9"
         }
     ],
     "alwaysOnTop": false,
@@ -274,22 +274,6 @@
         [
             {
                 "colorScheme": "Campbell",
-                "commandline": "wsl.exe",
-                "font": 
-                {
-                    "face": "Monoid NF",
-                    "size": 11
-                },
-                "guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
-                "hidden": false,
-                "name": "Arch",
-                "opacity": 75,
-                "source": "Windows.Terminal.Wsl",
-                "startingDirectory": "/home/blacklacost/code",
-                "useAcrylic": true
-            },
-            {
-                "colorScheme": "Campbell",
                 "font": 
                 {
                     "face": "Monoid NF",
@@ -300,7 +284,7 @@
                 "name": "PowerShell",
                 "opacity": 75,
                 "source": "Windows.Terminal.PowershellCore",
-                "startingDirectory": "D:\\code",
+                "startingDirectory": "C:\\Users\\black",
                 "useAcrylic": true
             },
             {
@@ -321,12 +305,6 @@
                 "hidden": false,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
-            },
-            {
-                "guid": "{bc0db362-622c-5b28-b639-159d9cb25b51}",
-                "hidden": false,
-                "name": "Developer Command Prompt for VS 2017",
-                "source": "Windows.Terminal.VisualStudio"
             },
             {
                 "guid": "{34a13805-9b56-5e89-9234-f02de44bd971}",

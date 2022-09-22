@@ -210,11 +210,18 @@
     "editor.formatOnSave": true,
     "editor.tabSize": 2
   },
+  "[django-html]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
 
   // PLUGINS
   "extensions.autoUpdate": true,
 
   // Life Server
+  "beautify.language": {
+    "html": ["django-html"]
+  },
   "liveServer.settings.donotShowInfoMsg": true,
 
   // Prettier
@@ -228,14 +235,14 @@
   "pyright.disableLanguageServices": true,
 
   // Vim
-  // "vim.autoSwitchInputMethod.enable": true,
-  // "vim.autoSwitchInputMethod.defaultIM": "1033",
-  // "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe",
-  // "vim.autoSwitchInputMethod.switchIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe {im}",
   "vim.autoSwitchInputMethod.enable": true,
-  "vim.autoSwitchInputMethod.defaultIM": "us",
-  "vim.autoSwitchInputMethod.obtainIMCmd": "/usr/bin/xkb-switch",
-  "vim.autoSwitchInputMethod.switchIMCmd": "/usr/bin/xkb-switch -s {im}",
+  "vim.autoSwitchInputMethod.defaultIM": "1033",
+  "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe",
+  "vim.autoSwitchInputMethod.switchIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe {im}",
+  // "vim.autoSwitchInputMethod.enable": true,
+  // "vim.autoSwitchInputMethod.defaultIM": "us",
+  // "vim.autoSwitchInputMethod.obtainIMCmd": "/usr/bin/xkb-switch",
+  // "vim.autoSwitchInputMethod.switchIMCmd": "/usr/bin/xkb-switch -s {im}",
   "vim.camelCaseMotion.enable": true,
   "vim.easymotion": true,
   "vim.ignorecase": true,
