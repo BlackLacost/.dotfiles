@@ -19,10 +19,9 @@ ln -sf $DOTFILES_DIR/config/vscode/settings.json ~/.config/Code/User
 # Link directories
 # ln -sr $HOME/.dotfiles/config/vifm ~/.config -f
 ln -sfr $DOTFILES_DIR/config/nvim/ ~/.config
+ln -sfr $DOTFILES_DIR/config/mpv/ ~/.config
 ln -sfr $DOTFILES_DIR/config/anki/addons21 ~/.local/share/Anki2
 ln -sfr $DOTFILES_DIR/home/.config/alacritty/ ~/.config
-ln -sfr $DOTFILES_DIR/home/.config/awesome/ ~/.config
-ln -sfr $DOTFILES_DIR/home/.config/backgrounds/ ~/.config
 ln -sfr $DOTFILES_DIR/home/.config/zathura/ ~/.config
 
 # Link files
