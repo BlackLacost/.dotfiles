@@ -11,36 +11,38 @@ function cddl() { Set-Location ~/Downloads; }
 function cddt() { Set-Location ~/Desktop; }
 function cdd() { Set-Location ~/.dotfiles; }
 function cdh() { Set-Location ~; }
-function cdp() { Set-Location D:/code; }
-function cdx() { Set-Location ~/.xi; }
+function cdc() { Set-Location D:/code; }
 function jnote() { Set-Location ~/python; jupyter notebook; }
+function ghc() {
+  gh repo list --limit 1000 | fzf | foreach { "gh repo clone {0}" -f ($_ -split '\t')} | Invoke-Expression
+}
 
 function g($command) { git $command; }
-function ggs() { git status; }
-function gga($file) {
+function gst() { git status; }
+function ga($file) {
   if ($file) {
     git add $file;
   } else {
     git add .;
   }
 }
-function ggc($commit) {
+function gcmm($commit) {
   if ($commit) {
     git commit -m $commit;
   } else {
     git commit;
   }
 }
-function ggac($commit) { git add .; ggc($commit); }
-function ggca($commit) {
+function gcma($commit) {
   if ($commit) {
     git commit --amend -m $commit;
   } else {
     git commit --amend --no-edit;
   }
 }
-function ggaca($commit) { git add .; ggca($commit); }
-function ggd($file) { git diff HEAD $file; }
+function gacmm($commit) { git add .; gcmm($commit); }
+function gacma($commit) { git add .; gcma($commit); }
+function gd($file) { git diff HEAD $file; }
 
 function Compare-GitFiles {
   param (
