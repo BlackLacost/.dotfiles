@@ -22,6 +22,3 @@ helper = manager-core
 	selected = manager-core
 [push]
 default = simple
-
-[safe]
-	directory = C:/Users/black/.dotfiles

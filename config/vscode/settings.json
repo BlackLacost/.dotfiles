@@ -369,5 +369,5 @@
     "editor.defaultFormatter": "IronGeek.vscode-env"
   },
   "workbench.activityBar.visible": false,
-  "window.menuBarVisibility": "toggle"
+  "window.menuBarVisibility": "compact"
 }

@@ -5,6 +5,8 @@ catch {
 }
 
 Set-Alias -Name v -Value nvim
+Set-Alias -Name c -Value code
+Set-Alias -Name g -Value git
 
 function cddc() { Set-Location ~/Documents; }
 function cddl() { Set-Location ~/Downloads; }
@@ -12,12 +14,19 @@ function cddt() { Set-Location ~/Desktop; }
 function cdd() { Set-Location ~/.dotfiles; }
 function cdh() { Set-Location ~; }
 function cdc() { Set-Location D:/code; }
+function cduf() { Set-Location D:/code/uber-eats-frontend; }
+function cdub() { Set-Location D:/code/uber-eats-backend; }
 function jnote() { Set-Location ~/python; jupyter notebook; }
+function cds() { Set-Location C:/Users/black/scoop/apps; }
+
 function ghc() {
   gh repo list --limit 1000 | fzf | foreach { "gh repo clone {0}" -f ($_ -split '\t')} | Invoke-Expression
 }
 
-function g($command) { git $command; }
+function gpush() { git push; }
+function gpushf() { git push -f; }
+function gpull() { git pull; }
+function gfetch() { git fetch; }
 function gst() { git status; }
 function ga($file) {
   if ($file) {
@@ -42,7 +51,8 @@ function gcma($commit) {
 }
 function gacmm($commit) { git add .; gcmm($commit); }
 function gacma($commit) { git add .; gcma($commit); }
-function gd($file) { git diff HEAD $file; }
+function gdiff($file) { git diff HEAD $file; }
+function gdiffc($file) { git diff HEAD $file --cached; }
 
 function Compare-GitFiles {
   param (
