@@ -218,6 +218,9 @@
   // PLUGINS
   "extensions.autoUpdate": true,
 
+  // Auto-Close
+  "auto-close-tag.disableOnLanguage": ["typescript"],
+
   // Life Server
   "beautify.language": {
     "html": ["django-html"]
