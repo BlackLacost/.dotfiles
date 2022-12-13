@@ -11,11 +11,11 @@ Host web
 Host poco
     HostName 192.168.111.170
     User black
-    Port 8022 
+    Port 8022
     IdentityFile ~/.ssh/pocox3
 
 Host mikrotik
     HostName 192.168.111.254
     User admin
-    Port 2222 
+    Port 2222
     IdentityFile ~/.ssh/mikrotik
