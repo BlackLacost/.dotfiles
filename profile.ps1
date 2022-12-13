@@ -14,12 +14,15 @@ function cddt() { Set-Location ~/Desktop; }
 function cdd() { Set-Location ~/.dotfiles; }
 function cdh() { Set-Location ~; }
 function cdc() { Set-Location D:/code; }
-function cduf() { Set-Location D:/code/uber-eats-frontend; }
-function cdub() { Set-Location D:/code/uber-eats-backend; }
+function cdff() { Set-Location ~/code/food-delivery-portfolio-frontend; }
+function cdfb() { Set-Location ~/code/food-delivery-portfolio-backend; }
 function jnote() { Set-Location ~/python; jupyter notebook; }
 function cds() { Set-Location C:/Users/black/scoop/apps; }
 
 function cr() { code -r . | Invoke-Expression; }
+function nrs() { npm run start | Invoke-Expression; }
+function nrd() { npm run dev | Invoke-Expression; }
+function nrt() { npm run test | Invoke-Expression; }
 
 function ghc() {
   gh repo list --limit 1000 | fzf | foreach { "gh repo clone {0}" -f ($_ -split '\t')} | Invoke-Expression

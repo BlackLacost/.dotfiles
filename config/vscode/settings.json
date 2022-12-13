@@ -41,7 +41,7 @@
   "javascript.suggest.autoImports": true,
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifier": "shortest",
   "typescript.updateImportsOnFileMove.enabled": "always",
 
   // Editor
@@ -219,7 +219,8 @@
   "extensions.autoUpdate": true,
 
   // Auto-Close
-  "auto-close-tag.disableOnLanguage": ["typescript"],
+  // "auto-close-tag.disableOnLanguage": ["typescript"],
+  "auto-close-tag.SublimeText3Mode": true,
 
   // Life Server
   "beautify.language": {
