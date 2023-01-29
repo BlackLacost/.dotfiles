@@ -13,7 +13,7 @@ function cddl() { Set-Location ~/Downloads; }
 function cddt() { Set-Location ~/Desktop; }
 function cdd() { Set-Location ~/.dotfiles; }
 function cdh() { Set-Location ~; }
-function cdc() { Set-Location D:/code; }
+function cdc() { Set-Location ~/code; }
 function cdff() { Set-Location ~/code/food-delivery-portfolio-frontend; }
 function cdfb() { Set-Location ~/code/food-delivery-portfolio-backend; }
 function jnote() { Set-Location ~/python; jupyter notebook; }

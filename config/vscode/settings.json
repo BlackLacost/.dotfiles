@@ -126,10 +126,10 @@
       "source": "Git Bash"
     }
   },
-  "window.openFoldersInNewWindow": "on",
-  "window.zoomLevel": 2,
+"window.openFoldersInNewWindow": "on",
+"window.zoomLevel": 2,
   "workbench.iconTheme": "eq-material-theme-icons-darker",
-  "workbench.colorTheme": "Material Theme Darker High Contrast",
+  "workbench.colorTheme": "Community Material Theme Darker",
   "task.problemMatchers.neverPrompt": {
     "npm": true
   },
@@ -373,5 +373,8 @@
     "editor.defaultFormatter": "IronGeek.vscode-env"
   },
   "workbench.activityBar.visible": false,
-  "window.menuBarVisibility": "compact"
+  "window.menuBarVisibility": "compact",
+  "remote.SSH.remotePlatform": {
+    "vdsina": "linux"
+  }
 }
