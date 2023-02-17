@@ -92,10 +92,10 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+t floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+t focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -168,8 +168,8 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-gaps inner 0px
-gaps outer 0px
+gaps inner 0
+gaps outer 0
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
