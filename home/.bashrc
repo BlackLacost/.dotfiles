@@ -44,45 +44,6 @@ echo "bashrc interactively loading..."
 
 mkcd() { mkdir -p "$@" && cd "$@"; }
 
-alias ls='exa --group-directories-first --classify --sort=extension --icons'
-alias ll='exa --group-directories-first \
-              --long \
-              --classify \
-              --grid \
-              --links \
-              --header \
-              --git \
-              --sort=extension \
-              --icons'
-alias lsa='ls --all'
-alias lla='ll --all'
-alias lt='exa --tree --level=2 --classify --sort=ext --icons'
-alias nnn="nnn -e"
-alias g=git
-alias glg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias glga="glg --all"
-alias gcmm='git commit -m'
-alias gcma='git commit --amend'
-alias gsw='git switch'
-alias gchb='git checkout -b'
-alias gst='git status'
-alias gdf='git diff'
-alias gdfc='git diff --cached'
-alias cdd='cd ~/.dotfiles'
-alias cdx='cd ~/.xi'
-alias cdc='cd ~/code'
-alias cdl='cd ~/cloud/mailru/G.Prog'
-alias vec="python -m venv .venv"
-alias vea=". .venv/bin/activate"
-alias ved="deactivate"
-alias vifm="$HOME/.config/vifm/scripts/vifmrun"
-alias vim="nvim"
-alias v="nvim"
-alias rgf="rg --files | rg"
-alias ghc='gh repo clone `gh repo list --limit=1000 | awk '"'"'{ print $1 }'"'"' | fzf`'
-alias vpnu='wg-quick up ~/vpn.conf'
-alias vpnd='wg-quick down ~/vpn.conf'
-
 # colors
 # export TERM=xterm-24bit
 
@@ -132,11 +93,22 @@ RESET="$(echo -e "\e[00m")"
 PS1='\[${MAGENTA}\]\W\[${RESET}\]$(__git_ps1 "\[${GREEN}\] (%s)\[${RESET}\]") -> '
 PS2='-> '
 
-
-function ss() {
+function gs() {
   $BROWSER https://www.google.com/search?q=`echo $* | jq -sRr @uri`
 }
 
+function ys() {
+  $BROWSER https://www.ya.ru/search?text=`echo $* | jq -sRr @uri`
+}
+
+
+if [ -f ~/opt/asdf-vim/asdf.sh ]; then
+  source /opt/asdf-vm/asdf.sh
+fi
+
+if [ -f ~/.config/aliasrc ]; then
+  source ~/.config/aliasrc
+fi
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
