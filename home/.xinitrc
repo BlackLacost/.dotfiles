@@ -42,4 +42,4 @@ setxkbmap -layout us,ru && \
 # -f for fade when open/close windows
 #picom -f &
 # picom &
-exec awesome
+exec i3
