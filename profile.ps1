@@ -9,13 +9,13 @@ Set-Alias -Name c -Value code
 Set-Alias -Name g -Value git
 
 function cddc() { Set-Location ~/Documents; }
-function cddl() { Set-Location ~/Downloads; }
+function cddl() { Set-Location d:/Downloads; }
 function cddt() { Set-Location ~/Desktop; }
 function cdd() { Set-Location ~/.dotfiles; }
 function cdh() { Set-Location ~; }
-function cdc() { Set-Location ~/code; }
-function cdff() { Set-Location ~/code/food-delivery-portfolio-frontend; }
-function cdfb() { Set-Location ~/code/food-delivery-portfolio-backend; }
+function cdc() { Set-Location d:/code; }
+function cdff() { Set-Location d:/code/food-delivery-portfolio-frontend; }
+function cdfb() { Set-Location d:/code/food-delivery-portfolio-backend; }
 function jnote() { Set-Location ~/python; jupyter notebook; }
 function cds() { Set-Location C:/Users/black/scoop/apps; }
 
