@@ -76,7 +76,6 @@
 
   // VirtualEnv
   "python.pythonPath": "./.venv/bin/python",
-  "python.defaultInterpreterPath": "./.venv/bin/python",
 
   // Linting
   "python.analysis.typeCheckingMode": "basic",
@@ -126,8 +125,7 @@
       "source": "Git Bash"
     }
   },
-"window.openFoldersInNewWindow": "on",
-"window.zoomLevel": 2,
+  "window.openFoldersInNewWindow": "on",
   "workbench.iconTheme": "eq-material-theme-icons-darker",
   "workbench.colorTheme": "Community Material Theme Darker",
   "task.problemMatchers.neverPrompt": {
@@ -172,7 +170,17 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 2,
     "editor.formatOnSave": true,
-    "editor.rulers": [80]
+    "editor.rulers": [80],
+    "editor.wordWrap": "wordWrapColumn"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.rulers": [100],
+    "editor.wordWrapColumn": 100,
+    // bounded - wrap делается по заданной колонке и на ширину видиомости.
+    "editor.wordWrap": "bounded"
   },
 
   "[jsonc]": {
@@ -197,7 +205,8 @@
 
   "[python]": {
     "editor.defaultFormatter": null,
-    "editor.tabSize": 4
+    "editor.tabSize": 4,
+    "editor.formatOnType": true
     // "editor.codeActionsOnSave": {
     //   "source.organizeImports": true,
     //   "source.fixAll": true
@@ -242,13 +251,13 @@
   "vim.autoSwitchInputMethod.enable": true,
   // ---
   // windows
-  "vim.autoSwitchInputMethod.defaultIM": "1033",
-  "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe",
-  "vim.autoSwitchInputMethod.switchIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe {im}",
+  // "vim.autoSwitchInputMethod.defaultIM": "1033",
+  // "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe",
+  // "vim.autoSwitchInputMethod.switchIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe {im}",
   // linux
-  // "vim.autoSwitchInputMethod.defaultIM": "us",
-  // "vim.autoSwitchInputMethod.obtainIMCmd": "/usr/bin/xkb-switch",
-  // "vim.autoSwitchInputMethod.switchIMCmd": "/usr/bin/xkb-switch -s {im}",
+  "vim.autoSwitchInputMethod.defaultIM": "us",
+  "vim.autoSwitchInputMethod.obtainIMCmd": "/usr/bin/xkb-switch",
+  "vim.autoSwitchInputMethod.switchIMCmd": "/usr/bin/xkb-switch -s {im}",
   // ---
   "vim.camelCaseMotion.enable": true,
   "vim.easymotion": true,
@@ -373,8 +382,10 @@
     "editor.defaultFormatter": "IronGeek.vscode-env"
   },
   "workbench.activityBar.visible": false,
-  "window.menuBarVisibility": "compact",
+  "window.menuBarVisibility": "toggle",
   "remote.SSH.remotePlatform": {
     "vdsina": "linux"
-  }
+  },
+  "window.zoomLevel": 3,
+  "vim.enableNeovim": true
 }

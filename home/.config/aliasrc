@@ -44,8 +44,8 @@ alias ved="deactivate"
 alias vifm="$HOME/.config/vifm/scripts/vifmrun"
 alias rgf="rg --files | rg"
 alias ghc='gh repo clone `gh repo list --limit=1000 | awk '"'"'{ print $1 }'"'"' | fzf`'
-alias vpnu='wg-quick up ~/vpn.conf'
-alias vpnd='wg-quick down ~/vpn.conf'
+alias vpnu='wg-quick up vpn'
+alias vpnd='wg-quick down vpn'
 
 # These common commands are just too long! Abbreviate them.
 alias \

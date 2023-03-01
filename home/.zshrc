@@ -11,4 +11,6 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+source /opt/asdf-vm/asdf.sh
+
 source ~/.config/aliasrc

@@ -8,6 +8,7 @@
     "prefix": "dbp",
     "body": [
       "  db:",
+      "    platform: linux/x86_64",
       "    image: postgres",
       "    restart: always",
       "    environment:",
@@ -15,7 +16,22 @@
       "      - POSTGRES_PASSWORD=\\${DB_PASS}",
       "      - POSTGRES_DB=\\${DB_NAME}",
       "    ports:",
-      "      - \\${DB_PORT}:\\${DB_PORT}"
+      "      - \\${DB_PORT}:${0:5432}"
+    ]
+  },
+  "MySQL Service": {
+    "prefix": "dbm",
+    "body": [
+      "  db:",
+      "    platform: linux/x86_64",
+      "    image: mysql",
+      "    restart: always",
+      "    environment:",
+      "      - MYSQL_USER=\\${DB_USER}",
+      "      - MYSQL_PASSWORD=\\${DB_PASS}",
+      "      - MYSQL_DATABASE=\\${DB_NAME}",
+      "    ports:",
+      "      - \\${DB_PORT}:3306"
     ]
   }
 }
