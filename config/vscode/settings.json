@@ -251,13 +251,13 @@
   "vim.autoSwitchInputMethod.enable": true,
   // ---
   // windows
-  // "vim.autoSwitchInputMethod.defaultIM": "1033",
-  // "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe",
-  // "vim.autoSwitchInputMethod.switchIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe {im}",
+  "vim.autoSwitchInputMethod.defaultIM": "1033",
+  "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe",
+  "vim.autoSwitchInputMethod.switchIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe {im}",
   // linux
-  "vim.autoSwitchInputMethod.defaultIM": "us",
-  "vim.autoSwitchInputMethod.obtainIMCmd": "/usr/bin/xkb-switch",
-  "vim.autoSwitchInputMethod.switchIMCmd": "/usr/bin/xkb-switch -s {im}",
+  // "vim.autoSwitchInputMethod.defaultIM": "us",
+  // "vim.autoSwitchInputMethod.obtainIMCmd": "/usr/bin/xkb-switch",
+  // "vim.autoSwitchInputMethod.switchIMCmd": "/usr/bin/xkb-switch -s {im}",
   // ---
   "vim.camelCaseMotion.enable": true,
   "vim.easymotion": true,
@@ -386,6 +386,6 @@
   "remote.SSH.remotePlatform": {
     "vdsina": "linux"
   },
-  "window.zoomLevel": 3,
+  "window.zoomLevel": 2,
   "vim.enableNeovim": true
 }

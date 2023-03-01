@@ -90,41 +90,41 @@
     "name": "youtube-dl",
     "installType": "scoop"
   },
-  // "vscode": {
-  //   "name": "vscode",
-  //   "installType": "scoop",
-  //   "configDir": "%APPDATA%\\Code\\User",
-  //   "vscodeExts": [
-  //     "EditorConfig.EditorConfig",
-  //     "esbenp.prettier-vscode",
-  //     "formulahendry.auto-rename-tag",
-  //     "grigoryvp.language-xi",
-  //     "grigoryvp.memory-theme",
-  //     "Gruntfuggly.todo-tree",
-  //     "ms-azuretools.vscode-docker",
-  //     "ms-python.python",
-  //     "ms-python.vscode-pylance",
-  //     "ms-toolsai.jupyter",
-  //     "ms-toolsai.jupyter-keymap",
-  //     "ms-toolsai.jupyter-renderers",
-  //     "ms-vscode-remote.remote-containers",
-  //     "ms-vscode-remote.remote-ssh",
-  //     "ms-vscode-remote.remote-ssh-edit",
-  //     "ms-vscode-remote.remote-wsl",
-  //     "ms-vscode-remote.vscode-remote-extensionpack",
-  //     "ms-vscode.powershell",
-  //     "PKief.material-icon-theme",
-  //     "ritwickdey.LiveServer",
-  //     "techer.open-in-browser",
-  //     "vscode-icons-team.vscode-icons",
-  //     "vscodevim.vim",
-  //     "yzhang.markdown-all-in-one"
-  //   ],
-  //   "imselect": {
-  //     "uri": "https://github.com/daipeihust/im-select/raw/master/im-select-win/out/x64/im-select.exe",
-  //     "outFile": "C:\\im-select.exe"
-  //   }
-  // },
+  "vscode": {
+    "name": "vscode",
+    "installType": "scoop",
+    "configDir": "%APPDATA%\\Code\\User",
+    "vscodeExts": [
+      "EditorConfig.EditorConfig",
+      "esbenp.prettier-vscode",
+      "formulahendry.auto-rename-tag",
+      "grigoryvp.language-xi",
+      "grigoryvp.memory-theme",
+      "Gruntfuggly.todo-tree",
+      "ms-azuretools.vscode-docker",
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "ms-toolsai.jupyter",
+      "ms-toolsai.jupyter-keymap",
+      "ms-toolsai.jupyter-renderers",
+      "ms-vscode-remote.remote-containers",
+      "ms-vscode-remote.remote-ssh",
+      "ms-vscode-remote.remote-ssh-edit",
+      "ms-vscode-remote.remote-wsl",
+      "ms-vscode-remote.vscode-remote-extensionpack",
+      "ms-vscode.powershell",
+      "PKief.material-icon-theme",
+      "ritwickdey.LiveServer",
+      "techer.open-in-browser",
+      "vscode-icons-team.vscode-icons",
+      "vscodevim.vim",
+      "yzhang.markdown-all-in-one"
+    ],
+    "imselect": {
+      "uri": "https://github.com/daipeihust/im-select/raw/master/im-select-win/out/x64/im-select.exe",
+      "outFile": "C:\\im-select.exe"
+    }
+  },
   "whatsapp": {
     "name": "whatsapp",
     "installType": "scoop"
