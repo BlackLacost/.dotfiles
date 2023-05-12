@@ -264,7 +264,7 @@
     "experimental.rendering.forceFullRepaint": true,
     "focusFollowMouse": true,
     "initialCols": 100,
-    "initialRows": 50,
+    "initialRows": 35,
     "language": "en-US",
     "launchMode": "default",
     "profiles": 

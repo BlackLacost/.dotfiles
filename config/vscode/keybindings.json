@@ -1,20 +1,7 @@
 [
   {
-    "key": "ctrl+, b",
-    "command": "bookmarks.toggle",
-    "when": "editorTextFocus"
-  },
-  {
     "key": "ctrl+]",
     "command": "editor.action.openLink"
-  },
-  {
-    "key": "ctrl+a [",
-    "command": "extension.xi.goBack"
-  },
-  {
-    "key": "ctrl+, x",
-    "command": "extension.xi.lookup"
   },
   {
     "key": "cmd-f",
@@ -59,32 +46,17 @@
     "command": "workbench.view.explorer"
   },
   {
+    "key": "ctrl+, b",
+    "command": "bookmarks.toggle",
+    "when": "editorTextFocus"
+  },
+  {
     "key": "ctrl+, l",
     "command": "workbench.view.scm"
   },
   {
     "key": "ctrl+, d",
     "command": "workbench.view.debug"
-  },
-  {
-    "key": "ctrl+;",
-    "command": "workbench.action.debug.stepOver",
-    "when": "inDebugMode"
-  },
-  {
-    "key": "ctrl+'",
-    "command": "workbench.action.debug.stepInto",
-    "when": "inDebugMode"
-  },
-  {
-    "key": "ctrl+shift+;",
-    "command": "workbench.action.debug.stepOut",
-    "when": "inDebugMode"
-  },
-  {
-    "key": "ctrl+\\",
-    "command": "workbench.action.debug.continue",
-    "when": "inDebugMode"
   },
   {
     "key": "ctrl+, g",
@@ -114,31 +86,10 @@
     "key": "ctrl+, t",
     "command": "workbench.action.tasks.runTask"
   },
-  {
-    "key": "ctrl+p",
-    "command": "extension.vim_ctrl+p",
-    "when": "suggestWidgetVisible && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
-  },
-  {
-    "key": "cmd+b",
-    "command": "HookyQR.beautify",
-    "when": "editorFocus"
-  },
   // {
-  //   "key": "ctrl+h",
-  //   "command": "workbench.action.navigateLeft"
-  // },
-  // {
-  //   "key": "ctrl+l",
-  //   "command": "workbench.action.navigateRight"
-  // },
-  // {
-  //   "key": "ctrl+k",
-  //   "command": "workbench.action.navigateUp"
-  // },
-  // {
-  //   "key": "ctrl+j",
-  //   "command": "workbench.action.navigateDown"
+  //   "key": "cmd+b",
+  //   "command": "HookyQR.beautify",
+  //   "when": "editorFocus"
   // },
   {
     "key": "ctrl+alt+t",
@@ -183,25 +134,50 @@
     "command": "-workbench.action.openGlobalKeybindings"
   },
   {
-    "key": "ctrl+p",
-    "command": "-extension.vim_ctrl+p",
-    "when": "suggestWidgetVisible && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
+    "key": "ctrl+;",
+    "command": "workbench.action.debug.stepOver",
+    "when": "inDebugMode"
   },
+  {
+    "key": "ctrl+'",
+    "command": "workbench.action.debug.stepInto",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "ctrl+shift+;",
+    "command": "workbench.action.debug.stepOut",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "ctrl+\\",
+    "command": "workbench.action.debug.continue",
+    "when": "inDebugMode"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "extension.vim_ctrl+p",
+    "when": "editorTextFocus && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
+  },
+  // {
+  //   "key": "ctrl+p",
+  //   "command": "-extension.vim_ctrl+p",
+  //   "when": "suggestWidgetVisible && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
+  // },
   {
     "key": "ctrl+p",
     "command": "-workbench.action.quickOpenNavigateNextInFilePicker",
     "when": "inFilesPicker && inQuickOpen"
   },
-  {
-    "key": "ctrl+n",
-    "command": "extension.vim_ctrl+n",
-    "when": "editorTextFocus && vim.active && vim.use<C-n> && !inDebugRepl || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
-  },
-  {
-    "key": "ctrl+n",
-    "command": "-extension.vim_ctrl+n",
-    "when": "editorTextFocus && vim.active && vim.use<C-n> && !inDebugRepl || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
-  },
+  // {
+  //   "key": "ctrl+n",
+  //   "command": "extension.vim_ctrl+n",
+  //   "when": "editorTextFocus && vim.active && vim.use<C-n> && !inDebugRepl || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
+  // },
+  // {
+  //   "key": "ctrl+n",
+  //   "command": "-extension.vim_ctrl+n",
+  //   "when": "editorTextFocus && vim.active && vim.use<C-n> && !inDebugRepl || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
+  // },
   {
     "key": "ctrl+, ctrl+\\",
     "command": "workbench.action.splitEditorOrthogonal"
@@ -232,116 +208,116 @@
     "key": "ctrl+w",
     "command": "-workbench.action.closeActiveEditor"
   },
-  {
-    "key": "ctrl+p",
-    "command": "selectPrevSuggestion",
-    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-  },
-  {
-    "key": "up",
-    "command": "-selectPrevSuggestion",
-    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-  },
-  {
-    "key": "up",
-    "command": "list.focusUp",
-    "when": "listFocus && !inputFocus"
-  },
-  {
-    "key": "up",
-    "command": "-list.focusUp",
-    "when": "listFocus && !inputFocus"
-  },
-  {
-    "key": "up",
-    "command": "showPrevParameterHint",
-    "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
-  },
-  {
-    "key": "up",
-    "command": "-showPrevParameterHint",
-    "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
-  },
-  {
-    "key": "up",
-    "command": "workbench.action.interactivePlayground.arrowUp",
-    "when": "interactivePlaygroundFocus && !editorTextFocus"
-  },
-  {
-    "key": "up",
-    "command": "-workbench.action.interactivePlayground.arrowUp",
-    "when": "interactivePlaygroundFocus && !editorTextFocus"
-  },
-  {
-    "key": "up",
-    "command": "workbench.banner.focusPreviousAction",
-    "when": "bannerFocused"
-  },
-  {
-    "key": "up",
-    "command": "-workbench.banner.focusPreviousAction",
-    "when": "bannerFocused"
-  },
-  {
-    "key": "up",
-    "command": "workbench.statusBar.focusPrevious",
-    "when": "statusBarFocused"
-  },
-  {
-    "key": "up",
-    "command": "-workbench.statusBar.focusPrevious",
-    "when": "statusBarFocused"
-  },
-  {
-    "key": "up",
-    "command": "notifications.focusPreviousToast",
-    "when": "notificationFocus && notificationToastsVisible"
-  },
-  {
-    "key": "up",
-    "command": "-notifications.focusPreviousToast",
-    "when": "notificationFocus && notificationToastsVisible"
-  },
-  {
-    "key": "up",
-    "command": "interactive.history.previous",
-    "when": "!suggestWidgetVisible && resourceScheme == 'vscode-interactive' && interactiveInputCursorAtBoundary != 'bottom' && interactiveInputCursorAtBoundary != 'none'"
-  },
-  {
-    "key": "up",
-    "command": "-interactive.history.previous",
-    "when": "!suggestWidgetVisible && resourceScheme == 'vscode-interactive' && interactiveInputCursorAtBoundary != 'bottom' && interactiveInputCursorAtBoundary != 'none'"
-  },
-  {
-    "key": "up",
-    "command": "history.showPrevious",
-    "when": "historyNavigationBackwardsEnabled && historyNavigationWidget && !suggestWidgetVisible"
-  },
-  {
-    "key": "up",
-    "command": "-history.showPrevious",
-    "when": "historyNavigationBackwardsEnabled && historyNavigationWidget && !suggestWidgetVisible"
-  },
-  {
-    "key": "up",
-    "command": "extension.vim_up",
-    "when": "editorTextFocus && vim.active && !inDebugRepl && !parameterHintsVisible && !suggestWidgetVisible"
-  },
-  {
-    "key": "up",
-    "command": "-extension.vim_up",
-    "when": "editorTextFocus && vim.active && !inDebugRepl && !parameterHintsVisible && !suggestWidgetVisible"
-  },
-  {
-    "key": "up",
-    "command": "cursorUp",
-    "when": "textInputFocus"
-  },
-  {
-    "key": "up",
-    "command": "-cursorUp",
-    "when": "textInputFocus"
-  },
+  // {
+  //   "key": "ctrl+p",
+  //   "command": "selectPrevSuggestion",
+  //   "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "-selectPrevSuggestion",
+  //   "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "list.focusUp",
+  //   "when": "listFocus && !inputFocus"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "-list.focusUp",
+  //   "when": "listFocus && !inputFocus"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "showPrevParameterHint",
+  //   "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "-showPrevParameterHint",
+  //   "when": "editorFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "workbench.action.interactivePlayground.arrowUp",
+  //   "when": "interactivePlaygroundFocus && !editorTextFocus"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "-workbench.action.interactivePlayground.arrowUp",
+  //   "when": "interactivePlaygroundFocus && !editorTextFocus"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "workbench.banner.focusPreviousAction",
+  //   "when": "bannerFocused"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "-workbench.banner.focusPreviousAction",
+  //   "when": "bannerFocused"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "workbench.statusBar.focusPrevious",
+  //   "when": "statusBarFocused"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "-workbench.statusBar.focusPrevious",
+  //   "when": "statusBarFocused"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "notifications.focusPreviousToast",
+  //   "when": "notificationFocus && notificationToastsVisible"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "-notifications.focusPreviousToast",
+  //   "when": "notificationFocus && notificationToastsVisible"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "interactive.history.previous",
+  //   "when": "!suggestWidgetVisible && resourceScheme == 'vscode-interactive' && interactiveInputCursorAtBoundary != 'bottom' && interactiveInputCursorAtBoundary != 'none'"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "-interactive.history.previous",
+  //   "when": "!suggestWidgetVisible && resourceScheme == 'vscode-interactive' && interactiveInputCursorAtBoundary != 'bottom' && interactiveInputCursorAtBoundary != 'none'"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "history.showPrevious",
+  //   "when": "historyNavigationBackwardsEnabled && historyNavigationWidget && !suggestWidgetVisible"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "-history.showPrevious",
+  //   "when": "historyNavigationBackwardsEnabled && historyNavigationWidget && !suggestWidgetVisible"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "extension.vim_up",
+  //   "when": "editorTextFocus && vim.active && !inDebugRepl && !parameterHintsVisible && !suggestWidgetVisible"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "-extension.vim_up",
+  //   "when": "editorTextFocus && vim.active && !inDebugRepl && !parameterHintsVisible && !suggestWidgetVisible"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "cursorUp",
+  //   "when": "textInputFocus"
+  // },
+  // {
+  //   "key": "up",
+  //   "command": "-cursorUp",
+  //   "when": "textInputFocus"
+  // },
   {
     "key": "ctrl+p",
     "command": "workbench.action.quickOpenNavigatePreviousInFilePicker",
@@ -549,8 +525,9 @@
     "key": "ctrl+, shift+d",
     "command": "workbench.view.extension.dockerView"
   },
+  // Показать подсказку по параметрам, например, функции
   {
-    "key": "ctrl+k k",
+    "key": "ctrl+k ctrl+k",
     "command": "editor.action.triggerParameterHints",
     "when": "editorHasSignatureHelpProvider && editorTextFocus"
   },
@@ -559,60 +536,38 @@
     "command": "-editor.action.triggerParameterHints",
     "when": "editorHasSignatureHelpProvider && editorTextFocus"
   },
-  {
-    "key": "ctrl+n",
-    "command": "selectNextSuggestion",
-    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-  },
-  {
-    "key": "ctrl+down",
-    "command": "-selectNextSuggestion",
-    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-  },
+  // {
+  //   "key": "ctrl+n",
+  //   "command": "selectNextSuggestion",
+  //   "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  // },
+  // {
+  //   "key": "ctrl+down",
+  //   "command": "-selectNextSuggestion",
+  //   "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  // },
   {
     "key": "ctrl+j",
     "command": "-workbench.action.togglePanel"
   },
-  {
-    "key": "ctrl+shift+p",
-    "command": "workbench.action.showCommands"
-  },
-  {
-    "key": "ctrl+shift+p",
-    "command": "-workbench.action.showCommands"
-  },
-  {
-    "key": "down",
-    "command": "extension.vim_down",
-    "when": "editorTextFocus && vim.active && !inDebugRepl && !parameterHintsVisible && !suggestWidgetVisible"
-  },
-  {
-    "key": "down",
-    "command": "-extension.vim_down",
-    "when": "editorTextFocus && vim.active && !inDebugRepl && !parameterHintsVisible && !suggestWidgetVisible"
-  },
-  {
-    "key": "down",
-    "command": "settings.action.focusSettingsFromSearch",
-    "when": "inSettingsSearch && !suggestWidgetVisible"
-  },
-  {
-    "key": "down",
-    "command": "-settings.action.focusSettingsFromSearch",
-    "when": "inSettingsSearch && !suggestWidgetVisible"
-  },
-  {
-    "key": "down",
-    "command": "list.focusDown",
-    "when": "listFocus && !inputFocus"
-  },
-  {
-    "key": "down",
-    "command": "-list.focusDown",
-    "when": "listFocus && !inputFocus"
-  },
+  // {
+  //   "key": "ctrl+shift+p",
+  //   "command": "workbench.action.showCommands"
+  // },
+  // {
+  //   "key": "ctrl+shift+p",
+  //   "command": "-workbench.action.showCommands"
+  // },
   {
     "key": "ctrl+, ctrl+s",
     "command": "workbench.action.openSnippets"
+  },
+  {
+    "key": "ctrl+alt+n",
+    "command": "welcome.showNewFileEntries"
+  },
+  {
+    "key": "ctrl+alt+win+n",
+    "command": "-welcome.showNewFileEntries"
   }
 ]

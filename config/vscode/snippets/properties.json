@@ -46,5 +46,16 @@
     "prefix": "dbmp",
     "body": ["DB_PORT=${0:3306}"],
     "description": "Database Postgres Port"
+  },
+  "SMTP Mail.ru": {
+    "prefix": "smtpm",
+    "body": [
+      "EMAIL_SERVER_USER=${1:blacklacost@inbox.ru}",
+      "EMAIL_SERVER_PASSWORD=${0}",
+      "EMAIL_SERVER_HOST=smtp.mail.ru",
+      "EMAIL_SERVER_PORT=465",
+      "EMAIL_FROM=${2:blacklacost@inbox.ru}"
+    ],
+    "description": "SMTP Mail.ru"
   }
 }

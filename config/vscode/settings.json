@@ -41,8 +41,9 @@
   "javascript.suggest.autoImports": true,
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "typescript.preferences.importModuleSpecifier": "shortest",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
   "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.suggest.autoImports": true,
 
   // Editor
   "editor.acceptSuggestionOnEnter": "off",
@@ -59,6 +60,8 @@
   "editor.quickSuggestions": {
     "strings": true
   },
+  "editor.tabCompletion": "off",
+  "editor.suggestSelection": "first",
   "editor.copyWithSyntaxHighlighting": true,
 
   // Colorized brackets
@@ -67,6 +70,7 @@
 
   // Autoformat
   "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "python.autoComplete.extraPaths": [], // enable auto import
   "python.formatting.provider": "black",
@@ -126,8 +130,7 @@
     }
   },
   "window.openFoldersInNewWindow": "on",
-  "workbench.iconTheme": "eq-material-theme-icons-darker",
-  "workbench.colorTheme": "Community Material Theme Darker",
+  "workbench.iconTheme": "material-icon-theme",
   "task.problemMatchers.neverPrompt": {
     "npm": true
   },
@@ -195,6 +198,11 @@
     "editor.wordWrap": "wordWrapColumn"
   },
 
+  "[latex]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.defaultFormatter": "James-Yu.latex-workshop"
+  },
+
   "[powershell]": {
     "editor.rulers": [120]
   },
@@ -219,10 +227,6 @@
     "editor.formatOnSave": true,
     "editor.tabSize": 2
   },
-  "[django-html]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "HookyQR.beautify"
-  },
 
   // PLUGINS
   "extensions.autoUpdate": true,
@@ -232,9 +236,6 @@
   "auto-close-tag.SublimeText3Mode": true,
 
   // Life Server
-  "beautify.language": {
-    "html": ["django-html"]
-  },
   "liveServer.settings.donotShowInfoMsg": true,
 
   // Prettier
@@ -242,10 +243,6 @@
   "prettier.semi": false,
   "prettier.printWidth": 80,
   "prettier.bracketSpacing": true,
-
-  // Pyright
-  // "pyright.disableOrganizeImports": false,
-  "pyright.disableLanguageServices": true,
 
   // Vim
   "vim.autoSwitchInputMethod.enable": true,
@@ -317,6 +314,16 @@
   // Stylelint
   // Выключить внутреннюю валидацию, так как она
   // мешала работе tailwind
+  "[css]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true
+    }
+  },
+  "[scss]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true
+    }
+  },
   "css.validate": false,
   "scss.validate": false,
 
@@ -334,18 +341,6 @@
     "xi"
   ],
   "cSpell.language": "en,ru",
-  "cSpell.userWords": [
-    "Ilya",
-    "Mila",
-    "Olya",
-    "Vanya",
-    "font",
-    "font semibold",
-    "fullname",
-    "semibold",
-    "unfollow",
-    "unfollowed"
-  ],
   "spellright.language": ["en", "ru"],
   "spellright.documentTypes": ["markdown", "latex", "plaintext"],
   "jupyter.askForKernelRestart": false,
@@ -378,14 +373,14 @@
   "git.autofetch": true,
   "git.confirmSync": false,
   "terminal.integrated.enableMultiLinePasteWarning": false,
-  "[env]": {
-    "editor.defaultFormatter": "IronGeek.vscode-env"
-  },
-  "workbench.activityBar.visible": false,
   "window.menuBarVisibility": "toggle",
   "remote.SSH.remotePlatform": {
-    "vdsina": "linux"
+    "vdsina": "linux",
+    "vpn": "linux"
   },
+  "vim.enableNeovim": true,
+  "workbench.startupEditor": "none",
+  "workbench.activityBar.visible": false,
   "window.zoomLevel": 2,
-  "vim.enableNeovim": true
+  "yaml.maxItemsComputed": 50000
 }

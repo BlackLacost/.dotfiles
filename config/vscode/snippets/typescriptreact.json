@@ -1,4 +1,11 @@
 {
+  // "": {
+  //   "prefix": "",
+  //   "body": [
+  //   ],
+  //   "description": ""
+  // },
+
   // Place your snippets for typescriptreact here. Each snippet is defined under a snippet name and has a prefix, body and
   // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
   // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
@@ -28,5 +35,65 @@
       "}"
     ],
     "description": "TypeScript React Functional Component with twMerge"
+  },
+  "Next Page": {
+    "prefix": "np",
+    "body": [
+      "const ${1:$TM_FILENAME_BASE}Page = () => {",
+      "  return (",
+      "    <div>",
+      "      <h1>${0:$TM_FILENAME_BASE}Page</h1>",
+      "    </div>",
+      "  )",
+      "}",
+      "",
+      "export default ${1:$TM_FILENAME_BASE}Page"
+    ],
+    "description": "Next Page"
+  },
+  "Next Page pages": {
+    "prefix": "npp",
+    "body": [
+      "import { NextPage } from 'next'",
+      "import Head from 'next/head'",
+      "",
+      "interface Props {}",
+      "",
+      "const ${1:$TM_FILENAME_BASE}: NextPage<Props> = (props) => {",
+      "  return (",
+      "    <div>",
+      "      <Head>",
+      "        <title>${1:$TM_FILENAME_BASE}</title>",
+      "      </Head>",
+      "      <h1>${0:$TM_FILENAME_BASE}</h1>",
+      "    </div>",
+      "  )",
+      "}",
+      "",
+      "export default ${1:$TM_FILENAME_BASE}"
+    ],
+    "description": "Next Page (Pages)"
+  },
+  "Next Component": {
+    "prefix": "nc",
+    "body": [
+      "interface Props {}",
+      "",
+      "export const $TM_FILENAME_BASE = ({}: Props) => {",
+      "  return <div>${0:$TM_FILENAME_BASE}</div>",
+      "}"
+    ],
+    "description": "Next Component"
+  },
+  "Next Component Async": {
+    "prefix": "nca",
+    "body": [
+      "interface Props {}",
+      "",
+      "export const $TM_FILENAME_BASE = async function $TM_FILENAME_BASE({}: Props) {",
+      "  return <div>${0:$TM_FILENAME_BASE}</div>",
+      "} as unknown as (props: Props) => JSX.Element"
+    ],
+    "description": "Next Component Async"
   }
 }
