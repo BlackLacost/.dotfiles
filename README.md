@@ -8,41 +8,7 @@
 ## Установка
 
 - Install Windows Terminal via WindowsStore
-- Disable python app execution alias
-- Установить последний [PowerShell](https://github.com/PowerShell/PowerShell/releases) core через msi
-- Если сайт 7zip блокируется, то надо настроить VPN
-
-Запустить PowerShell core 7 под **админом**
-
-```
-Set-ExecutionPolicy RemoteSigned -scope CurrentUser
-Invoke-WebRequest -UseBasicParsing get.scoop.sh | Invoke-Expression
-scoop install git
-(Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/BlackLacost/.dotfiles/master/install.ps1).Content | Invoke-Expression
-$d = New-Dotfiles
-$d.Configure()
-Set-Proxy
-nvm install lts
-nvm use lts
-npm install -g yarn
-```
-
-После скачки dotfiles через скрипт LF меняется на CRLF поэтому нужно вернуть все обратно.
-
-```
-cd ~/.dotfiles
-git reset --hard
-```
-
-- swap caps and ctrl using sharpkeys
-- Установить Master PDF Editor
-
-- poetry
-
-```
-(Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python -
-poetry config virtualenvs.in-project true
-```
+- PowerToys
 
 [WSL](https://docs.microsoft.com/ru-ru/windows/wsl/install-win10#manual-installation-steps)
 

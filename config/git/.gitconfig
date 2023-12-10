@@ -14,11 +14,12 @@ pretty = oneline
 
 [pull]
 rebase = true
+
 [init]
 defaultBranch = main
+
 [credential]
-helper = manager-core
-[credential "helperselector"]
-	selected = manager-core
+helper = manager
+
 [push]
 default = simple
