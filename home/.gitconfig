@@ -1,0 +1,21 @@
+[user]
+	email = blacklacost@gmail.com
+	name = Ilya Lisin
+
+[init]
+	defaultBranch = "main"
+
+[core]
+	editor = "code -w"
+	autocrlf = input
+	safecrlf = false
+	excludesFile = /home/blacklacost/.gitignore
+
+[format]
+	pretty = oneline
+
+[pull]
+	rebase = true
+
+[alias]
+	commitall = "!git add .;git commit"

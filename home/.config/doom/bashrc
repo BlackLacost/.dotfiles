@@ -1,0 +1,3 @@
+# Emacs
+export PATH="$HOME/.emacs.d/bin:$PATH"
+alias emacs="emacsclient -c -a 'emacs'"

@@ -1,0 +1,9 @@
+[Unit]
+Description=Бэкап важных файлов в облаке
+
+[Service]
+User=blacklacost
+ExecStart=/bin/bash /opt/doc_backup.sh
+
+[Install]
+WantedBy=multi-user.target

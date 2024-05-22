@@ -1,0 +1,14 @@
+[Unit]
+Description=Таймер запуска бэкапа важных файлов в облаке
+# Таймер без сервиса не имеет смысла, поэтому требуем его
+Requires=doc-backup.service
+
+[Timer]
+# Если название тоже можно не указывать, но явное лучше не явного
+Unit=doc-backup.service
+# Каждый раз через 5 минут после выполнения сервиса
+OnUnitInactiveSec=1d
+# Persistent=true
+
+[Install]
+WantedBy=timers.target

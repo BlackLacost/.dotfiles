@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# This is bound to Shift+PrintScreen by default, requires maim. It lets you
+# choose the kind of screenshot to take, including copying the image or even
+# highlighting an area to copy. scrotcucks on suicidewatch right now.
+
+menu="a selected area
+current window
+full screen
+a selected area (copy)
+current window (copy)
+full screen (copy)"
+
+case "$(printf "$menu" | dmenu -l 6 -i -p "Screenshot which area?")" in
+    "a selected area")
+        maim -s pic-selected-"$(date '+%y%m%d-%H%M-%S').png"
+        ;;
+    "current window")
+        active_window_id="$(xdotool getactivewindow)"
+        maim -i $active_window_id pic-window-"$(date '+%y%m%d-%H%M-%S').png"
+        ;;
+    "full screen")
+        maim pic-full-"$(date '+%y%m%d-%H%M-%S').png"
+        ;;
+    "a selected area (copy)")
+        maim -s | xclip -selection clipboard -t image/png
+        ;;
+    "current window (copy)")
+        active_window_id="$(xdotool getactivewindow)"
+        maim -i $active_window_id | xclip -selection clipboard -t image/png
+        ;;
+    "full screen (copy)")
+        maim | xclip -selection clipboard -t image/png
+        ;;
+esac

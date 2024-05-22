@@ -1,0 +1,386 @@
+{
+  // Files
+
+  "files.associations": {
+    "*.html": "html"
+  },
+
+  // The default end of line character.
+  //  - \n: LF
+  //  - \r\n: CRLF
+  //  - auto: Uses operating system specific end of line character.
+  "files.eol": "\n",
+
+  // When enabled, will trim trailing whitespace when saving a file.
+  "files.trimTrailingWhitespace": true,
+
+  // Configure glob patterns for excluding files and folders. For example,
+  // the file Explorer decides which files and folders to show or hide
+  // based on this setting. Refer to the `search.exclude` setting to define
+  // search specific excludes. Read more about glob patterns
+  // [here](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options).
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true
+  },
+
+  // Common
+  "window.restoreWindows": "all",
+
+  // Imports
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "source.addMissingImports": true
+  },
+  "editor.foldingImportsByDefault": false,
+  "javascript.suggest.autoImports": true,
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.suggest.autoImports": true,
+
+  // Editor
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.autoClosingBrackets": "beforeWhitespace",
+  "editor.autoClosingQuotes": "beforeWhitespace",
+  "editor.fontFamily": "Monoid, Monoid NF",
+  "editor.fontSize": 12,
+  "editor.fontLigatures": true,
+  "editor.links": true,
+  "editor.lineNumbers": "off",
+  "editor.minimap.enabled": false,
+  "editor.rulers": [78],
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "editor.tabCompletion": "off",
+  "editor.suggestSelection": "first",
+  "editor.copyWithSyntaxHighlighting": true,
+
+  // Colorized brackets
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+
+  // Autoformat
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "python.autoComplete.extraPaths": [], // enable auto import
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length", "78"],
+  "python.sortImports.args": ["-m 3", "-tc"],
+  "html.format.enable": true,
+
+  // VirtualEnv
+  "python.pythonPath": "./.venv/bin/python",
+
+  // Linting
+  "python.analysis.typeCheckingMode": "basic",
+  "python.languageServer": "Pylance",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.linting.pylintArgs": [
+    "--load-plugins",
+    "pylint_django",
+    "--errors-only"
+  ],
+
+  "editor.tabSize": 2,
+  "editor.linkedEditing": true,
+  "emmet.includeLanguages": {
+    "django-html": "html",
+    "vue-html": "html",
+    "vue": "html",
+    "javascript": "javascriptreact"
+    // "vue-html": "jade",
+    // "vue": "jade"
+  },
+  "emmet.syntaxProfiles": {
+    "vue-html": "jade",
+    "vue": "jade"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "html.autoClosingTags": true,
+  "search.useIgnoreFiles": true,
+  "terminal.integrated.fontFamily": "Monoid, Monoid NF",
+  "terminal.integrated.fontSize": 12,
+  // "terminal.integrated.shell.windows": "pwsh.exe",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    },
+    "Command Prompt": {
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ],
+      "args": [],
+      "icon": "terminal-cmd"
+    },
+    "Git Bash": {
+      "source": "Git Bash"
+    }
+  },
+  "window.openFoldersInNewWindow": "on",
+  "workbench.iconTheme": "material-icon-theme",
+  "task.problemMatchers.neverPrompt": {
+    "npm": true
+  },
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "todo-tree.tree.showScanModeButton": false,
+  "vsicons.dontShowNewVersionMessage": true,
+
+  // Search
+  "search.exclude": {
+    "**/.git": true,
+    "**/.vscode": true,
+    "**/node_modules": true,
+    "**/static": true,
+    "**/media": true,
+    "**/logs": true,
+    "**/tmp": true
+  },
+  "search.showLineNumbers": true,
+  "typescript.workspaceSymbols.scope": "currentProject",
+
+  // Настройки под разные технологии
+  "[git-commit]": {
+    "editor.rulers": [72, 50]
+  },
+
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
+
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.rulers": [80]
+  },
+
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.rulers": [80],
+    "editor.wordWrap": "wordWrapColumn"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.rulers": [100],
+    "editor.wordWrapColumn": 100,
+    // bounded - wrap делается по заданной колонке и на ширину видиомости.
+    "editor.wordWrap": "bounded"
+  },
+
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn"
+  },
+
+  "[mdx]": {
+    "editor.wordWrap": "wordWrapColumn"
+  },
+
+  "[latex]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.defaultFormatter": "James-Yu.latex-workshop"
+  },
+
+  "[powershell]": {
+    "editor.rulers": [120]
+  },
+
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+
+  "[python]": {
+    "editor.defaultFormatter": null,
+    "editor.tabSize": 4,
+    "editor.formatOnType": true
+    // "editor.codeActionsOnSave": {
+    //   "source.organizeImports": true,
+    //   "source.fixAll": true
+    // }
+    // "editor.formatOnSaveTimeout": 3000
+  },
+
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
+
+  // PLUGINS
+  "extensions.autoUpdate": true,
+
+  // Auto-Close
+  // "auto-close-tag.disableOnLanguage": ["typescript"],
+  "auto-close-tag.SublimeText3Mode": true,
+
+  // Life Server
+  "liveServer.settings.donotShowInfoMsg": true,
+
+  // Prettier
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "prettier.printWidth": 80,
+  "prettier.bracketSpacing": true,
+
+  // Vim
+  "vim.autoSwitchInputMethod.enable": true,
+  // ---
+  // windows
+  "vim.autoSwitchInputMethod.defaultIM": "1033",
+  "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe",
+  "vim.autoSwitchInputMethod.switchIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe {im}",
+  // linux
+  // "vim.autoSwitchInputMethod.defaultIM": "us",
+  // "vim.autoSwitchInputMethod.obtainIMCmd": "/usr/bin/xkb-switch",
+  // "vim.autoSwitchInputMethod.switchIMCmd": "/usr/bin/xkb-switch -s {im}",
+  // ---
+  "vim.camelCaseMotion.enable": true,
+  "vim.easymotion": true,
+  "vim.ignorecase": true,
+  "vim.useSystemClipboard": false,
+  "vim.leader": "<space>",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["j"],
+      "after": ["g", "j"]
+    },
+    {
+      "before": ["k"],
+      "after": ["g", "k"]
+    },
+    {
+      "before": ["g", "j"],
+      "after": ["j"]
+    },
+    {
+      "before": ["g", "k"],
+      "after": ["k"]
+    },
+    {
+      "before": ["<leader>", "y"],
+      "after": ["\"", "+", "y"]
+    },
+    {
+      "before": ["<leader>", "p"],
+      "after": ["\"", "+", "p"]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "y"],
+      "after": ["\"", "+", "y"]
+    },
+    {
+      "before": ["<leader>", "p"],
+      "after": ["\"", "+", "p"]
+    }
+  ],
+
+  // Wallaby
+  "wallaby.startAutomatically": false,
+  "sqltools.useNodeRuntime": true,
+
+  // Vetur
+  // Отключение валидация с помощью vetur, так как
+  // я это делаю с помощью es-lint и prettier
+  "vetur.validation.template": false,
+
+  // Eslint
+  "eslint.enable": false,
+  "eslint.validate": ["vue", "html", "javascript"],
+
+  // Stylelint
+  // Выключить внутреннюю валидацию, так как она
+  // мешала работе tailwind
+  "[css]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true
+    }
+  },
+  "[scss]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true
+    }
+  },
+  "css.validate": false,
+  "scss.validate": false,
+
+  // Tailwind intellisense
+  "tailwindCSS.emmetCompletions": true,
+  "cSpell.enableFiletypes": [
+    "!javascript",
+    "!javascriptreact",
+    "!json",
+    "!jsonc",
+    "!python",
+    "!scss",
+    "!typescript",
+    "!typescriptreact",
+    "xi"
+  ],
+  "cSpell.language": "en,ru",
+  "spellright.language": ["en", "ru"],
+  "spellright.documentTypes": ["markdown", "latex", "plaintext"],
+  "jupyter.askForKernelRestart": false,
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "python.analysis.extraPaths": [],
+  "json.maxItemsComputed": 50000,
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "XXX",
+    "[ ]",
+    "[x]"
+  ],
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+  "editor.cursorStyle": "line",
+  "editor.insertSpaces": false,
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "editor.wordWrap": "off",
+  "jupyter.interactiveWindowMode": "perFile",
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "security.workspace.trust.untrustedFiles": "open",
+  "redhat.telemetry.enabled": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "window.menuBarVisibility": "toggle",
+  "remote.SSH.remotePlatform": {
+    "vdsina": "linux",
+    "vpn": "linux"
+  },
+  "vim.enableNeovim": true,
+  "workbench.startupEditor": "none",
+  "workbench.activityBar.visible": false,
+  "window.zoomLevel": 2,
+  "yaml.maxItemsComputed": 50000
+}

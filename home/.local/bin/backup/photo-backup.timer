@@ -1,0 +1,14 @@
+[Unit]
+Description=Таймер бэкапа фоток в облаке
+# Таймер без сервиса не имеет смысла, поэтому требуем его
+Requires=photo-backup.service
+
+[Timer]
+# Если название тоже можно не указывать, но явное лучше не явного
+Unit=photo-backup.service
+# Каждый раз через 5 минут после выполнения сервиса
+OnUnitInactiveSec=1d
+# Persistent=true
+
+[Install]
+WantedBy=timers.target

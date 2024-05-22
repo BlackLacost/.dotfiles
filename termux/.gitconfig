@@ -1,0 +1,21 @@
+[user]
+email = blacklacost@gmail.com
+name = Ilya Lisin
+
+[core]
+editor = "nvim"
+eol = lf
+autocrlf = false
+safecrlf = warn
+quotepath = false
+
+[format]
+pretty = oneline
+
+[pull]
+rebase = true
+[init]
+defaultBranch = main
+[push]
+default = simple
+
