@@ -64,3 +64,15 @@ wsl --import Arch ~/AppData/Local/MyDistro ./archwsl.tar --version 2
 ```
 sudo pacman -S powerline-fonts
 ```
+
+Установка crt сертификатов в wsl Ubuntu
+
+```shell
+sudo mkdir /usr/share/ca-certificates/<name-organization>
+sudo sudo <sert-name> /usr/share/ca-certificates/<name-organization>/
+sudo dpkg-reconfigure ca-certificates
+```
+
+```powershell
+wsl --shutdown
+```

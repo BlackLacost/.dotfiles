@@ -3,9 +3,9 @@ email = lisin.ilya@sbereducation.ru
 name = "Илья Лисин"
 
 [core]
-editor = "code -w"
+editor = "vim -w"
 eol = lf
-autocrlf = false
+autocrlf = input
 safecrlf = warn
 quotepath = false
 
