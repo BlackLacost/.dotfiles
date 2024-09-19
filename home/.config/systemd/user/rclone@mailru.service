@@ -3,7 +3,7 @@ Description=rclone: Remote FUSE filesystem for cloud storage config %i
 Documentation=man:rclone(1)
 After=network-online.target
 Wants=network-online.target
-AssertPathIsDirectory=%h/cloud
+AssertPathIsDirectory=%H/cloud
 
 [Service]
 Type=notify
