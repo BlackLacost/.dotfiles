@@ -1,3 +1,4 @@
+echo "zshrc loading..."
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -74,11 +75,11 @@ plugins=(
   git
   you-should-use
   zsh-autosuggestions
-  zsh-bat
   zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
+
 
 # User configuration
 
@@ -119,16 +120,15 @@ alias cdx="cd ~/.xi"
 alias cddf="cd ~/.dotfiles"
 alias cddl="cd ~/Downloads"
 
+alias gbc="git branch --show-current"
+
 alias ls="eza"
 alias ll="ls --long --header"
 
 alias ze="nvim ~/.zshrc"
 alias zs="source ~/.zshrc"
 
-
-PATH=~/.console-ninja/.bin:$PATH
-
 # Work
-if [[ -e ~/.work.sh ]]; then
-  source ~/.work.sh
+if [[ -e ~/.sber/.sber.sh ]]; then
+  source ~/.sber/.sber.sh
 fi

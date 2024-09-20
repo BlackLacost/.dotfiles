@@ -3,8 +3,14 @@
 ## Manjaro
 
 ```shell
+# dotfiles
+ln -sfr ~/.dotfiles/config/mpv/ ~/.config
+# Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ln -sf ~/.dotfiles/home/.zshrc ~
+# Tmux
+sudo pamac install tmux
+ln -sf ~/.dotfiles/home/.config/tmux/.tmux.conf ~
 # autosuggestions plugin
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 # highlight commands in terminal
@@ -15,7 +21,14 @@ git clone https://github.com/MichaelAquilina/zsh-you-should-use.git $ZSH_CUSTOM/
 sudo pamac install bat
 # replace cat by bat in zsh
 git clone https://github.com/fdellwing/zsh-bat.git $ZSH_CUSTOM/plugins/zsh-bat
-ln -sfr ~/.dotfiles/config/mpv/ ~/.config
+# Alacritty
+ln -sfr ~/.dotfiles/home/.config/alacritty/ ~/.config
+# Mpv player
+sudo pamac install mpv
+# nvim
+sudo pamac install neovim unzip
+git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
+# MasonInstallAll
 ```
 
 ### Post manual install
