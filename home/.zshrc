@@ -125,10 +125,14 @@ alias gbc="git branch --show-current"
 alias ls="eza"
 alias ll="ls --long --header"
 
+alias ne="cd ~/.config/nvim && nvim ."
+alias te="nvim ~/.tmux.conf"
 alias ze="nvim ~/.zshrc"
 alias zs="source ~/.zshrc"
 
 # Work
-if [[ -e ~/.sber/.sber.sh ]]; then
-  source ~/.sber/.sber.sh
-fi
+# if [[ -e ~/.sber/.sber.sh ]]; then
+#   source ~/.sber/.sber.sh
+# fi
+
+PATH=~/.console-ninja/.bin:$PATH

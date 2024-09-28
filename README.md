@@ -23,10 +23,12 @@ sudo pamac install bat
 git clone https://github.com/fdellwing/zsh-bat.git $ZSH_CUSTOM/plugins/zsh-bat
 # Alacritty
 ln -sfr ~/.dotfiles/home/.config/alacritty/ ~/.config
+# проверить что в терминал поддерживает 256 цветов
+tput colors
 # Mpv player
 sudo pamac install mpv
 # nvim
-sudo pamac install neovim unzip
+sudo pamac install neovim unzip luarocks ripgrep
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 # MasonInstallAll
 ```
@@ -134,4 +136,33 @@ sudo dpkg-reconfigure ca-certificates
 
 ```powershell
 wsl --shutdown
+```
+
+## NixOS
+
+```shell
+sudo -i
+systemctl start wpa_supplicant
+wpa_cli
+```
+
+```wap_cli
+add_network
+set_network 0 ssid "RouteRich"
+set_network 0 psk "password"
+set_network 0 key_mgmt SAE # WPA 3
+enable_network 0
+quit
+```
+
+```shell
+nix-shell -p git
+git clone https://github.com/blacklacost/.nixos
+sh script.sh
+nixos-install --flake /mnt/etc/nixos#nixos
+reboot
+nmtui # Network Manager
+useradd -m ilya
+passwd ilya
+reboot
 ```
