@@ -129,6 +129,7 @@ alias ne="cd ~/.config/nvim && nvim ."
 alias te="nvim ~/.tmux.conf"
 alias ze="nvim ~/.zshrc"
 alias zs="source ~/.zshrc"
+alias ss="source ~/.sber/.sber.sh"
 
 # Work
 # if [[ -e ~/.sber/.sber.sh ]]; then

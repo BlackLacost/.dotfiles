@@ -4,7 +4,6 @@
 
 ```shell
 # dotfiles
-ln -sfr ~/.dotfiles/config/mpv/ ~/.config
 # Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ln -sf ~/.dotfiles/home/.zshrc ~
@@ -27,6 +26,7 @@ ln -sfr ~/.dotfiles/home/.config/alacritty/ ~/.config
 tput colors
 # Mpv player
 sudo pamac install mpv
+ln -sfr ~/.dotfiles/config/mpv/ ~/.config
 # nvim
 sudo pamac install neovim unzip luarocks ripgrep
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
@@ -41,7 +41,7 @@ sudo pamac build yandex-cloud-bin
 sudo pamac build yandex-disk
 yandex-disk setup
 ### Установка mailru
-sudo pamac -S rclone
+sudo pamac install rclone
 rclone config
 # n) New remote
 # mailru
