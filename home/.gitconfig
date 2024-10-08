@@ -8,15 +8,13 @@
 [core]
 	editor = "code -w"
 	autocrlf = input
-	safecrlf = false
+	safecrlf = true
 
 [format]
-	pretty = oneline
+	pretty = format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 
 [pull]
 	rebase = true
 
 [alias]
 	ca = "!git add .;git commit"
-	hist = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	hista = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all

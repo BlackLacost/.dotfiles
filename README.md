@@ -31,6 +31,7 @@ ln -sfr ~/.dotfiles/config/mpv/ ~/.config
 sudo pamac install neovim unzip luarocks ripgrep
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 # MasonInstallAll
+ln -sf ~/.dotfiles/home/.gitconfig ~
 ```
 
 ### Post manual install
