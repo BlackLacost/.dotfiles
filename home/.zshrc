@@ -114,10 +114,16 @@ fi
 # For a full list of active aliases, run `alias`.
 alias cdw="cd ~/work"
 alias cdwcp="cd ~/work/constructor-player"
+alias wcpe="code ~/work/constructor-player"
 alias cdwe="cd ~/work/edutoria-fe"
+alias wee="code ~/work/edutoria-fe"
 alias cdc="cd ~/code"
 alias cdx="cd ~/.xi"
+alias xe="code ~/.xi"
+alias cdf="cd ~/.foam"
+alias fe="code ~/.foam"
 alias cddf="cd ~/.dotfiles"
+alias de="code ~/.dotfiles"
 alias cddl="cd ~/Downloads"
 
 alias gbc="git branch --show-current"
@@ -129,6 +135,7 @@ alias ne="cd ~/.config/nvim && nvim ."
 alias te="nvim ~/.tmux.conf"
 alias ze="nvim ~/.zshrc"
 alias zs="source ~/.zshrc"
+alias se="code ~/.sber"
 alias ss="source ~/.sber/.sber.sh"
 
 # Work
