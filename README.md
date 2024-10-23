@@ -158,12 +158,11 @@ quit
 
 ```shell
 nix-shell -p git
-git clone https://github.com/blacklacost/.nixos
-sh script.sh
+git clone https://github.com/blacklacost/.dotfiles
+sh .dotfiles/nixos/script.sh
 nixos-install --flake /mnt/etc/nixos#nixos
 reboot
-nmtui # Network Manager
-useradd -m ilya
+# login like root
 passwd ilya
 reboot
 ```
