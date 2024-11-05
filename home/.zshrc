@@ -80,7 +80,6 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -97,7 +96,6 @@ source $ZSH/oh-my-zsh.sh
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
-
 
 # Nvm
 if [[ -e /usr/share/nvm/init-nvm.sh ]]; then
@@ -132,15 +130,18 @@ alias ls="eza"
 alias ll="ls --long --header"
 
 alias ne="cd ~/.config/nvim && nvim ."
-alias te="nvim ~/.tmux.conf"
-alias ze="nvim ~/.zshrc"
+alias te="emacs -nw ~/.tmux.conf"
+alias ze="emacs -nw ~/.zshrc"
 alias zs="source ~/.zshrc"
 alias se="code ~/.sber"
 alias ss="source ~/.sber/.sber.sh"
+alias ew="emacs"
+alias et="emacs -nw"
+alias quik="LC_ALL=ru_RU.UTF-8 wine64 ~/.wine/dosdevices/c:/BCS_Work/QUIK_BCS/info.exe"
 
 # Work
 # if [[ -e ~/.sber/.sber.sh ]]; then
 #   source ~/.sber/.sber.sh
 # fi
 
-PATH=~/.console-ninja/.bin:$PATH
+PATH=~/.config/emacs/bin:~/.console-ninja/.bin:$PATH

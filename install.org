@@ -1,0 +1,24 @@
+#+title: Install
+
+* Install Arch Linux
+
+Установка шрифта побольше
+#+begin_src bash
+setfont /usr/share/kbd/consolefonts/sun12x22.psfu.gz
+#+end_src
+
+#+begin_src bash
+# iwctl station wlan0 get-networks
+iwctl station wlan0 connect RouteRich
+#+end_src
+
+#+begin_src bash
+vim /etc/pacman.conf
+# Uncomment Paralle downloads
+#+end_src
+
+#+begin_src bash
+lsblk
+cfdisk /dev/nvme0n1
+# 256M EFI System
+#+end_src
