@@ -1,0 +1,10 @@
+[Unit]
+Description=Фикс предотвращающий моментальное пробуждение после suspend
+
+[Service]
+ExecStart=/bin/bash -c 'echo "XH00" > /proc/acpi/wakeup'
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

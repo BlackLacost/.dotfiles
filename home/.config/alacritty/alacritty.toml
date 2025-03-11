@@ -1,0 +1,32 @@
+# Docs: https://alacritty.org/config-alacritty.html
+
+# [shell]
+# program = "/bin/zsh"
+# args = ["--login", "-c", "tmux new-session -A -s default"]
+
+[selection]
+save_to_clipboard = true
+
+[env]
+TERM = "alacritty"
+
+[font]
+normal.family = "JetBrainsMono Nerd Font"
+size = 16.0
+
+
+[window]
+# dynamic_title = true
+padding.x = 20
+padding.y = 20
+
+opacity = 0.98
+blur = true
+decorations = "buttonless"
+
+# [window.dimensions]
+# columns = 100
+# lines = 85
+
+[scrolling]
+history = 10000

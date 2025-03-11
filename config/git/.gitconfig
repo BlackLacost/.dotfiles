@@ -1,0 +1,29 @@
+[user]
+email = lisin.ilya@sbereducation.ru
+name = "Илья Лисин"
+
+[core]
+editor = "vim -w"
+eol = lf
+autocrlf = input
+safecrlf = warn
+quotepath = false
+
+[format]
+pretty = oneline
+
+[pull]
+rebase = true
+
+[init]
+defaultBranch = main
+
+[credential]
+helper = manager
+
+[push]
+default = simple
+
+[alias]
+hist = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+hista = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all

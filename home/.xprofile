@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# This file runs when a DM logs you into a graphical session.
+# If you use startx/xinit like a Chad, this file will also be sourced.
+
+setxkbmap -layout us,ru && \
+    # setxkbmap -option 'grp:alt_shift_toggle' && \
+    setxkbmap -option 'grp:win_space_toggle' && \
+    setxkbmap -option 'ctrl:swapcaps'
