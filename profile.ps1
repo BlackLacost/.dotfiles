@@ -24,7 +24,7 @@ function nrd() { npm run dev | Invoke-Expression; }
 function nrt() { npm run test | Invoke-Expression; }
 
 function ghc() {
-  gh repo list --limit 1000 | fzf | foreach { "gh repo clone {0}" -f ($_ -split '\t')} | Invoke-Expression
+  gh repo list --limit 1000 | fzf | foreach { "gh repo clone {0}" -f ($_ -split '\t') } | Invoke-Expression
 }
 
 function gg() {
@@ -43,21 +43,24 @@ function gst() { git status; }
 function ga($file) {
   if ($file) {
     git add $file;
-  } else {
+  }
+  else {
     git add .;
   }
 }
 function gcmm($commit) {
   if ($commit) {
     git commit -m $commit;
-  } else {
+  }
+  else {
     git commit;
   }
 }
 function gcma($commit) {
   if ($commit) {
     git commit --amend -m $commit;
-  } else {
+  }
+  else {
     git commit --amend --no-edit;
   }
 }
@@ -73,7 +76,8 @@ function Compare-GitFiles {
 
   if ($File) {
     git diff HEAD $File
-  } else {
+  }
+  else {
     git diff HEAD
   }
 }
@@ -90,11 +94,13 @@ function Get-GitLog {
       --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' `
       --abbrev-commit `
       --all
-  } else {
+  }
+  else {
     git log `
       --graph `
       --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' `
       --abbrev-commit `
+  
   }
 }
 Set-Alias -Name glg -Value Get-GitLog
@@ -118,10 +124,10 @@ function Close-Task {
 
 # Reload the Shell
 function Reload-Powershell {
-    $newProcess = new-object System.Diagnostics.ProcessStartInfo "PowerShell";
-    $newProcess.Arguments = "-nologo";
-    [System.Diagnostics.Process]::Start($newProcess);
-    exit
+  $newProcess = new-object System.Diagnostics.ProcessStartInfo "PowerShell";
+  $newProcess.Arguments = "-nologo";
+  [System.Diagnostics.Process]::Start($newProcess);
+  exit
 }
 
 # Windows-OSX-Linux consistency
@@ -149,26 +155,27 @@ function Get-Proxy {
   Get-ItemProperty `
     -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings' `
     -Name 'AutoConfigURL' `
-    | Select-Object "AutoConfigURL"
+  | Select-Object "AutoConfigURL"
 }
 
 function OnViModeChange {
   if ($args[0] -eq 'Command') {
-      # Set the cursor to a blinking block.
-      Write-Host -NoNewLine "`e[1 q"
-  } else {
-      # Set the cursor to a blinking line.
-      Write-Host -NoNewLine "`e[5 q"
+    # Set the cursor to a blinking block.
+    Write-Host -NoNewLine "`e[1 q"
+  }
+  else {
+    # Set the cursor to a blinking line.
+    Write-Host -NoNewLine "`e[5 q"
   }
 }
 
 $PSReadLineOptions = @{
-  EditMode = "Vi"
-  # EditMode = "Emacs"
-  HistoryNoDuplicates = $true
+  # EditMode = "Vi"
+  EditMode                      = "Emacs"
+  HistoryNoDuplicates           = $true
   HistorySearchCursorMovesToEnd = $true
-  ViModeIndicator = "Script"
-  ViModeChangeHandler = $Function:OnViModeChange
+  ViModeIndicator               = "Script"
+  ViModeChangeHandler           = $Function:OnViModeChange
 }
 Set-PSReadLineOption @PSReadLineOptions
 Write-Host -NoNewLine "`e[5 q"
