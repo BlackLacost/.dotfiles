@@ -30,7 +30,7 @@ rebase = true
 
 [safe]
 # Can be manipulated via sudo which changes user
-directory = "C:/Users/ilya/.dotfiles"
+directory = "C:/Users/black/.dotfiles"
 
 [alias]
 cl = "clone"
