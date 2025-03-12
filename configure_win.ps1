@@ -85,9 +85,7 @@ class App {
     $this._POST_INSTALL_MSG = @"
       Config complete. Manual things to do
       - Reboot and make --full configuration
-      - vscode
-      - mpv config
-      - ollama model link
+      - Install Disk-O
       - Load X-Mouse Button Control settings
         * Disable 'Settings/Pointer/Change cursor when move to scroll'
         * Map Mouse4 => 'change movement to scroll' with setings:
@@ -323,6 +321,7 @@ class App {
       $this._installApp("Telegram.TelegramDesktop");
       # Browser
       $this._installApp("Brave.Brave");
+      $this._installApp("Guru3D.Afterburner");
       #   # file management
       #   $this._installApp("alexx2000.DoubleCommander");
       #   # PDF view, this is the last version that supports bookmarks save
