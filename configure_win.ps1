@@ -11,12 +11,12 @@ function New-Link {
     [ValidateSet('SymbolicLink', 'HardLink')][String]$ItemType
   )
   if ([String]::IsNullOrEmpty($Path)) {
-    Write-Host "Path can't be empty when create softlink" -ForegroundColor Red;
+    Write-Host "Path can't be empty when create New-Link" -ForegroundColor Red;
     exit;
   }
 
   if (-not (Test-Path -Path "$Path")) {
-    Write-Host "Create dir $Path for softlink";
+    Write-Host "Create new dir $Path for New-Link";
     New-Dir -Path "$Path";
   }
 
