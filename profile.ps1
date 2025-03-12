@@ -100,7 +100,7 @@ function Get-GitLog {
       --graph `
       --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' `
       --abbrev-commit `
-  
+
   }
 }
 Set-Alias -Name glg -Value Get-GitLog
@@ -181,6 +181,8 @@ Set-PSReadLineOption @PSReadLineOptions
 Write-Host -NoNewLine "`e[5 q"
 
 # GitHub Cli autocomplete
-Invoke-Expression -Command $(gh completion -s powershell | Out-String)
+if (Get-Command gh -ErrorAction SilentlyContinue) {
+  Invoke-Expression -Command $(gh completion -s powershell | Out-String)
+}
 
 Import-Module posh-git

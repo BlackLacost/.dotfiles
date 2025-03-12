@@ -1261,6 +1261,7 @@ $app = [App]::new($args, $pathIntrinsics);
 # $DebugPreference = 'Continue'; # Enable debug output for now.
 $app.configure();
 
+# TODO: !!! git clone as current user, not administrator
 # TODO: try rainmeter
 # TODO: try to use rainmeter with "always on top" over-taskbar skin.
 # TODO: configure no reboot reg key if it works, https://vk.cc/cEEWuN
