@@ -268,6 +268,9 @@ class App {
 
     # $this._getXiWindows();
 
+    $this._installApp("Obsidian.Obsidian");
+    $this._gitClonePkm();
+
     # Symlink PowerShel config file into PowerShell config dir.
     if (-not $this._isTest) {
       $src = $this._path(@($this._cfgDir, "profile.ps1"));
@@ -354,7 +357,6 @@ class App {
       # $this._installApp("9NT1R1C2HH7J");
       $this._installApp("qBittorrent.qBittorrent");
       $this._installApp("Ollama.Ollama");
-      $this._installApp("Obsidian.Obsidian");
       # Folder size analyzer
       $this._installApp("WinDirStat.WinDirStat");
       # Best video player
@@ -1016,6 +1018,18 @@ class App {
     Write-Host "cloning xi into $dstDir";
     & git clone $uri $dstDir;
     return;
+  }
+
+  _gitClonePkm() {
+    if ($this._isTest) { return; }
+    $uri = "git@github.com:blacklacost/pkm.git";
+    $dstDir = $this._path(@("~", ".pkm"));
+    if (Test-Path -Path $dstDir) {
+      Write-Host "PKM already cloned";
+      return;
+    }
+    Write-Host "Cloning PKM into $dstDir";
+    &git clone $uri $dstDir;
   }
 
 
