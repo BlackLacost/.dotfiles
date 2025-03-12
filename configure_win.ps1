@@ -354,6 +354,7 @@ class App {
       $this._installApp("WinDirStat.WinDirStat");
       # Best video player
       $this._installApp("mpv.net");
+      $this._configureMpv();
       # Video player
       $this._installApp("VideoLAN.VLC");
       # Wino Mail
@@ -1104,6 +1105,15 @@ class App {
     $dstDir = $this._path(@($env:APPDATA, "lsd"));
     $srcPath = $this._path(@($this._cfgDir, "config", "lsd", "config.yaml"));
     New-Link -ItemType HardLink -Path $dstDir -Name "config.yaml" -Value $srcPath
+  }
+
+
+  # TODO: Update scripts and create links for them
+  _configureMpv() {
+    if ($this._isTest) { return; }
+    $dstDir = $this._path(@($env:APPDATA, "mpv.net"));
+    $srcPath = $this._path(@($this._cfgDir, "config", "mpv", "input.conf"));
+    New-Link -ItemType HardLink -Path $dstDir -Name "input.conf" -Value $srcPath
   }
 
 
