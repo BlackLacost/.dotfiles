@@ -3,11 +3,12 @@ function New-Softlink() { New-Item -ItemType SymbolicLink -Force @args; }
 function New-SoftlinkDir() { New-Item -ItemType Junction -Force @args; }
 function New-Dir() { New-Item -ItemType Directory -Force @args; }
 function New-File() { New-Item -ItemType File -Force @args; }
-function Softlink {
+function New-Link {
   param (
     [String]$Path,
     [String]$Name,
-    [String]$Value
+    [String]$Value,
+    [ValidateSet('SymbolicLink', 'HardLink')][String]$ItemType
   )
   if ([String]::IsNullOrEmpty($Path)) {
     Write-Host "Path can't be empty when create softlink" -ForegroundColor Red;
@@ -26,8 +27,17 @@ function Softlink {
       Remove-Item "$dstPath" -Recurse -Force;
     }
   }
-  Write-Host ("Creating softlink{0} $Value => $Path\$Name" -f $(if ($isNameDir) { " dir" } else { "" }))
-  New-SoftLink -Path "$Path" -Name $Name -Value "$Value"
+
+  $withDir = $(if ($isNameDir) { " dir" } else { "" })
+
+  if ($ItemType -eq 'SymbolicLink') {
+    Write-Host ("Creating softlink$withDir $Value => $Path\$Name");
+    New-Item -ItemType SymbolicLink -Force -Path $Path -Name $Name -Target $Value;
+  }
+  if ($ItemType -eq 'HardLink') {
+    Write-Host ("Creating hardlink$withDir $Value => $Path\$Name");
+    New-Item -ItemType HardLink -Force -Path $Path -Name $Name -Value $Value;
+  }
 }
 
 class App {
@@ -1031,13 +1041,13 @@ class App {
     $srcDir = $this._path(@($this._cfgDir, "config", "vscode"));
     foreach ($name in @("settings.json", "keybindings.json", "tasks.json", "snippets/")) {
       $srcPath = $this._path(@($srcDir, $name));
-      Softlink -Path $dstDir -Name $name -Value $srcPath;
+      New-Link -ItemType SymbolicLink -Path $dstDir -Name $name -Value $srcPath;
     }
 
     $this._installVscodeExt("continue.continue");
     $dstDir = $this._path(@("~", ".continue"));
     $srcPath = $this._path(@($this._cfgDir, "config", "vscode", "continue", "config.json"));
-    Softlink -Path $dstDir -Name "config.json" -Value $srcPath;
+    New-Link -ItemType SymbolicLink -Path $dstDir -Name "config.json" -Value $srcPath;
 
     $this._installVscodeExt("grigoryvp.markdown-inline-fence");
     $this._installVscodeExt("grigoryvp.memory-theme");
