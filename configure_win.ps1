@@ -279,14 +279,18 @@ class App {
     }
 
     # Create git config with link to the git-cfg.toml
+    # if (-not $this._isTest) {
+    #   $src = $this._path(@($this._cfgDir, ".gitconfig"));
+    #   $dst = $this._path(@("~", ".gitconfig"));
+    #   if (Test-Path -Path "$dst") {
+    #     Remove-Item "$dst" -Recurse -Force;
+    #   }
+    #   $content = "[include]`npath = `"$($this._cfgDirLinux)/git-cfg.toml`"`n";
+    #   New-File -Path "~" -Name ".gitconfig" -Value "$content";
+    # }
     if (-not $this._isTest) {
-      $src = $this._path(@($this._cfgDir, ".gitconfig"));
-      $dst = $this._path(@("~", ".gitconfig"));
-      if (Test-Path -Path "$dst") {
-        Remove-Item "$dst" -Recurse -Force;
-      }
-      $content = "[include]`npath = `"$($this._cfgDirLinux)/git-cfg.toml`"`n";
-      New-File -Path "~" -Name ".gitconfig" -Value "$content";
+      $src = $this._path(@($this._cfgDir, "config", "git", ".gitconfig"));
+      New-Link -ItemType HardLink -Path "~" -Name ".gitconfig" -Value $src;
     }
 
     # if (-not (Test-Path -Path ".editorconfig")) {
