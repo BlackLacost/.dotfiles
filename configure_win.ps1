@@ -1,5 +1,3 @@
-function New-Hardlink() { New-Item -ItemType HardLink -Force @args; }
-function New-Softlink() { New-Item -ItemType SymbolicLink -Force @args; }
 function New-SoftlinkDir() { New-Item -ItemType Junction -Force @args; }
 function New-Dir() { New-Item -ItemType Directory -Force @args; }
 function New-File() { New-Item -ItemType File -Force @args; }
@@ -266,13 +264,8 @@ class App {
     # Symlink PowerShel config file into PowerShell config dir.
     if (-not $this._isTest) {
       $src = $this._path(@($this._cfgDir, "profile.ps1"));
-      $dst = $this._path(@($this._psDir, "profile.ps1"));
-      if (Test-Path -Path "$dst") {
-        Remove-Item "$dst" -Recurse -Force;
-      }
-      Write-Host "Creating softlink $src => $dst";
       # Hardlink is overwritten by powershell
-      New-Softlink -Path "$($this._psDir)" -Name "profile.ps1" -Value "$src";
+      New-Link -ItemType SymbolicLink -Path $this._psDir -Name "profile.ps1" -Value $src;
     }
 
     # Create git config with link to the git-cfg.toml
@@ -1119,15 +1112,13 @@ class App {
     $name = "BatteryInfoView.cfg";
     $srcPath = $this._path(@($this._cfgDir, $name));
     $dstDir = $this._path(@("~", "apps", "NirSoft.BatteryInfoView"));
-    New-Hardlink -Path "$dstDir" -Name $name -Value "$srcPath";
+    New-Link -ItemType HardLink -Path $dstDir -Name $name -Value $srcPath;
   }
-
-
 
 
   _configurePingoMeter() {
     if ($this._isTest) { return; }
-    $srcPath = $this._path(@($this._cfgDir, "pingometer-cfg.txt"));
+    $srcPath = $this._path(@($this._cfgDir, "config.txt"));
     $dstDir = $this._path(@(
         $env:LOCALAPPDATA,
         "Microsoft",
@@ -1136,13 +1127,7 @@ class App {
         "EFLFE.PingoMeter__DefaultSource",
         "PingoMeter"
       ));
-    $dstFileName = "config.txt";
-    $dstPath = $this._path(@($dstDir, $dstFileName));
-    if (Test-Path -Path "$dstFileName") {
-      Remove-Item "$dstFileName" -Recurse -Force;
-    }
-    Write-Host "Creating hardlink $srcPath => $dstPath";
-    New-Hardlink -Path "$dstDir" -Name "$dstFileName" -Value "$srcPath";
+    New-Link -ItemType HardLink -Path $dstDir -Name "config.txt" -Value $srcPath;
   }
 
 
@@ -1227,7 +1212,7 @@ class App {
 $ErrorActionPreference = "Stop";
 $pathIntrinsics = $ExecutionContext.SessionState.Path;
 $app = [App]::new($args, $pathIntrinsics);
-$DebugPreference = 'Continue';
+$DebugPreference = 'Continue'; # Enable debug output for now.
 $app.configure();
 
 # TODO: try to use rainmeter with "always on top" over-taskbar skin.
