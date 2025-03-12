@@ -215,7 +215,7 @@ class App {
     $this._configureVscode();
     # Better ls
     $this._installApp("lsd-rs.lsd");
-    # $this._configureLsd();
+    $this._configureLsd();
     $this._installApp("Microsoft.PowerToys");
     # TODO: install batteryinfoview via winget like "NirSoft.WifiInfoView"
     # this._installLocationApp("NirSoft.BatteryInfoView", "")
@@ -1109,11 +1109,8 @@ class App {
   _configureLsd() {
     if ($this._isTest) { return; }
     $dstDir = $this._path(@($env:APPDATA, "lsd"));
-    if (-not (Test-Path -Path "$dstDir")) {
-      New-Dir -Path "$dstDir";
-    }
-    $srcPath = $this._path(@($this._cfgDir, "lsd.config.yaml"));
-    New-Hardlink -Path "$dstDir" -Name "config.yaml" -Value "$srcPath";
+    $srcPath = $this._path(@($this._cfgDir, "config", "lsd", "config.yaml"));
+    New-Link -ItemType HardLink -Path $dstDir -Name "config.yaml" -Value $srcPath
   }
 
 

@@ -1,0 +1,28 @@
+display: all
+layout: oneline
+blocks:
+  - permission
+  - user
+  - size
+  - name
+color:
+  when: always
+ignore-globs:
+  - .DS_Store
+  - .vscode
+  - desktop.ini
+  - Diablo *
+  - Steelrising
+  - Larian Studios
+  - My Games
+  - My Music
+  - My Pictures
+  - My Videos
+  - PowerShell
+  - Sound Recordings
+  - WindowsPowerShell
+  - Zoom
+sorting:
+  column: name
+  reverse: false
+  dir-grouping: first
