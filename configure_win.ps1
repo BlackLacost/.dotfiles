@@ -176,7 +176,7 @@ class App {
         @($env:ProgramFiles, "KeePassXC")));
     # $this._installBinApp("Microsoft.VisualStudioCode", $this._path(
     # @($env:LOCALAPPDATA, "Programs", "Microsoft VS Code", "bin")));
-    # $this._configureVscode();
+    $this._configureVscode();
     # Better ls
     $this._installApp("lsd-rs.lsd");
     # $this._configureLsd();
@@ -1006,71 +1006,62 @@ class App {
     # Use softlinks since VSCode rewrites hardlinks:
     # https://github.com/microsoft/vscode/issues/194856
 
-    $srcPath = $this._path(@($this._cfgDir, "vscode_settings.json"));
-    $name = "settings.json"
-    Write-Host "Creating softlink $srcPath => $dstDir\$name";
-    New-Softlink -Path "$dstDir" -Name $name -Value "$srcPath";
+    $files = @("settings.json", "keybindings.json", "tasks.json", "snippets/")
 
-    $srcPath = $this._path(@($this._cfgDir, "vscode_keybindings.json"));
-    $name = "keybindings.json"
-    Write-Host "Creating softlink $srcPath => $dstDir\$name";
-    New-SoftLink -Path "$dstDir" -Name $name -Value "$srcPath";
-
-    $srcPath = $this._path(@($this._cfgDir, "vscode_tasks.json"));
-    $name = "tasks.json"
-    Write-Host "Creating softlink $srcPath => $dstDir\$name";
-    New-SoftLink -Path "$dstDir" -Name $name -Value "$srcPath";
-
-    $srcPath = $this._path(@($this._cfgDir, "vscode_snippets/"));
-    $dstPath = $this._path(@($dstDir, "vscode_snippets/"));
-    $name = "vscode_snippets/"
-    if (Test-Path -Path "$dstPath") {
-      Remove-Item "$dstPath" -Recurse -Force;
-    }
-    Write-Host "Creating dir softlink $srcPath => $dstDir\$name";
-    New-Softlink -Path "$dstDir" -Name $name -Value "$srcPath";
-
-    $this._installVscodeExt("grigoryvp.language-xi");
-    $this._installVscodeExt("grigoryvp.memory-theme");
-    $this._installVscodeExt("grigoryvp.goto-link-provider");
-    $this._installVscodeExt("grigoryvp.markdown-inline-fence");
-    $this._installVscodeExt("grigoryvp.markdown-python-repl-syntax");
-    $this._installVscodeExt("grigoryvp.markdown-pandoc-rawattr");
-    $this._installVscodeExt("vscodevim.vim");
-    $this._installVscodeExt("EditorConfig.EditorConfig");
-    $this._installVscodeExt("esbenp.prettier-vscode");
-    $this._installVscodeExt("formulahendry.auto-close-tag");
-    $this._installVscodeExt("dnut.rewrap-revived");
-    $this._installVscodeExt("streetsidesoftware.code-spell-checker");
-    $this._installVscodeExt("streetsidesoftware.code-spell-checker-russian");
-    $this._installVscodeExt("mark-wiemer.vscode-autohotkey-plus-plus");
-
-    $docCfgDir = $this._path(@("~", "Documents", ".vscode"));
-    if (-not (Test-Path -Path "$docCfgDir")) {
-      New-Dir -Path "$docCfgDir";
-    }
-
-    $content = @'
-      {
-        "files.exclude": {
-          "My Music/": true,
-          "My Pictures/": true,
-          "My Videos/": true,
-          "My Games/": true,
-          "Sound Recordings/": true,
-          "Diablo IV/": true,
-          "PowerShell": true,
-          "WindowsPowerShell": true,
-          "desktop.ini": true,
-          ".vscode/": true
+    foreach ($name in $files) {
+      $isNameDir = $name.EndsWith("/");
+      if ($isNameDir) {
+        $dstPath = $this._path(@($dstDir, $name));
+        if (Test-Path -Path "$dstPath") {
+          Remove-Item "$dstPath" -Recurse -Force;
         }
       }
-'@;
+      $srcPath = $this._path(@($this._cfgDir, "config", "vscode", $name))
+      Write-Host ("Creating softlink{0} $srcPath => $dstDir\$name" -f $(if ($isNameDir) { " dir" } else { "" }))
+      New-SoftLink -Path "$dstDir" -Name $name -Value "$srcPath"
+    }
 
-    New-File -Path $docCfgDir -Name "settings.json" -Value "$content";
+    # $this._installVscodeExt("grigoryvp.language-xi");
+    # $this._installVscodeExt("grigoryvp.memory-theme");
+    # $this._installVscodeExt("grigoryvp.goto-link-provider");
+    # $this._installVscodeExt("grigoryvp.markdown-inline-fence");
+    # $this._installVscodeExt("grigoryvp.markdown-python-repl-syntax");
+    # $this._installVscodeExt("grigoryvp.markdown-pandoc-rawattr");
+    # $this._installVscodeExt("vscodevim.vim");
+    # $this._installVscodeExt("EditorConfig.EditorConfig");
+    # $this._installVscodeExt("esbenp.prettier-vscode");
+    # $this._installVscodeExt("formulahendry.auto-close-tag");
+    # $this._installVscodeExt("dnut.rewrap-revived");
+    # $this._installVscodeExt("streetsidesoftware.code-spell-checker");
+    # $this._installVscodeExt("streetsidesoftware.code-spell-checker-russian");
+    # $this._installVscodeExt("mark-wiemer.vscode-autohotkey-plus-plus");
+
+    #     $docCfgDir = $this._path(@("~", "Documents", ".vscode"));
+    #     if (-not (Test-Path -Path "$docCfgDir")) {
+    #       New-Dir -Path "$docCfgDir";
+    #     }
+
+    #     $content = @'
+    #       {
+    #         "files.exclude": {
+    #           "My Music/": true,
+    #           "My Pictures/": true,
+    #           "My Videos/": true,
+    #           "My Games/": true,
+    #           "Sound Recordings/": true,
+    #           "Diablo IV/": true,
+    #           "PowerShell": true,
+    #           "WindowsPowerShell": true,
+    #           "desktop.ini": true,
+    #           ".vscode/": true
+    #         }
+    #       }
+    # '@;
+
+    #     New-File -Path $docCfgDir -Name "settings.json" -Value "$content";
 
     ##  Exclude from 'ls'.
-    $(Get-Item -Force $docCfgDir).Attributes = 'Hidden';
+    # $(Get-Item -Force $docCfgDir).Attributes = 'Hidden';
   }
 
 
