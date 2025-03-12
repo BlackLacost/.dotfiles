@@ -339,8 +339,6 @@ class App {
       #   $this._installApp("Microsoft.Sysinternals.ProcessExplorer");
       #   # Desktop recording.
       #   $this._installApp("OBSProject.OBSStudio");
-      #   # TODO: configure to save position on exit
-      #   $this._installApp("clsid2.mpc-hc");
       #   # ag command, "the silver searcher"
       #   $this._installApp("JFLarvoire.Ag");
       #   # screenshot tool, "sniping tool" corrupts colors
@@ -354,16 +352,13 @@ class App {
       #   $this._installApp("Elgato.ControlCenter");
       # # ChatGPT
       # $this._installApp("9NT1R1C2HH7J");
-      # Torrent client
       $this._installApp("qBittorrent.qBittorrent");
-      # For LLM
       $this._installApp("Ollama.Ollama");
-      # Dir analyzer
+      # Folder size analyzer
       $this._installApp("WinDirStat.WinDirStat");
       # Best video player
       $this._installApp("mpv.net");
       $this._configureMpv();
-      # Video player
       $this._installApp("VideoLAN.VLC");
       # Wino Mail
       $this._installApp("9NCRCVJC50WL");
@@ -1233,5 +1228,6 @@ $app = [App]::new($args, $pathIntrinsics);
 $DebugPreference = 'Continue'; # Enable debug output for now.
 $app.configure();
 
+# TODO: try rainmeter
 # TODO: try to use rainmeter with "always on top" over-taskbar skin.
 # TODO: configure no reboot reg key if it works, https://vk.cc/cEEWuN
