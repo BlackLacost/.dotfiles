@@ -354,6 +354,7 @@ class App {
       # $this._installApp("9NT1R1C2HH7J");
       $this._installApp("qBittorrent.qBittorrent");
       $this._installApp("Ollama.Ollama");
+      $this._installApp("Obsidian.Obsidian");
       # Folder size analyzer
       $this._installApp("WinDirStat.WinDirStat");
       # Best video player
