@@ -3,6 +3,32 @@ function New-Softlink() { New-Item -ItemType SymbolicLink -Force @args; }
 function New-SoftlinkDir() { New-Item -ItemType Junction -Force @args; }
 function New-Dir() { New-Item -ItemType Directory -Force @args; }
 function New-File() { New-Item -ItemType File -Force @args; }
+function Softlink {
+  param (
+    [String]$Path,
+    [String]$Name,
+    [String]$Value
+  )
+  if ([String]::IsNullOrEmpty($Path)) {
+    Write-Host "Path can't be empty when create softlink" -ForegroundColor Red;
+    exit;
+  }
+
+  if (-not (Test-Path -Path "$Path")) {
+    Write-Host "Create dir $Path for softlink";
+    New-Dir -Path "$Path";
+  }
+
+  $isNameDir = $name.EndsWith("/");
+  if ($isNameDir) {
+    $dstPath = $this._path(@($Path, $Name));
+    if (Test-Path -Path "$dstPath") {
+      Remove-Item "$dstPath" -Recurse -Force;
+    }
+  }
+  Write-Host ("Creating softlink{0} $Value => $Path\$Name" -f $(if ($isNameDir) { " dir" } else { "" }))
+  New-SoftLink -Path "$Path" -Name $Name -Value "$Value"
+}
 
 class App {
 
@@ -997,29 +1023,21 @@ class App {
 
   _configureVscode() {
     if ($this._isTest) { return; }
-    $dstDir = $this._path(@($env:APPDATA, "Code", "User"));
-    if (-not (Test-Path -Path "$dstDir")) {
-      # Not created during install, only on first UI start.
-      New-Dir -Path "$dstDir";
-    }
 
     # Use softlinks since VSCode rewrites hardlinks:
     # https://github.com/microsoft/vscode/issues/194856
 
-    $files = @("settings.json", "keybindings.json", "tasks.json", "snippets/")
-
-    foreach ($name in $files) {
-      $isNameDir = $name.EndsWith("/");
-      if ($isNameDir) {
-        $dstPath = $this._path(@($dstDir, $name));
-        if (Test-Path -Path "$dstPath") {
-          Remove-Item "$dstPath" -Recurse -Force;
-        }
-      }
-      $srcPath = $this._path(@($this._cfgDir, "config", "vscode", $name))
-      Write-Host ("Creating softlink{0} $srcPath => $dstDir\$name" -f $(if ($isNameDir) { " dir" } else { "" }))
-      New-SoftLink -Path "$dstDir" -Name $name -Value "$srcPath"
+    $dstDir = $this._path(@($env:APPDATA, "Code", "User"));
+    $srcDir = $this._path(@($this._cfgDir, "config", "vscode"));
+    foreach ($name in @("settings.json", "keybindings.json", "tasks.json", "snippets/")) {
+      $srcPath = $this._path(@($srcDir, $name));
+      Softlink -Path $dstDir -Name $name -Value $srcPath;
     }
+
+    $this._installVscodeExt("continue.continue");
+    $dstDir = $this._path(@("~", ".continue"));
+    $srcPath = $this._path(@($this._cfgDir, "config", "vscode", "continue", "config.json"));
+    Softlink -Path $dstDir -Name "config.json" -Value $srcPath;
 
     # $this._installVscodeExt("grigoryvp.language-xi");
     # $this._installVscodeExt("grigoryvp.memory-theme");
@@ -1189,6 +1207,7 @@ class App {
 $ErrorActionPreference = "Stop";
 $pathIntrinsics = $ExecutionContext.SessionState.Path;
 $app = [App]::new($args, $pathIntrinsics);
+$DebugPreference = 'Continue';
 $app.configure();
 
 # TODO: try to use rainmeter with "always on top" over-taskbar skin.
