@@ -196,7 +196,7 @@ class App {
     $this._installWsl();
     $this._installPowershellModule("posh-git");
     $this._installPowershellModule("WindowsCompatibility");
-    # $this._generateSshKey();
+    $this._generateSshKey();
     $this._setPowerOptions();
     # $this._setDebounceOptions();
     # $this._setTouchpadOptions();
@@ -228,23 +228,23 @@ class App {
     # $this._installApp("strayge.tray-monitor");
     # $this._installApp("Stardock.Start11");
 
-    # if (-not $this._isPublic) {
-    #   $markerPath = $this._path(@("~", ".ssh", ".uploaded_to_github"));
-    #   $sshUploaded = (Test-Path -Path "$markerPath");
-    #   # Interactive.
-    #   if (-not $sshUploaded -or $this._isUpdateEnv) {
-    #     $this._askForCredentials();
-    #     $this._setEnv("MQTT_URL", $this._mqtt.url);
-    #     $this._setEnv("MQTT_USER", $this._mqtt.user);
-    #     $this._setEnv("MQTT_PASS", $this._mqtt.pass);
-    #     $this._setEnv("VK_CC_TOKEN", $this._vk.cc_token);
-    #   }
-    #   if (-not $sshUploaded) {
-    #     $this._uploadSshKey();
-    #   }
-    #   # Re-clone with SSH keys
-    #   $this._getFilesFromGit();
-    # }
+    if (-not $this._isPublic) {
+      $markerPath = $this._path(@("~", ".ssh", ".uploaded_to_github"));
+      $sshUploaded = (Test-Path -Path $markerPath);
+      # Interactive.
+      if (-not $sshUploaded -or $this._isUpdateEnv) {
+        $this._askForCredentials();
+        # $this._setEnv("MQTT_URL", $this._mqtt.url);
+        # $this._setEnv("MQTT_USER", $this._mqtt.user);
+        # $this._setEnv("MQTT_PASS", $this._mqtt.pass);
+        # $this._setEnv("VK_CC_TOKEN", $this._vk.cc_token);
+      }
+      if (-not $sshUploaded) {
+        $this._uploadSshKey();
+      }
+      # Re-clone with SSH keys
+      # $this._getFilesFromGit();
+    }
 
     # After additional files are received
 
@@ -676,17 +676,19 @@ class App {
 
   _generateSshKey() {
     if ($this._isTest) { return; }
-    if (Test-Path -Path $this._path(@("~", ".ssh", "id_rsa"))) {
+    $sshDir = $this._path(@("~", ".ssh"));
+    $idRsaPath = $this._path(@($sshDir, "id_rsa"));
+    if (Test-Path -Path $idRsaPath) {
       Write-Host "ssh key already generated";
       return;
     }
-    $sshDir = $this._path(@("~", ".ssh"));
     if (-not (Test-Path -Path "$sshDir" )) {
       Write-Host "Creating ~/.ssh";
       New-Dir -Path "$sshDir";
     }
     Write-Host "Generating ssh key";
-    Start-Process ssh-keygen -ArgumentList '-N "" -f .ssh/id_rsa' -Wait;
+    # -N set passphrase
+    &ssh-keygen -N "" -f $idRsaPath;
   }
 
 
@@ -842,6 +844,10 @@ class App {
 
 
   [String] _attrFromKeepass($record, $attr) {
+    if (-not (Test-Path -Path $this._keepassdb)) {
+      Write-Host "File $($this._keepassdb) not found" -ForegroundColor Red;
+      exit;
+    }
     #! keepassxc-cli displays the "enter password" promt into stderr and
     #  powershell throws the NativeCommandError exception if program output
     #  to stderr (redirect does not help).
@@ -853,6 +859,9 @@ class App {
       keepassxc-cli show -s $this._keepassdb $record --attributes $attr
       2>$null
     );
+    if (-not $ret) {
+      Write-Host "Can't get $attr from $record in $($this._keepassdb)" -ForegroundColor Yellow;
+    }
     $ErrorActionPreference = "Stop";
     if (-not $?) { throw "keepassxc-cli failed" }
     return $ret;
@@ -869,33 +878,38 @@ class App {
 
     $this._github.user = $this._attrFromKeepass("github", "username");
     $this._github.pass = $this._attrFromKeepass("github", "password");
-    $this._github.token = $this._attrFromKeepass("github", "auto-cfg-token");
+    $this._github.token = $this._attrFromKeepass("github", "upload-ssh-token");
 
-    $this._mqtt.url = $this._attrFromKeepass("hivemq", "login_url");
-    $this._mqtt.user = $this._attrFromKeepass("hivemq", "login_user");
-    $this._mqtt.pass = $this._attrFromKeepass("hivemq", "login_pass");
+    # $this._mqtt.url = $this._attrFromKeepass("hivemq", "login_url");
+    # $this._mqtt.user = $this._attrFromKeepass("hivemq", "login_user");
+    # $this._mqtt.pass = $this._attrFromKeepass("hivemq", "login_pass");
 
-    $record = "vk.gvp-url-shortener";
-    $this._vk.cc_token = $this._attrFromKeepass($record, "token");
+    # $record = "vk.gvp-url-shortener";
+    # $this._vk.cc_token = $this._attrFromKeepass($record, "token");
   }
 
 
   _uploadSshKey() {
     $marker = ".uploaded_to_github";
-    if (Test-Path -Path $this._path(@("~", ".ssh", "$marker"))) { return; }
+    if (Test-Path -Path $this._path(@("~", ".ssh", "$marker"))) {
+      Write-Host "File $marker found. Skipping SSH key upload." -ForegroundColor Yellow;
+      return;
+    }
 
     $pair = "$($this._github.user):$($this._github.token)";
     $bytes = [System.Text.Encoding]::ASCII.GetBytes($pair);
     $creds = [System.Convert]::ToBase64String($bytes)
     $headers = @{Authorization = "Basic $creds"; }
+    Write-Debug "$pair => $bytes => $creds => $headers";
     $body = ConvertTo-Json @{
       title = "box key $(Get-Date)";
       key   = (Get-Content "~/.ssh/id_rsa.pub" | Out-String);
     }
     $url = "https://api.github.com/user/keys"
     if (-not $this._isTest) {
+      Write-Debug "Invoke-WebRequest -Method 'POST' -Headers $headers -Body $body $url";
       try {
-        Invoke-WebRequest -Method 'POST' -Headers $headers -Body $body $url;
+        Invoke-WebRequest -Method 'POST' -Headers $headers -Body $body -Uri $url -ContentType 'application/json';
       }
       catch {
         if ($_.Exception.Response.StatusCode -eq 422) {
@@ -904,7 +918,7 @@ class App {
         }
         elseif ($_.Exception.Response.StatusCode -eq 401) {
           # TODO: try to upload via auth token.
-          Write-Host "Failed to add key to GitHub";
+          Write-Host "Failed to add key to GitHub" -ForegroundColor Red;
           Write-Host "Upload manually and touch .ssh/${marker}";
           Write-Host "Login: '$($this._github.user)'";
           Write-Host "Pass: '$($this._github.pass)'";
@@ -1226,7 +1240,7 @@ class App {
 $ErrorActionPreference = "Stop";
 $pathIntrinsics = $ExecutionContext.SessionState.Path;
 $app = [App]::new($args, $pathIntrinsics);
-$DebugPreference = 'Continue'; # Enable debug output for now.
+# $DebugPreference = 'Continue'; # Enable debug output for now.
 $app.configure();
 
 # TODO: try rainmeter
