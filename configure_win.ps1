@@ -119,6 +119,15 @@ class App {
 
   configure() {
     Write-Host "Running configuration script v$($this._ver)";
+
+    # Check if the current user has administrator rights
+    $currentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = New-Object System.Security.Principal.WindowsPrincipal($currentUser)
+    if (-not $principal.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)) {
+      Write-Host "The current user does not have administrator privileges" -ForegroundColor Red;
+      exit;
+    }
+
     # For 'Install-Module'
     Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted;
 
