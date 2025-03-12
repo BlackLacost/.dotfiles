@@ -1,19 +1,4 @@
 {
-  // Files
-
-  "files.associations": {
-    "*.html": "html"
-  },
-
-  // The default end of line character.
-  //  - \n: LF
-  //  - \r\n: CRLF
-  //  - auto: Uses operating system specific end of line character.
-  "files.eol": "\n",
-
-  // When enabled, will trim trailing whitespace when saving a file.
-  "files.trimTrailingWhitespace": true,
-
   // Configure glob patterns for excluding files and folders. For example,
   // the file Explorer decides which files and folders to show or hide
   // based on this setting. Refer to the `search.exclude` setting to define
@@ -28,90 +13,134 @@
     "**/__pycache__": true,
     "**/.pytest_cache": true
   },
-
-  // Common
-  "window.restoreWindows": "all",
-
-  // Imports
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true,
-    "source.addMissingImports": true
+  // When enabled, will trim trailing whitespace when saving a file.
+  "files.trimTrailingWhitespace": true,
+  "files.eol": "\n",
+  "files.associations": {
+    "*.json": "jsonc"
   },
-  "editor.foldingImportsByDefault": false,
-  "javascript.suggest.autoImports": true,
-  "javascript.preferences.importModuleSpecifier": "non-relative",
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "typescript.preferences.importModuleSpecifier": "non-relative",
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "typescript.suggest.autoImports": true,
+
+  //##########
+  // Common ##
+  //##########
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "json.maxItemsComputed": 50000,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": true,
+  "search.useIgnoreFiles": true,
+  "search.exclude": {
+    "**/.git": true,
+    "**/.vscode": true,
+    "**/node_modules": true,
+    "**/static": true,
+    "**/media": true,
+    "**/logs": true,
+    "**/tmp": true
+  },
+  "search.showLineNumbers": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "window.restoreWindows": "all",
+  "window.openFoldersInNewWindow": "on",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "none",
 
   // Editor
-  "editor.acceptSuggestionOnEnter": "off",
-  "editor.acceptSuggestionOnCommitCharacter": false,
-  "editor.autoClosingBrackets": "beforeWhitespace",
-  "editor.autoClosingQuotes": "beforeWhitespace",
-  "editor.fontFamily": "Monoid, Monoid NF",
-  "editor.fontSize": 12,
-  "editor.fontLigatures": true,
-  "editor.links": true,
-  "editor.lineNumbers": "off",
-  "editor.minimap.enabled": false,
-  "editor.rulers": [78],
-  "editor.quickSuggestions": {
-    "strings": true
+  // "editor.acceptSuggestionOnEnter": "on",
+  // "editor.acceptSuggestionOnCommitCharacter": false,
+  // https://code.visualstudio.com/docs/editor/intellisense#_types-of-completions
+  // "editor.quickSuggestions": {
+  //   "strings": true
+  // },
+  // "editor.suggestSelection": "first",
+  // "editor.autoClosingBrackets": "beforeWhitespace",
+  // "editor.autoClosingQuotes": "beforeWhitespace",
+  // "editor.guides.bracketPairs": "active",
+  "editor.inlayHints.enabled": "on",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    // "source.organizeImports": "never",
+    "source.addMissingImports": "explicit"
   },
+  // "editor.cursorStyle": "line",
+  "editor.cursorSurroundingLines": 6, // Курсор не прилипает к верху и низу
+  // "editor.foldingImportsByDefault": false,
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 16,
+  "editor.tabSize": 2,
+  // "editor.insertSpaces": false,
+  "editor.lineNumbers": "relative",
+  "editor.linkedEditing": true,
+  "editor.links": true,
+  "editor.minimap.enabled": false,
+  "editor.rulers": [80],
+  "editor.wordWrap": "off",
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
   "editor.tabCompletion": "off",
-  "editor.suggestSelection": "first",
   "editor.copyWithSyntaxHighlighting": true,
-
-  // Colorized brackets
-  "editor.bracketPairColorization.enabled": true,
-  "editor.guides.bracketPairs": "active",
-
   // Autoformat
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "python.autoComplete.extraPaths": [], // enable auto import
-  "python.formatting.provider": "black",
-  "python.formatting.blackArgs": ["--line-length", "78"],
-  "python.sortImports.args": ["-m 3", "-tc"],
-  "html.format.enable": true,
-
-  // VirtualEnv
-  "python.pythonPath": "./.venv/bin/python",
-
-  // Linting
-  "python.analysis.typeCheckingMode": "basic",
-  "python.languageServer": "Pylance",
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": false,
-  "python.linting.pylintArgs": [
-    "--load-plugins",
-    "pylint_django",
-    "--errors-only"
-  ],
-
-  "editor.tabSize": 2,
-  "editor.linkedEditing": true,
-  "emmet.includeLanguages": {
-    "django-html": "html",
-    "vue-html": "html",
-    "vue": "html",
-    "javascript": "javascriptreact"
-    // "vue-html": "jade",
-    // "vue": "jade"
+  // "typescript.referencesCodeLens.enabled": true,
+  "[xi]": {
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 80,
+    "editor.rulers": [80]
   },
-  "emmet.syntaxProfiles": {
-    "vue-html": "jade",
-    "vue": "jade"
+  "[git-commit]": {
+    "editor.rulers": [72, 50]
   },
-  "emmet.triggerExpansionOnTab": true,
-  "html.autoClosingTags": true,
-  "search.useIgnoreFiles": true,
-  "terminal.integrated.fontFamily": "Monoid, Monoid NF",
+  "[jsonc]": {
+    "editor.rulers": [120]
+  },
+  "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn"
+  },
+  "[mdx]": {
+    "editor.wordWrap": "wordWrapColumn"
+  },
+  "[powershell]": {
+    "editor.rulers": [120],
+    "editor.defaultFormatter": "ms-vscode.powershell"
+  },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "[python]": {
+    "editor.defaultFormatter": null,
+    "editor.tabSize": 4,
+    "editor.formatOnType": true,
+    "editor.rulers": [78]
+    // "editor.formatOnSaveTimeout": 3000
+  },
+  "[typescript]": {
+    // "editor.wordWrap": "wordWrapColumn"
+    "editor.rulers": [80]
+  },
+  "[typescriptreact]": {
+    "editor.wordWrapColumn": 80,
+    "editor.rulers": [80],
+    // bounded - wrap делается по заданной колонке и на ширину видиомости.
+    "editor.wordWrap": "bounded"
+  },
+
+  //############
+  // Terminal ##
+  //############
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  // "terminal.integrated.fontFamily": "monospace",
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+  "terminal.external.windowsExec": "pwsh.exe",
   "terminal.integrated.fontSize": 12,
-  // "terminal.integrated.shell.windows": "pwsh.exe",
+  "terminal.integrated.commandsToSkipShell": [
+    // Ensure the toggle sidebar visibility keybinding skips the shell
+    // "workbench.action.toggleSidebarVisibility",
+    // Send quick open's keybinding to the shell
+    "-workbench.action.quickOpen",
+    "-workbench.action.quickOpenPreviousEditor"
+  ],
   "terminal.integrated.profiles.windows": {
     "PowerShell": {
       "source": "PowerShell",
@@ -129,226 +158,126 @@
       "source": "Git Bash"
     }
   },
-  "window.openFoldersInNewWindow": "on",
-  "workbench.iconTheme": "material-icon-theme",
-  "task.problemMatchers.neverPrompt": {
-    "npm": true
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "bash",
+      "icon": "terminal-bash"
+    },
+    "zsh": {
+      "path": "zsh"
+    },
+    "fish": {
+      "path": "fish"
+    },
+    "tmux": {
+      "path": "tmux",
+      "icon": "terminal-tmux"
+    },
+    "pwsh": {
+      "path": "pwsh",
+      "icon": "terminal-powershell"
+    }
   },
-  "explorer.confirmDragAndDrop": false,
-  "explorer.confirmDelete": false,
-  "todo-tree.tree.showScanModeButton": false,
-  "vsicons.dontShowNewVersionMessage": true,
 
-  // Search
-  "search.exclude": {
-    "**/.git": true,
-    "**/.vscode": true,
-    "**/node_modules": true,
-    "**/static": true,
-    "**/media": true,
-    "**/logs": true,
-    "**/tmp": true
-  },
-  "search.showLineNumbers": true,
+  //########
+  // HTML ##
+  //########
+  "html.format.enable": true,
+  "html.autoClosingTags": true,
+
+  //##############
+  // JavaScript ##
+  //##############
+  "javascript.suggest.autoImports": true,
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.autoClosingTags": true,
+
+  //##############
+  // TypeScript ##
+  //##############
+  "typescript.suggest.autoImports": true,
+  "typescript.preferences.importModuleSpecifier": "shortest",
+  "typescript.preferences.preferTypeOnlyAutoImports": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.workspaceSymbols.scope": "currentProject",
+  "typescript.autoClosingTags": true,
 
-  // Настройки под разные технологии
-  "[git-commit]": {
-    "editor.rulers": [72, 50]
-  },
+  //##########
+  // Python ##
+  //##########
+  "python.autoComplete.extraPaths": [], // enable auto import
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length", "78"],
+  "python.sortImports.args": ["-m 3", "-tc"],
+  // VirtualEnv
+  "python.pythonPath": "./.venv/bin/python",
+  // Linting
+  "python.analysis.typeCheckingMode": "basic",
+  "python.languageServer": "Pylance",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.analysis.extraPaths": [],
+  "python.linting.pylintArgs": [
+    "--load-plugins",
+    "pylint_django",
+    "--errors-only"
+  ],
 
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "editor.tabSize": 2
+  //#########
+  // Emmet ##
+  //#########
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "vue": "html",
+    "javascript": "javascriptreact"
   },
+  "emmet.triggerExpansionOnTab": true,
 
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "editor.rulers": [80]
-  },
-
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.rulers": [80],
-    "editor.wordWrap": "wordWrapColumn"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.rulers": [100],
-    "editor.wordWrapColumn": 100,
-    // bounded - wrap делается по заданной колонке и на ширину видиомости.
-    "editor.wordWrap": "bounded"
-  },
-
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-
-  "[markdown]": {
-    "editor.wordWrap": "wordWrapColumn"
-  },
-
-  "[mdx]": {
-    "editor.wordWrap": "wordWrapColumn"
-  },
-
-  "[latex]": {
-    "editor.wordWrap": "wordWrapColumn",
-    "editor.defaultFormatter": "James-Yu.latex-workshop"
-  },
-
-  "[powershell]": {
-    "editor.rulers": [120]
-  },
-
-  "[prisma]": {
-    "editor.defaultFormatter": "Prisma.prisma"
-  },
-
-  "[python]": {
-    "editor.defaultFormatter": null,
-    "editor.tabSize": 4,
-    "editor.formatOnType": true
-    // "editor.codeActionsOnSave": {
-    //   "source.organizeImports": true,
-    //   "source.fixAll": true
-    // }
-    // "editor.formatOnSaveTimeout": 3000
-  },
-
-  "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
-    "editor.tabSize": 2
-  },
-
-  // PLUGINS
+  //###########
+  // Plugins ##
+  //###########
   "extensions.autoUpdate": true,
-
-  // Auto-Close
-  // "auto-close-tag.disableOnLanguage": ["typescript"],
-  "auto-close-tag.SublimeText3Mode": true,
-
-  // Life Server
-  "liveServer.settings.donotShowInfoMsg": true,
-
+  // Codeium
+  "codeium.enableConfig": {
+    "*": true,
+    "javascript": false,
+    "typescriptreact": false
+  },
+  // Eslint
+  "eslint.workingDirectories": [{ "mode": "auto" }], // Parsing error: Cannot read file in root dir tsconfig.json
+  "eslint.enable": true,
+  "eslint.validate": [
+    "vue",
+    "html",
+    "javascript",
+    "typescript",
+    "typescriptreact"
+  ],
   // Prettier
   "prettier.singleQuote": true,
   "prettier.semi": false,
   "prettier.printWidth": 80,
   "prettier.bracketSpacing": true,
-
-  // Vim
-  "vim.autoSwitchInputMethod.enable": true,
-  // ---
-  // windows
-  "vim.autoSwitchInputMethod.defaultIM": "1033",
-  "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe",
-  "vim.autoSwitchInputMethod.switchIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe {im}",
-  // linux
-  // "vim.autoSwitchInputMethod.defaultIM": "us",
-  // "vim.autoSwitchInputMethod.obtainIMCmd": "/usr/bin/xkb-switch",
-  // "vim.autoSwitchInputMethod.switchIMCmd": "/usr/bin/xkb-switch -s {im}",
-  // ---
-  "vim.camelCaseMotion.enable": true,
-  "vim.easymotion": true,
-  "vim.ignorecase": true,
-  "vim.useSystemClipboard": false,
-  "vim.leader": "<space>",
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": ["j"],
-      "after": ["g", "j"]
-    },
-    {
-      "before": ["k"],
-      "after": ["g", "k"]
-    },
-    {
-      "before": ["g", "j"],
-      "after": ["j"]
-    },
-    {
-      "before": ["g", "k"],
-      "after": ["k"]
-    },
-    {
-      "before": ["<leader>", "y"],
-      "after": ["\"", "+", "y"]
-    },
-    {
-      "before": ["<leader>", "p"],
-      "after": ["\"", "+", "p"]
-    }
-  ],
-  "vim.visualModeKeyBindingsNonRecursive": [
-    {
-      "before": ["<leader>", "y"],
-      "after": ["\"", "+", "y"]
-    },
-    {
-      "before": ["<leader>", "p"],
-      "after": ["\"", "+", "p"]
-    }
-  ],
-
-  // Wallaby
-  "wallaby.startAutomatically": false,
-  "sqltools.useNodeRuntime": true,
-
-  // Vetur
-  // Отключение валидация с помощью vetur, так как
-  // я это делаю с помощью es-lint и prettier
-  "vetur.validation.template": false,
-
-  // Eslint
-  "eslint.enable": false,
-  "eslint.validate": ["vue", "html", "javascript"],
-
+  "prettier.trailingComma": "all",
   // Stylelint
-  // Выключить внутреннюю валидацию, так как она
-  // мешала работе tailwind
+  // Выключить внутреннюю валидацию, так как она мешала работе tailwind
+  "css.validate": false,
+  "scss.validate": false,
+  "stylelint.validate": ["css", "scss"],
   "[css]": {
     "editor.codeActionsOnSave": {
-      "source.fixAll.stylelint": true
+      "source.fixAll.stylelint": "explicit"
     }
   },
   "[scss]": {
     "editor.codeActionsOnSave": {
-      "source.fixAll.stylelint": true
+      "source.fixAll.stylelint": "explicit"
     }
   },
-  "css.validate": false,
-  "scss.validate": false,
-
   // Tailwind intellisense
   "tailwindCSS.emmetCompletions": true,
-  "cSpell.enableFiletypes": [
-    "!javascript",
-    "!javascriptreact",
-    "!json",
-    "!jsonc",
-    "!python",
-    "!scss",
-    "!typescript",
-    "!typescriptreact",
-    "xi"
-  ],
-  "cSpell.language": "en,ru",
-  "spellright.language": ["en", "ru"],
-  "spellright.documentTypes": ["markdown", "latex", "plaintext"],
-  "jupyter.askForKernelRestart": false,
-  "workbench.editorAssociations": {
-    "*.ipynb": "jupyter-notebook"
-  },
-  "python.analysis.extraPaths": [],
-  "json.maxItemsComputed": 50000,
+  // Todo
   "todo-tree.general.tags": [
     "BUG",
     "HACK",
@@ -359,28 +288,174 @@
     "[x]"
   ],
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
-  "editor.cursorStyle": "line",
-  "editor.insertSpaces": false,
-  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
-  "editor.wordWrap": "off",
-  "jupyter.interactiveWindowMode": "perFile",
-  "notebook.cellToolbarLocation": {
-    "default": "right",
-    "jupyter-notebook": "left"
+  // Yaml
+  "yaml.customTags": [
+    "!And",
+    "!And sequence",
+    "!If",
+    "!If sequence",
+    "!Not",
+    "!Not sequence",
+    "!Equals",
+    "!Equals sequence",
+    "!Or",
+    "!Or sequence",
+    "!FindInMap",
+    "!FindInMap sequence",
+    "!Base64",
+    "!Join",
+    "!Join sequence",
+    "!Cidr",
+    "!Ref",
+    "!Sub",
+    "!Sub sequence",
+    "!GetAtt",
+    "!GetAZs",
+    "!ImportValue",
+    "!ImportValue sequence",
+    "!Select",
+    "!Select sequence",
+    "!Split",
+    "!Split sequence"
+  ],
+
+  //#######
+  // Vim ##
+  //#######
+  // "vim.enableNeovim": true,
+  "vim.autoSwitchInputMethod.enable": true,
+  // windows
+  "vim.autoSwitchInputMethod.defaultIM": "1033",
+  "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe",
+  "vim.autoSwitchInputMethod.switchIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe {im}",
+  // linux
+  // ---
+  "vim.camelCaseMotion.enable": true,
+  "vim.easymotion": true,
+  "vim.ignorecase": true,
+  "vim.useSystemClipboard": false,
+  "vim.leader": "<space>",
+  "vim.handleKeys": {
+    "<C-a>": true,
+    "<C-b>": false,
+    "<C-d>": true,
+    "<C-e>": false,
+    "<C-f>": false,
+    "<C-j>": false,
+    "<C-i>": false,
+    "<C-k>": false,
+    "<C-l>": false,
+    "<C-n>": false,
+    "<C-p>": false,
+    "<C-s>": false,
+    "<C-t>": false,
+    "<C-w>": false,
+    "<C-z>": false
   },
-  "security.workspace.trust.untrustedFiles": "open",
-  "redhat.telemetry.enabled": true,
-  "git.autofetch": true,
-  "git.confirmSync": false,
-  "terminal.integrated.enableMultiLinePasteWarning": false,
-  "window.menuBarVisibility": "toggle",
-  "remote.SSH.remotePlatform": {
-    "vdsina": "linux",
-    "vpn": "linux"
+  // Чтобы Ctrl + ъ работал как Ctrl + ] => Esc
+  "keyboard.dispatch": "keyCode",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    { "before": ["<S-h>"], "commands": [":bprevious"] },
+    { "before": ["<S-l>"], "commands": [":bnext"] },
+    {
+      "before": ["<leader>", "g", "d"],
+      "commands": ["editor.action.revealDefinition"]
+    },
+    {
+      "before": ["<leader>", "g", "r"],
+      "commands": ["editor.action.goToReferences"]
+    },
+    {
+      "before": ["<leader>", "s"],
+      "commands": ["workbench.action.splitEditorOrthogonal"]
+    },
+    {
+      "before": ["<leader>", "v"],
+      "commands": ["workbench.action.splitEditor"]
+    },
+    {
+      "before": ["<leader>", "h"],
+      "commands": ["workbench.action.focusLeftGroup"]
+    },
+    {
+      "before": ["<leader>", "j"],
+      "commands": ["workbench.action.focusBelowGroup"]
+    },
+    {
+      "before": ["<leader>", "k"],
+      "commands": ["workbench.action.focusAboveGroup"]
+    },
+    {
+      "before": ["<leader>", "l"],
+      "commands": ["workbench.action.focusRightGroup"]
+    },
+    { "before": ["<C-d>"], "after": ["<C-d>", "z", "z"] },
+    { "before": ["<C-u>"], "after": ["<C-u>", "z", "z"] },
+    { "before": ["n"], "after": ["n", "z", "z", "z", "v"] },
+    { "before": ["N"], "after": ["N", "z", "z", "z", "v"] },
+    { "before": ["j"], "after": ["g", "j"] },
+    { "before": ["k"], "after": ["g", "k"] },
+    { "before": ["g", "j"], "after": ["j"] },
+    { "before": ["g", "k"], "after": ["k"] },
+    { "before": ["<leader>", "y"], "after": ["\"", "+", "y"] },
+    { "before": ["<leader>", "p"], "after": ["\"", "+", "p"] },
+    { "before": ["<leader>", "P"], "after": ["\"", "+", "P"] },
+    // Курсор остается на месте при join строк
+    { "before": ["J"], "after": ["m", "z", "J", "`", "z"] }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    { "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
+    { "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] },
+    // позволяет в визуальном режиме несколько раз испльзовать стрелки без сброса
+    { "before": [">"], "commands": ["editor.action.indentLines"] },
+    { "before": ["<"], "commands": ["editor.action.outdentLines"] },
+    { "before": ["<leader>", "y"], "after": ["\"", "+", "y"] },
+    { "before": ["<leader>", "p"], "after": ["\"", "+", "p"] },
+    // Перед вставкой удаляет выделенный текст в черную дыру, что позволяет оставить вставленный текст в регистре "
+    { "before": ["<leader>", "P"], "after": ["\"", "_", "d", "P"] }
+  ],
+  "workbench.activityBar.location": "top",
+  "[css][scss]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "explicit"
+    }
   },
-  "vim.enableNeovim": true,
-  "workbench.startupEditor": "none",
-  "workbench.activityBar.visible": false,
-  "window.zoomLevel": 2,
-  "yaml.maxItemsComputed": 50000
+  "terminal.integrated.env.windows": {},
+  "console-ninja.featureSet": "Community",
+  "window.customTitleBarVisibility": "auto",
+  "terminal.integrated.env.linux": {},
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.automationProfile.linux": {
+    "path": "zsh",
+    "args": ["-i"]
+  },
+  "remote.autoForwardPortsSource": "hybrid",
+
+  // Emoji
+  "emojisense.unicodeCompletionsEnabled": true,
+  "emojisense.languages": {
+    "markdown": true,
+    "plaintext": true,
+    "json": true,
+    "xi": true,
+    "scminput": true // language used in the source control commit message box
+  },
+
+  // Inbox
+
+  "diffEditor.ignoreTrimWhitespace": false,
+  "workbench.colorTheme": "grigoryvp memory theme",
+  "terminal.integrated.allowedLinkSchemes": [
+    "file",
+    "http",
+    "https",
+    "mailto",
+    "vscode",
+    "vscode-insiders",
+    "ms-settings"
+  ],
+  "window.commandCenter": false,
+  "window.menuBarVisibility": "compact",
+  "workbench.layoutControl.enabled": false,
+  "debug.javascript.autoAttachFilter": "disabled"
 }

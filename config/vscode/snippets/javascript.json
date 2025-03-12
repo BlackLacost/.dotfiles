@@ -25,5 +25,29 @@
   "Try Catch": {
     "prefix": "trycatchs",
     "body": ["try {", "  $0", "} catch (${1:err}) {", "  ${2:next(err)}", "}"]
+  },
+  "Tailwind Container": {
+    "prefix": "tc",
+    "body": ["container: {", "  center: true,", "  padding: '1rem'", "}"]
+  },
+  "Prisma Seed": {
+    "prefix": "ps",
+    "body": [
+      "import { PrismaClient } from '@prisma/client'",
+      "",
+      "const db = new PrismaClient()",
+      "",
+      "const load = async () => {",
+      "  try {",
+      "    const $0 = await db.$1"
+      "  } catch (e) {",
+      "    console.error(e)",
+      "    process.exit(1)",
+      "  } finally {",
+      "    await db.\\$disconnect()",
+      "  }",
+      "}",
+      "",
+      "load()",
+    ]
   }
-}
