@@ -200,8 +200,8 @@ class App {
     # $this._installApp("Highresolution.X-MouseButtonControl");
     $this._installBinApp("KeePassXCTeam.KeePassXC", $this._path(
         @($env:ProgramFiles, "KeePassXC")));
-    # $this._installBinApp("Microsoft.VisualStudioCode", $this._path(
-    # @($env:LOCALAPPDATA, "Programs", "Microsoft VS Code", "bin")));
+    $this._installBinApp("Microsoft.VisualStudioCode", $this._path(
+        @($env:LOCALAPPDATA, "Programs", "Microsoft VS Code", "bin")));
     $this._configureVscode();
     # Better ls
     $this._installApp("lsd-rs.lsd");
@@ -383,7 +383,7 @@ class App {
       $this._path(@("d:", "Videos")),
       "My Video"
     );
-    # TODO Get this guid dynamic
+    # TODO: Get this guid dynamic
     $downloadsGuid = "{374DE290-123F-4565-9164-39C4925E467B}";
     $currentDownloadsPath = (Get-ItemProperty -Path $this._registerUserFolders -Name $downloadsGuid).$downloadsGuid;
     $this._moveWindowDefaultDirectory(
@@ -1039,19 +1039,32 @@ class App {
     $srcPath = $this._path(@($this._cfgDir, "config", "vscode", "continue", "config.json"));
     Softlink -Path $dstDir -Name "config.json" -Value $srcPath;
 
+    $this._installVscodeExt("grigoryvp.markdown-inline-fence");
+    $this._installVscodeExt("grigoryvp.memory-theme");
+    $this._installVscodeExt("pkief.material-icon-theme");
     # $this._installVscodeExt("grigoryvp.language-xi");
-    # $this._installVscodeExt("grigoryvp.memory-theme");
     # $this._installVscodeExt("grigoryvp.goto-link-provider");
-    # $this._installVscodeExt("grigoryvp.markdown-inline-fence");
     # $this._installVscodeExt("grigoryvp.markdown-python-repl-syntax");
     # $this._installVscodeExt("grigoryvp.markdown-pandoc-rawattr");
-    # $this._installVscodeExt("vscodevim.vim");
     # $this._installVscodeExt("EditorConfig.EditorConfig");
-    # $this._installVscodeExt("esbenp.prettier-vscode");
-    # $this._installVscodeExt("formulahendry.auto-close-tag");
-    # $this._installVscodeExt("dnut.rewrap-revived");
-    # $this._installVscodeExt("streetsidesoftware.code-spell-checker");
-    # $this._installVscodeExt("streetsidesoftware.code-spell-checker-russian");
+    $this._installVscodeExt("vscodevim.vim");
+    $this._installVscodeExt("esbenp.prettier-vscode");
+    $this._installVscodeExt("rvest.vs-code-prettier-eslint");
+    $this._installVscodeExt("ms-vscode.powershell");
+    $this._installVscodeExt("clinyong.vscode-css-modules");
+    $this._installVscodeExt("andrewleedham.vscode-css-modules");
+    $this._installVscodeExt("bradlc.vscode-tailwindcss");
+    $this._installVscodeExt("yoavbls.pretty-ts-errors");
+    $this._installVscodeExt("alefragnani.project-manager");
+    $this._installVscodeExt("rangav.vscode-thunder-client");
+    $this._installVscodeExt("formulahendry.auto-close-tag");
+    $this._installVscodeExt("gruntfuggly.todo-tree");
+    $this._installVscodeExt("tamasfe.even-better-toml");
+    $this._installVscodeExt("redhat.vscode-yaml");
+    # Wrap all comments by Alt+Q or Ctrl+Q
+    $this._installVscodeExt("dnut.rewrap-revived");
+    $this._installVscodeExt("streetsidesoftware.code-spell-checker");
+    $this._installVscodeExt("streetsidesoftware.code-spell-checker-russian");
     # $this._installVscodeExt("mark-wiemer.vscode-autohotkey-plus-plus");
 
     #     $docCfgDir = $this._path(@("~", "Documents", ".vscode"));
