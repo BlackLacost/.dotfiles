@@ -170,8 +170,7 @@ function OnViModeChange {
 }
 
 $PSReadLineOptions = @{
-  # EditMode = "Vi"
-  EditMode                      = "Emacs"
+  EditMode                      = "Windows" # Emacs or Vi or Windows
   HistoryNoDuplicates           = $true
   HistorySearchCursorMovesToEnd = $true
   ViModeIndicator               = "Script"
