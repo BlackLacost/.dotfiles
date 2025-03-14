@@ -88,7 +88,7 @@ class App {
       - Install Disk-O
       - Load X-Mouse Button Control settings
         * Disable 'Settings/Pointer/Change cursor when move to scroll'
-        * Map Mouse4 => 'change movement to scroll' with setings:
+        * Map Mouse4 => 'change movement to scroll' with settings:
           * Sensitivity 1
           * Invert axis
       - Disable adaptive contrast for the built-in Intel GPU, if any
@@ -102,7 +102,7 @@ class App {
       - Disable snap assist
       - Disable touchpad click and set maximum speed
       - Pin trello to taskbar in Edge (not in Chrome due to wnd switch)
-      - Pin term, vscode, web, double, pass, telegram, wino, notionc, trello
+      - Pin term, vscode, web, double, pass, telegram, wino
       - Uninstall 'OneDrive' and other software
       - Login and sync browser
       - Switch nVidia display mode to "optimus" and drag gpu activity icon
@@ -147,30 +147,30 @@ class App {
 
     # Auto-created by PowerShell 5.x until 6.x+ is a system default.
     # Create and set hidden attribute to exclude from 'ls'.
-    if (-not $this._isTest) {
-      $oldPsDir = $this._path(@("~", "Documents", "WindowsPowerShell"));
-      if (-not (Test-Path -Path "$oldPsDir")) {
-        Write-Host "Creating dir $oldPsDir";
-        # $ret = & New-Dir -Path "$oldPsDir";
-        # $ret.Attributes = 'Hidden';
-      }
-      else {
-        Write-Host "$oldPsDir already exists";
-      }
-    }
+    # if (-not $this._isTest) {
+    #   $oldPsDir = $this._path(@("~", "Documents", "WindowsPowerShell"));
+    #   if (-not (Test-Path -Path "$oldPsDir")) {
+    #     Write-Host "Creating dir $oldPsDir";
+    #     $ret = & New-Dir -Path "$oldPsDir";
+    #     $ret.Attributes = 'Hidden';
+    #   }
+    #   else {
+    #     Write-Host "$oldPsDir already exists";
+    #   }
+    # }
 
     # PowerShell config is loaded from this dir.
     # Create and set hidden attribute to exclude from 'ls'.
-    if (-not $this._isTest) {
-      if (-not (Test-Path -Path "$($this._psDir)")) {
-        Write-Host "Creating dir $($this._psDir)";
-        # $ret = & New-Dir -Path "$($this._psDir)";
-        # $ret.Attributes = 'Hidden';
-      }
-      else {
-        Write-Host "$($this._psDir) already exists";
-      }
-    }
+    # if (-not $this._isTest) {
+    #   if (-not (Test-Path -Path "$($this._psDir)")) {
+    #     Write-Host "Creating dir $($this._psDir)";
+    #     $ret = & New-Dir -Path "$($this._psDir)";
+    #     $ret.Attributes = 'Hidden';
+    #   }
+    #   else {
+    #     Write-Host "$($this._psDir) already exists";
+    #   }
+    # }
 
     # Write-Host "Downloading let's encrypt root certificate..."
     # $url = "https://letsencrypt.org/certs/isrgrootx1.pem";
@@ -200,7 +200,7 @@ class App {
     $this._setPowerOptions();
     # $this._setDebounceOptions();
     # $this._setTouchpadOptions();
-    # $this._setInputMethodOptions();
+    $this._setInputMethodOptions();
     $this._installBinApp("Git.Git", $this._path(
         @(${env:ProgramFiles}, "Git", "cmd")));
     # Clone without keys via HTTPS
@@ -838,14 +838,14 @@ class App {
       'Set-WinUserLanguageList -Force $list;';
       & pwsh -Command $cmd;
     }
-    if (-not $current.Contains("Japanese")) {
-      Write-Host "Adding Japanese language";
-      $cmd = '' +
-      '$list = Get-WinUserLanguageList;' +
-      '$list.Add("ja");' +
-      'Set-WinUserLanguageList -Force $list;';
-      & pwsh -Command $cmd;
-    }
+    # if (-not $current.Contains("Japanese")) {
+    #   Write-Host "Adding Japanese language";
+    #   $cmd = '' +
+    #   '$list = Get-WinUserLanguageList;' +
+    #   '$list.Add("ja");' +
+    #   'Set-WinUserLanguageList -Force $list;';
+    #   & pwsh -Command $cmd;
+    # }
   }
 
 
@@ -1106,6 +1106,9 @@ class App {
     $this._installVscodeExt("streetsidesoftware.code-spell-checker");
     $this._installVscodeExt("streetsidesoftware.code-spell-checker-russian");
     # $this._installVscodeExt("mark-wiemer.vscode-autohotkey-plus-plus");
+
+    $this._installApp("Microsoft.DotNet.SDK.9");
+    $this._installVscodeExt("ms-dotnettools.dotnet-interactive-vscode");
 
     #     $docCfgDir = $this._path(@("~", "Documents", ".vscode"));
     #     if (-not (Test-Path -Path "$docCfgDir")) {
