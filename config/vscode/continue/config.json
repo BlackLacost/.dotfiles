@@ -7,9 +7,9 @@
     }
   ],
   "tabAutocompleteModel": {
-    "title": "qwen2.5-coder:14b",
-    "model": "qwen2.5-coder:14b",
-    "provider": "ollama"
+    "title": "Qwen2.5-Coder 7B",
+    "provider": "ollama",
+    "model": "qwen2.5-coder:7b-base"
   },
   "contextProviders": [
     {
@@ -55,5 +55,9 @@
       "description": "Generate a git commit message"
     }
   ],
-  "data": []
+  "data": [],
+  "embeddingsProvider": {
+    "provider": "ollama",
+    "model": "nomic-embed-text:latest"
+  }
 }
