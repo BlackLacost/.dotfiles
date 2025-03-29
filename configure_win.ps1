@@ -1088,16 +1088,19 @@ class App {
     # $this._installVscodeExt("grigoryvp.markdown-pandoc-rawattr");
     # $this._installVscodeExt("EditorConfig.EditorConfig");
     $this._installVscodeExt("vscodevim.vim");
+
+    $this._installVscodeExt("nrwl.angular-console");
     $this._installVscodeExt("esbenp.prettier-vscode");
     $this._installVscodeExt("rvest.vs-code-prettier-eslint");
-    $this._installVscodeExt("ms-vscode.powershell");
     $this._installVscodeExt("clinyong.vscode-css-modules");
     $this._installVscodeExt("andrewleedham.vscode-css-modules");
     $this._installVscodeExt("bradlc.vscode-tailwindcss");
     $this._installVscodeExt("yoavbls.pretty-ts-errors");
-    $this._installVscodeExt("alefragnani.project-manager");
     $this._installVscodeExt("rangav.vscode-thunder-client");
     $this._installVscodeExt("formulahendry.auto-close-tag");
+
+    $this._installVscodeExt("ms-vscode.powershell");
+    $this._installVscodeExt("alefragnani.project-manager");
     $this._installVscodeExt("gruntfuggly.todo-tree");
     $this._installVscodeExt("tamasfe.even-better-toml");
     $this._installVscodeExt("redhat.vscode-yaml");

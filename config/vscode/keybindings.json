@@ -216,4 +216,14 @@
     "key": "ctrl+shift+t",
     "command": "workbench.action.tasks.runTask"
   },
+  {
+    "key": "ctrl+w",
+    "command": "editor.action.smartSelect.grow",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+w",
+    "command": "editor.action.smartSelect.shrink",
+    "when": "editorTextFocus"
+  }
 ]

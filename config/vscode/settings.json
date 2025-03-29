@@ -201,7 +201,7 @@
   "typescript.preferences.preferTypeOnlyAutoImports": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.workspaceSymbols.scope": "currentProject",
-  "typescript.autoClosingTags": true,
+  // "typescript.autoClosingTags": true,
 
   //##########
   // Python ##
@@ -238,6 +238,8 @@
   // Plugins ##
   //###########
   "extensions.autoUpdate": true,
+  // Auto Close Tag
+  "auto-close-tag.disableOnLanguage": ["typescript"],
   // Codeium
   "codeium.enableConfig": {
     "*": true,
