@@ -7,9 +7,12 @@
     }
   ],
   "tabAutocompleteModel": {
-    "title": "Qwen2.5-Coder 7B",
-    "model": "qwen2.5-coder:7b-base",
-    "provider": "ollama"
+    "title": "",
+    "model": "",
+    "provider": ""
+//    "title": "Qwen2.5-Coder 7B",
+//    "model": "qwen2.5-coder:7b-base",
+//    "provider": "ollama"
   },
   "contextProviders": [
     {
