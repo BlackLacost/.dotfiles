@@ -21,17 +21,17 @@ function New-Link {
   }
 
   $isNameDir = $name.EndsWith("/");
-
+  $withDir = "";
+  $newName = $Name;
 
   if ($isNameDir) {
     $dstPath = $this._path(@($Path, $Name));
+    $withDir = " dir";
+    $newName = $Name.Substring(0, $str.Length - 1);
     if (Test-Path -Path "$dstPath") {
       Remove-Item "$dstPath" -Recurse -Force;
     }
   }
-
-  $withDir = $(if ($isNameDir) { " dir" } else { "" });
-  $newName = if ($isNameDir) { $Name.Substring(0, $str.Length - 1); } else { $Name }
 
   if ($ItemType -eq 'SymbolicLink') {
     Write-Host ("Creating softlink$withDir $Value => $Path\$newName");
