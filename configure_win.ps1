@@ -1,5 +1,8 @@
 function New-SoftlinkDir() { New-Item -ItemType Junction -Force @args; }
-function New-Dir() { New-Item -ItemType Directory -Force @args; }
+function New-Dir() {
+  Write-Host "Create new dir with args=@args"
+  New-Item -ItemType Directory -Force @args;
+}
 function New-File() { New-Item -ItemType File -Force @args; }
 function New-Link {
   param (
@@ -418,7 +421,7 @@ class App {
 
     # Проверка существования исходной папки
     if (-Not (Test-Path -Path $oldPath)) {
-      Write-Host "Create dir $oldPath $newPath $registerName"
+      Write-Host "Create dir oldPath=$oldPath newPath=$newPath registerName=$registerName"
       New-Dir -Path $oldPath;
       # Write-Host "Ошибка: Папка $oldPath не найдена!" -ForegroundColor Red
       # Read-Host "Нажмите Enter для выхода"
