@@ -8,6 +8,8 @@ function New-Link {
     [String]$Value,
     [ValidateSet('SymbolicLink', 'HardLink')][String]$ItemType
   )
+  Write-Host "Create new link with Path=$Path, Name=$Name, Value=$Value, ItemType=$ItemType";
+
   if ([String]::IsNullOrEmpty($Path)) {
     Write-Host "Path can't be empty when create New-Link" -ForegroundColor Red;
     exit;
