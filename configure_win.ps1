@@ -27,7 +27,7 @@ function New-Link {
   if ($isNameDir) {
     $dstPath = $this._path(@($Path, $Name));
     $withDir = " dir";
-    $newName = $Name.Substring(0, $str.Length - 1);
+    $newName = $Name.Substring(0, $Name.Length - 1);
     if (Test-Path -Path "$dstPath") {
       Remove-Item "$dstPath" -Recurse -Force;
     }
