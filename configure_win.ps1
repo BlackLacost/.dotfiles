@@ -21,6 +21,8 @@ function New-Link {
   }
 
   $isNameDir = $name.EndsWith("/");
+
+
   if ($isNameDir) {
     $dstPath = $this._path(@($Path, $Name));
     if (Test-Path -Path "$dstPath") {
@@ -29,7 +31,7 @@ function New-Link {
   }
 
   $withDir = $(if ($isNameDir) { " dir" } else { "" });
-  $newName = $Name.Substring(0, $str.Length - 1);
+  $newName = if ($isNameDir) { $Name } else { $Name.Substring(0, $str.Length - 1); }
 
   if ($ItemType -eq 'SymbolicLink') {
     Write-Host ("Creating softlink$withDir $Value => $Path\$newName");
