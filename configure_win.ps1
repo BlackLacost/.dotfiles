@@ -1,8 +1,5 @@
 function New-SoftlinkDir() { New-Item -ItemType Junction -Force @args; }
-function New-Dir() {
-  Write-Host "Create new dir with args=@args"
-  New-Item -ItemType Directory -Force @args;
-}
+function New-Dir() { New-Item -ItemType Directory -Force @args; }
 function New-File() { New-Item -ItemType File -Force @args; }
 function New-Link {
   param (
@@ -31,15 +28,16 @@ function New-Link {
     }
   }
 
-  $withDir = $(if ($isNameDir) { " dir" } else { "" })
+  $withDir = $(if ($isNameDir) { " dir" } else { "" });
+  $newName = $Name.Substring(0, $str.Length - 1);
 
   if ($ItemType -eq 'SymbolicLink') {
-    Write-Host ("Creating softlink$withDir $Value => $Path\$Name");
-    New-Item -ItemType SymbolicLink -Force -Path $Path -Name $Name -Target $Value;
+    Write-Host ("Creating softlink$withDir $Value => $Path\$newName");
+    New-Item -ItemType SymbolicLink -Force -Path $Path -Name $newName -Target $Value;
   }
   if ($ItemType -eq 'HardLink') {
-    Write-Host ("Creating hardlink$withDir $Value => $Path\$Name");
-    New-Item -ItemType HardLink -Force -Path $Path -Name $Name -Value $Value;
+    Write-Host ("Creating hardlink$withDir $Value => $Path\$newName");
+    New-Item -ItemType HardLink -Force -Path $Path -Name $newName -Value $Value;
   }
 }
 
