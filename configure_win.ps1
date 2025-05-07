@@ -195,7 +195,8 @@ class App {
     # Requires reboot for a second stage install
     $this._installWsl();
     $this._installPowershellModule("posh-git");
-    $this._installPowershellModule("WindowsCompatibility");
+    # Хочу проверить, что в моей установке зависит от этого модуля
+    # $this._installPowershellModule("WindowsCompatibility");
     $this._generateSshKey();
     $this._setPowerOptions();
     # $this._setDebounceOptions();
@@ -457,7 +458,7 @@ class App {
     }
     $newOllamaDir = $this._path(@("~", ".ollama"));
     if (Test-Path -Path $newOllamaDir) {
-      Write-Host "Remove ollama dir $ollamaDir";
+      Write-Host "Remove ollama dir $newOllamaDir";
       Remove-Item $newOllamaDir -Force -Recurse;
     }
     # New-Item -ItemType Junction -Path $newOllamaDir -Target $ollamaDir -Force;
