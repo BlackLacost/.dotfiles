@@ -1,14 +1,15 @@
 Import-Module .\powershell\env-path;
 Import-Module .\powershell\link-dotfiles;
 Import-Module .\powershell\install-code-extension.psm1;
+Import-Module .\powershell\configure-app;
 
 function New-SoftlinkDir() { New-Item -ItemType Junction -Force @args; }
 
-function Check-GitHubCliAuth {
+function Test-GitHubCliAuth {
   [CmdletBinding()]
   param ()
 
-  if (-not (Check-AppInstalled -Name Github.cli)) {
+  if (-not (Test-AppInstalled -Name Github.cli)) {
     Write-Verbose "GitHub CLI not installed"
     return $false
   }
@@ -24,7 +25,7 @@ function Check-GitHubCliAuth {
   }
 }
 
-function Check-AppInstalled {
+function Test-AppInstalled {
   [CmdletBinding()]
   param (
     [Parameter(Mandatory = $true)]
@@ -43,129 +44,6 @@ function Check-AppInstalled {
   }
 }
 
-# TODO: Установка в папку пользователя
-function Auth-GitHubCli {
-  [CmdletBinding()]
-  param ()
-
-  if (-not (Check-GitHubCliAuth)) {
-    Write-Host "Auth to GitHub";
-    &gh auth login;
-  }
-  else {
-    Write-Host "Already authenticated"
-  }
-}
-
-function Configure-NVM {
-  [CmdletBinding()]
-  param ()
-
-  & nvm install lts;
-  Write-Host "nvm install last lts version";
-  & nvm use lts;
-  Write-Host "Updating npm"
-  & npm install -g npm@latest
-}
-
-function Configure-Vscode() {
-  [CmdletBinding()]
-  param()
-  Link-Dotfiles code;
-
-  Install-CodeExtension continue;
-  Install-CodeExtension memory-theme;
-  # Install-VscodeExt grigoryvp.language-xi";
-  # Install-VscodeExt grigoryvp.goto-link-provider";
-  # Install-VscodeExt grigoryvp.markdown-python-repl-syntax";
-  # Install-VscodeExt grigoryvp.markdown-pandoc-rawattr";
-  # Install-VscodeExt EditorConfig.EditorConfig";
-  Install-CodeExtension vscodevim;
-  Install-CodeExtension markdown-inline-fence;
-  Install-CodeExtension material-icon-theme;
-
-  Install-CodeExtension angular-console;
-  Install-CodeExtension prettier-vscode
-  Install-CodeExtension prettier-eslint;
-  Install-CodeExtension css-modules;
-  Install-CodeExtension css-modules-highlights;
-  Install-CodeExtension tailwindcss;
-  Install-CodeExtension pretty-ts-errors;
-  Install-CodeExtension thunder-client;
-  Install-CodeExtension auto-close-tag;
-  Install-CodeExtension powershell;
-  Install-CodeExtension project-manager;
-  Install-CodeExtension todo-tree;
-  Install-CodeExtension event-better-toml;
-  Install-CodeExtension yaml;
-  # # Wrap all comments by Alt+Q or Ctrl+Q
-  # $this._installVscodeExt("dnut.rewrap-revived");
-  # $this._installVscodeExt("streetsidesoftware.code-spell-checker");
-  # $this._installVscodeExt("streetsidesoftware.code-spell-checker-russian");
-  # # $this._installVscodeExt("mark-wiemer.vscode-autohotkey-plus-plus");
-
-  #     $docCfgDir = $this._path(@("~", "Documents", ".vscode"));
-  #     if (-not (Test-Path -Path "$docCfgDir")) {
-  #       New-Dir -Path "$docCfgDir";
-  #     }
-
-  #     $content = @'
-  #       {
-  #         "files.exclude": {
-  #           "My Music/": true,
-  #           "My Pictures/": true,
-  #           "My Videos/": true,
-  #           "My Games/": true,
-  #           "Sound Recordings/": true,
-  #           "Diablo IV/": true,
-  #           "PowerShell": true,
-  #           "WindowsPowerShell": true,
-  #           "desktop.ini": true,
-  #           ".vscode/": true
-  #         }
-  #       }
-  # '@;
-
-  #     New-File -Path $docCfgDir -Name "settings.json" -Value "$content";
-
-  ##  Exclude from 'ls'.
-  # $(Get-Item -Force $docCfgDir).Attributes = 'Hidden';
-}
-
-function Configure-Powershell {
-  [CmdletBinding()]
-  param ()
-
-  # Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted;
-  # Install-PowershellModule -ModuleName "WindowsCompatibility";
-  # Symlink PowerShel config file into PowerShell config dir.
-  Link-Dotfiles powershell;
-}
-
-function Configure-Lsd {
-  [CmdletBinding()]
-  param ()
-
-  Link-Dotfiles lsd;
-}
-
-function Configure-Ollama {
-  [CmdletBinding()]
-  param ()
-
-  $ollamaDir = "D:\.ollama";
-  Write-Host $ollamaDir;
-  if (-not (Test-Path -Path $ollamaDir)) {
-    Write-Host "Create ollama dir $ollamaDir";
-    New-Dir -Path $ollamaDir;
-  }
-  $newOllamaDir = Join-Path -Path $HOME -ChildPath .ollama;
-  if (Test-Path -Path $newOllamaDir) {
-    Write-Host "Remove ollama dir $newOllamaDir";
-    Remove-Item $newOllamaDir -Force -Recurse;
-  }
-  New-SoftlinkDir -Path $newOllamaDir -Target $ollamaDir;
-}
 
 function Install-WingetApp {
   [CmdletBinding()]
@@ -177,7 +55,7 @@ function Install-WingetApp {
     [String] $EnvPath
   )
 
-  if (Check-AppInstalled -Name $Name) {
+  if (Test-AppInstalled -Name $Name) {
     Write-Verbose "$Name is already installed"
     return
   }
@@ -222,7 +100,10 @@ function Install-App {
       'windirstat',
       'winomail'
     )]
-    [String] $Name
+    [String] $Name,
+
+    [Parameter(Mandatory = $false)]
+    [Boolean] $WithConfig = $true
   )
 
   switch ($Name) {
@@ -235,7 +116,7 @@ function Install-App {
     }
     'code' {
       Install-WingetApp -Name "Microsoft.VisualStudioCode";
-      Configure-Vscode;
+      if ($WithConfig) { Update-AppConfig code; }
     }
     'jetbrainsfont' {
       Install-WingetApp -Name "DEVCOM.JetBrainsMonoNerdFont";
@@ -245,34 +126,37 @@ function Install-App {
     }
     'gh' {
       Install-WingetApp -Name "Github.cli" -EnvPath "C:\Program Files\GitHub CLI";
-      Auth-GitHubCli;
+      if ($WithConfig) { Update-AppConfig gh; }
     }
     'keepass' {
       Install-WingetApp -Name "KeePassXCTeam.KeePassXC";
     }
     'lsd' {
       Install-WingetApp -Name "lsd-rs.lsd";
-      Configure-Lsd;
+      if ($WithConfig) { New-LinkDotfiles lsd; }
     }
     'mpv' {
       Install-WingetApp -Name "mpv.net";
-      Link-Dotfiles mpv;
+      if ($WithConfig) { New-LinkDotfiles mpv; }
     }
     'nvm' {
       Install-WingetApp -Name "CoreyButler.NVMforWindows" -EnvPath $(Join-Path -Path $env:LOCALAPPDATA -ChildPath "nvm");
-      Configure-NVM;
+      if ($WithConfig) { Update-AppConfig nvm; }
     }
     'obs' {
       Install-WingetApp -Name "OBSProject.OBSStudio";
     }
     'obsidian' {
       Install-WingetApp -Name "Obsidian.Obsidian";
-      Clone pkm;
-      Clone obsidian-review-plugin;
+      if ($WithConfig) {
+        Clone pkm;
+        Clone obsidian-review-plugin;
+      }
     }
     'ollama' {
-      Install-WingetApp -Name "Ollama.Ollama";
-      Configure-Ollama;
+      Install-WingetApp "Ollama.Ollama";
+
+      if ($WithConfig) { Update-AppConfig ollama; }
     }
     'poshgit' {
       Install-PowershellModule -ModuleName "posh-git";
@@ -306,7 +190,7 @@ function Uninstall-App {
     [String] $Name
   )
 
-  if (-not (Check-AppInstalled -Name $Name)) {
+  if (-not (Test-AppInstalled -Name $Name)) {
     Write-Verbose "$Name is already uninstalled"
     return
   }
@@ -319,4 +203,4 @@ function Uninstall-App {
   }
 }
 
-Export-ModuleMember -Function Install-App, Uninstall-App, Check-AppInstalled, Check-GitHubCliAuth;
+Export-ModuleMember -Function Install-App, Uninstall-App, Test-AppInstalled, Test-GitHubCliAuth;

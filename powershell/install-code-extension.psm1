@@ -48,7 +48,7 @@ function Install-CodeExtension {
     }
     "continue" {
       Install-VscodeExt "continue.continue";
-      Link-Dotfiles continue;
+      New-LinkDotfiles continue;
     }
     "css-modules" {
       Install-VscodeExt "clinyong.vscode-css-modules";

@@ -13,11 +13,11 @@ function Clone-GitHub {
     $Force
   )
 
-  if (-not (Check-AppInstalled -Name Github.cli)) {
+  if (-not (Test-AppInstalled -Name Github.cli)) {
     Write-Warning("GitHub CLI not installed. Use Install-GitHubCli ndwto install it.");
     Install-App gh;
   }
-  if (-not (Check-GitHubCliAuth)) {
+  if (-not (Test-GitHubCliAuth)) {
     Write-Warning("GitHub CLI not auth. Use gh auth login to authenticate.");
   }
 

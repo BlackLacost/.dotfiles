@@ -43,7 +43,7 @@ function New-Link {
   }
 }
 
-function Link-Dotfiles {
+function New-LinkDotfiles {
   [CmdletBinding()]
   param (
     [ValidateSet(
@@ -97,4 +97,4 @@ function Link-Dotfiles {
   }
 }
 
-Export-ModuleMember -Function Link-Dotfiles;
+Export-ModuleMember -Function New-LinkDotfiles;

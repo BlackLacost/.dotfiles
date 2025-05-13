@@ -7,6 +7,7 @@ Import-Module .\powershell\link-dotfiles;
 Import-Module .\powershell\clone;
 Import-Module .\powershell\default-directory;
 Import-Module .\powershell\install-code-extension;
+Import-Module .\powershell\configure-app;
 
 function New-File() { New-Item -ItemType File -Force @args; }
 
@@ -23,7 +24,7 @@ function Get-PostConfigurationWindowsMessage {
 "@;
 }
 
-function Has-Cli {
+function Test-HasCli {
   [CmdletBinding()]
   param (
     [Parameter(Mandatory = $true)]
@@ -50,38 +51,18 @@ function Install-PowershellModule {
 }
 
 
-function  Set-PowerOptions() {
-  Write-Host "Setting power policy";
-  powercfg -change -monitor-timeout-ac 120;
-  powercfg -change -monitor-timeout-dc 120;
-  powercfg -change -disk-timeout-ac 0;
-  powercfg -change -disk-timeout-dc 0;
-  powercfg -change -standby-timeout-ac 0;
-  powercfg -change -standby-timeout-dc 0;
-  powercfg -change -hibernate-timeout-ac 0;
-  powercfg -change -hibernate-timeout-dc 0;
-  # Disable hibernate & delete hiberfil.sys
-  powercfg -hibernate off
-  #  Set 'plugged in' cooling policy to 'active'
-  # powercfg -setacvalueindex scheme_current 54533251-82be-4824-96c1-47b60b740d00 94d3a615-a899-4ac5-ae2b-e4d8f634367f 1
-  #  Set 'on battery' cooling policy to 'active'
-  #! If set to 'passive' will downclock cpu to minimum, unusable
-  # powercfg -setdcvalueindex scheme_current 54533251-82be-4824-96c1-47b60b740d00 94d3a615-a899-4ac5-ae2b-e4d8f634367f 1
-}
 
-function Configure-Windows {
+function Update-WindowsConfiguration {
   [CmdletBinding()]
   param ()
-
-  Move-WindowDefaultDirectories;
-  Set-PowerOptions;
 
   # # Ensure at least 1.9 version for "add to path" manifest flag
   # & winget upgrade winget;
 
-  # Hide search in the taskbar
-  $path = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search"
-  Set-ItemProperty -Path $path -Name SearchboxTaskbarMode -Value 0;
+  Move-WindowDefaultDirectories;
+  Update-AppConfig power;
+  Update-AppConfig powershell;
+  Update-AppConfig taskbar;
 
   # Write-Host "Configuration sudo as inline";
   # &sudo config --enable normal;
@@ -94,7 +75,7 @@ function Configure-Windows {
   Install-App poshgit;
   Install-App gh;
   Clone dotfiles;
-  Link-Dotfiles gitconfig;
+  New-LinkDotfiles gitconfig;
   Install-App code;
   Install-App jetbrainsfont;
 
