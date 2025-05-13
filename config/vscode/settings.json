@@ -446,7 +446,6 @@
   // Inbox
 
   "diffEditor.ignoreTrimWhitespace": false,
-  "workbench.colorTheme": "grigoryvp memory theme",
   "terminal.integrated.allowedLinkSchemes": [
     "file",
     "http",
@@ -459,5 +458,7 @@
   "window.commandCenter": false,
   "window.menuBarVisibility": "compact",
   "workbench.layoutControl.enabled": false,
-  "debug.javascript.autoAttachFilter": "disabled"
+  "debug.javascript.autoAttachFilter": "disabled",
+  "workbench.colorTheme": "grigoryvp memory theme",
+  "redhat.telemetry.enabled": true
 }
