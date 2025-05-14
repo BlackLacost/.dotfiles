@@ -36,6 +36,7 @@ gh auth login
 gh repo clone .dotfiles $HOME\.dotfiles
 cd $HOME\.dotfiles
 Import-Module .\powershell\main.ps1
+Update-WindowsConfiguration
 ```
 
 [WSL](https://docs.microsoft.com/ru-ru/windows/wsl/install-win10#manual-installation-steps)
