@@ -104,6 +104,7 @@ function Update-AppConfig {
       'gh',
       'nvm',
       'ollama',
+      'power',
       'powershell',
       'taskbar'
     )]

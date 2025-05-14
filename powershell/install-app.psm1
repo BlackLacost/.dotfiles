@@ -203,4 +203,32 @@ function Uninstall-App {
   }
 }
 
-Export-ModuleMember -Function Install-App, Uninstall-App, Test-AppInstalled, Test-GitHubCliAuth;
+function Test-WingetAppInstalled {
+  [CmdletBinding()]
+  param([ValidateSet('telegram', 'qbittorrent')] [String] $Name)
+
+  Write-Verbose "Checking if app '$Name' is installed via winget..."
+
+  $WingetId = Get-WingetId -Name $Name;
+  & winget list "$WingetId" *>$null
+
+  return ($LASTEXITCODE -eq 0)
+}
+
+
+function Get-WingetId {
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $true)]
+    [ValidateSet('telegram', 'qbittorrent')]
+    [String] $Name)
+
+  switch ($Name) {
+    'telegram' { return "Telegram.TelegramDesktop" }
+    'qbittorrent' { return "qBittorrent.qBittorrent" }
+    Default { throw "Unknown application name: $Name" }
+  }
+}
+
+
+Export-ModuleMember -Function Install-App, Uninstall-App, Test-AppInstalled, Test-GitHubCliAuth, Get-WingetId, Test-WingetAppInstalled

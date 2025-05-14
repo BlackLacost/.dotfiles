@@ -1,7 +1,7 @@
 # Stop on unhandled exceptions.
 $ErrorActionPreference = "Stop";
 
-Import-Module .\powershell\join-paths;
+Import-Module .\powershell\join-paths.psm1
 Import-Module .\powershell\install-app;
 Import-Module .\powershell\link-dotfiles;
 Import-Module .\powershell\clone;
