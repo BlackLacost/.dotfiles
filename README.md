@@ -21,10 +21,16 @@ admin
 
 ```shell
 winget install --silent --accept-package-agreements --accept-source-agreements github.cli git.git powershell
-[Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Program Files\GitHub CLI;C:\Program Files\Git\bin", "Process")
+Set-ExecutionPolicy Unrestricted
+```
+
+user
+
+```
 gh auth login
 gh repo clone .dotfiles $HOME\.dotfiles
-Set-ExecutionPolicy Unrestricted
+cd $HOME\.dotfiles
+Import-Module main.psm1
 ```
 
 [WSL](https://docs.microsoft.com/ru-ru/windows/wsl/install-win10#manual-installation-steps)
