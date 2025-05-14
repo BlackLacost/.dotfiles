@@ -20,8 +20,13 @@ Set-ExecutionPolicy Unrestricted -Scope CurrentUser
 admin
 
 ```shell
-winget install --silent --accept-package-agreements --accept-source-agreements github.cli git.git powershell
-Set-ExecutionPolicy Unrestricted
+$repo_url = "https://raw.githubusercontent.com/BlackLacost/.dotfiles"
+$url = "$repo_url/main/win-init.ps1"
+# 'Invoke-Expression' instead of 'iex' since 'iex' is removed by profile.ps1
+Invoke-WebRequest $url -OutFile ./win-init.ps1
+Set-ExecutionPolicy Unrestricted -Scope CurrentUser
+./win-init.ps1
+Remove-Item ./win-init.ps1
 ```
 
 user
@@ -30,7 +35,7 @@ user
 gh auth login
 gh repo clone .dotfiles $HOME\.dotfiles
 cd $HOME\.dotfiles
-Import-Module main.psm1
+Import-Module .\powershell\main.ps1
 ```
 
 [WSL](https://docs.microsoft.com/ru-ru/windows/wsl/install-win10#manual-installation-steps)
