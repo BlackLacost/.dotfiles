@@ -1,0 +1,29 @@
+{
+  // Place your snippets for dotenv here. Each snippet is defined under a snippet name and has a prefix, body and
+  // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+  // same ids are connected.
+  // Example:
+  "Postgresql DATABASE_URL": {
+    "prefix": "dbp",
+    "body": [
+      "DB_USER=blacklacost",
+      "DB_PASS=${1:password123}",
+      "DB_HOST=localhost",
+      "DB_PORT=5432",
+      "DB_NAME=${2:name}_db",
+      "DATABASE_URL=\"postgresql://\\${DB_USER}:\\${DB_PASS}@\\${DB_HOST}:\\${DB_PORT}/\\${DB_NAME}?schema=public\""
+    ],
+    "description": "Postgresql DATABASE_URL desc"
+  },
+  "Heroku API envoroments": {
+    "prefix": "hapi",
+    "body": [
+      "PREFIX=${1:bl}",
+      "PROJECT_NAME=${2:site-api}",
+      "TOKEN_SECRET=${3:super_secret}",
+      "TOKEN_EXPIRE=${4:1h}",
+      "CLIENT_URL=$0"
+    ]
+  }
+}

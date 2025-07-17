@@ -1,0 +1,180 @@
+{
+  // "": {
+  //   "prefix": "",
+  //   "body": [
+  //   ],
+  //   "description": ""
+  // },
+
+  // Place your snippets for typescriptreact here. Each snippet is defined under a snippet name and has a prefix, body and
+  // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+  // same ids are connected.
+  // Example:
+  // "Print to console": {
+  // 	"prefix": "log",
+  // 	"body": [
+  // 		"console.log('$1');",
+  // 		"$2"
+  // 	],
+  // 	"description": "Log output to console"
+  // }
+  "Console Log": {
+    "prefix": "lg",
+    "body": ["console.log($0)"]
+  },
+  "RC Expression export default": {
+    "prefix": "rced",
+    "body": [
+      "const ${1:$TM_FILENAME_BASE} = () => {",
+      "  return (",
+      "    <div>${0:$TM_FILENAME_BASE}</div>",
+      "  )",
+      "}",
+      "",
+      "export default ${1:$TM_FILENAME_BASE}"
+    ]
+  },
+  "RC Declaration export default": {
+    "prefix": "rcdd",
+    "body": [
+      "export default function ${0:$TM_FILENAME_BASE}() {",
+      "  return <div>${0:$TM_FILENAME_BASE}</div>",
+      "}"
+    ]
+  },
+  "RC Expression": {
+    "prefix": "rce",
+    "body": [
+      "export const ${0:$TM_FILENAME_BASE} = () => {",
+      "  return <div>${0:$TM_FILENAME_BASE}</div>",
+      "}"
+    ]
+  },
+  "RC Declaration": {
+    "prefix": "rcd",
+    "body": [
+      "export function ${0:$TM_FILENAME_BASE}() {",
+      "  return <${1:div}>${0:$TM_FILENAME_BASE}</${1:div}>",
+      "}"
+    ]
+  },
+  "RC Expression with Props": {
+    "prefix": "rcep",
+    "body": [
+      "type Props = {}",
+      "",
+      "export const ${0:$TM_FILENAME_BASE} = ({}: Props) => {",
+      "  return <div>${0:$TM_FILENAME_BASE}</div>",
+      "}"
+    ]
+  },
+  "RC Declaration with Props": {
+    "prefix": "rcdp",
+    "body": [
+      "type Props = {}",
+      "",
+      "export function ${0:$TM_FILENAME_BASE}({}: Props) {",
+      "  return <div>${0:$TM_FILENAME_BASE}</div>",
+      "}"
+    ]
+  },
+  "RC Expression with Extended Props": {
+    "prefix": "rceep",
+    "body": [
+      "import { ComponentPropsWithoutRef } from 'react'",
+      "import { cn } from '~/lib/cn'",
+      "",
+      "interface ${TM_FILENAME_BASE}Props extends ComponentPropsWithoutRef<'${1:div}'> {}",
+      "",
+      "export const $TM_FILENAME_BASE = ({ children, className, ...props }: ${TM_FILENAME_BASE}Props) => {",
+      "  return (",
+      "    <${1:div} className={cn('', className)} {...props}>",
+      "      {children}",
+      "    </${1:div}>",
+      "  )",
+      "}"
+    ]
+  },
+  "RC Declaration with Extended Props": {
+    "prefix": "rcdep",
+    "body": [
+      "import { ComponentPropsWithoutRef } from 'react'",
+      "import { cn } from '~/lib/cn'",
+      "",
+      "interface ${TM_FILENAME_BASE}Props extends ComponentPropsWithoutRef<'${1:div}'> {}",
+      "",
+      "export function $TM_FILENAME_BASE({ children, className, ...props }: ${TM_FILENAME_BASE}Props) {",
+      "  return (",
+      "    <${1:div} className={cn('', className)} {...props}>",
+      "      {children}",
+      "    </${1:div}>",
+      "  )",
+      "}"
+    ]
+  },
+  "RC Props": {
+    "prefix": "rcp",
+    "body": ["type ${1:$TM_FILENAME_BASE}Props = {", "  ${0}", "}"]
+  },
+  // "Pre Data": {
+  //   "prefix": "pre",
+  //   "body": ["<pre>{JSON.stringify(${0:data}, null, 2)}</pre>"],
+  // },
+  "Pre Data": {
+    "prefix": "pre",
+    "body": [
+      "<pre className=\"mt-2 w-full rounded-md bg-slate-950 p-4\">",
+      "<code className=\"text-white\">{JSON.stringify(data, null, 2)}</code>",
+      "</pre>"
+    ]
+  },
+  "Destructuring Assignment Const": {
+    "prefix": "dac",
+    "body": ["const { ${0} } = ${1}"]
+  },
+  "Destructuring Import": {
+    "prefix": "di",
+    "body": ["import { ${0} } from '${1}'"]
+  },
+  "Destructuring Type": {
+    "prefix": "dt",
+    "body": ["{ ${0} }: ${1}"]
+  },
+  "Props": {
+    "prefix": "pr",
+    "body": ["{ ${0} }: Props"]
+  },
+  "Sleep": {
+    "prefix": "sleep",
+    "body": ["await new Promise(res => setTimeout(res, ${0:2000}))"]
+  },
+  "Start Transition Hook": {
+    "prefix": "sth",
+    "body": ["const [isPending, startTransition] = useTransition()"]
+  },
+  "Start Transition Hook": {
+    "prefix": "st",
+    "body": ["startTransition(() => {", "${0}", "})"]
+  },
+  "Next Page": {
+    "prefix": "np",
+    "body": [
+      "const ${0}Page = () => {",
+      "  return <div>${0} Page</div>",
+      "}",
+      "",
+      "export default ${0}Page"
+    ]
+  },
+  "Layout": {
+    "prefix": "layout",
+    "body": [
+      "import styles from './styles.module.css'",
+      "",
+      "export function Layout() {",
+      "  return <div className={styles.root}>${0}</div>",
+      "}"
+    ]
+  }
+}

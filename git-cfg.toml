@@ -1,0 +1,51 @@
+[user]
+name = "Ilya Lisin"
+email = "blacklacost@gmail.com"
+
+[core]
+editor = "code"
+autocrlf = "input"
+safecrlf = false
+# Hunk header descriptions https://github.com/git/git/blob/master/userdiff.c
+# attributesfile = "~/.gitattributes"
+# Better dif
+# pager = "diff-so-fancy | less"
+
+[init]
+defaultBranch = "main"
+
+[format]
+pretty = "oneline"
+
+[push]
+default = "simple"
+
+[fetch]
+# Fixes "cannot lock ref" macOS case sensetive issue.
+prune = true
+
+[pull]
+# "fatal: Cannot rebase onto multiple branches" if git-radar is used.
+rebase = true
+
+[safe]
+# Can be manipulated via sudo which changes user
+directory = "C:/Users/black/.dotfiles"
+
+[alias]
+cl = "clone"
+ch = "checkout"
+a = "add"
+aa = "add ."
+ap = "add -p"
+cm = "commit -m"
+ps = "push"
+pl = "pull"
+st = "status --short --branch"
+lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+br = "branch"
+di = "diff --ignore-space-change"
+diw = "diff --ignore-space-change --color-words"
+dic = "diff --ignore-space-change --cached"
+dicw = "diff --ignore-space-change --color-words --cached"
+dit = "difftool --ignore-space-change"

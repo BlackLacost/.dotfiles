@@ -1,0 +1,9 @@
+[Unit]
+Description=Бэкап фоток в облаке
+
+[Service]
+User=blacklacost
+ExecStart=/bin/bash /opt/photo_backup.sh
+
+[Install]
+WantedBy=multi-user.target

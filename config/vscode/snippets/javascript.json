@@ -1,0 +1,53 @@
+{
+  // Place your snippets for javascript here. Each snippet is defined under a snippet name and has a prefix, body and
+  // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+  // same ids are connected.
+  "Reset auto increment in postgresql": {
+    "prefix": "dbprai",
+    "body": [
+      "await prisma.\\$queryRaw`ALTER SEQUENCE \"${1:Table_name}_id_seq\" RESTART 1`",
+      "console.log('Reset auto increment for ${1:Table_name} table')"
+    ],
+    "description": "Reset auto increment potgresql"
+  },
+  "React static via express": {
+    "prefix": "exprs",
+    "body": [
+      "if (process.env.NODE_ENV === 'production') {",
+      "  app.use(express.static('build'))",
+      "  app.get('*', (req, res) => {",
+      "    res.sendFile(path.resolve(__dirname, 'build', 'index.html'))",
+      "  })",
+      "}"
+    ]
+  },
+  "Try Catch": {
+    "prefix": "trycatchs",
+    "body": ["try {", "  $0", "} catch (${1:err}) {", "  ${2:next(err)}", "}"]
+  },
+  "Tailwind Container": {
+    "prefix": "tc",
+    "body": ["container: {", "  center: true,", "  padding: '1rem'", "}"]
+  },
+  "Prisma Seed": {
+    "prefix": "ps",
+    "body": [
+      "import { PrismaClient } from '@prisma/client'",
+      "",
+      "const db = new PrismaClient()",
+      "",
+      "const load = async () => {",
+      "  try {",
+      "    const $0 = await db.$1"
+      "  } catch (e) {",
+      "    console.error(e)",
+      "    process.exit(1)",
+      "  } finally {",
+      "    await db.\\$disconnect()",
+      "  }",
+      "}",
+      "",
+      "load()",
+    ]
+  }

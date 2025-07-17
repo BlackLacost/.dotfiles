@@ -1,0 +1,61 @@
+{
+  // Place your snippets for properties here. Each snippet is defined under a snippet name and has a prefix, body and
+  // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+  // same ids are connected.
+  // Example:
+  // "Print to console": {
+  // 	"prefix": "log",
+  // 	"body": [
+  // 		"console.log('$1');",
+  // 		"$2"
+  // 	],
+  // 	"description": "Log output to console"
+  // }
+  "DATABASE_URL MySQL": {
+    "prefix": "dbmurl",
+    "body": [
+      "DATABASE_URL=\"mysql://\\${DB_USER}:\\${DB_PASS}@\\${DB_HOST}:\\${DB_PORT}/\\${DB_NAME}\""
+    ],
+    "description": "DATABASE_URL MySQL"
+  },
+  "DATABASE_URL PostgreSQL": {
+    "prefix": "dbpurl",
+    "body": [
+      "DATABASE_URL=\"postgres://\\${DB_USER}:\\${DB_PASS}@\\${DB_HOST}:\\${DB_PORT}/\\${DB_NAME}?schema=public\""
+    ],
+    "description": "DATABASE_URL PostgreSQL"
+  },
+  "Database Env": {
+    "prefix": "dbe",
+    "body": [
+      "DB_USER=${blacklacost}",
+      "DB_PASS=${pass}",
+      "DB_NAME=${dev}",
+      "DB_HOST=${localhost}",
+      "DB_PORT=${0:5432}"
+    ],
+    "description": "Database env variables"
+  },
+  "Database PostgreSQL Port": {
+    "prefix": "dbpp",
+    "body": ["DB_PORT=${0:5432}"],
+    "description": "Database PostgreSQL Port"
+  },
+  "Database MySQL Port": {
+    "prefix": "dbmp",
+    "body": ["DB_PORT=${0:3306}"],
+    "description": "Database Postgres Port"
+  },
+  "SMTP Mail.ru": {
+    "prefix": "smtpm",
+    "body": [
+      "EMAIL_SERVER_USER=${1:blacklacost@inbox.ru}",
+      "EMAIL_SERVER_PASSWORD=${0}",
+      "EMAIL_SERVER_HOST=smtp.mail.ru",
+      "EMAIL_SERVER_PORT=465",
+      "EMAIL_FROM=${2:blacklacost@inbox.ru}"
+    ],
+    "description": "SMTP Mail.ru"
+  }
+}

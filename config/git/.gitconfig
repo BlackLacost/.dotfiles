@@ -1,0 +1,46 @@
+[user]
+name = "Ilya Lisin"
+email = blacklacost@gmail.com
+
+[core]
+editor = "code"
+eol = lf
+autocrlf = input
+safecrlf = false
+quotepath = false
+# Hunk header descriptions https://github.com/git/git/blob/master/userdiff.c
+# attributesfile = "~/.gitattributes"
+# Better dif
+# pager = "diff-so-fancy | less"
+
+[init]
+defaultBranch = main
+
+[format]
+pretty = oneline
+
+[push]
+default = simple
+
+[pull]
+rebase = true
+
+[alias]
+hist = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+hista = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+cl = "clone"
+ch = "checkout"
+a = "add"
+aa = "add ."
+ap = "add -p"
+cm = "commit -m"
+ps = "push"
+pl = "pull"
+st = "status --short --branch"
+lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+br = "branch"
+di = "diff --ignore-space-change"
+diw = "diff --ignore-space-change --color-words"
+dic = "diff --ignore-space-change --cached"
+dicw = "diff --ignore-space-change --color-words --cached"
+dit = "difftool --ignore-space-change"

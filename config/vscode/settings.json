@@ -1,0 +1,464 @@
+{
+  // Configure glob patterns for excluding files and folders. For example,
+  // the file Explorer decides which files and folders to show or hide
+  // based on this setting. Refer to the `search.exclude` setting to define
+  // search specific excludes. Read more about glob patterns
+  // [here](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options).
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true
+  },
+  // When enabled, will trim trailing whitespace when saving a file.
+  "files.trimTrailingWhitespace": true,
+  "files.eol": "\n",
+  "files.associations": {
+    "*.json": "jsonc"
+  },
+
+  //##########
+  // Common ##
+  //##########
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "json.maxItemsComputed": 50000,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": true,
+  "search.useIgnoreFiles": true,
+  "search.exclude": {
+    "**/.git": true,
+    "**/.vscode": true,
+    "**/node_modules": true,
+    "**/static": true,
+    "**/media": true,
+    "**/logs": true,
+    "**/tmp": true
+  },
+  "search.showLineNumbers": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "window.restoreWindows": "all",
+  "window.openFoldersInNewWindow": "on",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "none",
+
+  // Editor
+  // "editor.acceptSuggestionOnEnter": "on",
+  // "editor.acceptSuggestionOnCommitCharacter": false,
+  // https://code.visualstudio.com/docs/editor/intellisense#_types-of-completions
+  // "editor.quickSuggestions": {
+  //   "strings": true
+  // },
+  // "editor.suggestSelection": "first",
+  // "editor.autoClosingBrackets": "beforeWhitespace",
+  // "editor.autoClosingQuotes": "beforeWhitespace",
+  // "editor.guides.bracketPairs": "active",
+  "editor.inlayHints.enabled": "on",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    // "source.organizeImports": "never",
+    "source.addMissingImports": "explicit"
+  },
+  // "editor.cursorStyle": "line",
+  "editor.cursorSurroundingLines": 6, // Курсор не прилипает к верху и низу
+  // "editor.foldingImportsByDefault": false,
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 16,
+  "editor.tabSize": 2,
+  // "editor.insertSpaces": false,
+  "editor.lineNumbers": "relative",
+  "editor.linkedEditing": true,
+  "editor.links": true,
+  "editor.minimap.enabled": false,
+  "editor.rulers": [80],
+  "editor.wordWrap": "off",
+  "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+  "editor.tabCompletion": "off",
+  "editor.copyWithSyntaxHighlighting": true,
+  // Autoformat
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // "typescript.referencesCodeLens.enabled": true,
+  "[xi]": {
+    "editor.wordWrap": "bounded",
+    "editor.wordWrapColumn": 80,
+    "editor.rulers": [80]
+  },
+  "[git-commit]": {
+    "editor.rulers": [72, 50]
+  },
+  "[jsonc]": {
+    "editor.rulers": [120]
+  },
+  "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn"
+  },
+  "[mdx]": {
+    "editor.wordWrap": "wordWrapColumn"
+  },
+  "[powershell]": {
+    "editor.rulers": [120],
+    "editor.defaultFormatter": "ms-vscode.powershell"
+  },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "[python]": {
+    "editor.defaultFormatter": null,
+    "editor.tabSize": 4,
+    "editor.formatOnType": true,
+    "editor.rulers": [78]
+    // "editor.formatOnSaveTimeout": 3000
+  },
+  "[typescript]": {
+    // "editor.wordWrap": "wordWrapColumn"
+    "editor.rulers": [80]
+  },
+  "[typescriptreact]": {
+    "editor.wordWrapColumn": 80,
+    "editor.rulers": [80],
+    // bounded - wrap делается по заданной колонке и на ширину видиомости.
+    "editor.wordWrap": "bounded"
+  },
+
+  //############
+  // Terminal ##
+  //############
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  // "terminal.integrated.fontFamily": "monospace",
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+  "terminal.external.windowsExec": "pwsh.exe",
+  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.commandsToSkipShell": [
+    // Ensure the toggle sidebar visibility keybinding skips the shell
+    // "workbench.action.toggleSidebarVisibility",
+    // Send quick open's keybinding to the shell
+    "-workbench.action.quickOpen",
+    "-workbench.action.quickOpenPreviousEditor"
+  ],
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    },
+    "Command Prompt": {
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ],
+      "args": [],
+      "icon": "terminal-cmd"
+    },
+    "Git Bash": {
+      "source": "Git Bash"
+    }
+  },
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "bash",
+      "icon": "terminal-bash"
+    },
+    "zsh": {
+      "path": "zsh"
+    },
+    "fish": {
+      "path": "fish"
+    },
+    "tmux": {
+      "path": "tmux",
+      "icon": "terminal-tmux"
+    },
+    "pwsh": {
+      "path": "pwsh",
+      "icon": "terminal-powershell"
+    }
+  },
+
+  //########
+  // HTML ##
+  //########
+  "html.format.enable": true,
+  "html.autoClosingTags": true,
+
+  //##############
+  // JavaScript ##
+  //##############
+  "javascript.suggest.autoImports": true,
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.autoClosingTags": true,
+
+  //##############
+  // TypeScript ##
+  //##############
+  "typescript.suggest.autoImports": true,
+  "typescript.preferences.importModuleSpecifier": "shortest",
+  "typescript.preferences.preferTypeOnlyAutoImports": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.workspaceSymbols.scope": "currentProject",
+  // "typescript.autoClosingTags": true,
+
+  //##########
+  // Python ##
+  //##########
+  "python.autoComplete.extraPaths": [], // enable auto import
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length", "78"],
+  "python.sortImports.args": ["-m 3", "-tc"],
+  // VirtualEnv
+  "python.pythonPath": "./.venv/bin/python",
+  // Linting
+  "python.analysis.typeCheckingMode": "basic",
+  "python.languageServer": "Pylance",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.analysis.extraPaths": [],
+  "python.linting.pylintArgs": [
+    "--load-plugins",
+    "pylint_django",
+    "--errors-only"
+  ],
+
+  //#########
+  // Emmet ##
+  //#########
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "vue": "html",
+    "javascript": "javascriptreact"
+  },
+  "emmet.triggerExpansionOnTab": true,
+
+  //###########
+  // Plugins ##
+  //###########
+  "extensions.autoUpdate": true,
+  // Auto Close Tag
+  "auto-close-tag.disableOnLanguage": ["typescript"],
+  // Codeium
+  "codeium.enableConfig": {
+    "*": true,
+    "javascript": false,
+    "typescriptreact": false
+  },
+  // Eslint
+  "eslint.workingDirectories": [{ "mode": "auto" }], // Parsing error: Cannot read file in root dir tsconfig.json
+  "eslint.enable": true,
+  "eslint.validate": [
+    "vue",
+    "html",
+    "javascript",
+    "typescript",
+    "typescriptreact"
+  ],
+  // Prettier
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "prettier.printWidth": 80,
+  "prettier.bracketSpacing": true,
+  "prettier.trailingComma": "all",
+  // Stylelint
+  // Выключить внутреннюю валидацию, так как она мешала работе tailwind
+  "css.validate": false,
+  "scss.validate": false,
+  "stylelint.validate": ["css", "scss"],
+  "[css]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "explicit"
+    }
+  },
+  "[scss]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "explicit"
+    }
+  },
+  // Tailwind intellisense
+  "tailwindCSS.emmetCompletions": true,
+  // Todo
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "XXX",
+    "[ ]",
+    "[x]"
+  ],
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+  // Yaml
+  "yaml.customTags": [
+    "!And",
+    "!And sequence",
+    "!If",
+    "!If sequence",
+    "!Not",
+    "!Not sequence",
+    "!Equals",
+    "!Equals sequence",
+    "!Or",
+    "!Or sequence",
+    "!FindInMap",
+    "!FindInMap sequence",
+    "!Base64",
+    "!Join",
+    "!Join sequence",
+    "!Cidr",
+    "!Ref",
+    "!Sub",
+    "!Sub sequence",
+    "!GetAtt",
+    "!GetAZs",
+    "!ImportValue",
+    "!ImportValue sequence",
+    "!Select",
+    "!Select sequence",
+    "!Split",
+    "!Split sequence"
+  ],
+
+  //#######
+  // Vim ##
+  //#######
+  // "vim.enableNeovim": true,
+  "vim.autoSwitchInputMethod.enable": true,
+  // windows
+  "vim.autoSwitchInputMethod.defaultIM": "1033",
+  "vim.autoSwitchInputMethod.obtainIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe",
+  "vim.autoSwitchInputMethod.switchIMCmd": "C:\\Users\\black\\scoop\\apps\\im-select\\current\\im-select.exe {im}",
+  // linux
+  // ---
+  "vim.camelCaseMotion.enable": true,
+  "vim.easymotion": true,
+  "vim.ignorecase": true,
+  "vim.useSystemClipboard": false,
+  "vim.leader": "<space>",
+  "vim.handleKeys": {
+    "<C-a>": true,
+    "<C-b>": false,
+    "<C-d>": true,
+    "<C-e>": false,
+    "<C-f>": false,
+    "<C-j>": false,
+    "<C-i>": false,
+    "<C-k>": false,
+    "<C-l>": false,
+    "<C-n>": false,
+    "<C-p>": false,
+    "<C-s>": false,
+    "<C-t>": false,
+    "<C-w>": false,
+    "<C-z>": false
+  },
+  // Чтобы Ctrl + ъ работал как Ctrl + ] => Esc
+  "keyboard.dispatch": "keyCode",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    { "before": ["<S-h>"], "commands": [":bprevious"] },
+    { "before": ["<S-l>"], "commands": [":bnext"] },
+    {
+      "before": ["<leader>", "g", "d"],
+      "commands": ["editor.action.revealDefinition"]
+    },
+    {
+      "before": ["<leader>", "g", "r"],
+      "commands": ["editor.action.goToReferences"]
+    },
+    {
+      "before": ["<leader>", "s"],
+      "commands": ["workbench.action.splitEditorOrthogonal"]
+    },
+    {
+      "before": ["<leader>", "v"],
+      "commands": ["workbench.action.splitEditor"]
+    },
+    {
+      "before": ["<leader>", "h"],
+      "commands": ["workbench.action.focusLeftGroup"]
+    },
+    {
+      "before": ["<leader>", "j"],
+      "commands": ["workbench.action.focusBelowGroup"]
+    },
+    {
+      "before": ["<leader>", "k"],
+      "commands": ["workbench.action.focusAboveGroup"]
+    },
+    {
+      "before": ["<leader>", "l"],
+      "commands": ["workbench.action.focusRightGroup"]
+    },
+    { "before": ["<C-d>"], "after": ["<C-d>", "z", "z"] },
+    { "before": ["<C-u>"], "after": ["<C-u>", "z", "z"] },
+    { "before": ["n"], "after": ["n", "z", "z", "z", "v"] },
+    { "before": ["N"], "after": ["N", "z", "z", "z", "v"] },
+    { "before": ["j"], "after": ["g", "j"] },
+    { "before": ["k"], "after": ["g", "k"] },
+    { "before": ["g", "j"], "after": ["j"] },
+    { "before": ["g", "k"], "after": ["k"] },
+    { "before": ["<leader>", "y"], "after": ["\"", "+", "y"] },
+    { "before": ["<leader>", "p"], "after": ["\"", "+", "p"] },
+    { "before": ["<leader>", "P"], "after": ["\"", "+", "P"] },
+    // Курсор остается на месте при join строк
+    { "before": ["J"], "after": ["m", "z", "J", "`", "z"] }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    { "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
+    { "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] },
+    // позволяет в визуальном режиме несколько раз испльзовать стрелки без сброса
+    { "before": [">"], "commands": ["editor.action.indentLines"] },
+    { "before": ["<"], "commands": ["editor.action.outdentLines"] },
+    { "before": ["<leader>", "y"], "after": ["\"", "+", "y"] },
+    { "before": ["<leader>", "p"], "after": ["\"", "+", "p"] },
+    // Перед вставкой удаляет выделенный текст в черную дыру, что позволяет оставить вставленный текст в регистре "
+    { "before": ["<leader>", "P"], "after": ["\"", "_", "d", "P"] }
+  ],
+  "workbench.activityBar.location": "top",
+  "[css][scss]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": "explicit"
+    }
+  },
+  "terminal.integrated.env.windows": {},
+  "console-ninja.featureSet": "Community",
+  "window.customTitleBarVisibility": "auto",
+  "terminal.integrated.env.linux": {},
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.automationProfile.linux": {
+    "path": "zsh",
+    "args": ["-i"]
+  },
+  "remote.autoForwardPortsSource": "hybrid",
+
+  // Emoji
+  "emojisense.unicodeCompletionsEnabled": true,
+  "emojisense.languages": {
+    "markdown": true,
+    "plaintext": true,
+    "json": true,
+    "xi": true,
+    "scminput": true // language used in the source control commit message box
+  },
+
+  // Inbox
+
+  "diffEditor.ignoreTrimWhitespace": false,
+  "terminal.integrated.allowedLinkSchemes": [
+    "file",
+    "http",
+    "https",
+    "mailto",
+    "vscode",
+    "vscode-insiders",
+    "ms-settings"
+  ],
+  "window.commandCenter": false,
+  "window.menuBarVisibility": "compact",
+  "workbench.layoutControl.enabled": false,
+  "debug.javascript.autoAttachFilter": "disabled",
+  "workbench.colorTheme": "grigoryvp memory theme",
+  "redhat.telemetry.enabled": true
+}

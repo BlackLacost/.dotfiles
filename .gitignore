@@ -1,0 +1,14 @@
+*~
+.cache/
+watch_later/
+.nvimlog
+config/mpv/cache/
+
+# Ignore auto gen file by packer
+packer_compiled.lua
+
+# Ignore vifm files
+vifminfo.json
+vifm-help.txt
+
+watch_later/

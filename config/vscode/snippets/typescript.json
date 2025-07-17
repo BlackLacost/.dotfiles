@@ -1,0 +1,54 @@
+{
+  // Place your snippets for typescript here. Each snippet is defined under a snippet name and has a prefix, body and
+  // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+  // same ids are connected.
+  // Example:
+  // "Print to console": {
+  // 	"prefix": "log",
+  // 	"body": [
+  // 		"console.log('$1');",
+  // 		"$2"
+  // 	],
+  // 	"description": "Log output to console"
+  // }
+  "Console Log": {
+    "prefix": "lg",
+    "body": ["console.log($0)"]
+  },
+  "Prisma Lib": {
+    "prefix": "pl",
+    "body": [
+      "import { PrismaClient } from '@prisma/client'",
+      "",
+      "const prismaClientSingleton = () => {",
+      "  return new PrismaClient()",
+      "}",
+      "",
+      "type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>",
+      "",
+      "const globalForPrisma = globalThis as unknown as {",
+      "  prisma: PrismaClientSingleton | undefined",
+      "}",
+      "",
+      "const db = globalForPrisma.prisma ?? prismaClientSingleton()",
+      "",
+      "export default db",
+      "",
+      "if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = db",
+      ""
+    ]
+  },
+  "Sleep": {
+    "prefix": "sleep",
+    "body": ["await new Promise(res => setTimeout(res, ${0:2000}))"]
+  },
+  "Destructuring Import": {
+    "prefix": "di",
+    "body": ["import { ${0} } from '${1}'"]
+  },
+  "Layout": {
+    "prefix": "layout",
+    "body": ["export { Layout as ${0} } from './layout'"]
+  }
+}

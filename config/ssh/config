@@ -1,0 +1,35 @@
+Host github.com
+  HostName github.com
+  User BlackLacost
+  IdentityFile ~/.ssh/github
+
+Host poco
+  HostName 192.168.111.170
+  User black
+  Port 8022
+  IdentityFile ~/.ssh/pocox3
+
+Host mikrotik
+  HostName 192.168.111.254
+  User admin
+  Port 2222
+  IdentityFile ~/.ssh/mikrotik
+
+Host d
+  HostName blacklacost.ru
+  User dokku
+  Port 4444
+  RequestTTY yes
+  IdentityFile ~/.ssh/vdsina-win
+
+Host vdsina
+  HostName blacklacost.ru
+  User blacklacost
+  Port 4444
+  IdentityFile ~/.ssh/vdsina-win
+
+Host blacklacost.ru
+  HostName blacklacost.ru
+  User dokku
+  Port 4444
+  IdentityFile ~/.ssh/vdsina-win
