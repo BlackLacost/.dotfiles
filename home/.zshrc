@@ -139,6 +139,8 @@ alias cddf="cd ~/.dotfiles/"
 
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias dfe="nvim ~/.dotfiles/"
+alias o='xdg-open'
+alias l='lazygit'
 
 alias gbc="git branch --show-current"
 
@@ -161,4 +163,9 @@ export PATH="$PATH:$HOME/.local/share/JetBrains/jetbrains_ultimate/bin/"
 
 export LIBVIRT_DEFAULT_URI='qemu:///system'
 
-if [ "$TMUX" = "" ]; then tmux; fi
+# Запускать tmux только вне терминала JetBrains
+if [ -z "$TMUX" ] && [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
+  exec tmux
+fi
+
+
