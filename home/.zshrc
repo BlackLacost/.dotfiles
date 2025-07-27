@@ -140,7 +140,12 @@ alias cddf="cd ~/.dotfiles/"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias dfe="nvim ~/.dotfiles/"
 alias o='xdg-open'
-alias l='lazygit'
+alias lg='lazygit'
+alias rcmm="rclone mount mailru: /home/ilya/cloud/mailru --vfs-cache-mode full --vfs-cache-max-size 200G --vfs-cache-poll-interval 5m --vfs-cache-max-age 168h --log-level INFO --log-file /tmp/rclone.log &"
+alias rcmu="umount ~/cloud/mailru/"
+alias rcym="rclone mount yandexru: /home/ilya/cloud/yandexru --vfs-cache-mode full --vfs-cache-max-size 200G --vfs-cache-poll-interval 5m --vfs-cache-max-age 168h --log-level INFO --log-file /tmp/rclone.log &"
+alias rcyu="umount ~/cloud/yandexru/"
+alias rm="trash"
 
 alias gbc="git branch --show-current"
 
@@ -162,6 +167,8 @@ export SDKMAN_DIR="$HOME/.sdkman"
 export PATH="$PATH:$HOME/.local/share/JetBrains/jetbrains_ultimate/bin/"
 
 export LIBVIRT_DEFAULT_URI='qemu:///system'
+
+eval "$(zoxide init zsh)"
 
 # Запускать tmux только вне терминала JetBrains
 if [ -z "$TMUX" ] && [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then

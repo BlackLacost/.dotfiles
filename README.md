@@ -1,5 +1,17 @@
 # Dotfiles
 
+## Fedora install
+
+### Fast dnf
+
+Проверить стоит ли флаг быстрых зеркал для dnf `sudo grep 'fastestmirror' /etc/dnf/dnf.conf`. Если не стоит то добавляем `sudo echo 'fastestmirror=1' | sudo tee -a /etc/dnf/dnf.conf`. После этого можно обновить кэш `sudo dnf clean all && sudo dnf makecache`.
+
+Установить `sudo dnf install trash-cli` чтобы rm -rf удаляло в корзину.
+
+Умный cd `sudo dnf install zoxide`.
+
+Установить удобный runner, до этого нужно отключить у родного kRunner Alt+Space и включить у ulauncher `sudo dnf install ulauncher`. Включить как сервис `systemctl --user enable --now ulauncher`.
+
 ## Windows install
 
 ```shell
