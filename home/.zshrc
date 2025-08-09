@@ -136,6 +136,7 @@ alias zshs="source ~/.zshrc"
 alias cdc="cd ~/code"
 alias cddw="cd ~/Downloads/"
 alias cddf="cd ~/.dotfiles/"
+alias neobean='NVIM_APPNAME=linkarzu/dotfiles-latest/neovim/neobean nvim'
 
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias dfe="nvim ~/.dotfiles/"
@@ -200,4 +201,4 @@ if [ -z "$TMUX" ] && [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
   exec tmux
 fi
 
-
+# vim: ft=zsh
