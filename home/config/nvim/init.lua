@@ -127,7 +127,7 @@ require('lazy').setup({
   require 'plugins.nvim-lspconfig',
   require 'plugins.autoformat',
   require 'plugins.autocompletion',
-  require 'plugins.tokyonight',
+  require 'plugins.colorscheme',
   require 'plugins.todo-comments',
   require 'plugins.mini',
   require 'plugins.treesitter',
