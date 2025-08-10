@@ -150,10 +150,13 @@ require('lazy').setup({
   -- you can continue same window with `<space>sr` which resumes last telescope search
 }, {
   change_detection = {
+    -- Don't notify us every time a change is made to the configuration
     notify = true,
   },
   checker = {
+    -- Automatically check for package updates
     enabled = true,
+    -- Don't spam us with notification every time there is an update available
     notify = false,
   },
   ui = {
