@@ -124,7 +124,7 @@ require('lazy').setup({
   require 'plugins.witch-key',
   require 'plugins.telescope',
   -- LSP Plugins
-  require 'plugins.nvim-lspconfig',
+  require 'plugins.lsp',
   require 'plugins.autoformat',
   require 'plugins.autocompletion',
   require 'plugins.colorscheme',
