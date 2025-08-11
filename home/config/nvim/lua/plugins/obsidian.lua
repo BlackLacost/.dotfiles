@@ -89,7 +89,7 @@ return {
     vim.keymap.set('n', '<leader>or', '<cmd>Obsidian rename<cr>'),
     vim.keymap.set('n', '<leader>ot', '<cmd>Obsidian template<cr>'),
     vim.keymap.set('n', '<leader>ow', '<cmd>Obsidian workspace<cr>', { desc = '[O]bsidian [W]orkspace' }),
-    vim.keymap.set('n', '<leader>oq', '<cmd>Obsidian quick_switch<cr>', { desc = '[O]bsidian [Q]uick Switch' }),
+    vim.keymap.set('n', '<leader>so', '<cmd>Obsidian quick_switch<cr>', { desc = '[S]earch [O]bsidian Quick Switch' }),
     vim.keymap.set('n', '<leader>ob', '<cmd>Obsidian backlinks<cr>'),
     vim.keymap.set('n', '<leader>os', '<cmd>Obsidian search<cr>'),
   },

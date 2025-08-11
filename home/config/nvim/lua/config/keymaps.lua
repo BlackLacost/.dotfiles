@@ -51,3 +51,10 @@ vim.keymap.set('n', 'zj', '<cmd>set foldlevel=1<CR>')
 vim.keymap.set('n', 'zk', '<cmd>set foldlevel=2<CR>')
 vim.keymap.set('n', 'zl', '<cmd>set foldlevel=3<CR>')
 vim.keymap.set('n', 'z;', '<cmd>set foldlevel=4<CR>')
+
+vim.o.langmap =
+  'йq,цw,уe,кr,еt,нy,гu,шi,щo,зp,х[,ъ],фa,ыs,вd,аf,пg,рh,оj,лk,дl,ж\\;,э\',ё`,яz,чx,сc,мv,иb,тn,ьm,б\\,,ю.,ЙQ,ЦW,УE,КR,ЕT,НY,ГU,ШI,ЩO,ЗP,Х{,Ъ},ФA,ЫS,ВD,АF,ПG,РH,ОJ,ЛK,ДL,Ж:,Э",ЯZ,ЧX,СC,МV,ИB,ТN,ЬM,Б<,Ю>,Ё~'
+
+vim.keymap.set('i', '<C-ц>', '<C-w>', { noremap = true })
+vim.keymap.set('i', '<C-х>', '<Esc>', { noremap = true })
+vim.keymap.set('i', '<C-щ>', '<C-o>', { noremap = true })

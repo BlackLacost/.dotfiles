@@ -30,25 +30,9 @@ Kickstart Guide:
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
--- [[ Setting options ]]
 require 'config.options'
-
--- [[ Basic Keymaps ]]
 require 'config.keymaps'
-
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
-
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.hl.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.hl.on_yank()
-  end,
-})
+require 'config.autocommands'
 
 --{{{ [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
@@ -124,7 +108,8 @@ require('lazy').setup({
   require 'plugins.witch-key',
   require 'plugins.telescope',
   -- LSP Plugins
-  require 'plugins.lsp',
+  -- require 'plugins.lsp',
+  require 'plugins.mason',
   require 'plugins.autoformat',
   require 'plugins.autocompletion',
   require 'plugins.colorscheme',
@@ -180,5 +165,6 @@ require('lazy').setup({
   },
 })
 
+require 'config.lsp'
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et foldmethod=marker

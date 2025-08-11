@@ -55,7 +55,7 @@ vim.o.shiftwidth = 2
 vim.o.tabstop = 2
 
 -- Wrap Options
-vim.o.wrap = false
+vim.o.wrap = true
 vim.o.textwidth = 120
 vim.o.colorcolumn = '+1'
 
