@@ -5,6 +5,10 @@ vim.g.maplocalleader = ' '
 
 --  See `:help vim.keymap.set()`
 
+vim.keymap.set('n', '<leader>xf', '<cmd>source %<CR>', { desc = 'E[x]ecute Current [F]ile' })
+vim.keymap.set('n', '<leader>xl', ':.lua<CR>', { desc = 'E[x]ecute Current [L]ine' })
+vim.keymap.set('v', '<leader>xl', ':lua<CR>', { desc = 'E[x]ecute Selected [L]ines' })
+
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Remove search highlights' })
 
@@ -58,3 +62,9 @@ vim.o.langmap =
 vim.keymap.set('i', '<C-ц>', '<C-w>', { noremap = true })
 vim.keymap.set('i', '<C-х>', '<Esc>', { noremap = true })
 vim.keymap.set('i', '<C-щ>', '<C-o>', { noremap = true })
+
+-- These mappings control the size of splits (height/width)
+vim.keymap.set('n', '<M-,>', '<c-w>5<')
+vim.keymap.set('n', '<M-.>', '<c-w>5>')
+vim.keymap.set('n', '<M->>', '<C-W>+')
+vim.keymap.set('n', '<M-<>', '<C-W>-')
