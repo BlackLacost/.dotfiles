@@ -1,5 +1,7 @@
 -- https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json
 -- https://github.com/LuaLS/lua-language-server/wiki
+-- https://www.youtube.com/watch?v=bTWWFQZqzyI LSP in Neovim (with like 3 lines of code)
+-- https://github.com/neovim/nvim-lspconfig/tree/master/lsp
 
 return {
   cmd = {
@@ -18,30 +20,9 @@ return {
     'selene.yml',
     'stylua.toml',
   },
-  -- Важная часть: настройки для работы с типами Neovim
   settings = {
     Lua = {
-      workspace = {
-        -- Подключаем runtime Neovim.
-        -- Без включения типы нормально не работают.
-        library = vim.api.nvim_get_runtime_file('', true),
-        -- Опционально: игнорируем предупреждения о сторонних библиотеках
-        checkThirdParty = false,
-      },
-      diagnostics = {
-        globals = { 'vim' }, -- Разрешаем глобальную переменную `vim`
-      },
       telemetry = { enable = false },
     },
   },
-  -- settings = {
-  --     Lua = {
-  --         diagnostics = {
-  --             --     disable = { "missing-parameters", "missing-fields" },
-  --         },
-  --     },
-  -- },
-
-  -- single_file_support = true,
-  -- log_level = vim.lsp.protocol.MessageType.Warning,
 }

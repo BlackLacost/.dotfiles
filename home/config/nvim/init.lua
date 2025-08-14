@@ -110,6 +110,7 @@ require('lazy').setup({
   -- LSP Plugins
   -- require 'plugins.lsp',
   require 'plugins.mason',
+  require 'plugins.lazydev',
   require 'plugins.autoformat',
   require 'plugins.autocompletion',
   require 'plugins.colorscheme',
