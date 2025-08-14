@@ -196,9 +196,12 @@ bindkey '\ee' _aichat_zsh
 
 eval "$(zoxide init zsh)"
 
+# [[ -s "/home/ilya/.gvm/scripts/gvm" ]] && source "/home/ilya/.gvm/scripts/gvm"
+
 # Запускать tmux только вне терминала JetBrains
 if [ -z "$TMUX" ] && [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
   exec tmux
 fi
 
 # vim: ft=zsh
+
