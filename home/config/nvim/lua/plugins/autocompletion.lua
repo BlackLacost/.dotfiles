@@ -1,5 +1,8 @@
+-- Autocompletion
+-- https://youtu.be/bTWWFQZqzyI?si=759n5NzgrUEpEYPN&t=390 inc-competion
+
 return {
-  { -- Autocompletion
+  {
     'saghen/blink.cmp',
     event = 'VimEnter',
     version = '1.*',
