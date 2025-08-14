@@ -107,6 +107,7 @@ require('lazy').setup({
   require 'plugins.gitsigns',
   require 'plugins.witch-key',
   require 'plugins.telescope',
+  require 'plugins.snacks',
   -- LSP Plugins
   -- require 'plugins.lsp',
   require 'plugins.mason',
