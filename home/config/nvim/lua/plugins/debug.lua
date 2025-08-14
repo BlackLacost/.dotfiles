@@ -1,25 +1,20 @@
--- debug.lua
---
--- Shows how to use the DAP plugin to debug your code.
---
--- Primarily focused on configuring the debugger for Go, but can
--- be extended to other languages as well. That's why it's called
--- kickstart.nvim and not kitchen-sink.nvim ;)
+-- https://github.com/mfussenegger/nvim-dap?tab=readme-ov-file
 
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
   -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
-
     -- Required dependency for nvim-dap-ui
     'nvim-neotest/nvim-nio',
 
     -- Installs the debug adapters for you
     'mason-org/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
+
+    -- Shows variable values inline as virtual text
+    'theHamsta/nvim-dap-virtual-text',
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
@@ -135,6 +130,8 @@ return {
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    -- Setup virtual text to show variable values inline
+    require('nvim-dap-virtual-text').setup()
 
     -- Install golang specific config
     require('dap-go').setup {
