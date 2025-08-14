@@ -1,0 +1,427 @@
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+" NOTE: Enable Track Action Id in action by press <C-S-a>
+
+" Plugins ulr https://github.com/JetBrains/ideavim/wiki/IdeaVim-Plugins
+
+""" Map leader to space ---------------------
+let mapleader=" "
+
+""" Idea specific settings
+
+set ideajoin
+" TODO Узнать что это
+set ideaput
+
+
+
+""" Which Key
+" https://github.com/TheBlob42/idea-which-key?tab=readme-ov-file#installation
+" NOTE: First install which-key plugin
+set which-key
+set notimeout
+let g:WhichKey_ShowVimActions = "true"
+
+
+
+""" Common
+map <C-d> <C-d>zz
+map <C-u> <C-u>zz
+
+vmap <leader>P "_dP
+let g:WhichKeyDesc_PastAndSave = "<leader>P Past and Save in buffer"
+
+map <leader>p "+p
+let g:WhichKeyDesc_p = "<leader>p Past from clipboard"
+
+map <leader>y "+y
+let g:WhichKeyDesc_y = "<leader>y Yank to clipboard"
+
+" vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+" vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vmap J <Action>(MoveLineDown)
+vmap K <Action>(MoveLineUp)
+
+
+
+""" Inbox
+let g:WhichKeyDesc_inbox = "<leader>i Inbox"
+
+map <leader>id <Action>(ShowUmlDiagramPopup)
+let g:WhichKeyDesc_inbox_diagram = "<leader>id Show uml diagram <C-M-u>"
+
+map <leader>ix <Action>(IdeaVim.ReloadVimRc.reload)
+let g:WhichKeyDesc_inbox_SourceIdeavimrc = "<leader>ix Source .ideavimrc"
+
+map <leader>ik <Action>(Help.KeymapReference)
+let g:WhichKeyDesc_inbox_KeymapReference = "<leader>ik Idea keymaps pdf"
+
+
+
+""" Editing
+let g:WhichKeyDesc_editing = "<leader>e Editing"
+let g:WhichKeyDesc_editing_format = "<leader>ef Format"
+
+imap <C-d> <Action>(ParameterInfo)
+map <leader>ep <Action>(ParameterInfo)
+let g:WhichKeyDesc_editing_parameter_info = "<leader>ep Parameter info (within method call arguments)"
+
+imap <C-q> <Action>(QuickJavaDoc)
+map <leader>ed <Action>(QuickJavaDoc)
+let g:WhichKeyDesc_editing_quick_java_doc = "<leader>ed Quick documentation lookup"
+
+" TODO External Doc <S-F1>
+
+map <leader>ee <Action>(ShowErrorDescription)
+let g:WhichKeyDesc_editing_show_error = "<leader>ee Show descriptions of error or warning at caret"
+
+map <leader>eg <Action>(Generate)
+let g:WhichKeyDesc_editing_generate = "<leader>eg Generate code... (Getters, Setters, Constructors, hashCode/equals, toString)"
+
+map <leader>eo <Action>(OverrideMethods)
+let g:WhichKeyDesc_editing_override_methods = "<leader>eo Override methods"
+
+map <leader>ei <Action>(ImplementMethods)
+let g:WhichKeyDesc_editing_implement_methods = "<leader>ei Implement Methods"
+
+map <leader>es <Action>(SurroundWith)
+vmap <leader>es <Action>(SurroundWith)
+let g:WhichKeyDesc_editing_surround_with = "<leader>es Surround with…(if..else, try..catch, for, synchronized, etc.)"
+
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+vmap <C-w> <Action>(EditorSelectWord)
+imap <C-w> <Action>(EditorSelectWord)
+
+" <M-q> Context info
+
+map <leader>ea <Action>(ShowIntentionActions)
+let g:WhichKeyDesc_editing_show_intention_actions = "<leader>ea Show intention actions and quick-fixes"
+
+map <leader>efc <Action>(ReformatCode)
+let g:WhichKeyDesc_editing_reformat_code = "<leader>efc Reformat code"
+
+map <leader>efi <Action>(OptimizeImports)
+let g:WhichKeyDesc_editing_optimize_imports = "<leader>efi Optimize Imports"
+
+map <leader>efl <Action>(AutoIndentLines)
+let g:WhichKeyDesc_editing_auto_indent_lines = "<leader>efl Auto-indent line(s)"
+
+vmap < <gv
+vmap > >gv
+
+map <leader>et <Action>(SurroundWithLiveTemplate)
+let g:WhichKeyDesc_editing_SurroundWithLiveTemplate = "<leader>et Surround with Live Template <C-M-j>"
+
+
+
+""" Usage Search
+let g:WhichKeyDesc_usage = "<leader>u Usage Search"
+
+map <leader>uf <Action>(FindUsages)
+let g:WhichKeyDesc_usage_FindUsages = "<leader>uf Find usages <S-M-7>"
+
+map <leader>uc <Action>(FindUsagesInFile)
+let g:WhichKeyDesc_usage_InFile = "<leader>uc Find usages in file <C-7>"
+
+map <leader>uh <Action>(HighlightUsagesInFile)
+let g:WhichKeyDesc_usage_HighlightUsagesInFile = "<leader>uh Highlight usages in file <C-S-7>"
+
+map <leader>us <Action>(ShowUsages)
+let g:WhichKeyDesc_usage_ShowUsages = "<leader>us Show usages <C-M-7>"
+
+
+
+""" Navigation
+let g:WhichKeyDesc_navigation = "<leader>n Navigation"
+
+
+" I dont use tabs
+" I dont use back to previous tool window
+" Esc Go to editor from tool windows
+" Shift-Esc Hide active or last active window
+" TODO try Ctrl+Shift+F4 Close active run / messages / find / ... tab
+
+map <leader>nr <Action>(RecentFiles)
+let g:WhichKeyDesc_navigation_recent_files = "<leader>nr Recent files popup <C-e>"
+
+map <leader>nl <Action>(JumpToLastChange)
+let g:WhichKeyDesc_navigation_jump_to_last_change = "<leader>nl Navigate to last edit location"
+
+" TODO friendly key
+map <leader>ne <Action>(SelectIn)
+let g:WhichKeyDesc_navigation_SelectIn = "<leader>ne Select current file or symbol in any view <M-S-F1>"
+
+map <leader>nd <Action>(GotoDeclaration)
+let g:WhichKeyDesc_navigation_GotoDeclaration = "<leader>nd Go to declaration"
+
+map <leader>ni <Action>(GotoImplementation)
+let g:WhichKeyDesc_navigation_GotoImplementation = "<leader>ni Go to implementation"
+
+map <leader>nq <Action>(QuickImplementations)
+let g:WhichKeyDesc_navigation_QuickImplementations = "<leader>nq Open quick definition lookup"
+
+map <leader>nt <Action>(GotoTypeDeclaration)
+let g:WhichKeyDesc_navigation_GotoTypeDeclaration = "<leader>nt Go to type declaration"
+
+" TODO key s
+map <leader>nm <Action>(GotoSuperMethod)
+let g:WhichKeyDesc_navigation_method_GotoSuperMethod = "<leader>nm Go to super-method / super-class"
+
+let g:WhichKeyDesc_navigation_NextMethod = "]m Next method"
+let g:WhichKeyDesc_navigation_PreviousMethod = "[m Previous method"
+
+" TODO key s
+" <C-0> in linux <C-F12> in other
+map <leader>ns <Action>(FileStructurePopup)
+let g:WhichKeyDesc_navigation_FileStructurePopup = "<leader>ns File structure popup <C-0>"
+
+let g:WhichKeyDesc_navigation_hierarchy = "<leader>nh Hierarchy"
+
+map <leader>nht <Action>(TypeHierarchy)
+let g:WhichKeyDesc_navigation_hierarchy_type = "<leader>nht Type hierarchy"
+
+map <leader>nhm <Action>(MethodHierarchy)
+let g:WhichKeyDesc_navigation_hierarchy_method = "<leader>nhm Method hierarchy"
+
+map <leader>nhc <Action>(CallHierarchy)
+let g:WhichKeyDesc_navigation_hierarchy_call = "<leader>nhc Call hierarchy"
+
+map ]d <Action>(GotoNextError)
+let g:WhichKeyDesc_navigation_GotoNextError = "]d Next highlighted error"
+map [d <Action>(GotoPreviousError)
+let g:WhichKeyDesc_navigation_GotoPreviousError = "[d Previous highlighted error"
+
+" TODO Edit source / View source
+
+map <leader>nn <Action>(ShowNavBar)
+let g:WhichKeyDesc_navigation_ShowNavBar = "<leader>nn Show navigation bar"
+
+" Create bookmark m<Capital char or number>
+" To bookmark `<Capital char or number>
+map <leader>nt <Action>(ToggleBookmark)
+let g:WhichKeyDesc_navigation_ToggleBookmark = "<leader>nt Toggle bookmark"
+
+map <leader>nb <Action>(ShowBookmarks)
+let g:WhichKeyDesc_navigation_ShowBookmarks = "<leader>nb Show bookmarks"
+
+
+
+""" Search / Replace
+let g:WhichKeyDesc_search = "<leader>s Search / Replace"
+
+map <leader>sg <Action>(FindInPath)
+let g:WhichKeyDesc_search_FindInPath = "<leader>sg Find in path <C-S-f>"
+
+map <leader>sr <Action>(ReplaceInPath)
+let g:WhichKeyDesc_search_ReplaceInPath = "<leader>sr Replace in path <C-S-r>"
+
+map <leader>sc <Action>(GotoClass)
+let g:WhichKeyDesc_search_goto_class = "<leader>sc Go to class <C-n>"
+
+map <leader>sf <Action>(GotoFile)
+let g:WhichKeyDesc_search_goto_file = "<leader>sf Go to file <C-S-n>"
+
+map <leader>ss <Action>(GotoSymbol)
+let g:WhichKeyDesc_search_goto_symbol = "<leader>ss Go to Symbol <C-M-S-n>"
+
+
+
+""" Refactoring
+let g:WhichKeyDesc_refactoring = "<leader>r Refactoring"
+let g:WhichKeyDesc_refactoring_Extract = "<leader>re Extract"
+
+map <leader>rc <Action>(CopyElement)
+let g:WhichKeyDesc_refactoring_CopyElement = "<leader>rc Copy <F5>"
+
+map <leader>rm <Action>(Move)
+let g:WhichKeyDesc_refactoring_Move = "<leader>rm Move <F6>"
+
+map <leader>rd <Action>(SafeDelete)
+let g:WhichKeyDesc_refactoring_SafeDelete = "<leader>rd Safe Delete <M-Del>"
+
+map <leader>rr <Action>(RenameElement)
+let g:WhichKeyDesc_refactoring_Rename = "<leader>rr Rename <S-F6>"
+
+map <leader>rs <Action>(ChangeSignature)
+let g:WhichKeyDesc_refactoring_ChangeSignature = "<leader>rs Change Signature <C-F6>"
+
+map <leader>ri <Action>(Inline)
+let g:WhichKeyDesc_refactoring_Inline = "<leader>ri Inline <C-M-n>"
+
+map <leader>rem <Action>(ExtractMethod)
+let g:WhichKeyDesc_refactoring_ExtractMethod = "<leader>rem Extract Method <C-M-m>"
+
+map <leader>rev <Action>(IntroduceVariable)
+let g:WhichKeyDesc_refactoring_IntroduceVariable = "<leader>rev Extract Variable <C-S-v>"
+
+map <leader>ref <Action>(IntroduceField)
+let g:WhichKeyDesc_refactoring_IntroduceField = "<leader>ref Extract Field <C-M-f>"
+
+map <leader>rec <Action>(IntroduceConstant)
+let g:WhichKeyDesc_refactoring_IntroduceConstant = "<leader>rec Extract Constant <C-M-c>"
+
+map <leader>rep <Action>(IntroduceParameter)
+let g:WhichKeyDesc_refactoring_IntroduceParameter = "<leader>rep Extract Parameter <C-M-p>"
+
+
+
+""" Debugging
+let g:WhichKeyDesc_debug = "<leader>d Debugging"
+let g:WhichKeyDesc_debug_smart = "<leader>ds Smart"
+
+map <leader>di <Action>(StepInto)
+let g:WhichKeyDesc_debug_StepInto = "<leader>di Step into <F7>"
+
+map <leader>do <Action>(StepOver)
+let g:WhichKeyDesc_debug_StepOver = "<leader>do Step over <F8>"
+
+map <leader>dsi <Action>(SmartStepInto)
+let g:WhichKeyDesc_debug_SmartStepInto = "<leader>dsi Smart step into <S-F7>"
+
+map <leader>dso <Action>(SmartStepOver)
+let g:WhichKeyDesc_debug_SmartStepOver = "<leader>dso Smart step over <S-F8>"
+
+" TODO Не понял как запустить
+let g:WhichKeyDesc_debug_RunToCursor = "<leader>dc TODO Run to cursor <M-F9>"
+let g:WhichKeyDesc_debug_EvaluateExpression = "<leader>de TODO EvaluateExpression <M-F8>"
+
+map <leader>dr <Action>(Resume)
+let g:WhichKeyDesc_debug_Resume = "<leader>dr Resume program <F9>"
+
+map <leader>dt <Action>(ToggleLineBreakpoint)
+let g:WhichKeyDesc_debug_ToggleLineBreakpoint = "<leader>dt Toggle breakpoint <C-8>"
+
+map <leader>dv <Action>(ViewBreakpoints)
+let g:WhichKeyDesc_debug_ViewBreakpoints = "<leader>dv View breakpoints <C-S-8>"
+
+
+
+""" Compile and Run
+let g:WhichKeyDesc_run = "<leader>c Compile and Run"
+
+map <leader>cc <Action>(CompileDirty)
+let g:WhichKeyDesc_run_CompileDirty = "<leader>cc Make project (compile modified and dependent) <C-F9>"
+
+map <leader>cf <Action>(CompileFile)
+let g:WhichKeyDesc_run_CompileFile = "<leader>cf Compile selected file, package or module <C-S-F9"
+
+map <leader>cR <Action>(ChooseRunConfiguration)
+let g:WhichKeyDesc_run_ChooseRunConfiguration = "<leader>cR Select configuration and run <M-S-F10>"
+
+map <leader>cD <Action>(ChooseDebugConfiguration)
+let g:WhichKeyDesc_run_ChooseDebugConfiguration = "<leader>cD Select configuration and debug <M-S-F9>"
+
+map <leader>cr <Action>(Run)
+let g:WhichKeyDesc_run_Run = "<leader>cr Run <S-F10>"
+
+map <leader>cd <Action>(Debug)
+let g:WhichKeyDesc_run_Debug = "<leader>cd Debug <S-F9>"
+
+map <leader>ce <Action>(RunClass)
+let g:WhichKeyDesc_run_RunClass = "<leader>ce Run context configuration from editor <C-S-F10>"
+
+
+
+""" VCS / Local History
+let g:WhichKeyDesc_vcs = "<leader>v VCS / Local History"
+
+map <leader>vc <Action>(CheckinProject)
+let g:WhichKeyDesc_vcs_CheckinProject = "<leader>vc Commit project to VCS <C-k>"
+
+map <leader>vp <Action>(Vcs.UpdateProject)
+let g:WhichKeyDesc_vcs_UpdateProject = "<leader>vp Update from VCS <C-t>"
+
+map <leader>vs <Action>(RecentChanges)
+let g:WhichKeyDesc_vcs_RecentChanges = "<leader>vs View recent changes <M-S-c>"
+
+map <leader>vo <Action>(Vcs.QuickListPopupAction)
+let g:WhichKeyDesc_vcs_QuickListPopupAction = "<leader>vo VCS Operations Popup <M-`>"
+
+
+
+""" General
+let g:WhichKeyDesc_general = "<leader>g General"
+
+map <leader>\\ <Action>(ActivateProjectToolWindow)
+let g:WhichKeyDesc_general_ActivateProjectToolWindow = "<leader>\\ Explorer <M-1>"
+
+map <leader>gy <Action>(Synchronize)
+let g:WhichKeyDesc_general_Synchronize = "<leader>gy Synchronize <C-M-y>"
+
+map <leader>gt <Action>(HideAllWindows)
+let g:WhichKeyDesc_general_HideAllWindows = "<leader>gt Toggle maximizing editor <C-S-F12>"
+
+map <leader>gi <Action>(CodeInspection.OnEditor)
+let g:WhichKeyDesc_general_CodeInspection = "<leader>gi Inspect current file with current profile <M-S-i>"
+
+map <leader>gq <Action>(QuickChangeScheme)
+let g:WhichKeyDesc_general_QuickChangeScheme = "<leader>gq Quick switch current scheme <C-`>"
+
+map <leader>gs <Action>(ShowSettings)
+let g:WhichKeyDesc_general_ShowSettings = "<leader>gs Open Settings dialog <C-M-s>"
+
+map <leader>gp <Action>(ShowProjectStructureSettings)
+let g:WhichKeyDesc_general_ShowProjectStructureSettings = "<leader>gp Open Project Structure dialog <C-M-S-s>"
+
+map <leader>ga <Action>(GotoAction)
+let g:WhichKeyDesc_general_GotoAction = "<leader>ga Find Action <C-S-a>"
+
+map <leader>gt <Action>(Switcher)
+let g:WhichKeyDesc_general_Switcher = "<leader>gt Switch between tabs and tool window <C-Tab>"
+
+
+
+
+
+
+""" Common settings -------------------------
+" set showmode
+set incsearch " Do incremental searching.
+set scrolloff=5 " Show a few lines of context around the cursor.
+set number
+set relativenumber
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+
+
+" Terminal
+map \\ <Action>(ActivateTerminalToolWindow)
+" map <leader>t :action Terminal.OpenInTerminal<CR>
+
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+
+" NERDTree
+set NERDTree
+" q     Close the NERDTree window
+" o     Toggle open/close
+" go
+"
+" i
+" s
+" gs
+" <C-j>
+" <C-k>
+" R
+" m
+" A     Toggle to full width
+
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
