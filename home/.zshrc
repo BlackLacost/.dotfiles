@@ -196,6 +196,13 @@ bindkey '\ee' _aichat_zsh
 
 eval "$(zoxide init zsh)"
 
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
 # [[ -s "/home/ilya/.gvm/scripts/gvm" ]] && source "/home/ilya/.gvm/scripts/gvm"
 
 # Запускать tmux только вне терминала JetBrains
