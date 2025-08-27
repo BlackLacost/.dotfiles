@@ -49,8 +49,25 @@ let g:WhichKeyDesc_y = "<leader>y [Y]ank to Clipboard"
 vmap J <Action>(MoveLineDown)
 vmap K <Action>(MoveLineUp)
 
+
+
+""" Go
 let g:WhichKeyDesc_go = "g [G]o"
 
+map ga <Action>(ShowIntentionActions)
+let g:WhichKeyDesc_go_ShowIntentionActions = "ga Code [A]ction <M-Enter>"
+
+map gf <Action>(ReformatCode)<Action>(OptimizeImports)
+let g:WhichKeyDesc_go_reformat_code = "gf [F]ormat Code"
+
+map gn <Action>(ShowNavBar)
+let g:WhichKeyDesc_go_ShowNavBar = "gn [N]avigation Bar"
+
+map gt <Action>(GotoTest)
+let g:WhichKeyDesc_go_GotoTest = "gt Go to [T]est"
+
+map gs <Action>(FileStructurePopup)
+let g:WhichKeyDesc_navigation_FileStructurePopup = "gs [S]tructure File"
 
 
 
@@ -105,6 +122,7 @@ Plug 'tpope/vim-commentary'
 
 vmap <C-w> <Action>(EditorSelectWord)
 imap <C-w> <Action>(EditorSelectWord)
+
 map <leader>ea <Action>(ShowIntentionActions)
 let g:WhichKeyDesc_editing_show_intention_actions = "<leader>ea Code [A]ction <M-Enter>"
 
@@ -186,10 +204,8 @@ let g:WhichKeyDesc_navigation_method_GotoSuperMethod = "<leader>ns [S]uper-metho
 let g:WhichKeyDesc_navigation_NextMethod = "]m Next [M]ethod <M-Down>"
 let g:WhichKeyDesc_navigation_PreviousMethod = "[m Previous [M]ethod <M-Up>"
 
-" TODO key s
-" <C-0> in linux <C-F12> in other
 map <leader>nf <Action>(FileStructurePopup)
-let g:WhichKeyDesc_navigation_FileStructurePopup = "<leader>nf [F]ile Structure <C-0>"
+let g:WhichKeyDesc_navigation_FileStructurePopup = "<leader>nf [F]ile Structure <C-0> <C-F12>"
 
 let g:WhichKeyDesc_navigation_hierarchy = "<leader>nh [H]ierarchy"
 
@@ -202,15 +218,13 @@ let g:WhichKeyDesc_navigation_hierarchy_method = "<leader>nhm [M]ethod Hierarchy
 map <leader>nhc <Action>(CallHierarchy)
 let g:WhichKeyDesc_navigation_hierarchy_call = "<leader>nhc [C]all Hierarchy"
 
-map ]d <Action>(GotoNextError)
-let g:WhichKeyDesc_navigation_GotoNextError = "]d Next highlighted error"
-map [d <Action>(GotoPreviousError)
-let g:WhichKeyDesc_navigation_GotoPreviousError = "[d Previous highlighted error"
+map ]e <Action>(GotoNextError)
+let g:WhichKeyDesc_navigation_GotoNextError = "]e Next [E]Error"
+map [e <Action>(GotoPreviousError)
+let g:WhichKeyDesc_navigation_GotoPreviousError = "[e Previous [E]rror"
 
 " TODO Edit source / View source
 
-map gn <Action>(ShowNavBar)
-let g:WhichKeyDesc_go_ShowNavBar = "gn [N]avigation Bar"
 map <leader>nn <Action>(ShowNavBar)
 let g:WhichKeyDesc_navigation_ShowNavBar = "<leader>nn [N]avigation Bar <M-Home>"
 
