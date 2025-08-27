@@ -79,6 +79,7 @@ plugins=(
   fzf
   gh
   git
+  httpie
   mvn
   npm
   nvm
@@ -119,9 +120,6 @@ function ys() {
   $BROWSER https://www.ya.ru/search?text=$(echo $* | jq -sRr @uri)
 }
 
-alias mailrum="rclone mount mailru: /home/ilya/cloud/mailru --vfs-cache-mode full --vfs-cache-max-size 200G --vfs-cache-poll-interval 5m --vfs-cache-max-age 168h --log-level INFO --log-file /tmp/rclone.log"
-alias mailruu="umount ~/cloud/mailru"
-
 # Set personal aliases, overriding those provided by Oh My Zsh libs,
 # plugins, and themes. Aliases can be placed here, though Oh My Zsh
 # users are encouraged to define aliases within a top-level file in
@@ -142,6 +140,8 @@ alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias dfe="nvim ~/.dotfiles/"
 alias o='xdg-open'
 alias lg='lazygit'
+alias rcgm="rclone mount google: /home/ilya/cloud/google/ --vfs-cache-mode full --vfs-cache-max-size 200G --vfs-cache-poll-interval 5m --vfs-cache-max-age 168h --log-level INFO --log-file /tmp/rclone.log &"
+alias rcgu="umount ~/cloud/google/"
 alias rcmm="rclone mount mailru: /home/ilya/cloud/mailru --vfs-cache-mode full --vfs-cache-max-size 200G --vfs-cache-poll-interval 5m --vfs-cache-max-age 168h --log-level INFO --log-file /tmp/rclone.log &"
 alias rcmu="umount ~/cloud/mailru/"
 alias rcym="rclone mount yandexru: /home/ilya/cloud/yandexru --vfs-cache-mode full --vfs-cache-max-size 200G --vfs-cache-poll-interval 5m --vfs-cache-max-age 168h --log-level INFO --log-file /tmp/rclone.log &"
