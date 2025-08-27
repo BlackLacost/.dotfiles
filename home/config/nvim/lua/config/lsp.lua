@@ -1,5 +1,6 @@
 vim.lsp.enable {
   'gopls',
+  'jdtls',
   'lua_ls',
   'postgres_ls',
   'vimls',
