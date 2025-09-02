@@ -1,5 +1,5 @@
 ---
-model: ollama:qwen3:32b
+model: openrouter:deepseek/deepseek-chat-v3.1:free
 temperature: 0
 ---
 Context: You are tasked with generating conventional commit messages based on provided descriptions of changes made in a codebase. The commit messages must adhere to the Conventional Commits specification, ensuring clarity and consistency in version control.
