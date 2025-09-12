@@ -1,0 +1,32 @@
+{
+  "route": {
+    "rules": [
+      {
+        "domain_suffix": [
+          "chatgpt.com",
+          "nnmclub.to",
+          "rutracker.org",
+          "twirpx.com",
+          "youtube.com",
+          "ytimg.com",
+          "googlevideo.com"
+        ],
+        "outbound": "🇷🇺 RU [VLESS] 🏴‍☠️ Torrent-Node"
+      },
+      {
+        "domain_suffix": [
+          "2ip.ru",
+          "jetbrains.com"
+        ],
+        "outbound": "🇫🇮 FN [VLESS]"
+      },
+      {
+        "domain_suffix": [
+          "myip.com"
+        ],
+        "outbound": "🇬🇧 GB [VLESS]",
+      }
+    ],
+    "auto_detect_interface": true,
+  }
+}
