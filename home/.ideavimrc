@@ -290,7 +290,7 @@ map <leader>rem <Action>(ExtractMethod)
 let g:WhichKeyDesc_refactoring_ExtractMethod = "<leader>rem Extract [M]ethod <C-M-m>"
 
 map <leader>rev <Action>(IntroduceVariable)
-let g:WhichKeyDesc_refactoring_IntroduceVariable = "<leader>rev Extract [V]ariable <C-S-v>"
+let g:WhichKeyDesc_refactoring_IntroduceVariable = "<leader>rev Extract [V]ariable <S-M-v>"
 
 map <leader>ref <Action>(IntroduceField)
 let g:WhichKeyDesc_refactoring_IntroduceField = "<leader>ref Extract [F]ield <C-M-f>"
