@@ -3,11 +3,21 @@
     "rules": [
       {
         "domain_suffix": [
-          "chatgpt.com",
+          "github.com",
+          "githubusercontent.com",
+          "github.global.ssl.fastly.net"
+        ],
+        "server": "local"
+      },
+      {
+        "domain_suffix": [
           "nnmclub.to",
           "rutracker.org",
+          "rutracker.cc",
+          "cloudflare-ech.com",
           "twirpx.com",
           "youtube.com",
+          "youtu.be",
           "ytimg.com",
           "googlevideo.com"
         ],
@@ -15,18 +25,23 @@
       },
       {
         "domain_suffix": [
-          "2ip.ru",
-          "jetbrains.com"
+          "jetbrains.com",
+          "twitch.tv",
+          "ttvnw.net"
         ],
         "outbound": "🇫🇮 FN [VLESS]"
       },
       {
+        "domain_suffix": "myip.com",
+        "outbound": "🇬🇧 GB [VLESS]"
+      },
+      {
         "domain_suffix": [
-          "myip.com"
+          "2ip.ru",
+          "chatgpt.com"
         ],
-        "outbound": "🇬🇧 GB [VLESS]",
+        "outbound": "🇺🇸 US [VLESS]"
       }
-    ],
-    "auto_detect_interface": true,
+    ]
   }
 }
