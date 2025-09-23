@@ -1,4 +1,3 @@
-# If you come from bash you might have to change your $PATH.
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -177,6 +176,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 export PATH="$PATH:$HOME/.local/share/JetBrains/jetbrains_ultimate/bin/"
+export PATH="$PATH:$HOME/.local/share/kafka_2.13-4.1.0/bin"
 
 #!/bin/sh
 # add binaries to PATH if they aren't added yet
