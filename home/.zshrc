@@ -177,6 +177,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 export PATH="$PATH:$HOME/.local/share/JetBrains/jetbrains_ultimate/bin/"
 export PATH="$PATH:$HOME/.local/share/kafka_2.13-4.1.0/bin"
+export PATH="$PATH:$HOME/.local/share/visualvm/bin"
 
 #!/bin/sh
 # add binaries to PATH if they aren't added yet
