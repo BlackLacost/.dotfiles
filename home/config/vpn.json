@@ -3,14 +3,7 @@
     "rules": [
       {
         "domain_suffix": [
-          "github.com",
-          "githubusercontent.com",
-          "github.global.ssl.fastly.net"
-        ],
-        "server": "local"
-      },
-      {
-        "domain_suffix": [
+          "chatgpt.com",
           "nnmclub.to",
           "rutracker.org",
           "rutracker.cc",
@@ -18,6 +11,8 @@
           "twirpx.com",
           "youtube.com",
           "youtu.be",
+          "googleusercontent.com",
+          "ggpht.com",
           "ytimg.com",
           "googlevideo.com"
         ],
@@ -25,7 +20,13 @@
       },
       {
         "domain_suffix": [
+          "ciscobinary.openh264.org",
           "jetbrains.com",
+          "linkedin.com",
+          "medium.com",
+          "notion.so",
+          "skladchik.com",
+          "skladchik.org",
           "twitch.tv",
           "ttvnw.net"
         ],
@@ -41,7 +42,11 @@
           "chatgpt.com"
         ],
         "outbound": "🇺🇸 US [VLESS]"
-      }
+      },
+      {
+        "process_name": [ "ping", "ssh" ],
+        "outbound": "direct"
+      },
     ]
   }
 }
