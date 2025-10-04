@@ -26,4 +26,6 @@ alias rm="trash"
 
 alias nvime="nvim ~/.config/nvim"
 alias ghc='gh repo list | fzf | awk '\''{print $1}'\'' | xargs gh repo clone'
+alias gghc='glgg --all | fzf | cut -d"'\''" -f2 | cut -d" " -f1 | tr -d "\n" | xsel -bi'
+alias gcohc='git checkout `glgg --all | fzf | cut -d"'\''" -f2 | cut -d" " -f1 | tr -d "\n"`'
 
