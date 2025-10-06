@@ -1,0 +1,20 @@
+[user]
+	email = blacklacost@gmail.com
+	name = Илья Лисин
+
+[init]
+	defaultBranch = "main"
+
+[core]
+	editor = "nvim"
+	autocrlf = input
+	safecrlf = warn
+
+[format]
+	pretty = format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+
+[pull]
+	rebase = true
+
+[alias]
+	ca = "!git add .;git commit"

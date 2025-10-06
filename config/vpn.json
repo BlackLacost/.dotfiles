@@ -1,0 +1,52 @@
+{
+  "route": {
+    "rules": [
+      {
+        "domain_suffix": [
+          "chatgpt.com",
+          "nnmclub.to",
+          "rutracker.org",
+          "rutracker.cc",
+          "cloudflare-ech.com",
+          "twirpx.com",
+          "youtube.com",
+          "youtu.be",
+          "googleusercontent.com",
+          "ggpht.com",
+          "ytimg.com",
+          "googlevideo.com"
+        ],
+        "outbound": "🇷🇺 RU [VLESS] 🏴‍☠️ Torrent-Node"
+      },
+      {
+        "domain_suffix": [
+          "ciscobinary.openh264.org",
+          "jetbrains.com",
+          "linkedin.com",
+          "medium.com",
+          "notion.so",
+          "skladchik.com",
+          "skladchik.org",
+          "twitch.tv",
+          "ttvnw.net"
+        ],
+        "outbound": "🇫🇮 FN [VLESS]"
+      },
+      {
+        "domain_suffix": "myip.com",
+        "outbound": "🇬🇧 GB [VLESS]"
+      },
+      {
+        "domain_suffix": [
+          "2ip.ru",
+          "chatgpt.com"
+        ],
+        "outbound": "🇺🇸 US [VLESS]"
+      },
+      {
+        "process_name": [ "ping", "ssh" ],
+        "outbound": "direct"
+      }
+    ]
+  }
+}
